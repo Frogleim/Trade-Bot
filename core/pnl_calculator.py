@@ -1,15 +1,15 @@
-import logging
 import time
 import config
+# from . import config
 import os
 from binance.client import Client
 from binance.helpers import round_step_size  # add at top
+import pandas as pd
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 files_dir = os.path.join(parent_dir, "core")
 print(files_dir)
-client = Client(config.API_KEY, config.API_SECRET)
 
 
 class BinanceFuturesPNLCalculator:
@@ -47,43 +47,35 @@ def calculate_modified_difference(lst):
 
 def position_size():
     original_value = config.position_size
-    crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    percentage_increase = 0.05
+    percentage_increase = 0.50
     new_value = original_value + (original_value * percentage_increase)
-    logging.info(f"Original Value: {round(original_value *  crypto_current_price, 3) / 100}", )
-    logging.info(f"Percentage Increase: {round(percentage_increase * 100)}%", )
-    logging.info(f"New Value: {round(new_value * crypto_current_price, 3) / 100}$", )
+    print("Original Value:", original_value)
+    print("Percentage Increase:", percentage_increase)
+    print("New Value:", new_value)
     time.sleep(1)
-    config.position_size = round(new_value, 3)
+    config.position_size = new_value
     with open(f'{files_dir}/config.py', 'r') as config_file:
         config_data = config_file.read()
-    config_data = config_data.replace(f"position_size = {original_value}", f"position_size = {new_value}")
+    config_data = config_data.replace(f"position_size = {original_value}", f"position_size = {round(new_value, 3)}")
     with open(f'{files_dir}/config.py', 'w') as config_file:
         config_file.write(config_data)
     return original_value
 
 
-def get_symbol_precision(symbol):
-    exchange_info = client.get_exchange_info()
-
-    for symbol_info in exchange_info['symbols']:
-        if symbol_info['symbol'] == symbol:
-            return int(symbol_info['baseAssetPrecision'])
-
-    # If the symbol is not found, you may want to handle this case appropriately
-    raise ValueError(f"Symbol {symbol} not found in exchange info")
-
-
-# Example usage for ETHUSDT
+api_key = os.getenv('API_KEY')
+api_secret = os.getenv('API_SECRET')
+# Replace 'YOUR_API_KEY' and 'YOUR_API_SECRET' with your Binance API key and secret
+client = Client(api_key, api_secret)
 
 
 def get_last_two_candles_direction(symbol, interval='5m'):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
+
     if close_prices[-1] > close_prices[-2]:
-        direction = True
+        direction = "Up"
     elif close_prices[-1] < close_prices[-2]:
-        direction = False
+        direction = "Down"
     else:
         direction = 'No Change'
 
@@ -111,14 +103,15 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    symbol_precision_ethusdt = get_symbol_precision('ETHUSDT')
-    print(f"Symbol Precision for ETHUSDT: {symbol_precision_ethusdt}")
-    starting_number = 0.21  # 0.21$
-    common_ratio = 1.05  # 20% increase
-    num_terms = 40  # 40 Trades is one day trade
+    starting_number = 1  # 0.21$
+    common_ratio = 1.07  # 20% increase
+    num_terms = 11
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 1.03 for new_value in result]
+    wallet = [new_value + 1150 for new_value in result]
     print(wallet)
-    res = get_last_two_candles_direction(symbol=config.trading_pair)
-    print(res)
+    #
+    symbol = 'ETHUSDT'
+    direction = get_last_two_candles_direction(symbol)
+    print(f'The direction of the last two candles on {symbol}: {direction}')
+    #
