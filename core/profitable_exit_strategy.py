@@ -16,8 +16,9 @@ current_checkpoint = None
 THRESHOLD_FOR_CLOSING = -30
 LOSS = False
 checking_price = None
-api_key = os.getenv('API_KEY')
-api_secret = os.getenv('API_SECRET')
+api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh '
+
+api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
