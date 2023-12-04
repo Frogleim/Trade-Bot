@@ -110,7 +110,7 @@ if __name__ == '__main__':
     print(result)
     wallet = [new_value + 72 for new_value in result]
     print(wallet)
-    #
+    position_size()
     symbol = 'ETHUSDT'
     direction = get_last_two_candles_direction(symbol)
     print(f'The direction of the last two candles on {symbol}: {direction}')

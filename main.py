@@ -1,12 +1,16 @@
-import time
-from core import profitable_exit_strategy, config
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
+from pathlib import Path
+import os
 
+app = FastAPI()
 
-def start():
-    while True:
-        profitable_exit_strategy.trade()
-        time.sleep(config.TRADE_INTERVAL)
-
-
-if __name__ == '__main__':
-    start()
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+files_dir = os.path.join(parent_dir, "Trade-Bot\\core\\files")
+print(files_dir)
+@app.get("/get-statement")
+async def get_statement():
+    file_path = Path(f"{files_dir}/model_dataset.csv")  # Replace with the actual file path
+    file_name = "statement.csv"
+    return FileResponse(file_path, filename=file_name)
