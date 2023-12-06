@@ -45,3 +45,9 @@ async def get_logs():
 
     # Return the file as a response
     return FileResponse(file_path, filename=file_name)
+
+
+
+@app.get("/get_wallet_balance")
+def get_balance():
+    pass

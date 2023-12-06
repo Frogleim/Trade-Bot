@@ -16,8 +16,9 @@ current_checkpoint = None
 THRESHOLD_FOR_CLOSING = -30
 LOSS = False
 checking_price = None
-api_key = os.getenv('API_KEY')
-api_secret = os.getenv('API_SECRET')
+api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
+
+api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -43,6 +44,7 @@ def trade():
         crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
         body = f'Buying {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
+        time.sleep(2)
         while True:
             res = pnl_long(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
@@ -58,6 +60,7 @@ def trade():
         crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
         body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
+        time.sleep(2)
         while True:
             res = pnl_short(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
@@ -87,7 +90,7 @@ def check_price_changes():
                        f" Buying {config.trading_pair} for {round(float(next_crypto_current), 1)}$")
             logging.info(message)
             return True, next_crypto_current, signal_difference
-        elif signal_difference < -config.signal_price and pnl_calculator.get_last_two_candles_direction(
+        elif signal_difference < -config.signal_price and  pnl_calculator.get_last_two_candles_direction(
                 config.trading_pair) == 'Down':
             logging.info(pnl_calculator.get_last_two_candles_direction(
                 config.trading_pair))
