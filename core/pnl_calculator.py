@@ -77,7 +77,12 @@ def get_symbol_precision(symbol):
     raise ValueError(f"Symbol {symbol} not found in exchange info")
 
 
-# Example usage for ETHUSDT
+def are_last_3_candles_growing(api_key, api_secret, symbol="ETHUSDT", interval="5m"):
+    client = Client(api_key, api_secret)
+    candlesticks = client.get_klines(symbol=symbol, interval=interval, limit=3)
+    closing_prices = [float(candlestick[4]) for candlestick in candlesticks]
+    growing = all(closing_prices[i] < closing_prices[i + 1] for i in range(len(closing_prices) - 1))
+    return growing
 
 
 def get_last_two_candles_direction(symbol, interval='5m'):
@@ -115,14 +120,18 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 600  # 0.21$
+    starting_number = 6.2  # 0.21$
     common_ratio = 1.05  # 20% increase
     num_terms = 30  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 11000.9 for new_value in result]
+    wallet = [new_value + 76.3 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)
     position = position_size()
     print(position)
+    # api_key = 'KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA'
+    # api_secret = '7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb'
+    # are_growing = are_last_3_candles_growing(api_key, api_secret)
+    # print(are_growing)
