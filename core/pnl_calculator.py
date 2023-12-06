@@ -60,7 +60,7 @@ def position_size():
     with open(f'{files_dir}/config.py', 'r') as config_file:
         config_data = config_file.read()
     config_data = config_data.replace(f"position_size = {file_original_value}",
-                                      f"position_size = {round(new_value, 3)}")
+                                      f"position_size = {round(new_value, 2)}")
     with open(f'{files_dir}/config.py', 'w') as config_file:
         config_file.write(config_data)
     return original_value
@@ -115,12 +115,14 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 2.8  # 0.21$
+    starting_number = 600  # 0.21$
     common_ratio = 1.05  # 20% increase
-    num_terms = 80  # 40 Trades is one day trade
+    num_terms = 30  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 83.5 for new_value in result]
+    wallet = [new_value + 11000.9 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)
+    position = position_size()
+    print(position)
