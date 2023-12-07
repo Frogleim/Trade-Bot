@@ -102,12 +102,11 @@ def main():
 
 
 if __name__ == '__main__':
-    # starting_number = 10  # 0.21$
-    # common_ratio = 1.05  # 20% increase
-    # num_terms = 21
-    # result = geometric_progression(starting_number, common_ratio, num_terms)
-    # print(result)
+    starting_number = 11  # 0.21$
+    common_ratio = 1.05  # 20% increase
+    num_terms = 40
+    result = geometric_progression(starting_number, common_ratio, num_terms)
+    print(result)
     # Replace YOUR_API_KEY(api_key, api_secret)
-
-    main()
-# #
+    res = get_last_two_candles_direction(symbol=config.trading_pair)
+    print(res)
