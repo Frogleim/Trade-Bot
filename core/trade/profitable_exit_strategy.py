@@ -1,5 +1,5 @@
 from binance.client import Client
-from . import pnl_calculator, crypto_ticker, config, files_manager
+from . import pnl_calculator, crypto_ticker, config, files_manager, candles
 import crypto_ticker
 import files_manager
 import logging
@@ -98,7 +98,7 @@ def check_price_changes():
         signal_difference = float(next_crypto_current) - float(checking_price)
         logging.info(f'Difference: {round(signal_difference, 2)}')
         if signal_difference > config.signal_price and pnl_calculator.get_last_two_candles_direction(
-                config.trading_pair) == 'Up':
+                config.trading_pair) == 'Up' and candles.is_last_candle_green(symbol=config.trading_pair):
             logging.info(pnl_calculator.get_last_two_candles_direction(
                 config.trading_pair))
             message = (f"{config.trading_pair} goes up for more than {config.signal_price}$\n"
@@ -106,7 +106,7 @@ def check_price_changes():
             logging.info(message)
             return True, next_crypto_current, signal_difference
         elif signal_difference < -config.signal_price and pnl_calculator.get_last_two_candles_direction(
-                config.trading_pair) == 'Down':
+                config.trading_pair) == 'Down' and not candles.is_last_candle_green(symbol=config.trading_pair):
             logging.info(pnl_calculator.get_last_two_candles_direction(
                 config.trading_pair))
             message = (f"{config.trading_pair} goes down for more than {config.signal_price}$\n"

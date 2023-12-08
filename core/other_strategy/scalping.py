@@ -1,95 +1,53 @@
 from binance.client import Client
-import time
-from core.trade import config
-import os
-import logging
-import sys
+import pandas as pd
+import numpy as np
+# Binance API credentials
+api_key = 'YOUR_API_KEY'
+api_secret = 'YOUR_API_SECRET'
 
-# Binance API keys
-api_key = 'your_api_key'
-api_secret = 'your_api_secret'
-
-# Initialize Binance client
-client = Client(config.API_KEY, config.API_SECRET, testnet=True)
-
-# Define trading parameters
-symbol = 'ETHUSDT'  # Replace with your desired trading pair
-quantity = 0.001  # Replace with your desired trading quantity
-profit_target_percent = 0.2  # Target profit percentage
-stop_loss_percent = 0.1  # Stop-loss percentage
-candlestick_interval = '1m'  # 1-minute candles
-base_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(base_dir)
-grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "Trade-Bot")
-logging.basicConfig(filename=f'{files_dir}/logs/scalping_logs.log',
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(formatter)
-root_logger = logging.getLogger()
-root_logger.addHandler(console_handler)
+# Initialize the Binance client
+client = Client(api_key, api_secret)
 
 
-# Function to get current price
-def get_current_price():
-    ticker = client.get_ticker(symbol=symbol)
-    return float(ticker['lastPrice'])
+def get_historical_data(symbol, interval, limit=100):
+    klines = client.get_klines(symbol=symbol, interval=interval, limit=limit)
+    data = pd.DataFrame(klines, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time',
+                                         'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume',
+                                         'taker_buy_quote_asset_volume', 'ignore'])
+    data['timestamp'] = pd.to_datetime(data['timestamp'], unit='ms')
+    data.set_index('timestamp', inplace=True)
+    data['close'] = data['close'].astype(float)
+    return data
 
 
-# Function to place a market buy order
-def place_buy_order(quantity):
-    order = client.create_test_order(
-        symbol=symbol,
-        side='BUY',
-        type='MARKET',
-        quantity=quantity,
-        test=True
-    )
-    return order
+def trend_following_strategy(symbol, short_window, long_window):
+    data = get_historical_data(symbol, interval='1h', limit=200)  # Adjust limit based on your needs
+
+    # Calculate short-term and long-term moving averages
+    data['short_mavg'] = data['close'].rolling(window=short_window, min_periods=1, center=False).mean()
+    data['long_mavg'] = data['close'].rolling(window=long_window, min_periods=1, center=False).mean()
+
+    # Generate signals based on moving average crossovers
+    data['signal'] = 0.0
+    data['signal'][short_window:] = np.where(data['short_mavg'][short_window:] > data['long_mavg'][short_window:], 1.0,
+                                             0.0)
+
+    # Generate trading orders based on signals
+    data['positions'] = data['signal'].diff()
+
+    # Execute trading orders (buy/sell signals)
+    for index, row in data.iterrows():
+        if row['positions'] == 1.0:
+            print(f"Buy {symbol} at {row['close']}")
+            # Add your buy order logic here using the Binance API
+        elif row['positions'] == -1.0:
+            print(f"Sell {symbol} at {row['close']}")
+            # Add your sell order logic here using the Binance API
 
 
-# Function to place a market sell order
-def place_sell_order(quantity):
-    order = client.create_test_order(
-        symbol=symbol,
-        side='SELL',
-        type='MARKET',
-        quantity=quantity,
-        test=True
-    )
-    return order
+# Example usage
+symbol_to_trade = 'BTCUSDT'
+short_window_size = 50
+long_window_size = 200
 
-
-# Main scalping function
-def scalping_strategy():
-    while True:
-        try:
-            # Get current price
-            current_price = get_current_price()
-
-            # Place buy order if the price is below the previous buy price
-            buy_order_price = current_price * (1 - stop_loss_percent)
-            logging.info(f'Current Price: {current_price} --- Buy Order Price: {buy_order_price}')
-            if current_price < buy_order_price:
-                order = place_buy_order(quantity)
-                logging.info(f"Placed BUY order at {current_price}")
-                logging.info(f"Order details: {order}")
-                time.sleep(2)  # Wait for order to be executed
-
-                # Place sell order at a profit target
-                sell_price = current_price * (1 + profit_target_percent)
-                order = place_sell_order(quantity)
-                logging.info(f"Placed SELL order at {sell_price}")
-                logging.info(f"Order details: {order}")
-                time.sleep(2)  # Wait for order to be executed
-
-        except Exception as e:
-            logging.error(f"An error occurred: {e}")
-
-        time.sleep(5)  # Adjust the interval based on your strategy requirements
-
-
-if __name__ == "__main__":
-    scalping_strategy()
+trend_following_strategy(symbol_to_trade, short_window_size, long_window_size)
