@@ -20,7 +20,7 @@ DC_MAP = {
 btc_checkpoint_list = [40, 48, 55, 60, 70, 80, 100]
 
 checkpoint_list = [2, 2.5, 3, 3.5, 4.5, 6.5, 7.5, 8.5, 9.5, 10.5, 16.5, 20.5]
-position_size = 0.02
+position_size = 0.11
 ticker_timeout = 20
 TRADE_INTERVAL = 5*60
 trading_pair = 'ETHUSDT'

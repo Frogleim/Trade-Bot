@@ -1,6 +1,9 @@
 from binance.client import Client
 from . import pnl_calculator, crypto_ticker, config, files_manager
+import crypto_ticker
+import files_manager
 import logging
+import config
 import time
 import sys
 import os
@@ -39,13 +42,21 @@ def trade():
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        try:
+            crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        except Exception:
+            crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+
         body = f'Buying {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
             res = pnl_long(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
-                crypto_ticker.close_position(side='short', quantity=config.position_size)
+                try:
+                    crypto_ticker.close_position(side='short', quantity=config.position_size)
+                except Exception:
+                    crypto_ticker.close_position(side='short', quantity=config.position_size)
+
                 pnl_calculator.position_size()
                 logging.info('Position closed')
                 break
@@ -54,13 +65,21 @@ def trade():
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        try:
+            crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        except Exception:
+            crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+
         body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
             res = pnl_short(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
-                crypto_ticker.close_position(side='long', quantity=config.position_size)
+                try:
+                    crypto_ticker.close_position(side='long', quantity=config.position_size)
+                except Exception:
+                    crypto_ticker.close_position(side='long', quantity=config.position_size)
+
                 pnl_calculator.position_size()
                 logging.info('Position closed')
                 break

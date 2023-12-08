@@ -66,3 +66,8 @@ def get_wallet():
     return binance_wallet
 
 
+@app.get('position_history')
+def get_positions():
+    client = Client(api_key, api_secret)
+    res = client.futures_get_order()
+    print(res)

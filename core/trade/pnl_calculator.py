@@ -1,13 +1,15 @@
 import logging
-from . import config
+# from . import config
 import os
+import config
 from binance.client import Client
 import math
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "core")
+
+files_dir = os.path.join(parent_dir, "trade")
 print(files_dir)
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 
@@ -63,10 +65,10 @@ def position_size():
     with open(f'{files_dir}/config.py', 'r') as config_file:
         config_data = config_file.read()
     config_data = config_data.replace(f"position_size = {file_original_value}",
-                                      f"position_size = {final_position}")
+                                      f"position_size = {round(new_value, 2)}")
     with open(f'{files_dir}/config.py', 'w') as config_file:
         config_file.write(config_data)
-    return original_value
+    return final_position
 
 
 def get_symbol_precision(symbol):
@@ -88,7 +90,7 @@ def are_last_3_candles_growing(api_key, api_secret, symbol="ETHUSDT", interval="
     return growing
 
 
-def get_last_two_candles_direction(symbol, interval='15m'):
+def get_last_two_candles_direction(symbol, interval='1m'):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
 
@@ -120,14 +122,11 @@ def get_current_positions():
 
 if __name__ == '__main__':
     starting_number = 0.21  # 0.21$
-    common_ratio = 1.05  # 20% increase
-    num_terms = 120  # 40 Trades is one day trade
+    common_ratio = 1.5 # 20% increase
+    num_terms = 11  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 54 for new_value in result]
+    wallet = [new_value + 53 for new_value in result]
     print(wallet)
-
-    number = 0.0234
-    rounded_number = math.ceil(number * 100) / 100
-
-    print(rounded_number)
+    res = get_last_two_candles_direction(symbol=config.trading_pair)
+    print(res)

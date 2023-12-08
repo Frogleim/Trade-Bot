@@ -4,8 +4,9 @@ import os
 # Specify the file path
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "core")
+files_dir = os.path.join(parent_dir, "trade")
 file_path = f"{files_dir}/files/model_dataset.csv"
+print(file_path)
 
 
 def insert_data(entry_price, close_price, profit, entry_price_diff=0.0, open_time=None, close_time=None):
@@ -27,5 +28,6 @@ def insert_data(entry_price, close_price, profit, entry_price_diff=0.0, open_tim
 
 
 # Example usage
-if __name__ == '__main__':
-    insert_data(150, 110, 10, 10)
+# if __name__ == '__main__':
+#     # insert_data(150, 110, 10, 10)
+#
