@@ -1,8 +1,9 @@
 import random
 from binance.client import Client
-# from . import config
-import config
+from . import config
+# import config
 import logging
+import time
 import os
 
 previous_price = None
@@ -12,7 +13,9 @@ price_threshold = 15
 price_difference = 0.0
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "logs")
+grandparent_dir = os.path.dirname(parent_dir)
+print(grandparent_dir)
+files_dir = os.path.join(grandparent_dir, "logs")
 logging.basicConfig(filename=f'{files_dir}/binance_logs.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
