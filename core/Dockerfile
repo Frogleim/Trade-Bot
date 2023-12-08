@@ -2,6 +2,6 @@ FROM python:3.11
 RUN apt-get update
 RUN mkdir "btc"
 WORKDIR btc
-COPY . /btc
+COPY .. /btc
 RUN pip install --no-cache-dir -r requirements.txt
-CMD ["python", "main.py"]
+CMD ["python", "profitable_exit_strategy.py"]

@@ -4,11 +4,16 @@ import config
 import os
 from binance.client import Client
 from binance.helpers import round_step_size  # add at top
+import math
+
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 files_dir = os.path.join(parent_dir, "core")
 print(files_dir)
+api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
+
+api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
 
 
@@ -55,12 +60,12 @@ def position_size():
     logging.info(f"Original Value: {round(original_value, 3)}", )
     logging.info(f"Percentage Increase: {round(percentage_increase * 100)}%", )
     logging.info(f"New Value: {round(logging_new_value, 3)}$", )
-    time.sleep(1)
+    final_position = math.ceil(new_value * 100) / 100
     config.position_size = round(new_value, 3)
     with open(f'{files_dir}/config.py', 'r') as config_file:
         config_data = config_file.read()
     config_data = config_data.replace(f"position_size = {file_original_value}",
-                                      f"position_size = {round(new_value, 2)}")
+                                      f"position_size = {final_position}")
     with open(f'{files_dir}/config.py', 'w') as config_file:
         config_file.write(config_data)
     return original_value
@@ -85,7 +90,7 @@ def are_last_3_candles_growing(api_key, api_secret, symbol="ETHUSDT", interval="
     return growing
 
 
-def get_last_two_candles_direction(symbol, interval='5m'):
+def get_last_two_candles_direction(symbol, interval='15m'):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
 
@@ -100,38 +105,31 @@ def get_last_two_candles_direction(symbol, interval='5m'):
 
 
 def get_current_positions():
+    binance_balance = []
     # Replace YOUR_API_KEY and YOUR_API_SECRET with your Binance API key and secret
-    client = Client(api_key='KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA',
-                    api_secret='7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb')
-
-    client_test = Client(config.API_KEY, config.API_SECRET, testnet=True)
-    price = 2059
-    cost = float(str(price).split('.')[0] + "." + str(price).split('.')[1][0:5]) + (price * 0.3 / 100)
-
-    # Get current open positions
-    data = client.futures_exchange_info()  # request data
-    info = data['symbols']  # pull list of symbols
-    for x in range(len(info)):  # find length of list and run loop
-        if info[x]['symbol'] == config.trading_pair:  # until we find our coin
-            a = info[x]["filters"][0]['tickSize']  # break into filters pulling tick size
-            cost = round_step_size(cost,
-                                   float(a))  # convert tick size from string to float, insert in helper func with cost
-            print(cost)  # run into order parameter as price=cost
+    client = Client(api_key, api_secret)
+    futures_account_info = client.futures_account()
+    for asset in futures_account_info['assets']:
+        asset_name = asset['asset']
+        wallet_balance = asset['walletBalance']
+        balance = {
+            'asset':
+                f'{asset_name} - Wallet Balance: {wallet_balance}'
+        }
+        print(f'{asset_name} - Wallet Balance: {wallet_balance}')
+        binance_balance.append(balance)
 
 
 if __name__ == '__main__':
-    starting_number = 6.2  # 0.21$
+    starting_number = 0.21  # 0.21$
     common_ratio = 1.05  # 20% increase
-    num_terms = 30  # 40 Trades is one day trade
+    num_terms = 120  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 76.3 for new_value in result]
+    wallet = [new_value + 54 for new_value in result]
     print(wallet)
-    res = get_last_two_candles_direction(symbol=config.trading_pair)
-    print(res)
-    position = position_size()
-    print(position)
-    # api_key = 'KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA'
-    # api_secret = '7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb'
-    # are_growing = are_last_3_candles_growing(api_key, api_secret)
-    # print(are_growing)
+
+    number = 0.0234
+    rounded_number = math.ceil(number * 100) / 100
+
+    print(rounded_number)
