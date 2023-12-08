@@ -1,9 +1,6 @@
 from binance.client import Client
-import pnl_calculator
-import crypto_ticker
-import files_manager
+from . import pnl_calculator, crypto_ticker, config, files_manager
 import logging
-import config
 import time
 import sys
 import os
