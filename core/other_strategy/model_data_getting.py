@@ -1,8 +1,6 @@
 from binance.client import Client
 import time
-import config
-import crypto_ticker
-import files_manager
+from core.trade import files_manager, config
 import logging
 import os
 import sys

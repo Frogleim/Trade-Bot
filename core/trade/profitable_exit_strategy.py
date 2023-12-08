@@ -35,33 +35,35 @@ root_logger.addHandler(console_handler)
 
 def trade():
     btc_price_change, opened_price, signal_price = check_price_changes()
+    crypto_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+
     global current_checkpoint
-    if btc_price_change:
+    if btc_price_change and crypto_current <= opened_price:
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        # crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
         body = f'Buying {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
             res = pnl_long(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
-                # crypto_ticker.close_position(side='short', quantity=config.position_size)
+                crypto_ticker.close_position(side='short', quantity=config.position_size)
                 pnl_calculator.position_size()
                 logging.info('Position closed')
                 break
 
-    elif not btc_price_change:
+    elif not btc_price_change and crypto_current >= opened_price:
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        # crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
+        crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size, symbol=config.trading_pair)
         body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
             res = pnl_short(opened_price=opened_price, signal=signal_price)
             if res == 'Profit':
-                # crypto_ticker.close_position(side='long', quantity=config.position_size)
+                crypto_ticker.close_position(side='long', quantity=config.position_size)
                 pnl_calculator.position_size()
                 logging.info('Position closed')
                 break
@@ -103,7 +105,7 @@ def pnl_long(opened_price=None, current_price=2090, signal=None):
     global current_profit, current_checkpoint, profit_checkpoint_list, LOSS
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(btc_current) - float(opened_price)
-    logging.info(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
+    print(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
     for i in range(len(config.checkpoint_list) - 1):
         if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:  # Check if it's a new checkpoint
@@ -127,7 +129,7 @@ def pnl_short(opened_price=None, signal=None):
     global current_profit, current_checkpoint, profit_checkpoint_list, LOSS
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(btc_current)
-    logging.info(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
+    print(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
     for i in range(len(config.checkpoint_list) - 1):
         if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:

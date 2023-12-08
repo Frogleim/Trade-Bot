@@ -1,6 +1,6 @@
 from binance.client import Client
 import time
-import config
+from core.trade import config
 import os
 import logging
 import sys

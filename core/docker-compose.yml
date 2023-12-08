@@ -1,8 +1,9 @@
 version: '3'
 services:
-  app:
-    restart: always
+  btc-service:
     build:
-      context: ..
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - .:/btc
+    command: ["python", "profitable_exit_strategy.py"]

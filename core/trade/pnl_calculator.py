@@ -1,9 +1,7 @@
 import logging
-import time
 import config
 import os
 from binance.client import Client
-from binance.helpers import round_step_size  # add at top
 import math
 
 

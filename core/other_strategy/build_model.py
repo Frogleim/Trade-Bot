@@ -1,7 +1,7 @@
 import pandas as pd
 from binance.client import Client
 import numpy as np
-import config
+from core.trade import config
 
 # Binance API credentials
 api_key = 'your_api_key'

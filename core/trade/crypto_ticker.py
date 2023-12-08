@@ -4,8 +4,6 @@ from binance.client import Client
 import config
 import logging
 import os
-import time
-import decimal
 
 previous_price = None
 alert_status = False

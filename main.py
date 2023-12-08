@@ -4,6 +4,7 @@ from pathlib import Path
 import os
 import gzip
 import shutil
+from binance.client import Client
 
 app = FastAPI()
 
@@ -13,6 +14,8 @@ grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(grandparent_dir, "bot\\Trade-Bot\\core\\files")
 
 logs_dir = os.path.join(grandparent_dir, "bot\\Trade-Bot\\logs")
+api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
+api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
 
 def compress_file(input_file, output_file):
@@ -45,3 +48,21 @@ async def get_logs():
 
     # Return the file as a response
     return FileResponse(file_path, filename=file_name)
+
+
+@app.get('/get_wallet')
+def get_wallet():
+    binance_wallet = []
+    client = Client(api_key, api_secret)
+    futures_account_info = client.futures_account()
+    for asset in futures_account_info['assets']:
+        asset_name = asset['asset']
+        wallet_balance = asset['walletBalance']
+        print(f'{asset_name} - Wallet Balance: {wallet_balance}')
+        binance_dict = {
+            'Asset': f'{asset_name} - Wallet Balance: {wallet_balance}'
+        }
+        binance_wallet.append(binance_dict)
+    return binance_wallet
+
+
