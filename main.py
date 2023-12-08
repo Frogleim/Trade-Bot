@@ -11,9 +11,9 @@ app = FastAPI()
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/files")
+files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/trade/files")
 
-logs_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/logs")
+logs_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/trade/logs")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
