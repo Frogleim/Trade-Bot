@@ -1,7 +1,7 @@
 import logging
-# from . import config
+from . import config
 import os
-import config
+# import config
 from binance.client import Client
 import math
 
@@ -89,7 +89,7 @@ def are_last_3_candles_growing(api_key, api_secret, symbol="ETHUSDT", interval="
     return growing
 
 
-def get_last_two_candles_direction(symbol, interval='1m'):
+def get_last_two_candles_direction(symbol, interval='3m'):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
 

@@ -24,16 +24,4 @@ def is_last_candle_green(symbol, interval='3m'):
     return close_price > open_price
 
 
-# Example usage
-symbol_to_check = 'ETHUSDT'
-interval_to_check = '1m'
-
-last_candle_is_green = is_last_candle_green(symbol_to_check, interval_to_check)
-
-if last_candle_is_green is not None:
-    if last_candle_is_green:
-        print(f'The last candle is green (bullish). {last_candle_is_green}')
-    else:
-        print(f'The last candle is red (bearish). {last_candle_is_green}')
-else:
-    print('Unable to retrieve candlestick data.')
+# Example usagesymbol_to_check = 'ETHUSDT'
