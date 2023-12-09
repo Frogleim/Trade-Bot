@@ -1,0 +1,9 @@
+version: '3'
+services:
+  btc-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/btc
+    command: ["python", "profitable_exit_strategy.py"]
