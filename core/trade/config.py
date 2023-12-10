@@ -6,6 +6,8 @@ API_KEY = '552adddf40a41a4b272f22c99d7318792f0d2daf42cd80d69f2ecf4e8b9d649d'
 API_ID = '24465307'
 API_HASH = 'a7f60a15b4f5e7f97aec85d9ea408fe1'
 TOKEN = '6865487233:AAHggm1JbSUu7oMSV7UeXIrE7w8PxcRxMTA'
+moving_average_window = 6
+
 # Calculator
 # https://blockduo.com/binance-calculator/
 DC_MAP = {
@@ -21,7 +23,7 @@ btc_checkpoint_list = [40, 48, 55, 60, 70, 80, 100]
 
 checkpoint_list = [1.8, 2, 2.5, 3, 3.5, 4.5, 6.5, 7.5, 8.5, 9.5, 10.5, 16.5, 20.5]
 position_size = 0.02
-ticker_timeout = 20
+ticker_timeout = 5
 TRADE_INTERVAL = 5*60
 trading_pair = 'ETHUSDT'
 TP = 10.5
@@ -29,4 +31,5 @@ MIN_TP = 2
 SL = 5
 signal_price = 0.6
 
-#  4.58
+
+
