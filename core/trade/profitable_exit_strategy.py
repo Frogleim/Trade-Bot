@@ -163,7 +163,9 @@ def pnl_long(opened_price=None, current_price=2090, signal=None):
             body = f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            files_manager.insert_data(opened_price, btc_current, current_profit, signal)
+            position_size = config.position_size
+            save_data = (position_size * float(btc_current)) / 100
+            files_manager.insert_data(opened_price, btc_current, current_profit, signal, save_data)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'
 
@@ -187,7 +189,9 @@ def pnl_short(opened_price=None, signal=None):
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            files_manager.insert_data(opened_price, btc_current, current_profit, signal)
+            position_size = config.position_size
+            save_data = (position_size * float(btc_current)) / 100
+            files_manager.insert_data(opened_price, btc_current, current_profit, signal, save_data)
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'

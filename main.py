@@ -5,6 +5,7 @@ import os
 import gzip
 import shutil
 from binance.client import Client
+import uvicorn
 
 app = FastAPI()
 
@@ -66,8 +67,9 @@ def get_wallet():
     return binance_wallet
 
 
-@app.get('position_history')
+@app.get('/position_history')
 def get_positions():
     client = Client(api_key, api_secret)
-    res = client.futures_get_order()
+    res = client.futures_account()
     print(res)
+
