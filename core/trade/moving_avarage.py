@@ -1,6 +1,5 @@
 import numpy as np
 from binance.client import Client
-import ccxt
 import pandas as pd
 
 price_history = []

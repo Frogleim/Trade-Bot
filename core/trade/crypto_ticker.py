@@ -153,7 +153,7 @@ def place_buy_order(price, quantity, symbol):
     )
 
     print("Buy order placed successfully:")
-    print(order)
+    return order['price']
 
 
 def place_sell_order(price, quantity, symbol):
@@ -169,14 +169,15 @@ def place_sell_order(price, quantity, symbol):
     )
 
     print("Buy order placed successfully:")
-    print(order)
+    return order['price']
 
 
 if __name__ == "__main__":
     import time
 
     start_time = time.time()
-    client = Client(api_key='KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA', api_secret='7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb')
+    client = Client(api_key='KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA',
+                    api_secret='7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb')
 
     order = client.futures_create_order(
         symbol='ETHUSDT',
