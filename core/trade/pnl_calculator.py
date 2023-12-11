@@ -1,7 +1,7 @@
 import logging
-# from . import config
+from . import config
 import os
-import config
+# import config
 from binance.client import Client
 import math
 
