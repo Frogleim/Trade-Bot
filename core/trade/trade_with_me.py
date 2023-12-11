@@ -7,18 +7,22 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import pickle
+import os
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+grandparent_dir = os.path.dirname(parent_dir)
+print(grandparent_dir)
+files_dir = os.path.join(grandparent_dir, "core/trade")
 
 def get_historical_data():
     api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
-
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
     client = Client(api_key, api_secret)
-    interval = '1m'
+    interval = '15m'
     symbol = 'ETHUSDT'
     n = 10
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
-
     timestamps = [int(kline[0]) for kline in klines]
     open_prices = [float(kline[1]) for kline in klines]
     high_prices = [float(kline[2]) for kline in klines]
@@ -44,8 +48,8 @@ def predict_crypto():
 
     """
     new_data = get_historical_data()
-    loaded_model = tf.keras.models.load_model('./model/trade_model_1min.h5')
-    scaler_filename = './model/minmax_scaler.pkl'
+    loaded_model = tf.keras.models.load_model(f'{files_dir}/model/trade_model_1min.h5')
+    scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
 
     try:
         # Load existing scaler
@@ -62,11 +66,11 @@ def predict_crypto():
     new_data['predicted_prob'] = loaded_model.predict(X_new)
     threshold = 0.5
     new_data['trading_signal'] = np.where(new_data['predicted_prob'] > threshold, 1, -1)
-    pd.set_option('display.max_rows', None)
-    print(new_data[['close', 'predicted_prob', 'trading_signal']])
+    print(new_data[['close', 'predicted_prob', 'trading_signal']].iloc[-1])
     loaded_model.save('./model/trade_model_1min.h5')
-    return new_data[['close', 'predicted_prob', 'trading_signal']]
+    return new_data[['close', 'predicted_prob', 'trading_signal']].iloc[-1]
 
 
-if __name__ == '__main__':
-    predict_crypto()
+# if __name__ == '__main__':
+#     new_data = predict_crypto()
+#     print(round(new_data['trading_signal'], 10))

@@ -6,6 +6,7 @@ import gzip
 import shutil
 from binance.client import Client
 import uvicorn
+from core.trade import trade_with_me
 
 app = FastAPI()
 
@@ -72,4 +73,10 @@ def get_positions():
     client = Client(api_key, api_secret)
     res = client.futures_account()
     print(res)
+
+
+@app.get('/get_prediction')
+def get_prediction():
+    prediction = trade_with_me.predict_crypto()
+    return {'Result': prediction}
 
