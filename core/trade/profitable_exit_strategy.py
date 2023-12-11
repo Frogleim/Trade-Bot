@@ -1,6 +1,7 @@
 from binance.client import Client
 from . import pnl_calculator, crypto_ticker, config, files_manager, candles, moving_avarage
 import logging
+# import config
 import time
 import sys
 import os
