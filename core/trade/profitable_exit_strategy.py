@@ -58,11 +58,11 @@ def trade():
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
         try:
             order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
-                                                        symbol=config.position_size)
+                                                        symbol=config.trading_pair)
         except Exception as e:
             logging.error(e)
             order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
-                                                        symbol=config.position_size)
+                                                        symbol=config.trading_pair)
         body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
