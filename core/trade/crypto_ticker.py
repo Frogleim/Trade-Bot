@@ -1,7 +1,7 @@
 import random
 from binance.client import Client
-from . import config
-# import config
+# from . import config
+import config
 import logging
 import time
 import os
@@ -153,7 +153,8 @@ def place_buy_order(price, quantity, symbol):
     )
 
     print("Buy order placed successfully:")
-    return order['price']
+    print(order)
+    return order
 
 
 def place_sell_order(price, quantity, symbol):
@@ -169,21 +170,8 @@ def place_sell_order(price, quantity, symbol):
     )
 
     print("Buy order placed successfully:")
-    return order['price']
+    return order
 
 
 if __name__ == "__main__":
-    import time
-
-    start_time = time.time()
-    client = Client(api_key='KH3zUXPCNXCI8mkVymna2cG3tkYm2daQtgPBsQpSdOwZlOcTQuqoQVvA9mSvpQfA',
-                    api_secret='7TMJtn1N0B6cw875KgjD2jV1oxcLm6zcl5rPEt8uSJZeMmZs3JJrD1NxteVScPkb')
-
-    order = client.futures_create_order(
-        symbol='ETHUSDT',
-        side=Client.SIDE_BUY,
-        type=Client.ORDER_TYPE_MARKET,
-        quantity=config.position_size * 1.5,
-    )
-    # btc_current_class = LivePrice()
-    # btc_current = btc_current_class.get_live_price()
+    place_buy_order(price=1500, quantity=0.02, symbol='ETHUSDT')

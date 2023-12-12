@@ -8,7 +8,7 @@ from binance.client import Client
 import uvicorn
 
 import core.trade.config
-from core.trade import trade_with_me
+from core.trade import trade_with_me, config
 
 app = FastAPI()
 
