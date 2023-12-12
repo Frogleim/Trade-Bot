@@ -1,7 +1,6 @@
 import logging
 from . import config
 import os
-from . import moving_avarage
 # import config
 from binance.client import Client
 import math
@@ -82,18 +81,11 @@ def get_symbol_precision(symbol):
     raise ValueError(f"Symbol {symbol} not found in exchange info")
 
 
-def are_last_3_candles_growing(api_key, api_secret, symbol="ETHUSDT", interval="5m"):
-    client = Client(api_key, api_secret)
-    orders = client.get_all_orders(symbol=symbol)
-    print(orders)
 
 
-def get_last_two_candles_direction(symbol, interval='1m'):
-    klines = client.futures_klines(symbol=symbol, interval=interval, limit=10)
+def get_last_two_candles_direction(symbol, interval='3m'):
+    klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
-    print(close_prices)
-    sma = moving_avarage.calculate_sma(close_prices, config.moving_average_window)
-    print(sma)
 
     if close_prices[-1] > close_prices[-2]:
         direction = "Up"
@@ -122,13 +114,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 10  # 0.21$
-    common_ratio = 1.1 # 20% increase
-    num_terms = 50  # 40 Trades is one day trade
+    starting_number = 1.7  # 0.21$
+    common_ratio = 1.17  # 20% increase
+    num_terms = 60  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 30 for new_value in result]
+    wallet = [new_value + 6.5 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)
-    are_last_3_candles_growing(api_key, api_secret, config.trading_pair)

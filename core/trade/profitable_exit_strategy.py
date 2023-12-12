@@ -1,5 +1,5 @@
 from binance.client import Client
-from . import pnl_calculator, crypto_ticker, config, files_manager, candles, moving_avarage
+from . import pnl_calculator, crypto_ticker, config, files_manager, candles, moving_avarage, trade_with_me
 import logging
 # import config
 import time
@@ -107,7 +107,7 @@ def check_price_changes():
         logging.info(f'Difference: {round(signal_difference, 2)}')
         if SMA is not None:
             if pnl_calculator.get_last_two_candles_direction(
-                    config.trading_pair) == 'Up' and float(crypto_current) > SMA:
+                    config.trading_pair) == 'Up' and float(crypto_current) > SMA and trade_with_me.predict_crypto() > 0:
                 logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
                 logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
                 message = (f"{config.trading_pair} goes up for more than {config.signal_price}$\n"
@@ -115,7 +115,7 @@ def check_price_changes():
                 logging.info(message)
                 return True, next_crypto_current, signal_difference
             elif pnl_calculator.get_last_two_candles_direction(
-                    config.trading_pair) == 'Down' and float(crypto_current) < SMA:
+                    config.trading_pair) == 'Down' and float(crypto_current) < SMA and trade_with_me.predict_crypto() < 0:
                 logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
                 logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
                 message = (f"{config.trading_pair} goes down for more than {config.signal_price}$\n"

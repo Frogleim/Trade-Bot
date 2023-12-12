@@ -5,8 +5,8 @@ import os
 import gzip
 import shutil
 from binance.client import Client
-from core.trade import pnl_calculator
 import uvicorn
+from core.trade import trade_with_me
 
 app = FastAPI()
 
@@ -75,8 +75,8 @@ def get_positions():
     print(res)
 
 
-@app.get("/progression_calculator")
-def progression(starting_number: float = 10.0, percentage: float = 1.1, trade_count: int = 50):
-    calculator = pnl_calculator.geometric_progression(starting_number, percentage, trade_count)
-    result = {"result": calculator}
-    return result
+@app.get('/get_prediction')
+def get_prediction():
+    prediction = trade_with_me.predict_crypto()
+    return {'Result': prediction}
+

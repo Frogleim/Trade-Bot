@@ -7,6 +7,14 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import pickle
+import os
+
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+grandparent_dir = os.path.dirname(parent_dir)
+print(grandparent_dir)
+files_dir = os.path.join(grandparent_dir, "core/trade")
 
 
 def get_historical_data():
@@ -14,7 +22,7 @@ def get_historical_data():
 
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
     client = Client(api_key, api_secret)
-    interval = '1m'
+    interval = '15m'
     symbol = 'ETHUSDT'
     n = 200
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
@@ -43,7 +51,7 @@ def train_base_model():
     df['target'] = (df['close'].shift(-1) > df['close']).astype(int)
 
     # Feature Scaling
-    scaler_filename = './model/minmax_scaler.pkl'
+    scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
     try:
         # Load existing scaler
         with open(scaler_filename, 'rb') as scaler_file:
@@ -79,7 +87,7 @@ def train_base_model():
     print("Accuracy:", accuracy)
     with open(scaler_filename, 'wb') as scaler_file:
         pickle.dump(scaler, scaler_file)
-    model.save('./model/trade_model_1min.h5')
+    model.save(f'{files_dir}/model/trade_model_1min.h5')
 
 
 if __name__ == '__main__':
