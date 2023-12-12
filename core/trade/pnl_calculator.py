@@ -1,8 +1,8 @@
 import logging
-# from . import config
+from . import config
 import os
-import moving_avarage
-import config
+from . import moving_avarage
+# import config
 from binance.client import Client
 import math
 
@@ -122,12 +122,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 1.7  # 0.21$
-    common_ratio = 1.05  # 20% increase
-    num_terms = 48  # 40 Trades is one day trade
+    starting_number = 10  # 0.21$
+    common_ratio = 1.1 # 20% increase
+    num_terms = 50  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 13 for new_value in result]
+    wallet = [new_value + 30 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)
