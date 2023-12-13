@@ -4,6 +4,7 @@ import logging
 # import config
 import time
 import os
+import sys
 
 current_profit = 0
 profit_checkpoint_list = []
@@ -15,6 +16,30 @@ api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
 price_history = []
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+grandparent_dir = os.path.dirname(parent_dir)
+files_dir = os.path.join(grandparent_dir, "Trade-Bot")
+logging.basicConfig(filename=f'{files_dir}/logs/binance_logs.log',
+                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+console_handler = logging.StreamHandler(sys.stdout)
+error_logger = logging.getLogger('error_logger')
+error_logger.setLevel(logging.ERROR)
+console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
+error_handler = logging.FileHandler(f'{files_dir}/logs/error_logs.log')
+error_handler.setLevel(logging.ERROR)  # Set the desired log level for the file
+error_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+error_handler.setFormatter(error_formatter)
+error_logger.addHandler(error_handler)
+error_console_handler = logging.StreamHandler(sys.stdout)
+error_console_handler.setLevel(logging.ERROR)  # Set the desired log level for the console
+error_console_handler.setFormatter(error_formatter)
+error_logger.addHandler(error_console_handler)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+root_logger = logging.getLogger()
+root_logger.addHandler(console_handler)
 
 
 def trade():
@@ -106,15 +131,17 @@ def check_price_changes():
         signal_difference = float(next_crypto_current) - float(checking_price)
         logging.info(f'Difference: {round(signal_difference, 2)}')
         if SMA is not None:
-            if float(crypto_current) > SMA and trade_with_me.predict_crypto() > 0:
+            if (float(crypto_current) > SMA and trade_with_me.predict_crypto()['trading_signal'] > 0
+                    and trade_with_me.predict_crypto()['predicted_prob'] >= 0.9):
                 logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
                 logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
                 message = (f"{config.trading_pair} goes up for more than {config.signal_price}$\n"
                            f" Buying {config.trading_pair} for {round(float(next_crypto_current), 1)}$")
                 logging.info(message)
                 return True, next_crypto_current, signal_difference
-            elif float(
-                    crypto_current) < SMA and trade_with_me.predict_crypto() < 0:
+            elif (float(
+                    crypto_current) < SMA and trade_with_me.predict_crypto()['trading_signal'] < 0
+                  and trade_with_me.predict_crypto()['predicted_prob'] >= 0.9):
                 logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
                 logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
                 message = (f"{config.trading_pair} goes down for more than {config.signal_price}$\n"
@@ -123,6 +150,8 @@ def check_price_changes():
                 return False, next_crypto_current, signal_difference
             else:
                 continue
+        time.sleep(40)
+
 
 
 def pnl_long(opened_price=None, current_price=2090, signal=None):

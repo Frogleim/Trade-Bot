@@ -1,0 +1,63 @@
+2023-12-13 11:04:03,539 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:04:03,797 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:04:05,507 - INFO -                         close  predicted_prob  trading_signal
+2023-12-13 04:45:00  0.117885    4.636870e-03              -1
+2023-12-13 05:00:00  0.094863    6.198950e-01               1
+2023-12-13 05:15:00  0.158602    3.526810e-01              -1
+2023-12-13 05:30:00  0.146877    9.999968e-01               1
+2023-12-13 05:45:00  0.183650    9.920382e-01               1
+2023-12-13 06:00:00  0.172991    3.098572e-01              -1
+2023-12-13 06:15:00  0.157323    9.995019e-01               1
+2023-12-13 06:30:00  0.104242    8.804008e-01               1
+2023-12-13 06:45:00 -0.021957    5.386443e-07              -1
+2023-12-13 07:00:00  0.033468    2.527170e-04              -1
+2023-12-13 11:05:23,728 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:05:23,994 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:05:25,749 - INFO - close             0.040503
+predicted_prob    0.000257
+trading_signal   -1.000000
+Name: 2023-12-13 07:00:00, dtype: float64
+2023-12-13 11:42:07,859 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:42:08,124 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:42:09,846 - INFO - close             1.791729e-01
+predicted_prob    4.761949e-16
+trading_signal   -1.000000e+00
+Name: 2023-12-13 07:30:00, dtype: float64
+2023-12-13 11:53:50,504 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:53:50,754 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:53:52,458 - INFO - close             0.185781
+predicted_prob    0.000919
+trading_signal   -1.000000
+Name: 2023-12-13 07:45:00, dtype: float64
+2023-12-13 11:54:01,605 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:54:01,856 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:54:03,566 - INFO - close             0.191857
+predicted_prob    0.000331
+trading_signal   -1.000000
+Name: 2023-12-13 07:45:00, dtype: float64
+2023-12-13 11:55:25,854 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:55:26,111 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:55:27,819 - INFO - close             0.174483
+predicted_prob    0.000013
+trading_signal   -1.000000
+Name: 2023-12-13 07:45:00, dtype: float64
+2023-12-13 11:58:59,307 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:1398: The name tf.executing_eagerly_outside_functions is deprecated. Please use tf.compat.v1.executing_eagerly_outside_functions instead.
+
+2023-12-13 11:58:59,572 - WARNING - From C:\Users\admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\utils\tf_utils.py:492: The name tf.ragged.RaggedTensorValue is deprecated. Please use tf.compat.v1.ragged.RaggedTensorValue instead.
+
+2023-12-13 11:59:01,318 - INFO - close             0.177787
+predicted_prob    0.000047
+trading_signal   -1.000000
+Name: 2023-12-13 07:45:00, dtype: float64

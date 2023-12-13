@@ -174,4 +174,4 @@ def place_sell_order(price, quantity, symbol):
 
 
 if __name__ == "__main__":
-    place_buy_order(price=1500, quantity=0.02, symbol='ETHUSDT')
+    place_buy_order(price=40000, quantity=0.003, symbol='BTCUSDT')

@@ -1,10 +1,11 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from pathlib import Path
 import os
 import gzip
 import shutil
 from binance.client import Client
+import zipfile
 import uvicorn
 
 import core.trade.config
@@ -41,17 +42,18 @@ async def get_statement():
 
 @app.get("/get_trade_logs")
 async def get_logs():
-    file_path = Path(f"{logs_dir}/binance_logs.log")  # Replace with the actual file path
-    file_name = "trade_logs.txt"
-
-    compress_file(file_path, file_name)
+    log_file_path = Path(f"{logs_dir}/binance_logs.log")  # Replace with the actual file path
+    zip_file_path = log_file_path.with_suffix(".zip")
+    if not zip_file_path.exists():
+        with zipfile.ZipFile(zip_file_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+            zipf.write(log_file_path, arcname="binance_logs.log")
 
     # Path to the file you want to return
 
     # Optional: Specify the desired file name for the response
 
     # Return the file as a response
-    return FileResponse(file_path, filename=file_name)
+    return StreamingResponse(open(zip_file_path, "rb"), media_type="application/zip", headers={"Content-Disposition": f"attachment; filename=trade_logs.zip"})
 
 
 @app.get('/get_wallet')
@@ -61,7 +63,7 @@ def get_wallet():
     futures_account_info = client.futures_account()
     for asset in futures_account_info['assets']:
         asset_name = asset['asset']
-        wallet_balance = asset['walletBalance']
+        wallet_balance = round(float(asset['walletBalance']), 2)
         print(f'{asset_name} - Wallet Balance: {wallet_balance}')
         binance_dict = {
             'Asset': f'{asset_name} - Wallet Balance: {wallet_balance}'
@@ -81,3 +83,4 @@ def get_positions():
 def get_prediction():
     prediction = trade_with_me.predict_crypto()
     return {'Result': prediction}
+

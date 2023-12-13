@@ -90,5 +90,28 @@ def train_base_model():
     model.save(f'{files_dir}/model/trade_model_1min.h5')
 
 
+def predict_entry_price(model, scaler):
+    df = get_historical_data()
+
+    # Feature Scaling using the saved scaler
+    df[['open', 'high', 'low', 'close']] = scaler.transform(df[['open', 'high', 'low', 'close']])
+
+    # Extract features for prediction
+    features = df[['open', 'high', 'low', 'close']]
+
+    # Generate predictions
+    predictions = model.predict(features)
+
+    # Choose a threshold (you can adjust this based on your strategy)
+    threshold = 0.5
+
+    # Identify entry points based on the threshold
+    entry_points = (predictions > threshold).astype(int)
+
+    # Add entry points to the DataFrame
+    df['entry_point'] = entry_points
+
+    return df
+
 if __name__ == '__main__':
     train_base_model()
