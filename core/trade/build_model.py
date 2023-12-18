@@ -9,7 +9,6 @@ from tensorflow.keras.layers import Dense
 import pickle
 import os
 
-
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
@@ -22,7 +21,7 @@ def get_historical_data():
 
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
     client = Client(api_key, api_secret)
-    interval = '15m'
+    interval = '1h'
     symbol = 'ETHUSDT'
     n = 200
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
@@ -51,7 +50,7 @@ def train_base_model():
     df['target'] = (df['close'].shift(-1) > df['close']).astype(int)
 
     # Feature Scaling
-    scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
+    scaler_filename = f'{files_dir}/model/minmax_scaler_1hrs.pkl'
     try:
         # Load existing scaler
         with open(scaler_filename, 'rb') as scaler_file:
@@ -87,7 +86,7 @@ def train_base_model():
     print("Accuracy:", accuracy)
     with open(scaler_filename, 'wb') as scaler_file:
         pickle.dump(scaler, scaler_file)
-    model.save(f'{files_dir}/model/trade_model_1min.h5')
+    model.save(f'{files_dir}/model/trade_model_1hrs.h5')
 
 
 def predict_entry_price(model, scaler):
@@ -112,6 +111,7 @@ def predict_entry_price(model, scaler):
     df['entry_point'] = entry_points
 
     return df
+
 
 if __name__ == '__main__':
     train_base_model()
