@@ -9,7 +9,7 @@ import zipfile
 import uvicorn
 
 import core.trade.config
-from core.trade import trade_with_me, config
+from core.trade import live_prediction, config
 
 app = FastAPI()
 

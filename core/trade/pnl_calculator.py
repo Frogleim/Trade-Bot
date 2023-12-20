@@ -7,9 +7,11 @@ import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
+
 files_dir = os.path.join(parent_dir, "trade")
 print(files_dir)
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
+
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
 
@@ -79,6 +81,8 @@ def get_symbol_precision(symbol):
     raise ValueError(f"Symbol {symbol} not found in exchange info")
 
 
+
+
 def get_last_two_candles_direction(symbol, interval='3m'):
     klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
     close_prices = [float(kline[4]) for kline in klines[:-1]]
@@ -110,12 +114,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 0.7  # 0.21$
-    common_ratio = 1.1  # 20% increase
-    num_terms = 25  # 40 Trades is one day trade
+    starting_number = 100  # 0.21$
+    common_ratio = 1.187 # 20% increase
+    num_terms = 15  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 2.7 for new_value in result]
+    wallet = [new_value + 556 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)

@@ -1,6 +1,6 @@
 import time
 
-from core.trade import build_model
+from .trade import build_model
 
 
 def start_train():

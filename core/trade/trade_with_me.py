@@ -43,7 +43,7 @@ def get_historical_data():
     api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
     client = Client(api_key, api_secret)
-    interval = '15m'
+    interval = '1h'
     symbol = 'ETHUSDT'
     n = 10
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
@@ -72,7 +72,7 @@ def predict_crypto():
 
     """
     new_data = get_historical_data()
-    loaded_model = tf.keras.models.load_model(f'{files_dir}/model/trade_model_1min.h5')
+    loaded_model = tf.keras.models.load_model(f'{files_dir}/model/trade_model_1hrs.h5')
     scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
 
     try:
@@ -91,7 +91,7 @@ def predict_crypto():
     new_data['predicted_prob'] = loaded_model.predict(X_new)
     threshold = 0.5
     new_data['trading_signal'] = np.where(new_data['predicted_prob'] > threshold, 1, -1)
-    loaded_model.save('./model/trade_model_1min.h5')
+    loaded_model.save('./model/trade_model_1hrs.h5')
     res = new_data[['close', 'predicted_prob', 'trading_signal']].iloc[-1]
     logging.info(res)
 

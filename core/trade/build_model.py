@@ -22,7 +22,7 @@ def get_historical_data():
 
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
     client = Client(api_key, api_secret)
-    interval = '15m'
+    interval = '1h'
     symbol = 'ETHUSDT'
     n = 200
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
@@ -87,31 +87,10 @@ def train_base_model():
     print("Accuracy:", accuracy)
     with open(scaler_filename, 'wb') as scaler_file:
         pickle.dump(scaler, scaler_file)
-    model.save(f'{files_dir}/model/trade_model_1min.h5')
+    model.save(f'{files_dir}/model/trade_model_1hrs.h5')
 
 
-def predict_entry_price(model, scaler):
-    df = get_historical_data()
 
-    # Feature Scaling using the saved scaler
-    df[['open', 'high', 'low', 'close']] = scaler.transform(df[['open', 'high', 'low', 'close']])
-
-    # Extract features for prediction
-    features = df[['open', 'high', 'low', 'close']]
-
-    # Generate predictions
-    predictions = model.predict(features)
-
-    # Choose a threshold (you can adjust this based on your strategy)
-    threshold = 0.5
-
-    # Identify entry points based on the threshold
-    entry_points = (predictions > threshold).astype(int)
-
-    # Add entry points to the DataFrame
-    df['entry_point'] = entry_points
-
-    return df
 
 if __name__ == '__main__':
     train_base_model()
