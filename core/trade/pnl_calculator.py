@@ -1,6 +1,7 @@
 import logging
 # from . import config
 import os
+import requests
 import config
 from binance.client import Client
 import math
@@ -8,22 +9,9 @@ import math
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 files_dir = os.path.join(parent_dir, "trade")
-print(files_dir)
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
-
-
-class BinanceFuturesPNLCalculator:
-    def __init__(self, entry_price, exit_price, quantity, leverage):
-        self.entry_price = entry_price
-        self.exit_price = exit_price
-        self.quantity = quantity
-        self.leverage = leverage
-
-    def calculate_pnl(self):
-        pnl = ((self.exit_price - self.entry_price) / self.entry_price) * self.quantity * self.leverage
-        return pnl
 
 
 def geometric_progression(starting_number, ratio, count):
@@ -50,7 +38,7 @@ def calculate_modified_difference(lst):
 def position_size():
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    percentage_increase = 0.05
+    percentage_increase = 0.3
     new_value = file_original_value + (file_original_value * percentage_increase)
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     logging_new_value = (new_value * float(crypto_current_price)) / 100
@@ -68,15 +56,36 @@ def position_size():
     return final_position
 
 
-def get_symbol_precision(symbol):
-    exchange_info = client.get_exchange_info()
+def get_wallet():
+    url = 'http://siranyan.xyz/get_wallet'
+    r = requests.get(url)
+    usdt_data = [item for item in r.json() if "USDT" in item["Asset"]]
+    return usdt_data
 
-    for symbol_info in exchange_info['symbols']:
-        if symbol_info['symbol'] == symbol:
-            return int(symbol_info['baseAssetPrecision'])
 
-    # If the symbol is not found, you may want to handle this case appropriately
-    raise ValueError(f"Symbol {symbol} not found in exchange info")
+def check_wallet():
+    client = Client(api_key, api_secret)
+    crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    wallet = get_wallet()
+    raw_value = wallet[0]['Asset']
+
+    value_part = raw_value.split(':')[-1].strip()
+    result = float(value_part)
+    file_original_value = config.position_size
+    original_value = (float(file_original_value) * float(crypto_current_price)) / 100
+    diff = original_value / result
+    if diff * 100 >= 60:
+        print('Position Size is equal or above than 60%')
+        new_value = result * (12 / 100)
+        changed_value = (new_value / crypto_current_price) * 100
+        with open(f'{files_dir}/config.py', 'r') as config_file:
+            config_data = config_file.read()
+        config_data = config_data.replace(f"position_size = {file_original_value}",
+                                          f"position_size = {round(changed_value, 2)}")
+        with open(f'{files_dir}/config.py', 'w') as config_file:
+            config_file.write(config_data)
+        print('Position Size resetted Successfully')
+    print('Position Size is less than 60%')
 
 
 def get_last_two_candles_direction(symbol, interval='3m'):
@@ -111,8 +120,8 @@ def get_current_positions():
 
 if __name__ == '__main__':
     starting_number = 0.456  # 0.21$
-    common_ratio = 1.08  # 20% increase
-    num_terms = 120  # 40 Trades is one day trade
+    common_ratio = 1.3  # 20% increase
+    num_terms = 11  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
     wallet = [new_value + 2.544 for new_value in result]
