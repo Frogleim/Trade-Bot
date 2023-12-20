@@ -20,71 +20,115 @@ SMA = 0.0
 
 def check_price_changes():
     global checking_price, price_history, SMA
-    window_size = 10  # Adjust the window size as needed
     price_history = []  # Keep track of historical prices
     while True:
         crypto_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
         logging.info(f'Current {config.trading_pair} price: {crypto_current}')
         checking_price = crypto_current
-        price_history.append(float(crypto_current))
-        if len(price_history) > window_size:
-            price_history = price_history[-window_size:]
-        SMA = moving_avarage.calculate_sma(price_history, window_size)
-        logging.info(f'SMA: {SMA}')
         time.sleep(config.ticker_timeout)
         next_crypto_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
         logging.info(f'New {config.trading_pair} price: {next_crypto_current} SMA: {SMA}')
         signal_difference = float(next_crypto_current) - float(checking_price)
         logging.info(f'Difference: {round(signal_difference, 2)}')
-        if SMA is not None:
-            if (trade_with_me.predict_crypto()['trading_signal'] > 0
-                    and trade_with_me.predict_crypto()['predicted_prob'] >= 0.9):
-                logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
-                logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
-                message = (f"{config.trading_pair} goes up for more than {config.signal_price}$\n"
-                           f" Buying {config.trading_pair} for {round(float(next_crypto_current), 1)}$")
-                logging.info(message)
-                return True, next_crypto_current, signal_difference
-            elif (trade_with_me.predict_crypto()['trading_signal'] < 0
-                  and trade_with_me.predict_crypto()['predicted_prob'] >= 0.9):
-                logging.info(f'Crypto Direction: {pnl_calculator.get_last_two_candles_direction(config.trading_pair)}')
-                logging.info(pnl_calculator.get_last_two_candles_direction(config.trading_pair))
-                message = (f"{config.trading_pair} goes down for more than {config.signal_price}$\n"
-                           f" Selling {config.trading_pair} for {round(float(next_crypto_current), 1)}$")
-                logging.info(message)
-                return False, next_crypto_current, signal_difference
-            else:
-                continue
+        return True, next_crypto_current, signal_difference
 
 
 def trade():
-    crypto_price_change, opened_price, signal_price = check_price_changes()
-    if crypto_price_change:
-        print(f'Buying {config.trading_pair}')
+    global current_checkpoint
+    df, model = build_model.train_model()
+    window_size = 3  # You can adjust the window size as needed
+    df['SMA'] = df['trading_signal'].rolling(window=window_size).mean()
+    df['Trend'] = 'None'
+    df.loc[df['SMA'] > 0, 'Trend'] = 'Up'
+    df.loc[df['SMA'] < 0, 'Trend'] = 'Down'
+    data = df[['date', 'trading_signal', 'SMA', 'Trend']].iloc[-1]
+
+    btc_price_change, opened_price, signal_price = check_price_changes()
+    if data['Trend'] == 'Up':
+        profit_checkpoint_list.clear()
+        current_checkpoint = None
+        logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
+        try:
+            order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
+                                                       symbol=config.trading_pair)
+        except Exception as e:
+            logging.error(e)
+            order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
+                                                       symbol=config.trading_pair)
+        body = f'Buying {config.trading_pair} for price {round(float(opened_price), 1)}'
+        logging.info(body)
         while True:
-            res = pnl_long(opened_price=opened_price, signal=signal_price)
-            if res == 'Profit':
-                # try:
-                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
-                # except Exception as e:
-                #     logging.error(e)
-                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
-                pnl_calculator.position_size()
-                logging.info('Position closed')
-                break
-    elif not crypto_price_change:
-        print(f'Selling {config.trading_pair}')
+            # ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            # if float(ticker) - float(open_orders['price']) > 3:
+            #     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            #     break
+            if open_orders['status'] == 'FILLED':
+                res = check_profit_long(opened_price)
+                # res = pnl_long(opened_price=opened_price, signal=signal_price)
+                if res == 'Profit':
+                    try:
+                        crypto_ticker.close_position(side='short', quantity=config.position_size)
+                    except Exception as e:
+                        logging.error(e)
+                        crypto_ticker.close_position(side='short', quantity=config.position_size)
+                    pnl_calculator.position_size()
+                    logging.info('Position closed')
+                    break
+            # else:
+            #     continue
+    elif data['Trend'] == 'Down':
+        profit_checkpoint_list.clear()
+        current_checkpoint = None
+        logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
+        try:
+            order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
+                                                        symbol=config.trading_pair)
+        except Exception as e:
+            logging.error(e)
+            order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
+                                                        symbol=config.trading_pair)
+        body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
+        logging.info(body)
         while True:
-            res = pnl_short(opened_price=opened_price, signal=signal_price)
-            if res == 'Profit':
-                # try:
-                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
-                # except Exception as e:
-                #     logging.error(e)
-                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
-                pnl_calculator.position_size()
-                logging.info('Position closed')
-                break
+            # ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            # if float(open_orders['price']) - float(ticker) < -3:
+            #     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            #     break
+            #
+            if open_orders['status'] == 'FILLED':
+                # res = pnl_short(opened_price=opened_price, signal=signal_price)
+                res = check_profit_short(opened_price)
+                if res == 'Profit':
+                    try:
+                        crypto_ticker.close_position(side='long', quantity=config.position_size)
+                    except Exception as e:
+                        logging.error(e)
+                        crypto_ticker.close_position(side='long', quantity=config.position_size)
+                    pnl_calculator.position_size()
+                    logging.info('Position closed')
+                    break
+            # else:
+            #     continue
+
+def check_profit_long(opened_price):
+    global current_profit, current_checkpoint, profit_checkpoint_list
+    btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    current_profit = float(btc_current) - float(opened_price)
+    if current_profit >= 4:
+        files_manager.insert_data(opened_price, btc_current, current_profit)
+        return 'Profit'
+
+
+def check_profit_short(opened_price):
+    global current_profit, current_checkpoint, profit_checkpoint_list
+    btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    current_profit = float(opened_price) - float(btc_current)
+    if current_profit >= 4:
+        files_manager.insert_data(opened_price, btc_current, current_profit)
+        return 'Profit'
+
 
 
 def pnl_long(opened_price=None, current_price=2090, signal=None):
@@ -143,7 +187,11 @@ def pnl_short(opened_price=None, signal=None):
 
 if __name__ == '__main__':
     import build_model
-
+    count = 0
     while True:
-        build_model.train_base_model()
         trade()
+        count += 1
+        if count == 4:
+            count = 0
+            time.sleep(2*3600)
+

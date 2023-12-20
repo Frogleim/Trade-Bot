@@ -1,1 +1,10 @@
-entry price,close price,profit,entry price difference, position_size
+entry price,close price,profit,entry price difference, position_size,open_time,close_time
+2191.2,2187.1,4.0,0.0,,,
+2186.7,2182.7,4.0,0.0,,,
+2185.5,2181.5,4.0,0.0,,,
+2179.5,2175.0,4.5,0.0,,,
+2171.9,2176.2,4.2,0.0,,,
+2174.2,2178.8,4.5,0.0,,,
+2178.5,2183.1,4.6,0.0,,,
+2184.2,2188.8,4.6,0.0,,,
+2187.0,2183.0,4.0,0.0,,,

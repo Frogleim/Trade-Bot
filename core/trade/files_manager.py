@@ -5,7 +5,7 @@ import os
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 files_dir = os.path.join(parent_dir, "trade")
-file_path = f"{files_dir}/files/data.csv"
+file_path = f"{files_dir}/files/model_dataset.csv"
 print(file_path)
 
 
