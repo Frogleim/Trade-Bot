@@ -72,8 +72,8 @@ def predict_crypto():
 
     """
     new_data = get_historical_data()
-    loaded_model = tf.keras.models.load_model(f'{files_dir}/model/trade_model_1hrs.h5')
-    scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
+    loaded_model = tf.keras.models.load_model(f'{files_dir}/model/trade_model_1min.h5')
+    scaler_filename = f'{files_dir}/model/minmax_scaler_1hrs.pkl'
 
     try:
         # Load existing scaler

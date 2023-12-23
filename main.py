@@ -7,6 +7,7 @@ import shutil
 from binance.client import Client
 import zipfile
 import uvicorn
+import csv
 
 import core.trade.config
 from core.trade import live_prediction, config
@@ -16,7 +17,7 @@ app = FastAPI()
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/trade/files")
+files_dir = os.path.join(grandparent_dir, "bot/Trade-Bot/core/trade/files")
 
 logs_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/trade/logs")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
@@ -53,7 +54,8 @@ async def get_logs():
     # Optional: Specify the desired file name for the response
 
     # Return the file as a response
-    return StreamingResponse(open(zip_file_path, "rb"), media_type="application/zip", headers={"Content-Disposition": f"attachment; filename=trade_logs.zip"})
+    return StreamingResponse(open(zip_file_path, "rb"), media_type="application/zip",
+                             headers={"Content-Disposition": f"attachment; filename=trade_logs.zip"})
 
 
 @app.get('/get_wallet')
@@ -84,3 +86,14 @@ def get_prediction():
     prediction = trade_with_me.predict_crypto()
     return {'Result': prediction}
 
+
+@app.get('/current_profit')
+def current_profit():
+    file_name = f'{files_dir}/model_dataset.csv'
+    with open(file_name, 'r', newline='', encoding='utf-8') as csv_file:
+        # Create a CSV reader
+        csv_reader = csv.reader(csv_file)
+
+        # Use the len function to get the number of rows
+        num_rows = len(list(csv_reader))
+    return num_rows

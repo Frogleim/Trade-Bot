@@ -153,7 +153,6 @@ def check_price_changes():
         time.sleep(40)
 
 
-
 def pnl_long(opened_price=None, current_price=2090, signal=None):
     global current_profit, current_checkpoint, profit_checkpoint_list
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']

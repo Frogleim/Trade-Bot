@@ -1,23 +1,20 @@
+from binance.client import Client
 import pandas as pd
 import numpy as np
-from binance.client import Client
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-import pickle
-import os
+# import matplotlib.pyplot as plt
 
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(base_dir)
-grandparent_dir = os.path.dirname(parent_dir)
-print(grandparent_dir)
-files_dir = os.path.join(grandparent_dir, "core/trade")
+def calculate_demark_trendline(close_prices, periods=5):
+    demark_trendline = close_prices.rolling(window=periods, min_periods=1).mean()
+    return demark_trendline
 
 
-def get_historical_data():
+def historical_data():
     api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 
     api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
@@ -26,7 +23,6 @@ def get_historical_data():
     symbol = 'ETHUSDT'
     n = 200
     klines = client.futures_klines(symbol=symbol, interval=interval, limit=n)
-
     timestamps = [int(kline[0]) for kline in klines]
     open_prices = [float(kline[1]) for kline in klines]
     high_prices = [float(kline[2]) for kline in klines]
@@ -45,20 +41,12 @@ def get_historical_data():
     return df
 
 
-def train_base_model():
-    df = get_historical_data()
-    # Assuming df is your DataFrame
+def train_model():
+    df = historical_data()
     df['target'] = (df['close'].shift(-1) > df['close']).astype(int)
 
     # Feature Scaling
-    scaler_filename = f'{files_dir}/model/minmax_scaler.pkl'
-    try:
-        # Load existing scaler
-        with open(scaler_filename, 'rb') as scaler_file:
-            scaler = pickle.load(scaler_file)
-    except FileNotFoundError:
-        # Create a new scaler if not found
-        scaler = MinMaxScaler()
+    scaler = MinMaxScaler()
     df[['open', 'high', 'low', 'close']] = scaler.fit_transform(df[['open', 'high', 'low', 'close']])
 
     # Train-Test Split
@@ -85,12 +73,16 @@ def train_base_model():
     # Evaluate the model
     loss, accuracy = model.evaluate(X_test, y_test)
     print("Accuracy:", accuracy)
-    with open(scaler_filename, 'wb') as scaler_file:
-        pickle.dump(scaler, scaler_file)
-    model.save(f'{files_dir}/model/trade_model_1hrs.h5')
 
+    # Assuming new_data is your new DataFrame with similar structure
+    df[['open', 'high', 'low', 'close']] = scaler.transform(df[['open', 'high', 'low', 'close']])
+    df['predicted_target'] = np.round(model.predict(df[['open', 'high', 'low', 'close']])).astype(int)
+    df['predicted_prob'] = model.predict(X)
+    threshold = 0.5  # You can adjust this threshold based on your strategy
+    df['trading_signal'] = np.where(df['predicted_prob'] > threshold, 1, -1)
 
+    # Print or visualize the trading signals
+    pd.set_option('display.max_rows', None)
 
+    return df, model
 
-if __name__ == '__main__':
-    train_base_model()

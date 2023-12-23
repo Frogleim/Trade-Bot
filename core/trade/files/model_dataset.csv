@@ -1,1 +1,2 @@
-entry price,close price,profit,entry price difference, position_size
+entry price,close price,profit,entry price difference, position_size,open_time,close_time
+
