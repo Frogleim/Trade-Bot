@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.responses import FileResponse, StreamingResponse
 from pathlib import Path
 import os
@@ -10,7 +10,7 @@ import uvicorn
 import csv
 
 import core.trade.config
-from core.trade import trade_with_me, config
+from core.trade import trade_with_me, config, profitable_exit_strategy
 
 app = FastAPI()
 
@@ -33,6 +33,18 @@ def compress_file(input_file, output_file):
 async def get_statement():
     # Path to the file you want to return
     file_path = Path(f"{files_dir}/model_dataset.csv")  # Replace with the actual file path
+
+    # Optional: Specify the desired file name for the response
+    file_name = "statement_report.csv"
+
+    # Return the file as a response
+    return FileResponse(file_path, filename=file_name)
+
+
+@app.get("/get_second_trade_statement")
+async def get_statement():
+    # Path to the file you want to return
+    file_path = Path(f"{files_dir}/data_20.csv")  # Replace with the actual file path
 
     # Optional: Specify the desired file name for the response
     file_name = "statement_report.csv"
@@ -97,3 +109,17 @@ def current_profit():
         # Use the len function to get the number of rows
         num_rows = len(list(csv_reader))
     return num_rows
+
+
+@app.get('/get_sma_test')
+def current_profit(
+    symbol: str = Query('BTCUSDT', description='The trading pair symbol'),
+    interval: str = Query('15m', description='The candlestick interval'),
+    initial_balance: float = Query(25, description='Initial balance for backtesting'),
+    profit_target: float = Query(10, description='Profit target for backtesting'),
+):
+    historical_data = profitable_exit_strategy.get_historical_klines(symbol, interval)  # Replace with your historical data file
+    historical_data = profitable_exit_strategy.calculate_sma(historical_data)
+    final_balance = profitable_exit_strategy.backtest_strategy(historical_data)
+    return {'Message': "Success", "Data": f"Initial Balance: ${initial_balance}\nFinal Balance: ${final_balance}"
+                                          f"\nProfit: ${final_balance - initial_balance}"}

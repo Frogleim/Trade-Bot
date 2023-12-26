@@ -7,11 +7,11 @@ moving_average_window = 6
 # ETH/USDT checkpoint list. Minimum Take Profit 11.9%
 long_term_checkpoints = [5, 7, 10, 15, 20, 30, 40, 60]
 
-checkpoint_list = [2, 2.5, 3, 3.5, 4.5, 6.5, 7.5, 8.5, 9.5, 10.5, 16.5, 20.5]
+checkpoint_list = [6.5, 9.5, 11.5, 15.5, 25.5, 50.5, 100.5]
 position_size = 0.02
 ticker_timeout = 5
 TRADE_INTERVAL = 5*60
-trading_pair = 'ETHUSDT'
+trading_pair = 'BTCUSDT'
 TP = 10.5
 MIN_TP = 2
 SL = 5

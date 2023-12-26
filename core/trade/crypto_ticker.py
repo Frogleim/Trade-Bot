@@ -145,7 +145,7 @@ def place_buy_order(price, quantity, symbol):
     client = Client(api_key=api_key, api_secret=api_secret)
     order = client.futures_create_order(
         symbol=symbol,
-        side='BUY',
+        side=Client.SIDE_BUY,
         type='LIMIT',
         timeInForce='GTC',  # Good 'til canceled
         quantity=quantity,
@@ -162,14 +162,14 @@ def place_sell_order(price, quantity, symbol):
 
     order = client.futures_create_order(
         symbol=symbol,
-        side='SELL',
+        side=Client.SIDE_SELL,
         type='LIMIT',
         timeInForce='GTC',  # Good 'til canceled
         quantity=quantity,
         price=price
     )
 
-    print("Buy order placed successfully:")
+    print("Sell order placed successfully:")
     return order
 
 

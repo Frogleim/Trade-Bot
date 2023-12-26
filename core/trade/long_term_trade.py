@@ -49,92 +49,101 @@ def trade():
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        try:
-            order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
-                                                       symbol=config.trading_pair)
-        except Exception as e:
-            logging.error(e)
-            order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
-                                                       symbol=config.trading_pair)
+        # try:
+        #     order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
+        #                                                symbol=config.trading_pair)
+        # except Exception as e:
+        #     logging.error(e)
+        #     order_info = crypto_ticker.place_buy_order(price=opened_price, quantity=config.position_size,
+        #                                                symbol=config.trading_pair)
         body = f'Buying {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
-            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-            if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 3:
-                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-                    break
-            if open_orders['status'] == 'FILLED':
-                res = check_profit_long(opened_price)
-                if res == 'Profit':
-                    try:
-                        crypto_ticker.close_position(side='short', quantity=config.position_size)
-                    except Exception as e:
-                        logging.error(e)
-                        crypto_ticker.close_position(side='short', quantity=config.position_size)
-                    pnl_calculator.position_size()
-                    logging.info('Position closed')
-                    break
+            # ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            # open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            # if open_orders['status'] == 'NEW':
+            #     if float(ticker) - float(open_orders['price']) > 3:
+            #         client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            #         break
+            # if open_orders['status'] == 'FILLED':
+            res = check_profit_long(opened_price)
+            if res == 'Profit':
+                # try:
+                #     crypto_ticker.close_position(side='short', quantity=config.position_size)
+                # except Exception as e:
+                #     logging.error(e)
+                #     crypto_ticker.close_position(side='short', quantity=config.position_size)
+                pnl_calculator.position_size()
+                logging.info('Position closed')
+                break
+            if res == 'Loss':
+                logging.info('Position closed')
+                break
+
     elif data['Trend'] == 'Down':
         profit_checkpoint_list.clear()
         current_checkpoint = None
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list} --- Current checkpoint: {current_checkpoint}')
-        try:
-            order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
-                                                        symbol=config.trading_pair)
-        except Exception as e:
-            logging.error(e)
-            order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
-                                                        symbol=config.trading_pair)
+        # try:
+        #     order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
+        #                                                 symbol=config.trading_pair)
+        # except Exception as e:
+        #     logging.error(e)
+        #     order_info = crypto_ticker.place_sell_order(price=opened_price, quantity=config.position_size,
+        #                                                 symbol=config.trading_pair)
         body = f'Selling {config.trading_pair} for price {round(float(opened_price), 1)}'
         logging.info(body)
         while True:
-            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-            if open_orders['status'] == 'NEW':
-                if float(open_orders['price']) - float(ticker) < -3:
-                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-                    break
-
-            if open_orders['status'] == 'FILLED':
-                res = check_profit_short(opened_price)
-                if res == 'Profit':
-                    try:
-                        crypto_ticker.close_position(side='long', quantity=config.position_size)
-                    except Exception as e:
-                        logging.error(e)
-                        crypto_ticker.close_position(side='long', quantity=config.position_size)
-                    pnl_calculator.position_size()
-                    logging.info('Position closed')
-                    break
+            # ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            # open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            # if open_orders['status'] == 'NEW':
+            #     if float(open_orders['price']) - float(ticker) < -3:
+            #         client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            #         break
+            #
+            # if open_orders['status'] == 'FILLED':
+            res = check_profit_short(opened_price)
+            if res == 'Profit':
+                # try:
+                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
+                # except Exception as e:
+                #     logging.error(e)
+                #     crypto_ticker.close_position(side='long', quantity=config.position_size)
+                pnl_calculator.position_size()
+                logging.info('Position closed')
+                break
+            if res == 'Loss':
+                logging.info('Position closed')
+                break
 
 
 def check_profit_long(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(btc_current) - float(opened_price)
-    if current_profit >= 8:
+    if current_profit >= 4:
         files_manager.insert_data(opened_price, btc_current, current_profit)
         return 'Profit'
+    if current_profit <= -2:
+        return 'Loss'
 
 
 def check_profit_short(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(btc_current)
-    if current_profit >= 8:
+    if current_profit >= 4:
         files_manager.insert_data(opened_price, btc_current, current_profit)
         return 'Profit'
+    if current_profit <= -2:
+        return 'Loss'
 
 
 if __name__ == '__main__':
     import build_model
+
     #
     count = 0
     while True:
         trade()
-        count += 1
-        if count == 4:
-            count = 0
-            time.sleep(2 * 3600)
+        time.sleep(4 * 3600)
