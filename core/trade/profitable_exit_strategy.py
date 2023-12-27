@@ -41,7 +41,7 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def pnl_long(opened_price):
+def pnl_long(opened_price, sma):
     global current_profit, current_checkpoint, profit_checkpoint_list
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(btc_current) - float(opened_price)
@@ -53,7 +53,10 @@ def pnl_long(opened_price):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
+    if btc_current < sma:
+        files_manager.insert_data(opened_price, btc_current, current_profit)
 
+        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         if current_checkpoint < profit_checkpoint_list[-2] or current_checkpoint == config.checkpoint_list[-1]:
@@ -68,7 +71,7 @@ def pnl_long(opened_price):
             return 'Profit'
 
 
-def pnl_short(opened_price):
+def pnl_short(opened_price, sma):
     global current_profit, current_checkpoint, profit_checkpoint_list
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(btc_current)
@@ -80,7 +83,9 @@ def pnl_short(opened_price):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-
+    if btc_current > sma:
+        files_manager.insert_data(opened_price, btc_current, current_profit)
+        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         if current_checkpoint < profit_checkpoint_list[-2] or current_checkpoint == config.checkpoint_list[-1]:
