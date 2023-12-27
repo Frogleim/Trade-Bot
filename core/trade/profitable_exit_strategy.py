@@ -53,7 +53,7 @@ def pnl_long(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if btc_current < sma:
+    if float(btc_current) < float(sma):
         files_manager.insert_data(opened_price, btc_current, current_profit)
 
         return 'Loss'
@@ -83,7 +83,7 @@ def pnl_short(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if btc_current > sma:
+    if float(btc_current) > float(sma):
         files_manager.insert_data(opened_price, btc_current, current_profit)
         return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
