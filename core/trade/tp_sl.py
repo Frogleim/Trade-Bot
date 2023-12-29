@@ -1,10 +1,11 @@
-from binance.client import Client
 # from . import config, files_manager
 import logging
-import config, files_manager
-import os
+from binance.client import Client
+import config
+import files_manager
 import sys
 
+client = Client()
 current_profit = 0
 profit_checkpoint_list = []
 SMA = 0.0
@@ -13,32 +14,12 @@ checking_price = None
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-client = Client(api_key, api_secret)
 price_history = []
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(base_dir)
-grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "Trade-Bot")
-logging.basicConfig(filename=f'{grandparent_dir}/logs/binance_logs.log',
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-console_handler = logging.StreamHandler(sys.stdout)
-error_logger = logging.getLogger('error_logger')
-error_logger.setLevel(logging.ERROR)
-console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
-error_handler = logging.FileHandler(f'{grandparent_dir}/logs/error_logs.log')
-error_handler.setLevel(logging.ERROR)  # Set the desired log level for the file
-error_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-error_handler.setFormatter(error_formatter)
-error_logger.addHandler(error_handler)
-error_console_handler = logging.StreamHandler(sys.stdout)
-error_console_handler.setLevel(logging.ERROR)  # Set the desired log level for the console
-error_console_handler.setFormatter(error_formatter)
-error_logger.addHandler(error_console_handler)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-console_handler.setFormatter(formatter)
-root_logger = logging.getLogger()
-root_logger.addHandler(console_handler)
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setLevel(logging.DEBUG)
+stdout_handler.setFormatter(formatter)
 
 
 def pnl_long(opened_price, sma):
