@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - .:/btc
-    command: ["python", "profitable_exit_strategy.py"]
+    command: ["python", "sma_trade.py"]

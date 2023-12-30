@@ -43,8 +43,10 @@ while True:
         # Wait for live price direction change
         while True:
             current_live_price = float(client.get_symbol_ticker(symbol=symbol)['price'])
+            print(f'Checking entry position')
+
             # Long
-            if current_live_price >= sma_up_side + 1:
+            if current_live_price >= sma_up_side - 1:
                 print(f'Live price went down by 4 points from SMA. Sell!')
                 # Implement your sell logic here
                 res = pnl_short(current_live_price, last_sma_value)
@@ -55,7 +57,7 @@ while True:
                     print('Closing Position with Loss')
                     break
             # Short
-            elif current_live_price <= sma_down_side - 1:
+            elif current_live_price <= sma_down_side + 1:
                 print(f'Live price went up by 4 points from SMA. Buy!')
                 # Implement your buy logic here
                 res = pnl_long(current_live_price, last_sma_value)

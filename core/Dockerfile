@@ -4,4 +4,4 @@ RUN mkdir "btc"
 WORKDIR btc
 COPY .. /btc
 RUN pip install --no-cache-dir -r requirements.txt
-CMD ["python", "profitable_exit_strategy.py"]
+CMD ["python", "sma_trade.py"]
