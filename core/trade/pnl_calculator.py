@@ -30,11 +30,6 @@ def geometric_progression(starting_number, ratio, count):
     return progression
 
 
-def calculate_modified_difference(lst):
-    modified_values = [(lst[i] - lst[i + 1]) * (1 - 0.005) for i in range(len(lst) - 1)]
-    return modified_values
-
-
 def position_size():
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
@@ -88,20 +83,6 @@ def check_wallet():
     print('Position Size is less than 60%')
 
 
-def get_last_two_candles_direction(symbol, interval='3m'):
-    klines = client.get_klines(symbol=symbol, interval=interval, limit=5)
-    close_prices = [float(kline[4]) for kline in klines[:-1]]
-
-    if close_prices[-1] > close_prices[-2]:
-        direction = "Up"
-    elif close_prices[-1] < close_prices[-2]:
-        direction = "Down"
-    else:
-        direction = 'No Change'
-
-    return direction
-
-
 def get_current_positions():
     binance_balance = []
     # Replace YOUR_API_KEY and YOUR_API_SECRET with your Binance API key and secret
@@ -119,12 +100,10 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 0.456  # 0.21$
-    common_ratio = 1.3  # 20% increase
-    num_terms = 11  # 40 Trades is one day trade
+    starting_number = 2  # 0.21$
+    common_ratio = 1.2  # 20% increase
+    num_terms = 44  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 2.544 for new_value in result]
+    wallet = [new_value + 15 for new_value in result]
     print(wallet)
-    res = get_last_two_candles_direction(symbol=config.trading_pair)
-    print(res)
