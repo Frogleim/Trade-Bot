@@ -26,7 +26,7 @@ def geometric_progression(starting_number, ratio, count):
     Returns:
     A list containing the terms of the geometric progression.
     """
-    progression = [starting_number * (ratio ** i) for i in range(count)]
+    progression = [round(starting_number * (ratio ** i), 3) for i in range(count)]
     return progression
 
 
@@ -119,12 +119,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 0.456  # 0.21$
-    common_ratio = 1.3  # 20% increase
-    num_terms = 11  # 40 Trades is one day trade
+    starting_number = 0.32  # 0.21$
+    common_ratio = 1.5  # 20% increase
+    num_terms = 11 # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [new_value + 2.544 for new_value in result]
+    wallet = [round(new_value, 2) + 1.68 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)

@@ -1,8 +1,10 @@
 # from . import config, files_manager
 import logging
 from binance.client import Client
-import config
-import files_manager
+from collections import Counter
+from . import config, files_manager
+# import config, files_manager
+# import files_manager
 import sys
 
 client = Client()
@@ -34,13 +36,16 @@ def pnl_long(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) < float(sma):
+    if float(btc_current) <= float(sma):
         files_manager.insert_data(opened_price, btc_current, current_profit)
 
         return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
-        if current_checkpoint < profit_checkpoint_list[-2] or current_checkpoint == config.checkpoint_list[-1]:
+        print('Checking for duplicates...')
+        profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
+        print(f'Checkpoint List is: {profit_checkpoint_list}')
+        if current_checkpoint < profit_checkpoint_list[-1] - 2 or current_checkpoint >= config.checkpoint_list[-1]:
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
@@ -64,12 +69,15 @@ def pnl_short(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) > float(sma):
+    if float(btc_current) >= float(sma):
         files_manager.insert_data(opened_price, btc_current, current_profit)
         return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
-        if current_checkpoint < profit_checkpoint_list[-2] or current_checkpoint == config.checkpoint_list[-1]:
+        print('Checking for duplicates...')
+        profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
+        print(f'Checkpoint List is: {profit_checkpoint_list}')
+        if current_checkpoint < profit_checkpoint_list[-1] - 2 or current_checkpoint >= config.checkpoint_list[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
@@ -79,3 +87,18 @@ def pnl_short(opened_price, sma):
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'
+
+
+
+if __name__ == '__main__':
+    profit_checkpoint_list.clear()
+    print(profit_checkpoint_list)
+    while True:
+        res = pnl_long(opened_price=2290, sma=2301)
+        print(res)
+        if res == 'Profit':
+            print('Closing with profit')
+            break
+        if res == 'Loss':
+            print('Closing with Loss')
+            break

@@ -19,3 +19,6 @@ signal_price = 0.6
 
 
 
+
+
+

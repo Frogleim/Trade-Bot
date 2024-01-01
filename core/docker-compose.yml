@@ -7,4 +7,4 @@ services:
     restart: always
     volumes:
       - .:/btc
-    command: ["python", "sma_trade.py"]
+    command: ["python", "main.py"]
