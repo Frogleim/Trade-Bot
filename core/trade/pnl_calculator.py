@@ -120,8 +120,8 @@ def get_current_positions():
 
 if __name__ == '__main__':
     starting_number = 0.32  # 0.21$
-    common_ratio = 1.3  # 20% increase
-    num_terms = 33 # 40 Trades is one day trade
+    common_ratio = 1.35  # 20% increase
+    num_terms = 44 # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
     wallet = [round(new_value, 2) + 1.68 for new_value in result]

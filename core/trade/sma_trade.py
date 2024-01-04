@@ -43,10 +43,10 @@ def break_point():
     while True:
         current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
         print(f'Checking entry position')
-        if current_live_price <= sma_down - 2:
+        if current_live_price <= sma_down - 3:
             print(f'Live price went down by 2 points from SMA. Sell!')
             return 'Buy', current_live_price, sma
-        elif current_live_price >= sma_up + 2:
+        elif current_live_price >= sma_up + 3:
             print(f'Live price went up by 2 points from SMA. Buy!')
             return 'Sell', current_live_price, sma
         else:
@@ -69,7 +69,7 @@ def trade():
             order_info = position_handler.place_sell_order(price=entry_price,
                                                           quantity=config.position_size,
                                                            symbol=config.trading_pair)
-        # Implement your sell logic here
+        # # Implement your sell logic here
         while True:
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair,
@@ -79,7 +79,7 @@ def trade():
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price, sma)
+                res = tp_sl.pnl_long(entry_price, sma)
                 if res == 'Profit' or res == 'Loss':
                     print(f'Closing Position with {res}')
                     try:
@@ -110,7 +110,7 @@ def trade():
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price, sma)
+                res = tp_sl.pnl_short(entry_price, sma)
                 if res == 'Profit' or res == 'Loss':
                     print(f'Closing Position with {res}')
                     try:
