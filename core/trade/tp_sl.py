@@ -23,7 +23,7 @@ parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(grandparent_dir, "core\\trade")
 print(files_dir)
-logging.basicConfig(filename=f'{files_dir}/logs/logfile.log',
+logging.basicConfig(filename=f'{files_dir}/logs/monitor_trade.log',
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
