@@ -1,7 +1,7 @@
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
-from . import position_handler, config, tp_sl
+from . import position_handler, config, tp_sl, pnl_calculator
 import os
 import logging
 import sys
@@ -88,10 +88,12 @@ def trade():
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 try:
-                    position_handler.close_position(side='long', quantity=config.position_size)
+                    position_handler.close_position(side='short', quantity=config.position_size)
                 except Exception as e:
                     print(e)
-                    position_handler.close_position(side='long', quantity=config.position_size)
+                    position_handler.close_position(side='short', quantity=config.position_size)
+                pnl_calculator.position_size()
+
                 break
 
     if signal == 'Sell':
@@ -109,12 +111,14 @@ def trade():
         while True:
             res = tp_sl.pnl_short(entry_price, sma)
             if res == 'Profit' or res == 'Loss':
+
                 logging.info(f'Closing Position with {res}')
                 try:
-                    position_handler.close_position(side='short', quantity=config.position_size)
+                    position_handler.close_position(side='long', quantity=config.position_size)
                 except Exception as e:
                     print(e)
-                    position_handler.close_position(side='short', quantity=config.position_size)
+                    position_handler.close_position(side='long', quantity=config.position_size)
+
                 break
 
 

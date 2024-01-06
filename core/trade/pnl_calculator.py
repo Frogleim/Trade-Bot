@@ -12,7 +12,7 @@ files_dir = os.path.join(parent_dir, "trade")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
-
+percentage_increase = 0.0
 
 def geometric_progression(starting_number, ratio, count):
     """
@@ -35,10 +35,14 @@ def calculate_modified_difference(lst):
     return modified_values
 
 
-def position_size():
+def position_size(profit):
+    global percentage_increase
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    percentage_increase = 0.3
+    if profit >= 7:
+        percentage_increase = 0.3
+    elif profit <= 3:
+        percentage_increase = 0.05
     new_value = file_original_value + (file_original_value * percentage_increase)
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     logging_new_value = (new_value * float(crypto_current_price)) / 100
@@ -119,12 +123,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 0.32  # 0.21$
+    starting_number = 40  # 0.21$
     common_ratio = 1.35  # 20% increase
-    num_terms = 44 # 40 Trades is one day trade
+    num_terms = 18 # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [round(new_value, 2) + 1.68 for new_value in result]
+    wallet = [round(new_value, 2) + 300 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)

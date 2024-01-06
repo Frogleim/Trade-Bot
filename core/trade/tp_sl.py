@@ -2,7 +2,7 @@
 import logging
 from binance.client import Client
 from collections import Counter
-from . import config, files_manager
+from . import config, files_manager, pnl_calculator
 # import config, files_manager
 # import files_manager
 import sys
@@ -70,6 +70,8 @@ def pnl_long(opened_price, sma):
             save_data = (position_size * float(btc_current)) / 100
             files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+            pnl_calculator.position_size(current_profit)
+
             return 'Profit'
 
     if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[-1]:
@@ -81,6 +83,7 @@ def pnl_long(opened_price, sma):
         files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
         logging.info('Saving data')
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+        pnl_calculator.position_size(current_profit)
         return 'Profit'
 
 @method_name_decorator
@@ -113,6 +116,8 @@ def pnl_short(opened_price, sma):
             files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+            pnl_calculator.position_size(current_profit)
+
             return 'Profit'
     if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[-1]:
         body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
@@ -123,6 +128,8 @@ def pnl_short(opened_price, sma):
         files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
         logging.info('Saving data')
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+        pnl_calculator.position_size(current_profit)
+
         return 'Profit'
 
 
