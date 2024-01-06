@@ -43,7 +43,6 @@ def create_order(entry_price, side, percentage_of_balance=95, quantity=None):
             side=Client.SIDE_BUY,
             type=Client.ORDER_TYPE_MARKET,
             quantity=quantity,
-            price=entry_price
         )
         print(order)
         print("Order opened successfully")
@@ -54,7 +53,6 @@ def create_order(entry_price, side, percentage_of_balance=95, quantity=None):
             side=Client.SIDE_SELL,
             type=Client.ORDER_TYPE_MARKET,
             quantity=quantity,
-            price=entry_price
 
         )
         print(order)

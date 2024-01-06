@@ -42,8 +42,8 @@ def calculate_sma(symbol, interval, length):
 def check_sma():
     while True:
         sma_value = calculate_sma(symbol, interval, length)
-        sma_up_side = sma_value + 1
-        sma_down_side = sma_value - 1
+        sma_up_side = sma_value + 4
+        sma_down_side = sma_value - 4
         live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
         logging.info(f'Price: {live_price} --- SMA: {sma_value}')
         if sma_down_side <= live_price <= sma_up_side:
@@ -58,10 +58,10 @@ def break_point():
     while True:
         current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
         print(f'Checking entry position')
-        if current_live_price <= sma_down - 3:
+        if current_live_price <= sma_down:
             logging.info(f'Live price went down by 2 points from SMA. Sell!')
             return 'Sell', current_live_price, sma
-        elif current_live_price >= sma_up + 3:
+        elif current_live_price >= sma_up:
             logging.info(f'Live price went up by 2 points from SMA. Buy!')
             return 'Buy', current_live_price, sma
         else:
@@ -73,69 +73,49 @@ def trade():
     global closed
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
-
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.create_order(entry_price=entry_price,
+            position_handler.create_order(entry_price=entry_price,
                                                           quantity=config.position_size,
                                                           side='long')
         except Exception as e:
             print(e)
-            order_info = position_handler.create_order(entry_price=entry_price,
+            position_handler.create_order(entry_price=entry_price,
                                                        quantity=config.position_size,
                                                        side='long')
-        # # Implement your sell logic here
         while True:
-            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-            open_orders = client.futures_get_order(symbol=config.trading_pair,
-                                                   orderId=int(order_info['orderId']))
-            if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 3:
-                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-                    break
-            if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price, sma)
-                if res == 'Profit' or res == 'Loss':
-                    logging.info(f'Closing Position with {res}')
-                    try:
-                        position_handler.close_position(side='long', quantity=config.position_size)
-                    except Exception as e:
-                        print(e)
-                        position_handler.close_position(side='long', quantity=config.position_size)
-                    break
+            res = tp_sl.pnl_long(entry_price, sma)
+            if res == 'Profit' or res == 'Loss':
+                logging.info(f'Closing Position with {res}')
+                try:
+                    position_handler.close_position(side='long', quantity=config.position_size)
+                except Exception as e:
+                    print(e)
+                    position_handler.close_position(side='long', quantity=config.position_size)
+                break
+
     if signal == 'Sell':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
-
-
         try:
-            order_info = position_handler.create_order(entry_price=entry_price,
+            position_handler.create_order(entry_price=entry_price,
                                                        quantity=config.position_size,
                                                        side='short')
         except Exception as e:
             print(e)
-            order_info = position_handler.create_order(entry_price=entry_price,
+            position_handler.create_order(entry_price=entry_price,
                                                        quantity=config.position_size,
                                                        side='short')
-
-        # Implement your buy logic here
         while True:
-            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-            if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 3:
-                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
-                    break
-            if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price, sma)
-                if res == 'Profit' or res == 'Loss':
-                    logging.info(f'Closing Position with {res}')
-                    try:
-                        position_handler.close_position(side='short', quantity=config.position_size)
-                    except Exception as e:
-                        print(e)
-                        position_handler.close_position(side='short', quantity=config.position_size)
-                    break
+            res = tp_sl.pnl_short(entry_price, sma)
+            if res == 'Profit' or res == 'Loss':
+                logging.info(f'Closing Position with {res}')
+                try:
+                    position_handler.close_position(side='short', quantity=config.position_size)
+                except Exception as e:
+                    print(e)
+                    position_handler.close_position(side='short', quantity=config.position_size)
+                break
 
 
 
