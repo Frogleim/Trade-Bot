@@ -70,7 +70,6 @@ def pnl_long(opened_price, sma):
             save_data = (position_size * float(btc_current)) / 100
             files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-            pnl_calculator.position_size(current_profit)
 
             return 'Profit'
 
@@ -83,7 +82,6 @@ def pnl_long(opened_price, sma):
         files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
         logging.info('Saving data')
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-        pnl_calculator.position_size(current_profit)
         return 'Profit'
 
 @method_name_decorator
@@ -116,7 +114,6 @@ def pnl_short(opened_price, sma):
             files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-            pnl_calculator.position_size(current_profit)
 
             return 'Profit'
     if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[-1]:
@@ -128,7 +125,6 @@ def pnl_short(opened_price, sma):
         files_manager.insert_data(opened_price, btc_current, current_profit, round(save_data, 3))
         logging.info('Saving data')
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-        pnl_calculator.position_size(current_profit)
 
         return 'Profit'
 

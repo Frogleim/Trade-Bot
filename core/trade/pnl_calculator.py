@@ -35,14 +35,11 @@ def calculate_modified_difference(lst):
     return modified_values
 
 
-def position_size(profit):
+def position_size():
     global percentage_increase
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    if profit >= 7:
-        percentage_increase = 0.3
-    elif profit <= 3:
-        percentage_increase = 0.05
+    percentage_increase = 0.3
     new_value = file_original_value + (file_original_value * percentage_increase)
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     logging_new_value = (new_value * float(crypto_current_price)) / 100

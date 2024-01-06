@@ -118,6 +118,7 @@ def trade():
                 except Exception as e:
                     print(e)
                     position_handler.close_position(side='long', quantity=config.position_size)
+                pnl_calculator.position_size()
 
                 break
 
