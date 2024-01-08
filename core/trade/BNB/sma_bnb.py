@@ -1,10 +1,12 @@
+import logging
+import sys
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
-from core.trade import position_handler, config, tp_sl, pnl_calculator
-import os
-import logging
-import sys
+import config
+import pnl_calculator
+import position_handler
+import tp_sl
 
 # Replace with your Binance API key and secret
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'

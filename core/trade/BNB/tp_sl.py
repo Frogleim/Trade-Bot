@@ -1,12 +1,9 @@
-# from . import config, files_manager
 import logging
-from binance.client import Client
-from collections import Counter
-from . import config, files_manager, pnl_calculator
-# import config, files_manager
-# import files_manager
 import sys
-import os
+from collections import Counter
+from binance.client import Client
+import config
+import files_manager
 
 client = Client()
 current_profit = 0
