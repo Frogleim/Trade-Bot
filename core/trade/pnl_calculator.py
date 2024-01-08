@@ -78,7 +78,7 @@ def check_wallet():
     if diff * 100 >= 60:
         print('Position Size is equal or above than 60%')
         new_value = result * (12 / 100)
-        changed_value = (new_value / crypto_current_price) * 100
+        changed_value = (new_value / float(crypto_current_price)) * 100
         with open(f'{files_dir}/config.py', 'r') as config_file:
             config_data = config_file.read()
         config_data = config_data.replace(f"position_size = {file_original_value}",
