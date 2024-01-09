@@ -1,7 +1,7 @@
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
-from core.trade.ETH import tp_sl, config, pnl_calculator, position_handler
+import tp_sl, config, pnl_calculator, position_handler
 import os
 import logging
 import sys

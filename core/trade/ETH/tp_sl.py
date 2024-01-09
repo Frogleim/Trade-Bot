@@ -2,7 +2,7 @@
 import logging
 from binance.client import Client
 from collections import Counter
-from core.trade.ETH import config, files_manager
+import config, files_manager
 # import config, files_manager
 # import files_manager
 import pandas as pd

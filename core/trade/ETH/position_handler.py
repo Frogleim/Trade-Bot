@@ -1,5 +1,5 @@
 from binance.client import Client
-from core.trade.ETH import config
+import config
 # import config
 import logging
 import os
