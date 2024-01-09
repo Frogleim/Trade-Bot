@@ -1,6 +1,6 @@
 # from . import config, files_manager
 import logging
-from binance.client import Client
+from binance.client import Client, AsyncClient
 from collections import Counter
 import config, files_manager
 # import config, files_manager
@@ -10,7 +10,6 @@ import pandas_ta as ta
 import sys
 import os
 
-client = Client()
 current_profit = 0
 profit_checkpoint_list = []
 SMA = 0.0
@@ -19,13 +18,15 @@ checking_price = None
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
+client = Client()
+
 price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "core\\trade")
+files_dir = os.path.join(grandparent_dir, "ETH")
 print(files_dir)
-logging.basicConfig(filename=f'{files_dir}/logs/monitor_trade.log',
+logging.basicConfig(
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console

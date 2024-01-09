@@ -3,7 +3,8 @@ import logging
 import os
 import requests
 import config
-from binance.client import Client
+from binance.client import Client, AsyncClient
+
 import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +14,7 @@ api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
 percentage_increase = 0.0
+
 
 def geometric_progression(starting_number, ratio, count):
     """

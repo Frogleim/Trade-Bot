@@ -4,7 +4,7 @@ import os
 # Specify the file path
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "trade")
+files_dir = os.path.join(parent_dir, "ETH")
 file_path = f"{files_dir}/files/data.csv"
 print(file_path)
 
