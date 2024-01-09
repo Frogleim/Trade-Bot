@@ -1,9 +1,7 @@
-import random
 from binance.client import Client
-from . import config
+from core.trade.ETH import config
 # import config
 import logging
-import time
 import os
 
 previous_price = None

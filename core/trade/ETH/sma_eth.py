@@ -1,7 +1,7 @@
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
-from . import position_handler, config, tp_sl, pnl_calculator
+from core.trade.ETH import tp_sl, config, pnl_calculator, position_handler
 import os
 import logging
 import sys
@@ -11,16 +11,9 @@ api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
 client = Client(api_key, api_secret)
-
-symbol = 'ETHUSDT'
 interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
-base_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(base_dir)
-grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "core\\trade")
-print(files_dir)
-logging.basicConfig(filename=f'{files_dir}/logs/main_logs.log',
+logging.basicConfig(
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
@@ -33,7 +26,7 @@ closed = False
 
 
 def calculate_sma(symbol, interval, length):
-    klines = client.futures_klines(symbol=symbol, interval=interval)
+    klines = client.futures_klines(symbol=config.trading_pair, interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
     df['sma'] = ta.sma(df['close'], length=length)
@@ -42,10 +35,10 @@ def calculate_sma(symbol, interval, length):
 
 def check_sma():
     while True:
-        sma_value = calculate_sma(symbol, interval, length)
+        sma_value = calculate_sma(config.trading_pair, interval, length)
         sma_up_side = sma_value + 1
         sma_down_side = sma_value - 1
-        live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
+        live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- SMA: {sma_value}')
         if sma_down_side <= live_price <= sma_up_side:
             logging.info(f'Live price touches SMA: {live_price}')
@@ -58,13 +51,13 @@ def break_point():
     is_open, sma_up, sma_down, sma = check_sma()
 
     while True:
-        current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
+        current_live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         print(f'Checking entry position')
-        if current_live_price <= sma_down - 3:
-            logging.info(f'Live price went down by 2 points from SMA. Sell!')
+        if current_live_price <= sma_down - 4:
+            logging.info(f'Live price went down by 4 points from SMA. Sell!')
             return 'Sell', current_live_price, sma
-        elif current_live_price >= sma_up + 3:
-            logging.info(f'Live price went up by 2 points from SMA. Buy!')
+        elif current_live_price >= sma_up + 4:
+            logging.info(f'Live price went up by 4 points from SMA. Buy!')
             return 'Buy', current_live_price, sma
         else:
             continue

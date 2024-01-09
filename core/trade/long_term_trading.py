@@ -1,5 +1,5 @@
 from binance.client import Client
-import pnl_calculator, crypto_ticker, config, files_manager, moving_avarage, live_prediction
+from core.trade.ETH import config, pnl_calculator, files_manager
 import trade_with_me, live_prediction, build_model
 import logging
 import pickle

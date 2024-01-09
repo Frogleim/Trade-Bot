@@ -3,6 +3,8 @@ import sys
 from collections import Counter
 from binance.client import Client
 import config
+import pandas as pd
+import pandas_ta as ta
 import files_manager
 
 client = Client()
@@ -16,7 +18,7 @@ api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 price_history = []
 logging.basicConfig(
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -33,9 +35,19 @@ def method_name_decorator(func):
     return wrapper
 
 
+def calculate_sma(symbol, interval, length):
+    klines = client.futures_klines(symbol=symbol, interval=interval)
+    close_prices = [float(kline[4]) for kline in klines]
+    df = pd.DataFrame({'close': close_prices})
+    df['sma'] = ta.sma(df['close'], length=length)
+    return df['sma'].iloc[-1]
+
+
 @method_name_decorator
 def pnl_long(opened_price, sma):
     global current_profit, current_checkpoint, profit_checkpoint_list
+    sma_value = calculate_sma(config.trading_pair, '15m', 20)
+
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(btc_current) - float(opened_price)
     logging.info(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
@@ -46,7 +58,7 @@ def pnl_long(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) <= float(opened_price) - 1:
+    if float(btc_current) <= float(sma_value) - 0.8:
         files_manager.insert_data(opened_price, btc_current, current_profit)
 
         return 'Loss'
@@ -55,7 +67,7 @@ def pnl_long(opened_price, sma):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-1] - 2 or current_checkpoint >= config.checkpoint_list_bnb[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list_bnb[-1]:
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
@@ -82,6 +94,8 @@ def pnl_long(opened_price, sma):
 @method_name_decorator
 def pnl_short(opened_price, sma):
     global current_profit, current_checkpoint, profit_checkpoint_list
+    sma_value = calculate_sma(config.trading_pair, '15m', 20)
+
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(btc_current)
     logging.info(f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
@@ -92,7 +106,7 @@ def pnl_short(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) >= float(opened_price) + 1:
+    if float(btc_current) >= float(sma_value) + 0.8:
         files_manager.insert_data(opened_price, btc_current, current_profit)
         return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
@@ -100,7 +114,7 @@ def pnl_short(opened_price, sma):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-1] - 2 or current_checkpoint >= config.checkpoint_list_bnb[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list_bnb[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
