@@ -9,7 +9,7 @@ import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "trade")
+files_dir = os.path.join(parent_dir, "ETH")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)

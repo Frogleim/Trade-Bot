@@ -10,6 +10,7 @@ long_term_checkpoints = [5, 7, 10, 15, 20, 30, 40, 60]
 checkpoint_list = [5, 10, 15, 20, 30, 40, 60]
 checkpoint_list_scalping = [3, 5, 6]
 
+
 # checkpoint_list_bnb = [0.7, 1.2, 1.7, 2.5]
 
 position_size = 0.04
@@ -20,7 +21,7 @@ trading_pair_list = ['BTCUSDT', 'ETHUSDT, XRPUSDT', 'BNBUSDT', 'BCHUSDT', 'LTCUS
 
 TP = 10.5
 MIN_TP = 2
-SL = 5
+SL = 1.2
 signal_price = 0.6
 
 
