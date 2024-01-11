@@ -21,7 +21,7 @@ trading_pair_list = ['BTCUSDT', 'ETHUSDT, XRPUSDT', 'BNBUSDT', 'BCHUSDT', 'LTCUS
 
 TP = 10.5
 MIN_TP = 2
-SL = 1.2
+SL = 2.2
 signal_price = 0.6
 
 

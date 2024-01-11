@@ -72,21 +72,24 @@ def trade():
         tp_sl.profit_checkpoint_list.clear()
         iteration_count = 0
         while True:
+            iteration_count += 1
             res = tp_sl_scalping.pnl_long(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()
-            break
+                break
+
     if signal == 'Sell':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
         iteration_count = 0
         while True:
+            iteration_count += 1
             res = tp_sl_scalping.pnl_short(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()
-            break
+                break
 
 
 if __name__ == '__main__':

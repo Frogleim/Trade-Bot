@@ -71,12 +71,12 @@ def pnl_long(opened_price, iteration_count):
     if float(current_price) >= stop_loss:
         logging.info('Break even price was passed!')
         files_manager.insert_scalping_data(opened_price, current_price, current_profit)
-        if iteration_count >= 7 and len(profit_checkpoint_list) == 0:
+        if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
 
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and iteration_count >= random.randint(15, 20):
+        -2] is not None and iteration_count >= random.randint(15, 2000):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -136,11 +136,11 @@ def pnl_short(opened_price, iteration_count):
     if float(current_price) <= stop_loss:
         logging.info('Break even price passed!')
         files_manager.insert_scalping_data(opened_price, current_price, current_profit)
-        if iteration_count >= 7 and len(profit_checkpoint_list) == 0:
+        if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and iteration_count >= random.randint(15, 20):
+        -2] is not None and iteration_count >= random.randint(15, 2000):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
