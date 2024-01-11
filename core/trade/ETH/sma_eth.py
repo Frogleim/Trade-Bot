@@ -67,6 +67,8 @@ def trade():
     global closed
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
+        iteration_count = 0
+
         tp_sl.profit_checkpoint_list.clear()
         try:
             position_handler.create_order(entry_price=entry_price,
@@ -78,7 +80,9 @@ def trade():
                                           quantity=config.position_size,
                                           side='long')
         while True:
-            res = tp_sl.pnl_long(entry_price, sma)
+            iteration_count += 1
+
+            res = tp_sl.pnl_long(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 try:
@@ -91,6 +95,8 @@ def trade():
                 break
 
     if signal == 'Sell':
+        iteration_count = 0
+
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
         try:
@@ -103,7 +109,9 @@ def trade():
                                           quantity=config.position_size,
                                           side='short')
         while True:
-            res = tp_sl.pnl_short(entry_price, sma)
+            iteration_count += 1
+
+            res = tp_sl.pnl_short(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
 
                 logging.info(f'Closing Position with {res}')

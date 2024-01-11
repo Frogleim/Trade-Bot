@@ -76,7 +76,7 @@ def pnl_long(opened_price, iteration_count):
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
 
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and iteration_count >= random.randint(15, 2000):
+        -2] is not None and iteration_count >= random.randint(2000, 5000):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -140,7 +140,7 @@ def pnl_short(opened_price, iteration_count):
             return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and iteration_count >= random.randint(15, 2000):
+        -2] is not None and iteration_count >= random.randint(2000, 2000):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
