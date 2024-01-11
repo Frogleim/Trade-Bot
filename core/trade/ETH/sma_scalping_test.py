@@ -1,4 +1,3 @@
-
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
@@ -19,7 +18,7 @@ except Exception as e:
 interval = '5m'  # Use '15m' for 15-minute intervals
 length = 20
 logging.basicConfig(
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -72,19 +71,21 @@ def trade():
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
-
-        res = tp_sl_scalping.pnl_long(entry_price)
-        if res == 'Profit' or res == 'Loss':
-            logging.info(f'Closing Position with {res}')
-            pnl_calculator.position_size()
-
+        while True:
+            res = tp_sl_scalping.pnl_long(entry_price)
+            if res == 'Profit' or res == 'Loss':
+                logging.info(f'Closing Position with {res}')
+                pnl_calculator.position_size()
+            break
     if signal == 'Sell':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
-        res = tp_sl_scalping.pnl_short(entry_price)
-        if res == 'Profit' or res == 'Loss':
-            logging.info(f'Closing Position with {res}')
-            pnl_calculator.position_size()
+        while True:
+            res = tp_sl_scalping.pnl_short(entry_price)
+            if res == 'Profit' or res == 'Loss':
+                logging.info(f'Closing Position with {res}')
+                pnl_calculator.position_size()
+            break
 
 
 if __name__ == '__main__':
