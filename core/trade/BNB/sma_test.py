@@ -44,9 +44,12 @@ def check_sma():
         sma_down_side = sma_value - 0.5
         live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
         logging.info(f'Price: {live_price} --- SMA: {sma_value}')
-        if sma_down_side <= live_price <= sma_up_side:
-            logging.info(f'Live price touches SMA: {live_price}')
+        if sma_up_side >= live_price:
+            logging.info(f'Live price touches SMA from upside: {live_price}')
             return True, sma_up_side, sma_down_side, sma_value
+        elif sma_down_side <= live_price:
+            logging.info(f'Live price touches SMA from Down side: {live_price}')
+            return False, sma_up_side, sma_down_side, sma_value
         else:
             continue
 
@@ -57,12 +60,20 @@ def break_point():
     while True:
         current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
         print(f'Checking entry position')
-        if current_live_price <= sma_down:
-            logging.info(f'Live price went down by 2 points from SMA. Sell!')
-            return 'Sell', current_live_price, sma
-        elif current_live_price >= sma_up:
-            logging.info(f'Live price went up by 2 points from SMA. Buy!')
-            return 'Buy', current_live_price, sma
+        if is_open: # Touching from upside
+            if current_live_price < sma_down - 0.3:
+                logging.info(f'Live price went down by 2 points from SMA. Sell!')
+                return 'Sell', current_live_price, sma
+            if current_live_price > sma_up + 0.3:
+                logging.info(f'Live price went down by 2 points from SMA. Sell!')
+                return 'Buy', current_live_price, sma
+        elif not is_open: # Touching from downside
+            if current_live_price > sma_up + 0.3:
+                logging.info(f'Live price went up by 2 points from SMA. Buy!')
+                return 'Buy', current_live_price, sma
+            if current_live_price < sma_down - 0.3:
+                logging.info(f'Live price went down by 2 points from SMA. Sell!')
+                return 'Sell', current_live_price, sma
         else:
             continue
 

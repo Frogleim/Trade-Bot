@@ -11,7 +11,11 @@ import sys
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
-client = Client(api_key, api_secret)
+try:
+    client = Client(api_key, api_secret)
+except Exception as e:
+    client = Client(api_key, api_secret)
+    print(e)
 interval = '5m'  # Use '15m' for 15-minute intervals
 length = 20
 logging.basicConfig(
@@ -69,7 +73,7 @@ def trade():
     if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
 
-        res = tp_sl_scalping.pnl_long(entry_price, sma)
+        res = tp_sl_scalping.pnl_long(entry_price)
         if res == 'Profit' or res == 'Loss':
             logging.info(f'Closing Position with {res}')
             pnl_calculator.position_size()
@@ -77,7 +81,7 @@ def trade():
     if signal == 'Sell':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
-        res = tp_sl_scalping.pnl_short(entry_price, sma)
+        res = tp_sl_scalping.pnl_short(entry_price)
         if res == 'Profit' or res == 'Loss':
             logging.info(f'Closing Position with {res}')
             pnl_calculator.position_size()

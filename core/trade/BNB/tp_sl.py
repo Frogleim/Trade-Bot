@@ -51,7 +51,6 @@ def calculate_sma(symbol, interval, length):
 @method_name_decorator
 def pnl_long(opened_price, sma):
     global current_profit, current_checkpoint, profit_checkpoint_list
-    sma_value = calculate_sma(config.trading_pair, '15m', 20)
 
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(btc_current) - float(opened_price)
@@ -63,7 +62,7 @@ def pnl_long(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) <= float(sma_value) - 0.8:
+    if float(btc_current) <= float(sma) - 0.8:
         files_manager.insert_data(opened_price, btc_current, current_profit)
 
         return 'Loss'

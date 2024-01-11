@@ -1,12 +1,9 @@
-# from . import config, files_manager
 import logging
-from binance.client import Client, AsyncClient
+from binance.client import Client
 from collections import Counter
 import config, files_manager
-# import config, files_manager
-# import files_manager
 import pandas as pd
-import pandas_ta as ta
+import random
 import sys
 import os
 
@@ -18,8 +15,11 @@ checking_price = None
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-client = Client()
-
+try:
+    client = Client(api_key, api_secret)
+except Exception as e:
+    print(e)
+    client = Client(api_key, api_secret)
 price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -44,22 +44,6 @@ def method_name_decorator(func):
     return wrapper
 
 
-def calculate_sma(symbol, interval, length):
-    """
-
-    Args:
-        symbol: trading pair
-        interval: trading interval
-        length: MA length
-
-    Returns: MA float
-
-    """
-    klines = client.futures_klines(symbol=symbol, interval=interval)
-    close_prices = [float(kline[4]) for kline in klines]
-    df = pd.DataFrame({'close': close_prices})
-    df['sma'] = ta.sma(df['close'], length=length)
-    return df['sma'].iloc[-1]
 
 
 @method_name_decorator
@@ -76,11 +60,12 @@ def pnl_long(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
     iteration_count = 0
     while True:
-        iteration_count += 1
+        iteration_count += 1 # Set iteration counter
         btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
         current_profit = float(btc_current) - float(opened_price)
         logging.info(
-            f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit}')
+            f'Entry Price: {opened_price} --- Current Price: {btc_current} --- Current Profit: {current_profit} ---'
+            f'Iteration: {iteration_count}')
         for i in range(len(config.checkpoint_list_scalping) - 1):
             if config.checkpoint_list_scalping[i] <= current_profit < config.checkpoint_list_scalping[i + 1]:
                 if current_checkpoint != config.checkpoint_list_scalping[i]:  # Check if it's a new checkpoint
@@ -88,16 +73,16 @@ def pnl_long(opened_price):
                     profit_checkpoint_list.append(current_checkpoint)
                     message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                     logging.info(message)
-        stop_loss = float(opened_price) + config.SL
-        # Checking Stop Loss Condition
+        stop_loss = float(opened_price) + config.SL # Set up Stop Loss
         if float(btc_current) >= stop_loss:
-            logging.info('Break even price passed!')
+            logging.info('Break even price was passed!')
             files_manager.insert_scalping_data(opened_price, btc_current, current_profit)
-            if iteration_count >= 7 and len(current_checkpoint) == 0:
+            if iteration_count >= 7 and len(profit_checkpoint_list) == 0:
                 return 'Loss'
+            break
         logging.warning(f'Current checkpoint: --> {current_checkpoint}')
 
-        if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and iteration_count >= 15:
+        if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and iteration_count >= random.randint(15, 20):
             logging.info('Checking for duplicates...')
             profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
             logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -113,6 +98,7 @@ def pnl_long(opened_price):
                 logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
 
                 return 'Profit'
+            break
 
         if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
@@ -125,6 +111,7 @@ def pnl_long(opened_price):
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'
+        break
 
 
 @method_name_decorator
@@ -158,10 +145,11 @@ def pnl_short(opened_price):
         if float(btc_current) <= stop_loss:
             logging.info('Break even price passed!')
             files_manager.insert_scalping_data(opened_price, btc_current, current_profit)
-            if iteration_count >= 7 and len(current_checkpoint) == 0:
+            if iteration_count >= 7 and len(profit_checkpoint_list) == 0:
                 return 'Loss'
+            break
         logging.warning(f'Current checkpoint: --> {current_checkpoint}')
-        if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and iteration_count >= 15:
+        if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and iteration_count >= random.randint(15, 20):
             logging.info('Checking for duplicates...')
             profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
             logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -175,8 +163,8 @@ def pnl_short(opened_price):
                                                    iteration_count)
                 logging.info('Saving data')
                 logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-
                 return 'Profit'
+            break
         if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(btc_current), 1)}\nProfit: {round(current_profit, 1)}'
@@ -189,3 +177,4 @@ def pnl_short(opened_price):
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
 
             return 'Profit'
+        break
