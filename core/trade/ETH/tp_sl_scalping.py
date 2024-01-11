@@ -42,10 +42,11 @@ def method_name_decorator(func):
 
 
 @method_name_decorator
-def pnl_long(opened_price):
+def pnl_long(opened_price, iteration_count):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
+        iteration_count:
         opened_price: Entry Price
 
     Returns: Profit or Loss signal as string
@@ -53,7 +54,6 @@ def pnl_long(opened_price):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
-    iteration_count = 0
     iteration_count += 1  # Set iteration counter
     current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(current_price) - float(opened_price)
@@ -107,11 +107,12 @@ def pnl_long(opened_price):
 
 
 @method_name_decorator
-def pnl_short(opened_price):
+def pnl_short(opened_price, iteration_count):
     """
     Definition: Monitoring current position by profit checkpoint list
 
     Args:
+        iteration_count:
         opened_price: Entry Price
 
     Returns: Profit or Loss signals as string
@@ -119,7 +120,6 @@ def pnl_short(opened_price):
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
 
-    iteration_count = 0
     current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(current_price)
     logging.info(

@@ -1,10 +1,12 @@
+import logging
+import sys
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
-import tp_sl, config, pnl_calculator, position_handler, tp_sl_scalping
-import os
-import logging
-import sys
+import config
+import pnl_calculator
+import tp_sl
+import tp_sl_scalping
 
 # Replace with your Binance API key and secret
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
@@ -26,10 +28,8 @@ console_handler.setFormatter(formatter)
 root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
-closed = False
 
-
-def calculate_sma(symbol, interval, length):
+def calculate_sma(interval, length):
     klines = client.futures_klines(symbol=config.trading_pair, interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
@@ -39,7 +39,7 @@ def calculate_sma(symbol, interval, length):
 
 def check_sma():
     while True:
-        sma_value = calculate_sma(config.trading_pair, interval, length)
+        sma_value = calculate_sma(interval, length)
         sma_up_side = sma_value + 1
         sma_down_side = sma_value - 1
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
@@ -67,12 +67,12 @@ def break_point():
 
 
 def trade():
-    global closed
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
+        iteration_count = 0
         while True:
-            res = tp_sl_scalping.pnl_long(entry_price)
+            res = tp_sl_scalping.pnl_long(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()
@@ -80,8 +80,9 @@ def trade():
     if signal == 'Sell':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
+        iteration_count = 0
         while True:
-            res = tp_sl_scalping.pnl_short(entry_price)
+            res = tp_sl_scalping.pnl_short(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()
