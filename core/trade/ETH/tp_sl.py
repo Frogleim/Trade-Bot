@@ -60,10 +60,10 @@ def pnl_long(opened_price, iteration_count):
     logging.info(
         f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
         f'Iteration: {iteration_count}')
-    for i in range(len(config.checkpoint_list_scalping) - 1):
-        if config.checkpoint_list_scalping[i] <= current_profit < config.checkpoint_list_scalping[i + 1]:
-            if current_checkpoint != config.checkpoint_list_scalping[i]:  # Check if it's a new checkpoint
-                current_checkpoint = config.checkpoint_list_scalping[i]
+    for i in range(len(config.checkpoint_list) - 1):
+        if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
+            if current_checkpoint != config.checkpoint_list[i]:  # Check if it's a new checkpoint
+                current_checkpoint = config.checkpoint_list[i]
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
@@ -80,7 +80,7 @@ def pnl_long(opened_price, iteration_count):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list_scalping[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
@@ -124,10 +124,10 @@ def pnl_short(opened_price, iteration_count):
     current_profit = float(opened_price) - float(current_price)
     logging.info(
         f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit}')
-    for i in range(len(config.checkpoint_list_scalping) - 1):
-        if config.checkpoint_list_scalping[i] <= current_profit < config.checkpoint_list_scalping[i + 1]:
-            if current_checkpoint != config.checkpoint_list_scalping[i]:
-                current_checkpoint = config.checkpoint_list_scalping[i]
+    for i in range(len(config.checkpoint_list) - 1):
+        if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
+            if current_checkpoint != config.checkpoint_list[i]:
+                current_checkpoint = config.checkpoint_list[i]
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
@@ -144,7 +144,7 @@ def pnl_short(opened_price, iteration_count):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list_scalping[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
