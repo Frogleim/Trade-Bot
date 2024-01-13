@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
@@ -83,16 +85,24 @@ def trade():
             iteration_count += 1
 
             res = tp_sl.pnl_long(entry_price, iteration_count)
-            if res == 'Profit' or res == 'Loss':
+            if res == 'Profit':
                 logging.info(f'Closing Position with {res}')
                 try:
                     position_handler.close_position(side='short', quantity=config.position_size)
                 except Exception as e:
                     print(e)
                     position_handler.close_position(side='short', quantity=config.position_size)
-                # pnl_calculator.position_size()
-
+                pnl_calculator.position_size()
                 break
+            if res == 'Loss':
+                logging.info(f'Closing Position with {res}')
+                try:
+                    position_handler.close_position(side='short', quantity=config.position_size)
+                except Exception as e:
+                    print(e)
+                    position_handler.close_position(side='short', quantity=config.position_size)
+                break
+
 
     if signal == 'Sell':
         iteration_count = 0
@@ -112,7 +122,7 @@ def trade():
             iteration_count += 1
 
             res = tp_sl.pnl_short(entry_price, iteration_count)
-            if res == 'Profit' or res == 'Loss':
+            if res == 'Profit':
 
                 logging.info(f'Closing Position with {res}')
                 try:
@@ -120,11 +130,26 @@ def trade():
                 except Exception as e:
                     print(e)
                     position_handler.close_position(side='long', quantity=config.position_size)
-                # pnl_calculator.position_size()
+                pnl_calculator.position_size()
+                break
+            if res == 'Loss':
 
+                logging.info(f'Closing Position with {res}')
+                try:
+                    position_handler.close_position(side='long', quantity=config.position_size)
+                except Exception as e:
+                    print(e)
+                    position_handler.close_position(side='long', quantity=config.position_size)
                 break
 
 
 if __name__ == '__main__':
+
+    from send_email import send_email
+    trades_count = 0
     while True:
+        trades_count += 1
         trade()
+        if trades_count == 8:
+            send_email('Trades Successfully Finished', 'Trades Finished! Check your Binance account')
+            break
