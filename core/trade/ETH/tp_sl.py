@@ -70,7 +70,7 @@ def pnl_long(opened_price, iteration_count):
     stop_loss = float(opened_price) + config.SL  # Set up Stop Loss
     if float(current_price) >= stop_loss:
         logging.info('Break even price was passed!')
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit)
+        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
         if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
@@ -135,7 +135,7 @@ def pnl_short(opened_price, iteration_count):
     # Checking Stop Loss Condition
     if float(current_price) <= stop_loss:
         logging.info('Break even price passed!')
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit)
+        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
         if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')

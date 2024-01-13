@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 import pandas_ta as ta
 from binance.client import Client
@@ -89,6 +91,7 @@ def trade():
 
                 logging.info(f'Closing Position with {res}')
                 break
+            time.sleep(0.5)
 
 
 if __name__ == '__main__':

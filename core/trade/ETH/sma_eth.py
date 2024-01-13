@@ -11,7 +11,7 @@ api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
 client = Client(api_key, api_secret)
-interval = '5m'  # Use '15m' for 15-minute intervals
+interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
 logging.basicConfig(
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -35,7 +35,7 @@ def calculate_sma(interval, length):
 
 def check_sma():
     while True:
-        sma_value = calculate_sma(config.trading_pair, interval, length)
+        sma_value = calculate_sma(interval, length)
         sma_up_side = sma_value + 1
         sma_down_side = sma_value - 1
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
