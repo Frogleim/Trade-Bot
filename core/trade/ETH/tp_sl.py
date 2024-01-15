@@ -42,10 +42,11 @@ def method_name_decorator(func):
 
 
 @method_name_decorator
-def pnl_long(opened_price, iteration_count):
+def pnl_long(opened_price, iteration_count, sma):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
+        sma:
         iteration_count:
         opened_price: Entry Price
 
@@ -73,6 +74,10 @@ def pnl_long(opened_price, iteration_count):
         files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
         if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
+    if float(current_price) <= sma - 1:
+        logging.info('Losing')
+        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
+        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
 
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
@@ -107,11 +112,12 @@ def pnl_long(opened_price, iteration_count):
 
 
 @method_name_decorator
-def pnl_short(opened_price, iteration_count):
+def pnl_short(opened_price, iteration_count, sma):
     """
     Definition: Monitoring current position by profit checkpoint list
 
     Args:
+        sma:
         iteration_count:
         opened_price: Entry Price
 
@@ -138,6 +144,10 @@ def pnl_short(opened_price, iteration_count):
         files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
         if iteration_count >= 7000 and len(profit_checkpoint_list) == 0:
             return 'Loss'
+    if float(current_price) >= sma + 1:
+        logging.info('Losing')
+        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
+        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
         -2] is not None and iteration_count >= random.randint(2000, 5000):

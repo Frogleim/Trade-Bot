@@ -11,19 +11,16 @@ import sys
 # Replace with your Binance API key and secret
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-
 client = Client(api_key, api_secret)
 interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
-logging.basicConfig(
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)
 root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
-
 closed = False
 
 
@@ -70,7 +67,7 @@ def trade():
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
         iteration_count = 0
-        tp_sl.profit_checkpoint_list.clear()
+        tp_sl.profit_checkpoint_list = []
         try:
             position_handler.create_order(entry_price=entry_price,
                                           quantity=config.position_size,
@@ -82,7 +79,7 @@ def trade():
                                           side='long')
         while True:
             iteration_count += 1
-            res = tp_sl.pnl_long(entry_price, iteration_count)
+            res = tp_sl.pnl_long(entry_price, iteration_count, sma)
             if res == 'Profit':
                 logging.info(f'Closing Position with {res}')
                 try:
@@ -103,7 +100,7 @@ def trade():
 
     if signal == 'Sell':
         iteration_count = 0
-        tp_sl.profit_checkpoint_list.clear()
+        tp_sl.profit_checkpoint_list = []
         try:
             position_handler.create_order(entry_price=entry_price,
                                           quantity=config.position_size,
@@ -115,8 +112,7 @@ def trade():
                                           side='short')
         while True:
             iteration_count += 1
-
-            res = tp_sl.pnl_short(entry_price, iteration_count)
+            res = tp_sl.pnl_short(entry_price, iteration_count, sma)
             if res == 'Profit':
                 logging.info(f'Closing Position with {res}')
                 try:
@@ -144,5 +140,6 @@ if __name__ == '__main__':
         trades_count += 1
         trade()
         if trades_count == 8:
-            send_email('Trades Successfully Finished', 'Trades Finished! Check your Binance account')
+            send_email('Trades Successfully Finished',
+                       'Trades Finished! Check your Binance account')
             break
