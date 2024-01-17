@@ -16,7 +16,7 @@ client = Client(api_key, api_secret)
 interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
 logging.basicConfig(
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -27,47 +27,44 @@ root_logger.addHandler(console_handler)
 closed = False
 
 
-def calculate_sma(interval, length):
-    klines = client.futures_klines(symbol=config.trading_pair, interval=interval)
+def calculate_bollinger_bands(interval, length, num_std_dev):
+    klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
-    df['sma'] = ta.sma(df['close'], length=length)
-    return df['sma'].iloc[-1]
+
+    # Calculate SMA using pandas
+    df['sma'] = df['close'].rolling(window=length).mean()
+
+    # Calculate standard deviation
+    df['std_dev'] = df['close'].rolling(window=length).std()
+
+    # Calculate upper and lower Bollinger Bands
+    df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
+    df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
+
+    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
 
 
 def check_sma():
     while True:
-        sma_value = calculate_sma(config.trading_pair, interval, length)
-        sma_up_side = sma_value + 1
-        sma_down_side = sma_value - 1
+        bollinger_values = calculate_bollinger_bands(config.trading_pair, interval, length)
+        upper_band, lower_band = bollinger_values['upper_band'], bollinger_values['lower_band']
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
-        logging.info(f'Price: {live_price} --- SMA: {sma_value}')
-        if sma_down_side <= live_price <= sma_up_side:
-            logging.info(f'Live price touches SMA: {live_price}')
-            return True, sma_up_side, sma_down_side, sma_value
-        else:
-            continue
+        logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-
-def break_point():
-    is_open, sma_up, sma_down, sma = check_sma()
-
-    while True:
-        current_live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
-        print(f'Checking entry position')
-        if current_live_price <= sma_down:
-            logging.info(f'Live price went down by 4 points from SMA. Sell!')
-            return 'Sell', current_live_price, sma
-        elif current_live_price >= sma_up:
-            logging.info(f'Live price went up by 4 points from SMA. Buy!')
-            return 'Buy', current_live_price, sma
+        if live_price > upper_band:
+            logging.info(f'Live price above Upper Band. Simulating short position.')
+            return 'Short', upper_band, lower_band
+        elif live_price < lower_band:
+            logging.info(f'Live price below Lower Band. Simulating long position.')
+            return 'Long', upper_band, lower_band
         else:
             continue
 
 
 def trade():
     global closed
-    signal, entry_price, sma = break_point()
+    signal, entry_price, sma = check_sma()
     if signal == 'Buy':
         iteration_count = 0
 
@@ -88,7 +85,6 @@ def trade():
 
             res = tp_sl.pnl_short(entry_price, iteration_count)
             if res == 'Profit' or res == 'Loss':
-
                 logging.info(f'Closing Position with {res}')
                 break
             time.sleep(0.5)
