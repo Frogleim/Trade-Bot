@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Query
+from fastapi.responses import FileResponse
+from pathlib import Path
 import os
 import gzip
 import shutil
@@ -11,7 +13,7 @@ app = FastAPI()
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "bot/Trade-Bot/core/trade/files")
+files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/trade/ETH/files")
 
 logs_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/trade/logs")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
@@ -21,6 +23,18 @@ api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 def compress_file(input_file, output_file):
     with open(input_file, 'rb') as f_in, gzip.open(output_file, 'wb') as f_out:
         shutil.copyfileobj(f_in, f_out)
+
+
+@app.get("/get_trade_statement")
+async def get_statement():
+    # Path to the file you want to return
+    file_path = Path(f"{files_dir}/data.csv")  # Replace with the actual file path
+
+    # Optional: Specify the desired file name for the response
+    file_name = "statement_report.csv"
+
+    # Return the file as a response
+    return FileResponse(file_path, filename=file_name)
 
 
 @app.get('/get_wallet')

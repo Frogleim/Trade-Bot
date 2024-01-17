@@ -48,14 +48,14 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
 def check_sma():
     while True:
         bollinger_values = calculate_bollinger_bands(config.trading_pair, interval, length)
-        upper_band, lower_band = bollinger_values['upper_band'], bollinger_values['lower_band']
+        upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if live_price > upper_band:
+        if live_price > upper_band + 3:
             logging.info(f'Live price above Upper Band. Simulating short position.')
             return 'Short', upper_band, lower_band
-        elif live_price < lower_band:
+        elif live_price < lower_band - 3:
             logging.info(f'Live price below Lower Band. Simulating long position.')
             return 'Long', upper_band, lower_band
         else:
