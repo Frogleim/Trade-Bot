@@ -41,8 +41,7 @@ def method_name_decorator(func):
     return wrapper
 
 
-@method_name_decorator
-def pnl_long(opened_price, iteration_count, sma):
+def pnl_long(opened_price, iteration_count):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
@@ -68,10 +67,7 @@ def pnl_long(opened_price, iteration_count, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(current_price) <= sma - 1:
-        logging.info('Losing')
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
-        return 'Loss'
+
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
 
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
@@ -105,8 +101,7 @@ def pnl_long(opened_price, iteration_count, sma):
         return 'Profit'
 
 
-@method_name_decorator
-def pnl_short(opened_price, iteration_count, sma):
+def pnl_short(opened_price, iteration_count):
     """
     Definition: Monitoring current position by profit checkpoint list
 
@@ -132,10 +127,7 @@ def pnl_short(opened_price, iteration_count, sma):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
     # Checking Stop Loss Condition
-    if float(current_price) >= sma + 1:
-        logging.info('Losing')
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit, iteration_count)
-        return 'Loss'
+
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
         -2] is not None:

@@ -67,7 +67,7 @@ def trade():
     signal, entry_price, sma = break_point()
     if signal == 'Buy':
         iteration_count = 0
-        tp_sl.profit_checkpoint_list = []
+        tp_sl.profit_checkpoint_list = [ ]
         try:
             position_handler.create_order(entry_price=entry_price,
                                           quantity=config.position_size,
