@@ -15,6 +15,7 @@ api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
 interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
+num_std_dev = 2
 logging.basicConfig(
     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
@@ -47,8 +48,9 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
 
 def check_sma():
     while True:
-        bollinger_values = calculate_bollinger_bands(config.trading_pair, interval, length)
+        bollinger_values = calculate_bollinger_bands(interval=interval, length=length, num_std_dev=num_std_dev)
         upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
+        print(upper_band, lower_band)
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
