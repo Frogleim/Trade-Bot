@@ -54,21 +54,20 @@ def check_sma():
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if live_price > upper_band + 4:
+        if live_price > upper_band + 3:
             logging.info(f'Live price above Upper Band. Simulating short position.')
-            return 'Short', live_price
-        elif live_price < lower_band - 4:
+            return 'Short', upper_band, lower_band
+        elif live_price < lower_band - 3:
             logging.info(f'Live price below Lower Band. Simulating long position.')
-            return 'Long', live_price
+            return 'Long', upper_band, lower_band
         else:
             continue
 
 
 def trade():
     global closed
-    signal, entry_price = check_sma()
-    print('Opening Position')
-    if signal == 'Buy':
+    signal, entry_price, sma = check_sma()
+    if signal == 'Long':
         iteration_count = 0
 
         tp_sl.profit_checkpoint_list.clear()
@@ -79,7 +78,7 @@ def trade():
                 logging.info(f'Closing Position with {res}')
                 break
 
-    if signal == 'Sell':
+    if signal == 'Short':
         iteration_count = 0
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
