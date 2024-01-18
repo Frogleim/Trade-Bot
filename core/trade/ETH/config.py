@@ -4,7 +4,7 @@ API_KEY = '552adddf40a41a4b272f22c99d7318792f0d2daf42cd80d69f2ecf4e8b9d649d'
 
 moving_average_window = 6
 email_password = 'fbbb segh zebm ewlw'
-checkpoint_list = [8, 12, 20, 30, 40, 60]
+checkpoint_list = [5, 8, 12, 20, 30, 40, 60]
 checkpoint_list_scalping = [3, 5, 6]
 
 interval = '15m'  # Use '15m' for 15-minute intervals

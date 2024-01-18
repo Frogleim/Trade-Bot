@@ -32,17 +32,10 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
     klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
-
-    # Calculate SMA using pandas
     df['sma'] = df['close'].rolling(window=length).mean()
-
-    # Calculate standard deviation
     df['std_dev'] = df['close'].rolling(window=length).std()
-
-    # Calculate upper and lower Bollinger Bands
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
-
     return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
 
 
@@ -54,20 +47,21 @@ def check_sma():
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if live_price > upper_band + 3:
+        if live_price > upper_band + 4:
             logging.info(f'Live price above Upper Band. Simulating short position.')
-            return 'Short', upper_band, lower_band
-        elif live_price < lower_band - 3:
+            return 'Short', live_price
+        elif live_price < lower_band - 4:
             logging.info(f'Live price below Lower Band. Simulating long position.')
-            return 'Long', upper_band, lower_band
+            return 'Long', live_price
         else:
             continue
 
 
 def trade():
     global closed
-    signal, entry_price, sma = check_sma()
-    if signal == 'Long':
+    signal, entry_price = check_sma()
+    print('Opening Position')
+    if signal == 'Buy':
         iteration_count = 0
 
         tp_sl.profit_checkpoint_list.clear()
@@ -78,7 +72,7 @@ def trade():
                 logging.info(f'Closing Position with {res}')
                 break
 
-    if signal == 'Short':
+    if signal == 'Sell':
         iteration_count = 0
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()

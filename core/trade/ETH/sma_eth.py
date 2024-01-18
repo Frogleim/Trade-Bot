@@ -12,11 +12,11 @@ import sys
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
-interval = '15m'  # Use '15m' for 15-minute intervals
+interval = '15m'
 length = 20
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setLevel(logging.INFO)  # Set the desired log level for the console
+console_handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)
 root_logger = logging.getLogger()
@@ -28,17 +28,10 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
     klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
-
-    # Calculate SMA using pandas
     df['sma'] = df['close'].rolling(window=length).mean()
-
-    # Calculate standard deviation
     df['std_dev'] = df['close'].rolling(window=length).std()
-
-    # Calculate upper and lower Bollinger Bands
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
-
     return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
 
 
@@ -65,7 +58,6 @@ def trade():
     signal, entry_price = check_sma()
     if signal == 'Long':
         iteration_count = 0
-        tp_sl.profit_checkpoint_list = []
         try:
             position_handler.create_order(entry_price=entry_price,
                                           quantity=config.position_size,
@@ -98,7 +90,6 @@ def trade():
 
     if signal == 'Short':
         iteration_count = 0
-        tp_sl.profit_checkpoint_list = []
         try:
             position_handler.create_order(entry_price=entry_price,
                                           quantity=config.position_size,
@@ -136,6 +127,7 @@ if __name__ == '__main__':
 
     trades_count = 0
     while True:
+        tp_sl.profit_checkpoint_list.clear()
         trades_count += 1
         trade()
         if trades_count == 8:

@@ -122,12 +122,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 5  # 0.21$
-    common_ratio = 1.25  # 20% increase
-    num_terms = 24 # 40 Trades is one day trade
+    starting_number = 1000  # 0.21$
+    common_ratio = 1.3  # 20% increase
+    num_terms = 8 # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(result)
-    wallet = [round(new_value, 2) + 39 for new_value in result]
+    wallet = [round(new_value, 2) + 0 for new_value in result]
     print(wallet)
     res = get_last_two_candles_direction(symbol=config.trading_pair)
     print(res)
