@@ -37,39 +37,39 @@ def calculate_sma(symbol, interval, length):
     return df['sma'].iloc[-1]
 
 
+def calculate_bollinger_bands(interval, length, num_std_dev):
+    klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
+    close_prices = [float(kline[4]) for kline in klines]
+    df = pd.DataFrame({'close': close_prices})
+    df['sma'] = df['close'].rolling(window=length).mean()
+    df['std_dev'] = df['close'].rolling(window=length).std()
+    df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
+    df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
+    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
+
+
 def check_sma():
     while True:
-        sma_value = calculate_sma(symbol, interval, length)
-        sma_up_side = sma_value + 0.5
-        sma_down_side = sma_value - 0.5
-        live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
-        logging.info(f'Price: {live_price} --- SMA: {sma_value}')
-        if sma_down_side <= live_price <= sma_up_side:
-            logging.info(f'Live price touches SMA: {live_price}')
-            return True, sma_up_side, sma_down_side, sma_value
+        bollinger_values = calculate_bollinger_bands(interval=config.interval, length=config.length, num_std_dev=config.num_std_dev)
+        upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
+        print(upper_band, lower_band)
+        live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
+        logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
+
+        if live_price > upper_band + 0.56:
+            logging.info(f'Live price above Upper Band. Simulating short position.')
+            return 'Short', live_price
+        elif live_price < lower_band - 0.56:
+            logging.info(f'Live price below Lower Band. Simulating long position.')
+            return 'Long', live_price
         else:
             continue
 
-
-def break_point():
-    is_open, sma_up, sma_down, sma = check_sma()
-
-    while True:
-        current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
-        print(f'Checking entry position')
-        if current_live_price <= sma_down - 0.9:
-            logging.info(f'Live price went down by 2 points from SMA. Sell!')
-            return 'Sell', current_live_price, sma
-        elif current_live_price >= sma_up + 0.9:
-            logging.info(f'Live price went up by 2 points from SMA. Buy!')
-            return 'Buy', current_live_price, sma
-        else:
-            continue
 
 
 def trade():
     global closed
-    signal, entry_price, sma = break_point()
+    signal, entry_price = check_sma()
     if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
         try:
@@ -82,7 +82,7 @@ def trade():
                                           quantity=config.position_size,
                                           side='long')
         while True:
-            res = tp_sl.pnl_long(entry_price, sma)
+            res = tp_sl.pnl_long(entry_price)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 try:
@@ -107,7 +107,7 @@ def trade():
                                           quantity=config.position_size,
                                           side='short')
         while True:
-            res = tp_sl.pnl_short(entry_price, sma)
+            res = tp_sl.pnl_short(entry_price)
             if res == 'Profit' or res == 'Loss':
 
                 logging.info(f'Closing Position with {res}')
@@ -122,5 +122,8 @@ def trade():
 
 
 if __name__ == '__main__':
+
+    entry_usdt = float(input('Enter your trade amount in USD: '))
+    pnl_calculator.size_calculator(entry_usdt)
     while True:
         trade()

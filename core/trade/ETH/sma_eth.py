@@ -43,10 +43,10 @@ def check_sma():
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if live_price > upper_band + 4:
+        if live_price > upper_band + 3:
             logging.info(f'Live price above Upper Band. Simulating short position.')
             return 'Short', live_price
-        elif live_price < lower_band - 4:
+        elif live_price < lower_band - 3:
             logging.info(f'Live price below Lower Band. Simulating long position.')
             return 'Long', live_price
         else:
@@ -57,6 +57,9 @@ def trade():
     global closed
     signal, entry_price = check_sma()
     if signal == 'Long':
+        tp_sl.profit_checkpoint_list.clear()
+        tp_sl.current_profit = None
+
         iteration_count = 0
         try:
             position_handler.create_order(entry_price=entry_price,
@@ -89,6 +92,9 @@ def trade():
                 break
 
     if signal == 'Short':
+        tp_sl.profit_checkpoint_list.clear()
+        tp_sl.current_profit = None
+
         iteration_count = 0
         try:
             position_handler.create_order(entry_price=entry_price,
@@ -125,9 +131,11 @@ if __name__ == '__main__':
 
     from send_email import send_email
 
+    entry_usdt = float(input('Enter your trade amount in USD: '))
+    pnl_calculator.size_calculator(entry_usdt)
+
     trades_count = 0
     while True:
-        tp_sl.profit_checkpoint_list.clear()
         trades_count += 1
         trade()
         if trades_count == 8:

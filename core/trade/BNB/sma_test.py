@@ -1,7 +1,6 @@
 import logging
 import sys
 import pandas as pd
-import pandas_ta as ta
 from binance.client import Client
 import config
 import pnl_calculator
@@ -29,62 +28,42 @@ root_logger.addHandler(console_handler)
 closed = False
 
 
-def calculate_sma(symbol, interval, length):
-    klines = client.futures_klines(symbol=symbol, interval=interval)
+def calculate_bollinger_bands(interval, length, num_std_dev):
+    klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
-    df['sma'] = ta.sma(df['close'], length=length)
-    return df['sma'].iloc[-1]
+    df['sma'] = df['close'].rolling(window=length).mean()
+    df['std_dev'] = df['close'].rolling(window=length).std()
+    df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
+    df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
+    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
 
 
 def check_sma():
     while True:
-        sma_value = calculate_sma(symbol, interval, length)
-        sma_up_side = sma_value + 0.5
-        sma_down_side = sma_value - 0.5
-        live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
-        logging.info(f'Price: {live_price} --- SMA: {sma_value}')
-        if sma_up_side >= live_price:
-            logging.info(f'Live price touches SMA from upside: {live_price}')
-            return True, sma_up_side, sma_down_side, sma_value
-        elif sma_down_side <= live_price:
-            logging.info(f'Live price touches SMA from Down side: {live_price}')
-            return False, sma_up_side, sma_down_side, sma_value
-        else:
-            continue
+        bollinger_values = calculate_bollinger_bands(interval=config.interval, length=config.length, num_std_dev=config.num_std_dev)
+        upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
+        print(upper_band, lower_band)
+        live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
+        logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-
-def break_point():
-    is_open, sma_up, sma_down, sma = check_sma()
-
-    while True:
-        current_live_price = float(client.futures_ticker(symbol=symbol)['lastPrice'])
-        print(f'Checking entry position')
-        if is_open: # Touching from upside
-            if current_live_price < sma_down - 0.3:
-                logging.info(f'Live price went down by 2 points from SMA. Sell!')
-                return 'Sell', current_live_price, sma
-            if current_live_price > sma_up + 0.3:
-                logging.info(f'Live price went down by 2 points from SMA. Sell!')
-                return 'Buy', current_live_price, sma
-        elif not is_open: # Touching from downside
-            if current_live_price > sma_up + 0.3:
-                logging.info(f'Live price went up by 2 points from SMA. Buy!')
-                return 'Buy', current_live_price, sma
-            if current_live_price < sma_down - 0.3:
-                logging.info(f'Live price went down by 2 points from SMA. Sell!')
-                return 'Sell', current_live_price, sma
+        if live_price > upper_band + 0.56:
+            logging.info(f'Live price above Upper Band. Simulating short position.')
+            return 'Short', live_price
+        elif live_price < lower_band - 0.56:
+            logging.info(f'Live price below Lower Band. Simulating long position.')
+            return 'Long', live_price
         else:
             continue
 
 
 def trade():
     global closed
-    signal, entry_price, sma = break_point()
+    signal, entry_price, = check_sma()
     if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
         while True:
-            res = tp_sl.pnl_long(entry_price, sma)
+            res = tp_sl.pnl_long(entry_price)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()
@@ -95,7 +74,7 @@ def trade():
         tp_sl.profit_checkpoint_list.clear()
 
         while True:
-            res = tp_sl.pnl_short(entry_price, sma)
+            res = tp_sl.pnl_short(entry_price)
             if res == 'Profit' or res == 'Loss':
                 logging.info(f'Closing Position with {res}')
                 pnl_calculator.position_size()

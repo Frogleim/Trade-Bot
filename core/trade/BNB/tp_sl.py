@@ -3,8 +3,6 @@ import sys
 from collections import Counter
 from binance.client import Client
 import config
-import pandas as pd
-import pandas_ta as ta
 import files_manager
 import os
 
@@ -32,24 +30,9 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def method_name_decorator(func):
-    def wrapper(*args, **kwargs):
-        logging.info(f'Executing method: {func.__name__}')
-        return func(*args, **kwargs)
-
-    return wrapper
 
 
-def calculate_sma(symbol, interval, length):
-    klines = client.futures_klines(symbol=symbol, interval=interval)
-    close_prices = [float(kline[4]) for kline in klines]
-    df = pd.DataFrame({'close': close_prices})
-    df['sma'] = ta.sma(df['close'], length=length)
-    return df['sma'].iloc[-1]
-
-
-@method_name_decorator
-def pnl_long(opened_price, sma):
+def pnl_long(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
 
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
@@ -62,10 +45,7 @@ def pnl_long(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) <= float(sma) - 0.8:
-        files_manager.insert_data(opened_price, btc_current, current_profit)
 
-        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
@@ -95,10 +75,8 @@ def pnl_long(opened_price, sma):
         return 'Profit'
 
 
-@method_name_decorator
-def pnl_short(opened_price, sma):
+def pnl_short(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
-    sma_value = calculate_sma(config.trading_pair, '15m', 20)
 
     btc_current = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(opened_price) - float(btc_current)
@@ -110,9 +88,7 @@ def pnl_short(opened_price, sma):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if float(btc_current) >= float(sma_value) + 0.8:
-        files_manager.insert_data(opened_price, btc_current, current_profit)
-        return 'Loss'
+
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         logging.info('Checking for duplicates...')

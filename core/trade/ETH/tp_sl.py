@@ -54,7 +54,7 @@ def pnl_long(opened_price, iteration_count):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
-    iteration_count += 1  # Set iteration counter
+    iteration_count += 1
     current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(current_price) - float(opened_price)
     logging.info(
@@ -129,8 +129,7 @@ def pnl_short(opened_price, iteration_count):
     # Checking Stop Loss Condition
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
-    if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and current_checkpoint is not None:
+    if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')

@@ -105,6 +105,22 @@ def get_last_two_candles_direction(symbol, interval='3m'):
     return direction
 
 
+def size_calculator(entry_usd):
+    leverage = 75
+    crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    quantity = (leverage * float(entry_usd)) / crypto_current_price
+    file_original_value = config.position_size
+
+    with open(f'{files_dir}/config.py', 'r') as config_file:
+        config_data = config_file.read()
+        config_data = config_data.replace(f"position_size = {file_original_value}",
+                                          f"position_size = {round(quantity, 2)}")
+
+        with open(f'{files_dir}/config.py', 'w') as config_file:
+            config_file.write(config_data)
+        print('Position Size resetted Successfully')
+
+
 def get_current_positions():
     binance_balance = []
     # Replace YOUR_API_KEY and YOUR_API_SECRET with your Binance API key and secret
