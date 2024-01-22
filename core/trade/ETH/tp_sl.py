@@ -54,7 +54,6 @@ def pnl_long(opened_price, iteration_count=None):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
-    iteration_count += 1
     current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     current_profit = float(current_price) - float(opened_price)
     logging.info(
@@ -80,24 +79,19 @@ def pnl_long(opened_price, iteration_count=None):
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            position_size = config.position_size
-            save_data = (position_size * float(current_price)) / 100
-            files_manager.insert_scalping_data(opened_price, current_price, current_profit, round(save_data, 3),
-                                               iteration_count)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-
+            current_profit = 0
+            current_checkpoint = None
             return 'Profit'
 
     if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
         body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
         logging.info(body)
-        position_size = config.position_size
-        save_data = (position_size * float(current_price)) / 100
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit, round(save_data, 3),
-                                           iteration_count)
         logging.info('Saving data')
         logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+        current_profit = 0
+        current_checkpoint = None
         return 'Profit'
 
 
@@ -137,22 +131,14 @@ def pnl_short(opened_price, iteration_count=None):
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            position_size = config.position_size
-            save_data = (position_size * float(current_price)) / 100
-            files_manager.insert_scalping_data(opened_price, current_price, current_profit, round(save_data, 3),
-                                               iteration_count)
-            logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+            current_profit = 0
+            current_checkpoint = None
             return 'Profit'
     if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
         body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
         logging.info(body)
-        position_size = config.position_size
-        save_data = (position_size * float(current_price)) / 100
-        files_manager.insert_scalping_data(opened_price, current_price, current_profit, round(save_data, 3),
-                                           iteration_count)
-        logging.info('Saving data')
-        logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-
+        current_profit = 0
+        current_checkpoint = None
         return 'Profit'

@@ -60,12 +60,12 @@ def trade():
 
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_sell_order(price=entry_price - 3,
+            order_info = position_handler.place_sell_order(price=entry_price + 3,
                                                           quantity=config.position_size,
                                                           symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_sell_order(price=entry_price - 3,
+            order_info = position_handler.place_sell_order(price=entry_price + 3,
                                                           quantity=config.position_size,
                                                            symbol=config.trading_pair)
         # Implement your sell logic here
@@ -93,11 +93,11 @@ def trade():
 
 
         try:
-            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price -3, quantity=config.position_size,
                                                        symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price - 3, quantity=config.position_size,
                                                           symbol=config.trading_pair)
 
         # Implement your buy logic here
