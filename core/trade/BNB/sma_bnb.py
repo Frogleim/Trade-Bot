@@ -38,7 +38,7 @@ def calculate_sma(symbol, interval, length):
 
 
 def calculate_bollinger_bands(interval, length, num_std_dev):
-    klines = client.futures_klines(symbol='ETHUSDT', interval=interval)
+    klines = client.futures_klines(symbol='BNBUSDT', interval=interval)
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
     df['sma'] = df['close'].rolling(window=length).mean()
@@ -70,7 +70,7 @@ def check_sma():
 def trade():
     global closed
     signal, entry_price = check_sma()
-    if signal == 'Buy':
+    if signal == 'Long':
         tp_sl.profit_checkpoint_list.clear()
         try:
             position_handler.create_order(entry_price=entry_price,
@@ -94,7 +94,7 @@ def trade():
 
                 break
 
-    if signal == 'Sell':
+    if signal == 'Short':
         # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
         try:
@@ -123,7 +123,7 @@ def trade():
 
 if __name__ == '__main__':
 
-    entry_usdt = float(input('Enter your trade amount in USD: '))
-    pnl_calculator.size_calculator(entry_usdt)
+#    entry_usdt = float(input('Enter your trade amount in USD: '))
+#    pnl_calculator.size_calculator(entry_usdt)
     while True:
         trade()

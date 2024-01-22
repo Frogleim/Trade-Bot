@@ -43,10 +43,10 @@ def check_sma():
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if live_price > upper_band + 3:
+        if live_price > upper_band + 4:
             logging.info(f'Live price above Upper Band. Simulating short position.')
             return 'Short', live_price
-        elif live_price < lower_band - 3:
+        elif live_price < lower_band - 4:
             logging.info(f'Live price below Lower Band. Simulating long position.')
             return 'Long', live_price
         else:
