@@ -41,7 +41,7 @@ def method_name_decorator(func):
     return wrapper
 
 
-def pnl_long(opened_price, iteration_count):
+def pnl_long(opened_price, iteration_count=None):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
@@ -75,7 +75,7 @@ def pnl_long(opened_price, iteration_count):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
+        if current_profit < profit_checkpoint_list[-2] - 1 or current_checkpoint >= config.checkpoint_list[-1]:
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
@@ -101,7 +101,7 @@ def pnl_long(opened_price, iteration_count):
         return 'Profit'
 
 
-def pnl_short(opened_price, iteration_count):
+def pnl_short(opened_price, iteration_count=None):
     """
     Definition: Monitoring current position by profit checkpoint list
 
@@ -133,7 +133,7 @@ def pnl_short(opened_price, iteration_count):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
+        if current_profit < profit_checkpoint_list[-2] - 1 or current_checkpoint >= config.checkpoint_list[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)

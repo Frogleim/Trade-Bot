@@ -56,84 +56,73 @@ def check_sma():
 def trade():
     global closed
     signal, entry_price = check_sma()
-    if signal == 'Long':
-        tp_sl.profit_checkpoint_list.clear()
-        tp_sl.current_profit = None
-
-        iteration_count = 0
-        try:
-            position_handler.create_order(entry_price=entry_price,
-                                          quantity=config.position_size,
-                                          side='long')
-        except Exception as e:
-            print(e)
-            position_handler.create_order(entry_price=entry_price,
-                                          quantity=config.position_size,
-                                          side='long')
-        while True:
-            iteration_count += 1
-            res = tp_sl.pnl_long(entry_price, iteration_count)
-            if res == 'Profit':
-                logging.info(f'Closing Position with {res}')
-                try:
-                    position_handler.close_position(side='short', quantity=config.position_size)
-                except Exception as e:
-                    print(e)
-                    position_handler.close_position(side='short', quantity=config.position_size)
-                pnl_calculator.position_size()
-                break
-            elif res == 'Loss':
-                logging.info(f'Closing Position with {res}')
-                try:
-                    position_handler.close_position(side='short', quantity=config.position_size)
-                except Exception as e:
-                    print(e)
-                    position_handler.close_position(side='short', quantity=config.position_size)
-                break
-
     if signal == 'Short':
-        tp_sl.profit_checkpoint_list.clear()
-        tp_sl.current_profit = None
 
-        iteration_count = 0
+        tp_sl.profit_checkpoint_list.clear()
         try:
-            position_handler.create_order(entry_price=entry_price,
-                                          quantity=config.position_size,
-                                          side='short')
+            order_info = position_handler.place_sell_order(price=entry_price - 3,
+                                                          quantity=config.position_size,
+                                                          symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            position_handler.create_order(entry_price=entry_price,
-                                          quantity=config.position_size,
-                                          side='short')
+            order_info = position_handler.place_sell_order(price=entry_price - 3,
+                                                          quantity=config.position_size,
+                                                           symbol=config.trading_pair)
+        # Implement your sell logic here
         while True:
-            iteration_count += 1
-            res = tp_sl.pnl_short(entry_price, iteration_count)
-            if res == 'Profit':
-                logging.info(f'Closing Position with {res}')
-                try:
-                    position_handler.close_position(side='long', quantity=config.position_size)
-                except Exception as e:
-                    print(e)
-                    position_handler.close_position(side='long', quantity=config.position_size)
-                pnl_calculator.position_size()
-                break
-            elif res == 'Loss':
-                logging.info(f'Closing Position with {res}')
-                try:
-                    position_handler.close_position(side='long', quantity=config.position_size)
-                except Exception as e:
-                    print(e)
-                    position_handler.close_position(side='long', quantity=config.position_size)
-                break
+            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            open_orders = client.futures_get_order(symbol=config.trading_pair,
+                                                   orderId=int(order_info['orderId']))
+            if open_orders['status'] == 'NEW':
+                if float(ticker) - float(open_orders['price']) < -3:
+                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+                    break
+            if open_orders['status'] == 'FILLED':
+                res = tp_sl.pnl_short(entry_price)
+                if res == 'Profit':
+                    print(f'Closing Position with {res}')
+                    try:
+                        position_handler.close_position(side='long', quantity=config.position_size)
+                    except Exception as e:
+                        print(e)
+                        position_handler.close_position(side='long', quantity=config.position_size)
+                    break
+    if signal == 'Long':
+        # Cleaning checkpoint list before trade
+        tp_sl.profit_checkpoint_list.clear()
+
+
+        try:
+            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+                                                       symbol=config.trading_pair)
+        except Exception as e:
+            print(e)
+            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+                                                          symbol=config.trading_pair)
+
+        # Implement your buy logic here
+        while True:
+            ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+            if open_orders['status'] == 'NEW':
+                if float(ticker) - float(open_orders['price']) > 3:
+                    client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
+                    break
+            if open_orders['status'] == 'FILLED':
+                res = tp_sl.pnl_long(entry_price)
+                if res == 'Profit':
+                    print(f'Closing Position with {res}')
+                    try:
+                        position_handler.close_position(side='short', quantity=config.position_size)
+                    except Exception as e:
+                        print(e)
+                        position_handler.close_position(side='short', quantity=config.position_size)
+                    break
 
 
 if __name__ == '__main__':
 
     from send_email import send_email
-
-    entry_usdt = float(input('Enter your trade amount in USD: '))
-    pnl_calculator.size_calculator(entry_usdt)
-
     trades_count = 0
     while True:
         trades_count += 1
