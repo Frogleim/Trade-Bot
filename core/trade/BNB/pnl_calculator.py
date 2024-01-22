@@ -41,7 +41,7 @@ def position_size():
     check_wallet()
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    percentage_increase = 0.3
+    percentage_increase = 0.1
     new_value = file_original_value + (file_original_value * percentage_increase)
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     logging_new_value = (new_value * float(crypto_current_price)) / 100
@@ -77,7 +77,7 @@ def check_wallet():
     file_original_value = config.position_size
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     diff = original_value / result
-    if diff * 100 >= 60:
+    if diff * 100 >= 20:
         print('Position Size is equal or above than 60%')
         new_value = result * (12 / 100)
         changed_value = (new_value / float(crypto_current_price)) * 100
@@ -108,7 +108,7 @@ def get_last_two_candles_direction(symbol, interval='3m'):
 def size_calculator(entry_usd):
     leverage = 75
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    quantity = (leverage * float(entry_usd)) / crypto_current_price
+    quantity = (leverage * float(entry_usd)) / float(crypto_current_price)
     file_original_value = config.position_size
 
     with open(f'{files_dir}/config.py', 'r') as config_file:
