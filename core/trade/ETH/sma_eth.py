@@ -1,7 +1,6 @@
 import time
 
 import pandas as pd
-import pandas_ta as ta
 from binance.client import Client
 import tp_sl, config, pnl_calculator, position_handler
 import os
@@ -32,43 +31,56 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
     df['std_dev'] = df['close'].rolling(window=length).std()
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
-    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
+    return df[['sma', 'upper_band', 'lower_band', 'close']].iloc[-1]
+
+def is_sideways_market(data, num_periods):
+    bollinger_values = data.iloc[-num_periods:]
+    upper_band, lower_band = float(bollinger_values['upper_band'].mean()), float(bollinger_values['lower_band'].mean())
+    close_price = float(data['close'])  # Access directly as a NumPy float
+    is_sideways = lower_band < close_price < upper_band
+    return is_sideways
 
 
-def check_sma():
-    while True:
-        bollinger_values = calculate_bollinger_bands(interval=config.interval, length=config.length, num_std_dev=config.num_std_dev)
+def check_sma(data):
+    num_periods = 10
+    sideways_market = is_sideways_market(data, num_periods)
+    if sideways_market:
+        logging.info("Sideways market detected. No trade signals.")
+        return 'Hold', None
+    else:
+        bollinger_values = data  # No need to use .iloc[-1] here
         upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
         print(upper_band, lower_band)
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
-
-        if live_price > upper_band + 4:
+        if live_price > upper_band + 3:
             logging.info(f'Live price above Upper Band. Simulating short position.')
             return 'Short', live_price
-        elif live_price < lower_band - 4:
+        elif live_price < lower_band - 3:
             logging.info(f'Live price below Lower Band. Simulating long position.')
             return 'Long', live_price
         else:
-            continue
+            return 'Hold', None
+
+
 
 
 def trade():
     global closed
-    signal, entry_price = check_sma()
-    if signal == 'Short':
 
+    data = calculate_bollinger_bands(interval, length, config.num_std_dev)
+    signal, entry_price = check_sma(data)
+    if signal == 'Short':
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_sell_order(price=entry_price + 3,
+            order_info = position_handler.place_sell_order(price=entry_price - 3,
                                                           quantity=config.position_size,
                                                           symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_sell_order(price=entry_price + 3,
+            order_info = position_handler.place_sell_order(price=entry_price - 3,
                                                           quantity=config.position_size,
                                                            symbol=config.trading_pair)
-        # Implement your sell logic here
         while True:
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair,
@@ -88,19 +100,14 @@ def trade():
                         position_handler.close_position(side='long', quantity=config.position_size)
                     break
     if signal == 'Long':
-        # Cleaning checkpoint list before trade
         tp_sl.profit_checkpoint_list.clear()
-
-
         try:
-            order_info = position_handler.place_buy_order(price=entry_price -3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
                                                        symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_buy_order(price=entry_price - 3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
                                                           symbol=config.trading_pair)
-
-        # Implement your buy logic here
         while True:
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
@@ -122,12 +129,5 @@ def trade():
 
 if __name__ == '__main__':
 
-    from send_email import send_email
-    trades_count = 0
     while True:
-        trades_count += 1
         trade()
-        if trades_count == 8:
-            send_email('Trades Successfully Finished',
-                       'Trades Finished! Check your Binance account')
-            break
