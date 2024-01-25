@@ -98,7 +98,7 @@ def backtest(data, signals):
     return capital
 
 # Get historical data for ETHUSDT with 15-minute interval
-symbol = 'ETHUSDT'
+symbol = 'XRPUSDT'
 interval = '15m'
 limit = 1000  # You can adjust this based on the amount of historical data you want
 data = get_historical_data(symbol, interval, limit)

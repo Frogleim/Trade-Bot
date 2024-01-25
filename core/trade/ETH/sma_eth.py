@@ -53,10 +53,10 @@ def check_sma(data):
         print(upper_band, lower_band)
         live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
         logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
-        if live_price > upper_band + 3:
+        if live_price > upper_band + 0.004:
             logging.info(f'Live price above Upper Band. Simulating short position.')
             return 'Short', live_price
-        elif live_price < lower_band - 3:
+        elif live_price < lower_band - 0.004:
             logging.info(f'Live price below Lower Band. Simulating long position.')
             return 'Long', live_price
         else:
@@ -73,12 +73,12 @@ def trade():
     if signal == 'Short':
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_sell_order(price=entry_price - 3,
+            order_info = position_handler.place_sell_order(price=entry_price - 0.004,
                                                           quantity=config.position_size,
                                                           symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_sell_order(price=entry_price - 3,
+            order_info = position_handler.place_sell_order(price=entry_price - 0.004,
                                                           quantity=config.position_size,
                                                            symbol=config.trading_pair)
         while True:
@@ -86,7 +86,7 @@ def trade():
             open_orders = client.futures_get_order(symbol=config.trading_pair,
                                                    orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) < -3:
+                if float(ticker) - float(open_orders['price']) < -0.004:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
@@ -102,17 +102,17 @@ def trade():
     if signal == 'Long':
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price + 0.004, quantity=config.position_size,
                                                        symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_buy_order(price=entry_price + 3, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price + 0.004, quantity=config.position_size,
                                                           symbol=config.trading_pair)
         while True:
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 3:
+                if float(ticker) - float(open_orders['price']) > 0.004:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
