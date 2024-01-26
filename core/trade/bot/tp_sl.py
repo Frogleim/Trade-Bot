@@ -20,7 +20,7 @@ price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "ETH")
+files_dir = os.path.join(grandparent_dir, "bot")
 print(files_dir)
 logging.basicConfig(
     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -57,7 +57,7 @@ def pnl_long(opened_price, iteration_count=None):
     current_profit = float(current_price) - float(opened_price)
     logging.info(
         f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
-       )
+    )
     for i in range(len(config.checkpoint_list) - 1):
         if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:  # Check if it's a new checkpoint
@@ -73,7 +73,7 @@ def pnl_long(opened_price, iteration_count=None):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2]  or current_checkpoint >= config.checkpoint_list[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
@@ -127,7 +127,7 @@ def pnl_short(opened_price, iteration_count=None):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2]  or current_checkpoint >= config.checkpoint_list[-1]:
+        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)

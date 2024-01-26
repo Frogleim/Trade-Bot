@@ -5,7 +5,7 @@ import os
 import gzip
 import shutil
 from binance.client import Client
-import core.trade.ETH.config
+import core.trade.bot.config
 from binance_api import api
 
 app = FastAPI()
@@ -13,7 +13,7 @@ app = FastAPI()
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/trade/ETH/files")
+files_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/core/trade/bot/files")
 
 logs_dir = os.path.join(grandparent_dir, "binance/Trade-Bot/trade/logs")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'

@@ -9,7 +9,7 @@ import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "ETH")
+files_dir = os.path.join(parent_dir, "bot")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
@@ -41,7 +41,7 @@ def position_size():
     global percentage_increase
     file_original_value = config.position_size
     crypto_current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    percentage_increase = 0.3
+    percentage_increase = 0.08
     new_value = file_original_value + (file_original_value * percentage_increase)
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     logging_new_value = (new_value * float(crypto_current_price)) / 100
@@ -139,11 +139,10 @@ def get_current_positions():
 
 if __name__ == '__main__':
     starting_number = 20  # 0.21$
-    common_ratio = 1.3  # 20% increase
-    num_terms = 11 # 40 Trades is one day trade
+    common_ratio = 1.08  # 20% increase
+    num_terms = 11  # 40 Trades is one day trade
     result = geometric_progression(starting_number, common_ratio, num_terms)
-    print(result)
-    wallet = [round(new_value, 2) + 66.29 for new_value in result]
-    print(wallet)
-    res = get_last_two_candles_direction(symbol=config.trading_pair)
-    print(res)
+    wallet = [round(new_value, 2) + 80 for new_value in result]
+    final_profit = wallet[-1] - wallet[0]
+    print(f'{round(final_profit, 3)}$')
+    print(f'Final wallet: {wallet[-1]}$')

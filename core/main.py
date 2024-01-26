@@ -1,4 +1,4 @@
-from core.trade.ETH import sma_eth
+from core.trade.bot import sma_eth
 
 
 def run():
