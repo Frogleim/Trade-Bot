@@ -97,34 +97,36 @@ def backtest(data, signals):
 
     return capital
 
-# Get historical data for ETHUSDT with 15-minute interval
-symbol = 'XRPUSDT'
-interval = '15m'
-limit = 1000  # You can adjust this based on the amount of historical data you want
-data = get_historical_data(symbol, interval, limit)
 
-# Apply the strategy to the historical data
-signals = sideways_market_strategy(data)
+if __name__ == '__main__':
+    # Get historical data for ETHUSDT with 15-minute interval
+    symbol = 'XRPUSDT'
+    interval = '5m'
+    limit = 1000  # You can adjust this based on the amount of historical data you want
+    data = get_historical_data(symbol, interval, limit)
 
-# Backtest the strategy
-final_capital = backtest(data, signals)
-print(f"Initial Capital: {starting_capital} - Final Capital: {final_capital}")
+    # Apply the strategy to the historical data
+    signals = sideways_market_strategy(data)
 
-# Visualize the data with Bollinger Bands
-apds = [mpf.make_addplot(data['sma'], color='blue'),
-        mpf.make_addplot(data['upper_band'], color='orange'),
-        mpf.make_addplot(data['lower_band'], color='orange')]
+    # Backtest the strategy
+    final_capital = backtest(data, signals)
+    print(f"Initial Capital: {starting_capital} - Final Capital: {final_capital}")
 
-# Plot entry signals
-fig, axlist = mpf.plot(data, type='candle', addplot=apds, show_nontrading=True, warn_too_much_data=len(data), returnfig=True)
-cursor = mpf.make_addplot(data['close'], scatter=True, markersize=0, color='blue', panel=1, secondary_y=False)
+    # Visualize the data with Bollinger Bands
+    apds = [mpf.make_addplot(data['sma'], color='blue'),
+            mpf.make_addplot(data['upper_band'], color='orange'),
+            mpf.make_addplot(data['lower_band'], color='orange')]
 
-# Add scatter plots for entry signals
-for signal in signals:
-    action, timestamp, price = signal
-    marker = '^' if action == 'Long' else 'v'
-    color = 'green' if action == 'Long' else 'red'
-    axlist[0].scatter(timestamp, price, marker=marker, color=color, label=f'{action} Entry Signal')
+    # Plot entry signals
+    fig, axlist = mpf.plot(data, type='candle', addplot=apds, show_nontrading=True, warn_too_much_data=len(data), returnfig=True)
+    cursor = mpf.make_addplot(data['close'], scatter=True, markersize=0, color='blue', panel=1, secondary_y=False)
 
-# Show the plot
-mpf.show()
+    # Add scatter plots for entry signals
+    for signal in signals:
+        action, timestamp, price = signal
+        marker = '^' if action == 'Long' else 'v'
+        color = 'green' if action == 'Long' else 'red'
+        axlist[0].scatter(timestamp, price, marker=marker, color=color, label=f'{action} Entry Signal')
+
+    # Show the plot
+    mpf.show()

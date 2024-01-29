@@ -64,3 +64,8 @@ def get_positions():
 def position_alert():
     new_position = api.get_position_history()
     return new_position
+
+
+@app.get('/signal')
+def get_signal():
+    pass

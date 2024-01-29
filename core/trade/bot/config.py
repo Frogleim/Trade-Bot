@@ -9,7 +9,7 @@ length = 20
 num_std_dev = 2
 # checkpoint_list_bnb = [0.7, 1.2, 1.7, 2.5]
 
-position_size = 2
+position_size = 5
 ticker_timeout = 5
 TRADE_INTERVAL = 5*60
 trading_pair = 'XRPUSDT'
