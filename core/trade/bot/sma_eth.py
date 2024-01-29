@@ -26,7 +26,11 @@ closed = False
 
 
 def calculate_bollinger_bands(interval, length, num_std_dev):
-    klines = client.futures_klines(symbol='XRPUSDT', interval=interval)
+    try:
+        klines = client.futures_klines(symbol='XRPUSDT', interval=interval)
+    except Exception:
+        klines = client.futures_klines(symbol='XRPUSDT', interval=interval)
+
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
     df['sma'] = df['close'].rolling(window=length).mean()
@@ -41,9 +45,9 @@ def is_sideways_market(data, num_periods):
     upper_band, lower_band = float(bollinger_values['upper_band'].mean()), float(bollinger_values['lower_band'].mean())
     close_price = float(data['close'])  # Access directly as a NumPy float
     if close_price < lower_band:
-        return 'Long'
+        return 'Long' ,close_price
     if close_price > upper_band:
-        return 'Short'
+        return 'Short', close_price
     else:
         return 'Hold'
 
@@ -54,18 +58,18 @@ def trade():
     global closed
     num_periods = 10
     data = calculate_bollinger_bands(interval, length, config.num_std_dev)
-    signal = is_sideways_market(data, num_periods)
+    signal, entry_price = is_sideways_market(data, num_periods)
     live_price = float(client.futures_ticker(symbol=config.trading_pair)['lastPrice'])
 
     if signal == 'Short':
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_sell_order(price=live_price,
+            order_info = position_handler.place_sell_order(price=entry_price,
                                                            quantity=config.position_size,
                                                            symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_sell_order(price=live_price,
+            order_info = position_handler.place_sell_order(price=entry_price,
                                                            quantity=config.position_size,
                                                            symbol=config.trading_pair)
         while True:
@@ -90,11 +94,11 @@ def trade():
     if signal == 'Long':
         tp_sl.profit_checkpoint_list.clear()
         try:
-            order_info = position_handler.place_buy_order(price=live_price, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
                                                           symbol=config.trading_pair)
         except Exception as e:
             print(e)
-            order_info = position_handler.place_buy_order(price=live_price, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
                                                           symbol=config.trading_pair)
         while True:
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']

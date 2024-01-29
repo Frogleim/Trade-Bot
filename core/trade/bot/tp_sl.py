@@ -53,7 +53,11 @@ def pnl_long(opened_price, iteration_count=None):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
-    current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    try:
+        current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    except Exception:
+        current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+
     current_profit = float(current_price) - float(opened_price)
     logging.info(
         f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
