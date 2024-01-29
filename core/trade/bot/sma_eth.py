@@ -37,20 +37,20 @@ def calculate_bollinger_bands(interval, length, num_std_dev):
     df['std_dev'] = df['close'].rolling(window=length).std()
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
-    return df[['sma', 'upper_band', 'lower_band', 'close']].iloc[-1]
+    return df
 
 
 def is_sideways_market(data, num_periods):
-    bollinger_values = data.iloc[-num_periods:]
-    upper_band, lower_band = float(bollinger_values['upper_band'].mean()), float(bollinger_values['lower_band'].mean())
-    close_price = float(data['close'])  # Access directly as a NumPy float
-    if close_price < lower_band:
-        return 'Long' ,close_price
-    if close_price > upper_band:
+    bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
+    upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
+    close_price = bollinger_values['close'].iloc[-2]
+
+    if close_price < lower_band - 0.0004:
+        return 'Long', close_price
+    elif close_price > upper_band + 0.0004:
         return 'Short', close_price
     else:
-        return 'Hold'
-
+        return 'Hold', close_price
 
 
 
