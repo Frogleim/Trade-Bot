@@ -44,10 +44,10 @@ def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
     close_price = bollinger_values['close'].iloc[-2]
-
-    if close_price < lower_band - 0.0004:
+    print(f'Lower Band: {lower_band} --> Upper Band: {upper_band} --> Close Price: {close_price}')
+    if close_price < lower_band:
         return 'Long', close_price
-    elif close_price > upper_band + 0.0004:
+    elif close_price > upper_band:
         return 'Short', close_price
     else:
         return 'Hold', close_price
