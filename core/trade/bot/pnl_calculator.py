@@ -49,11 +49,11 @@ def position_size():
     logging.info(f"Percentage Increase: {round(percentage_increase * 100)}%", )
     logging.info(f"New Value: {round(logging_new_value, 3)}$", )
     final_position = math.ceil(new_value * 100) / 100
-    config.position_size = round(new_value, 3)
+    config.position_size = round(new_value)
     with open(f'{files_dir}/config.py', 'r') as config_file:
         config_data = config_file.read()
     config_data = config_data.replace(f"position_size = {file_original_value}",
-                                      f"position_size = {round(new_value, 2)}")
+                                      f"position_size = {round(new_value)}")
     with open(f'{files_dir}/config.py', 'w') as config_file:
         config_file.write(config_data)
     return final_position
@@ -77,17 +77,18 @@ def check_wallet():
     file_original_value = config.position_size
     original_value = (float(file_original_value) * float(crypto_current_price)) / 100
     diff = original_value / result
-    if diff * 100 >= 30:
-        print('Position Size is equal or above than 60%')
-        new_value = result * (12 / 100)
-        changed_value = (new_value / float(crypto_current_price)) * 100
-        with open(f'{files_dir}/config.py', 'r') as config_file:
-            config_data = config_file.read()
-        config_data = config_data.replace(f"position_size = {file_original_value}",
-                                          f"position_size = {round(changed_value, 2)}")
-        with open(f'{files_dir}/config.py', 'w') as config_file:
-            config_file.write(config_data)
-        print('Position Size resetted Successfully')
+    # if diff * 100 >= 30:
+    print('Position Size is equal or above than 60%')
+    new_value = result * (12 / 100)
+    changed_value = (new_value / float(crypto_current_price)) * 100
+    print(changed_value)
+    with open(f'{files_dir}/config.py', 'r') as config_file:
+        config_data = config_file.read()
+    config_data = config_data.replace(f"position_size = {file_original_value}",
+                                      f"position_size = {round(changed_value, 2)}")
+    with open(f'{files_dir}/config.py', 'w') as config_file:
+        config_file.write(config_data)
+    print('Position Size resetted Successfully')
     print('Position Size is less than 60%')
 
 
@@ -138,11 +139,12 @@ def get_current_positions():
 
 
 if __name__ == '__main__':
-    starting_number = 20  # 0.21$
-    common_ratio = 1.08  # 20% increase
-    num_terms = 11  # 40 Trades is one day trade
-    result = geometric_progression(starting_number, common_ratio, num_terms)
-    wallet = [round(new_value, 2) + 80 for new_value in result]
-    final_profit = wallet[-1] - wallet[0]
-    print(f'{round(final_profit, 3)}$')
-    print(f'Final wallet: {wallet[-1]}$')
+    # starting_number = 20  # 0.21$
+    # common_ratio = 1.08  # 20% increase
+    # num_terms = 11  # 40 Trades is one day trade
+    # result = geometric_progression(starting_number, common_ratio, num_terms)
+    # wallet = [round(new_value, 2) + 80 for new_value in result]
+    # final_profit = wallet[-1] - wallet[0]
+    # print(f'{round(final_profit, 3)}$')
+    # print(f'Final wallet: {wallet[-1]}$')
+    position_size()
