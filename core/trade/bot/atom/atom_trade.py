@@ -77,7 +77,7 @@ def trade():
             open_orders = client.futures_get_order(symbol=config.trading_pair,
                                                    orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) < -0.006 or float(ticker) - float(open_orders['price']) > 0.006:
+                if float(ticker) - float(open_orders['price']) < -0.06 or float(ticker) - float(open_orders['price']) > 0.06:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
@@ -104,7 +104,7 @@ def trade():
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 0.006 or float(ticker) - float(open_orders['price']) < -0.006:
+                if float(ticker) - float(open_orders['price']) > 0.06 or float(ticker) - float(open_orders['price']) < -0.06:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
             if open_orders['status'] == 'FILLED':
