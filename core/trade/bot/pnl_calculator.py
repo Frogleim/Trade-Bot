@@ -143,10 +143,10 @@ def calculate_percentage(part, whole):
     return percentage
 
 if __name__ == '__main__':
-    starting_number = 1000  # 0.21$
-    common_ratio = 4.8  # 20% increase
-    num_terms = 16  # 16 Trades is one day trade
-    main_wallet = 9000
+    starting_number = 2  # 0.21$
+    common_ratio = 8  # 20% increase
+    num_terms = 120  # 16 Trades is one day trade
+    main_wallet = 4.59
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(f'Final profit: {result}$')
     part_value = result

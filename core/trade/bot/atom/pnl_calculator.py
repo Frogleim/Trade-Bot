@@ -9,7 +9,7 @@ import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "bot")
+files_dir = os.path.join(parent_dir, "atom")
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(config.API_KEY, config.API_SECRET)
@@ -143,14 +143,14 @@ def calculate_percentage(part, whole):
     return percentage
 
 if __name__ == '__main__':
-    starting_number = 1000  # 0.21$
-    common_ratio = 4.8  # 20% increase
-    num_terms = 16  # 16 Trades is one day trade
-    main_wallet = 9000
+    starting_number = 300  # 0.21$
+    common_ratio = 8  # 20% increase
+    num_terms = 20  # 16 Trades is one day trade
+    main_wallet = 2200
     result = geometric_progression(starting_number, common_ratio, num_terms)
     print(f'Final profit: {result}$')
     part_value = result
-    whole_value = starting_number
+    whole_value = main_wallet
 
     result_percentage = calculate_percentage(part_value, whole_value)
 
