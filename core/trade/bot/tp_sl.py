@@ -40,12 +40,11 @@ def method_name_decorator(func):
     return wrapper
 
 
-def pnl_long(opened_price, iteration_count=None):
+def pnl_long(opened_price, low_price):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
-        sma:
-        iteration_count:
+        low_price:
         opened_price: Entry Price
 
     Returns: Profit or Loss signal as string
@@ -71,6 +70,8 @@ def pnl_long(opened_price, iteration_count=None):
                 logging.info(message)
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
+    if current_profit + 0.0004 < low_price:
+        return 'Loss'
 
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
         -2] is not None and current_checkpoint is not None:
@@ -99,13 +100,12 @@ def pnl_long(opened_price, iteration_count=None):
         return 'Profit'
 
 
-def pnl_short(opened_price, iteration_count=None):
+def pnl_short(opened_price, high_price):
     """
     Definition: Monitoring current position by profit checkpoint list
 
     Args:
-        sma:
-        iteration_count:
+        high_price:
         opened_price: Entry Price
 
     Returns: Profit or Loss signals as string
@@ -124,8 +124,8 @@ def pnl_short(opened_price, iteration_count=None):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    # Checking Stop Loss Condition
-
+    if current_profit + 0.0004 > high_price:
+        return 'Loss'
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
     if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
