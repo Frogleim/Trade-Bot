@@ -82,6 +82,8 @@ def trade():
                 if float(ticker) - float(open_orders['price']) < -0.006 or float(ticker) - float(open_orders['price']) > 0.006:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
+            elif open_orders['status'] == 'CANCELED':
+                break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price, high_price)
                 if res == 'Profit':
@@ -117,6 +119,8 @@ def trade():
                 if float(ticker) - float(open_orders['price']) > 0.006 or float(ticker) - float(open_orders['price']) < -0.006:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
+            elif open_orders['status'] == 'CANCELED':
+                break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_long(entry_price, low_price)
                 if res == 'Profit':

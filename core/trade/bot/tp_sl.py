@@ -70,11 +70,9 @@ def pnl_long(opened_price, low_price):
                 logging.info(message)
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
-    if current_profit + 0.0004 < low_price:
-        return 'Loss'
 
-    if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[
-        -2] is not None and current_checkpoint is not None:
+
+    if len(profit_checkpoint_list) >= 0  and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -83,21 +81,9 @@ def pnl_long(opened_price, low_price):
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            position_size = config.position_size
-            save_data = (position_size * float(current_price)) / 100
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-
             return 'Profit'
 
-    if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
-        body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
-               f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
-        logging.info(body)
-        position_size = config.position_size
-        save_data = (position_size * float(current_price)) / 100
-        logging.info('Saving data')
-        logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-        return 'Profit'
 
 
 def pnl_short(opened_price, high_price):
@@ -124,29 +110,17 @@ def pnl_short(opened_price, high_price):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if current_profit + 0.0004 > high_price:
-        return 'Loss'
+
     logging.warning(f'Current checkpoint: --> {current_checkpoint}')
-    if len(profit_checkpoint_list) >= 2 and profit_checkpoint_list[-2] is not None and current_checkpoint is not None:
+    if len(profit_checkpoint_list) >= 0  and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-2] or current_checkpoint >= config.checkpoint_list[-1]:
+        if current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]:
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
-            position_size = config.position_size
-            save_data = (position_size * float(current_price)) / 100
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'
-    if len(profit_checkpoint_list) > 0 and current_profit <= profit_checkpoint_list[0]:
-        body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
-               f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
-        logging.info(body)
-        position_size = config.position_size
-        save_data = (position_size * float(current_price)) / 100
-        logging.info('Saving data')
-        logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
 
-        return 'Profit'
