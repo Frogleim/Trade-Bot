@@ -12,7 +12,7 @@ import sys
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
-interval = '5m'
+interval = '3m'
 length = 20
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -27,9 +27,9 @@ closed = False
 
 def calculate_bollinger_bands(interval, length, num_std_dev):
     try:
-        klines = client.futures_klines(symbol='XRPUSDT', interval=interval)
+        klines = client.futures_klines(symbol='BNBUSDT', interval=interval)
     except Exception:
-        klines = client.futures_klines(symbol='XRPUSDT', interval=interval)
+        klines = client.futures_klines(symbol='BNBUSDT', interval=interval)
 
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
@@ -77,9 +77,11 @@ def trade():
             open_orders = client.futures_get_order(symbol=config.trading_pair,
                                                    orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) < -0.006 or float(ticker) - float(open_orders['price']) > 0.006:
+                if float(ticker) - float(open_orders['price']) < -0.5 or float(ticker) - float(open_orders['price']) > 0.5:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
+            elif open_orders['status'] == 'CANCELED':
+                break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price)
                 if res == 'Profit':
@@ -104,9 +106,12 @@ def trade():
             ticker = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
             open_orders = client.futures_get_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
-                if float(ticker) - float(open_orders['price']) > 0.006 or float(ticker) - float(open_orders['price']) < -0.006:
+                if float(ticker) - float(open_orders['price']) > 0.5 or float(ticker) - float(open_orders['price']) < -0.5:
                     client.futures_cancel_order(symbol=config.trading_pair, orderId=int(order_info['orderId']))
                     break
+            elif open_orders['status'] == 'CANCELED':
+                break
+
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_long(entry_price)
                 if res == 'Profit':

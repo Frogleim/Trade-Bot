@@ -11,4 +11,5 @@ def get_position_history():
 
 
 if __name__ == '__main__':
-    get_position_history()
+    res = get_position_history()
+    print(res)
