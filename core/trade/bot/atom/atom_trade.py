@@ -1,6 +1,6 @@
 import time
 from binance.client import Client
-import tp_sl, config, position_handler
+from . import tp_sl, config, position_handler
 import logging
 import sys
 

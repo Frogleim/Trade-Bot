@@ -1,8 +1,8 @@
 import logging
-# from . import config
+from . import config
 import os
 import requests
-import config
+# import config
 from binance.client import Client, AsyncClient
 
 import math

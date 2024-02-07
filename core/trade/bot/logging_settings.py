@@ -4,7 +4,7 @@ import logging
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "trade\\bot")
+files_dir = os.path.join(grandparent_dir, r"trade/bot")
 user_count = None
 log_file_path = os.path.join(files_dir, 'logs', 'logs.log')
 actions_log_file_path = os.path.join(files_dir, 'logs', 'actions.log')

@@ -1,10 +1,9 @@
 import logging
 import os
-import random
 import sys
 from collections import Counter
 from binance.client import Client
-import config
+from . import config
 
 current_profit = 0
 profit_checkpoint_list = []
