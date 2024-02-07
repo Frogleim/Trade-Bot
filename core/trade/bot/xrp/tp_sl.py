@@ -40,11 +40,10 @@ def method_name_decorator(func):
     return wrapper
 
 
-def pnl_long(opened_price, low_price):
+def pnl_long(opened_price):
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
-        low_price:
         opened_price: Entry Price
 
     Returns: Profit or Loss signal as string
@@ -86,12 +85,11 @@ def pnl_long(opened_price, low_price):
 
 
 
-def pnl_short(opened_price, high_price):
+def pnl_short(opened_price):
     """
     Definition: Monitoring current position by profit checkpoint list
 
     Args:
-        high_price:
         opened_price: Entry Price
 
     Returns: Profit or Loss signals as string

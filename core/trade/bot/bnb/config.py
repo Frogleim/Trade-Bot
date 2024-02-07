@@ -4,12 +4,12 @@ API_SECRET = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 checkpoint_list = [0.5, 1, 1.5]
 checkpoint_list_scalping = [3, 5, 6]
 
-interval = '15m'  # Use '15m' for 15-minute intervals
+interval = '3m'  # Use '15m' for 15-minute intervals
 length = 20
 num_std_dev = 2
 # checkpoint_list_bnb = [0.7, 1.2, 1.7, 2.5]
 
-position_size = 5
+position_size = 0.8
 ticker_timeout = 5
 TRADE_INTERVAL = 5*60
 trading_pair = 'BNBUSDT'
