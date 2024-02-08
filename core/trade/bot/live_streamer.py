@@ -3,8 +3,9 @@ from binance.client import AsyncClient
 import pandas as pd
 import logging_settings
 from xrp import xrp_trade
-from bnb import bnb_trade
 from atom import atom_trade
+from matic import matic_trade
+from ada import ada_trade
 
 
 async def is_sideways_market(data, num_periods):
@@ -41,8 +42,10 @@ async def execute_trade(client, symbol, market_condition, close_price):
         result = await xrp_trade.trade(signal=market_condition, entry_price=close_price)
     elif symbol == 'ATOMUSDT':
         result = await atom_trade.trade(signal=market_condition, entry_price=close_price)
-    elif symbol == 'BNBUSDT':
-        result = await bnb_trade.trade(signal=market_condition, entry_price=close_price)
+    elif symbol == 'MATICUSDT':
+        result = await matic_trade.trade(signal=market_condition, entry_price=close_price)
+    elif symbol == 'ADAUSDT':
+        result = await ada_trade.trade(signal=market_condition, entry_price=close_price)
     else:
         result = None
     return result
@@ -78,7 +81,7 @@ async def monitor_symbols(client, symbols, interval, length, num_std_dev):
 
 async def main():
     client = await AsyncClient.create()
-    symbols = ['XRPUSDT', 'ATOMUSDT']
+    symbols = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
     interval = '3m'
     length = 20
     num_std_dev = 2

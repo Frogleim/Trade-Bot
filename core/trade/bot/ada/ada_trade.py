@@ -1,15 +1,15 @@
+import time
 from binance.client import Client
-from . import tp_sl, config, position_handler
+from . import tp_sl, config, pnl_calculator, position_handler
 import logging
 import sys
-import time
 
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 client = Client(api_key, api_secret)
-timestamp = client.get_server_time()['serverTime']
 interval = '3m'
 length = 20
+timestamp = client.get_server_time()['serverTime']
 recv_window = 5000
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
@@ -23,7 +23,7 @@ closed = False
 
 async def trade(signal, entry_price):
     global closed
-    start_time = time.time()
+    start_time = time.time()  # Start time of the trade
     if signal == 'Short':
         tp_sl.profit_checkpoint_list.clear()
         try:
@@ -42,6 +42,7 @@ async def trade(signal, entry_price):
 
             if open_orders['status'] == 'CANCELED':
                 return 'Canceled'
+
             elif open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price)
                 if res == 'Profit':
@@ -51,8 +52,10 @@ async def trade(signal, entry_price):
                     except Exception as e:
                         print(e)
                         position_handler.close_position(side='long', quantity=config.position_size)
+                    pnl_calculator.position_size()
                     return 'Completed'
-            if time.time() - start_time > 3 * 60 * 60:
+            # Check if trade duration exceeds 3 hours without profit
+            if time.time() - start_time > 3 * 60 * 60:  # 3 hours in seconds
                 print("Trade duration exceeded 3 hours without profit. Terminating trade.")
                 return 'Timeout'
     elif signal == 'Long':
@@ -68,6 +71,7 @@ async def trade(signal, entry_price):
             open_orders = client.futures_get_order(symbol=config.trading_pair,
                                                    orderId=int(order_info['orderId']),
                                                    timestamp=timestamp, recvWindow=recv_window)
+
             if open_orders['status'] == 'CANCELED':
                 return 'Canceled'
             elif open_orders['status'] == 'FILLED':
@@ -79,9 +83,8 @@ async def trade(signal, entry_price):
                     except Exception as e:
                         print(e)
                         position_handler.close_position(side='short', quantity=config.position_size)
+                    pnl_calculator.position_size()
                     return 'Completed'
-            if time.time() - start_time > 3 * 60 * 60:
+            if time.time() - start_time > 3 * 60 * 60:  # 3 hours in seconds
                 print("Trade duration exceeded 3 hours without profit. Terminating trade.")
                 return 'Timeout'
-
-
