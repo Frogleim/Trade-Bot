@@ -7,7 +7,7 @@ from atom import atom_trade
 from matic import matic_trade
 from ada import ada_trade
 
-
+active_trades = {}
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
@@ -51,30 +51,32 @@ async def execute_trade(client, symbol, market_condition, close_price):
     return result
 
 
-async def monitor_symbol(client, symbol, interval, length, num_std_dev, symbol_status):
+async def trigger(client, symbol, signal, close_price):
+    global active_trades
+    if signal != 'Hold':
+        active_trades[symbol] = True  # Mark symbol as actively trading
+        result = await execute_trade(client, symbol, signal, close_price)
+        if result in ['Completed', 'Canceled', 'Timeout']:
+            active_trades.pop(symbol)  # Remove symbol from active trades after trade completion
+
+async def monitor_symbol(client, symbol, interval, length, num_std_dev):
+    global active_trades
     while True:
-        if symbol_status[symbol]:
+        if symbol not in active_trades:  # Proceed with monitoring only if symbol is not actively trading
             queue = asyncio.Queue()
             await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
             symbol, df = await queue.get()
             market_condition, close_price = await is_sideways_market(df, length)
             print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
-
-            if market_condition != 'Hold':
-                symbol_status[symbol] = False  # Pause streaming for this symbol
-                result = await execute_trade(client, symbol, market_condition, close_price)
-                if result in ['Completed', 'Canceled', 'Timeout']:
-                    symbol_status[symbol] = True  # Resume streaming if trade completed or canceled
-                    continue
-                symbol_status[symbol] = True  # Resume streaming after trade execution
+            await trigger(client, symbol, market_condition, close_price)
         await asyncio.sleep(1)
+
 
 
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     symbol_tasks = []
-    symbol_status = {symbol: True for symbol in symbols}  # Initialize status for each symbol as True (streaming ON)
     for symbol in symbols:
-        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev, symbol_status))
+        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev))
         symbol_tasks.append(task)
     await asyncio.gather(*symbol_tasks)
 
@@ -85,7 +87,6 @@ async def main():
     interval = '3m'
     length = 20
     num_std_dev = 2
-
     await monitor_symbols(client, symbols, interval, length, num_std_dev)
 
 
