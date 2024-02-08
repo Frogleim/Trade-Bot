@@ -8,6 +8,8 @@ from matic import matic_trade
 from ada import ada_trade
 
 active_trades = {}
+symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
+
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
@@ -52,12 +54,11 @@ async def execute_trade(client, symbol, market_condition, close_price):
 
 
 async def trigger(client, symbol, signal, close_price):
-    global active_trades
+    global active_trades, symbols_list
     if signal != 'Hold':
         active_trades[symbol] = True  # Mark symbol as actively trading
-        result = await execute_trade(client, symbol, signal, close_price)
-        if result in ['Completed', 'Canceled', 'Timeout']:
-            active_trades.pop(symbol)  # Remove symbol from active trades after trade completion
+        logging_settings.actions_logger.info(f'{symbol} {close_price} {signal}')
+        symbols_list.remove(symbol)
 
 async def monitor_symbol(client, symbol, interval, length, num_std_dev):
     global active_trades
@@ -72,7 +73,6 @@ async def monitor_symbol(client, symbol, interval, length, num_std_dev):
         await asyncio.sleep(1)
 
 
-
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     symbol_tasks = []
     for symbol in symbols:
@@ -82,12 +82,12 @@ async def monitor_symbols(client, symbols, interval, length, num_std_dev):
 
 
 async def main():
+    global symbols_list
     client = await AsyncClient.create()
-    symbols = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
     interval = '3m'
     length = 20
     num_std_dev = 2
-    await monitor_symbols(client, symbols, interval, length, num_std_dev)
+    await monitor_symbols(client, symbols_list, interval, length, num_std_dev)
 
 
 if __name__ == "__main__":

@@ -13,7 +13,6 @@ parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(parent_dir, "bot")
 
-print(files_dir)
 def read_config_json():
     with open(f'{files_dir}/config.json', "r") as f:
         data = json.load(f)

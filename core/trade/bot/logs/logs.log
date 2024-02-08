@@ -92,3 +92,8 @@ client_session: <aiohttp.client.ClientSession object at 0x000002686BF922D0>
 2024-02-07 20:47:07,609 - ERROR - Unclosed connector
 connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x000002686BF5FA80>, 349795.906), (<aiohttp.client_proto.ResponseHandler object at 0x000002686BF5FC40>, 349795.906), (<aiohttp.client_proto.ResponseHandler object at 0x000002686BF5FB60>, 349795.906)]']
 connector: <aiohttp.connector.TCPConnector object at 0x000002686BF92310>
+2024-02-08 20:19:45,548 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb8d1879b40>
+2024-02-08 20:19:45,550 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7fb8d189b1c0>, 370392.024682575)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7fb8d1914f40>, 370393.697622568), (<aiohttp.client_proto.ResponseHandler object at 0x7fb8d19151e0>, 370393.705345719), (<aiohttp.client_proto.ResponseHandler object at 0x7fb8d19153c0>, 370397.174612228)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7fb8d187a680>
