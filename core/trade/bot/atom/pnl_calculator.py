@@ -1,5 +1,5 @@
 import logging
-from . import config
+import config
 import os
 import requests
 from binance.client import Client, AsyncClient

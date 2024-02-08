@@ -3,7 +3,7 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import config
+import config
 
 current_profit = 0
 profit_checkpoint_list = []
