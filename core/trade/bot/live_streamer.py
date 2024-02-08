@@ -48,33 +48,37 @@ async def execute_trade(client, symbol, market_condition, close_price):
     return result
 
 
-async def monitor_symbol(client, symbol, interval, length, num_std_dev):
+async def monitor_symbol(client, symbol, interval, length, num_std_dev, symbol_status):
     while True:
-        queue = asyncio.Queue()
-        await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
-        symbol, df = await queue.get()
-        market_condition, close_price = await is_sideways_market(df, length)
-        print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
+        if symbol_status[symbol]:
+            queue = asyncio.Queue()
+            await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
+            symbol, df = await queue.get()
+            market_condition, close_price = await is_sideways_market(df, length)
+            print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
 
-        if market_condition != 'Hold':
-            result = await execute_trade(client, symbol, market_condition, close_price)
-            if result in ['Completed', 'Canceled', 'Timeout']:
-                continue
+            if market_condition != 'Hold':
+                symbol_status[symbol] = False  # Pause streaming for this symbol
+                result = await execute_trade(client, symbol, market_condition, close_price)
+                if result in ['Completed', 'Canceled', 'Timeout']:
+                    symbol_status[symbol] = True  # Resume streaming if trade completed or canceled
+                    continue
+                symbol_status[symbol] = True  # Resume streaming after trade execution
         await asyncio.sleep(1)
 
 
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     symbol_tasks = []
+    symbol_status = {symbol: True for symbol in symbols}  # Initialize status for each symbol as True (streaming ON)
     for symbol in symbols:
-        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev))
+        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev, symbol_status))
         symbol_tasks.append(task)
-
     await asyncio.gather(*symbol_tasks)
 
 
 async def main():
     client = await AsyncClient.create()
-    symbols = ['XRPUSDT', 'ATOMUSDT', 'BNBUSDT']
+    symbols = ['XRPUSDT', 'ATOMUSDT']
     interval = '3m'
     length = 20
     num_std_dev = 2
