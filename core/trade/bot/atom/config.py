@@ -1,7 +1,7 @@
 #testnet
 API_KEY = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 API_SECRET = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-checkpoint_list = [0.03, 0.05, 0.07]
+checkpoint_list = [0.02, 0.03, 0.05, 0.07]
 checkpoint_list_scalping = [3, 5, 6]
 
 interval = '3m'  # Use '15m' for 15-minute intervals

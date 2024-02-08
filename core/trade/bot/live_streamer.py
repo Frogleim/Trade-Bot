@@ -48,20 +48,28 @@ async def execute_trade(client, symbol, market_condition, close_price):
     return result
 
 
-async def monitor_symbols(client, symbols, interval, length, num_std_dev):
+async def monitor_symbol(client, symbol, interval, length, num_std_dev):
     while True:
-        for symbol in symbols:
-            queue = asyncio.Queue()
-            await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
-            symbol, df = await queue.get()
-            market_condition, close_price = await is_sideways_market(df, length)
-            print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
+        queue = asyncio.Queue()
+        await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
+        symbol, df = await queue.get()
+        market_condition, close_price = await is_sideways_market(df, length)
+        print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
 
-            if market_condition != 'Hold':
-                result = await execute_trade(client, symbol, market_condition, close_price)
-                if result in ['Completed', 'Canceled', 'Timeout']:
-                    continue
+        if market_condition != 'Hold':
+            result = await execute_trade(client, symbol, market_condition, close_price)
+            if result in ['Completed', 'Canceled', 'Timeout']:
+                continue
         await asyncio.sleep(1)
+
+
+async def monitor_symbols(client, symbols, interval, length, num_std_dev):
+    symbol_tasks = []
+    for symbol in symbols:
+        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev))
+        symbol_tasks.append(task)
+
+    await asyncio.gather(*symbol_tasks)
 
 
 async def main():
