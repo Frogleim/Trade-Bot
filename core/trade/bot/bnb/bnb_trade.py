@@ -21,7 +21,7 @@ root_logger.addHandler(console_handler)
 closed = False
 
 
-def trade(signal, entry_price):
+async def trade(signal, entry_price):
     global closed
     start_time = time.time()
     if signal == 'Short':

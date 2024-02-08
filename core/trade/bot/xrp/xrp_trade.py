@@ -21,8 +21,7 @@ root_logger.addHandler(console_handler)
 closed = False
 
 
-
-def trade(signal, entry_price):
+async def trade(signal, entry_price):
     global closed
     start_time = time.time()  # Start time of the trade
     if signal == 'Short':
@@ -88,4 +87,3 @@ def trade(signal, entry_price):
             if time.time() - start_time > 3 * 60 * 60:  # 3 hours in seconds
                 print("Trade duration exceeded 3 hours without profit. Terminating trade.")
                 return 'Timeout'
-

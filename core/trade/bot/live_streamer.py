@@ -6,6 +6,7 @@ from xrp import xrp_trade
 from bnb import bnb_trade
 from atom import atom_trade
 
+
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
@@ -17,6 +18,7 @@ async def is_sideways_market(data, num_periods):
         return 'Short', close_price
     else:
         return 'Hold', close_price
+
 
 async def get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue):
     try:
@@ -33,6 +35,7 @@ async def get_bollinger_bands(client, symbol, interval, length, num_std_dev, que
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
     await queue.put((symbol, df))
 
+
 async def execute_trade(client, symbol, market_condition, close_price):
     if symbol == 'XRPUSDT':
         result = await xrp_trade.trade(signal=market_condition, entry_price=close_price)
@@ -43,6 +46,7 @@ async def execute_trade(client, symbol, market_condition, close_price):
     else:
         result = None
     return result
+
 
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     while True:
@@ -59,6 +63,7 @@ async def monitor_symbols(client, symbols, interval, length, num_std_dev):
                     continue
         await asyncio.sleep(1)
 
+
 async def main():
     client = await AsyncClient.create()
     symbols = ['XRPUSDT', 'ATOMUSDT', 'BNBUSDT']
@@ -67,6 +72,7 @@ async def main():
     num_std_dev = 2
 
     await monitor_symbols(client, symbols, interval, length, num_std_dev)
+
 
 if __name__ == "__main__":
     try:
