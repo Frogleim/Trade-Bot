@@ -8,7 +8,9 @@ active_trades = {}
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
 is_empty = False
 data = None
-
+def clean_log_file():
+    with open('./logs/finish_trade.log.log', 'w') as log_file:
+        log_file.write('')
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
@@ -61,16 +63,15 @@ async def trigger(client, symbol, signal, close_price):
 
 async def check_trade_status():
     global symbols_list
-    while True:
-        is_empty, data = read_alert()
-        if is_empty:
-            cryptocurrency = data[0]
-            symbols_list.append(cryptocurrency)
-            print(f'Trade for {cryptocurrency} was finished')
-        time.sleep(2)
+    is_empty, data = read_alert()
+    if is_empty:
+        cryptocurrency = data[0]
+        symbols_list.append(cryptocurrency)
+        print(f'Trade for {cryptocurrency} was finished')
 
 async def monitor_symbol(client, symbol, interval, length, num_std_dev):
     global active_trades
+
     while True:
         if symbol not in active_trades:  # Proceed with monitoring only if symbol is not actively trading
             queue = asyncio.Queue()
@@ -78,7 +79,9 @@ async def monitor_symbol(client, symbol, interval, length, num_std_dev):
             symbol, df = await queue.get()
             market_condition, close_price = await is_sideways_market(df, length)
             await check_trade_status()
+            print('Checking trades status')
             print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
+            clean_log_file()
             await trigger(client, symbol, market_condition, close_price)
         await asyncio.sleep(1)
 
