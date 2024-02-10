@@ -7,12 +7,14 @@ import logging_settings
 import threading
 
 
-
+data = None
+is_empty = False
 
 def clean_log_file():
     with open('./logs/actions.log', 'w') as log_file:
         log_file.write('')
 def read_alert():
+    global data, is_empty
     with open('./logs/actions.log', 'r') as alert_file:
         lines = alert_file.readlines()
         if lines:
@@ -24,38 +26,44 @@ def read_alert():
 
 def run_trade(cryptocurrency, price, action):
     if cryptocurrency == 'XRPUSDT':
-        start_time = time.time()
         clean_log_file()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=xrp_trade.trade, args=(price, action, start_time)).start()
+        threading.Thread(target=xrp_trade.trade, args=(cryptocurrency, action, price)).start()
+        print('Trade start successfully')
+
     elif cryptocurrency == 'ATOMUSDT':
         clean_log_file()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=atom_trade.trade, args=(price, action)).start()
+        threading.Thread(target=atom_trade.trade, args=(cryptocurrency, action, price)).start()
+        print('Trade start successfully')
+
     elif cryptocurrency == 'MATICUSDT':
         clean_log_file()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=matic_trade.trade, args=(price, action)).start()
+        threading.Thread(target=matic_trade.trade, args=(cryptocurrency, action, price)).start()
+        print('Trade start successfully')
+
     elif cryptocurrency == 'ADAUSDT':
         clean_log_file()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=ada_trade.trade, args=(price, action)).start()
+        threading.Thread(target=ada_trade.trade, args=(cryptocurrency, action, price)).start()
+        print('Trade start successfully')
+
     else:
         print(f"Unknown cryptocurrency: {cryptocurrency}")
-
-
 
 def continuously_check_signals():
     while True:
         is_empty, data = read_alert()
         if is_empty:
-            cryptocurrency = data[0]
-            price = float(data[1])
-            action = data[2]
+            logs = data[0].split()
+            cryptocurrency = logs[5]
+            price = float(logs[6])
+            action = logs[7]
             print(f"Received signal for {cryptocurrency} at price {price} with action {action}")
             run_trade(cryptocurrency, price, action)
         else:
