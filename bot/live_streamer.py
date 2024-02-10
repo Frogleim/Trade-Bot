@@ -44,7 +44,7 @@ async def get_bollinger_bands(client, symbol, interval, length, num_std_dev, que
 
 def read_alert(path=None):
     global data, is_empty
-    with open('./logs/finish_trade.log', 'r') as alert_file:
+    with open('./logs/finish_trade_log.log', 'r') as alert_file:
         lines = alert_file.readlines()
         if lines:
             data = lines[0].strip().split(', ')  # Split the line into parts
@@ -62,10 +62,10 @@ async def trigger(client, symbol, signal, close_price):
         symbols_list.remove(symbol)
 
 async def check_trade_status():
-    global symbols_list
+    global symbols_list, is_empty, data
     is_empty, data = read_alert()
     if is_empty:
-        cryptocurrency = data[0]
+        cryptocurrency = data[0].split()[5]
         symbols_list.append(cryptocurrency)
         print(f'Trade for {cryptocurrency} was finished')
 
@@ -73,18 +73,17 @@ async def monitor_symbol(client, symbol, interval, length, num_std_dev):
     global active_trades
 
     while True:
-        if symbol not in active_trades:  # Proceed with monitoring only if symbol is not actively trading
+        if symbol not in active_trades:
             queue = asyncio.Queue()
             await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
             symbol, df = await queue.get()
             market_condition, close_price = await is_sideways_market(df, length)
-            await check_trade_status()
             print('Checking trades status')
             print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
+            await check_trade_status()
             clean_log_file()
             await trigger(client, symbol, market_condition, close_price)
         await asyncio.sleep(1)
-
 
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     symbol_tasks = []
@@ -103,8 +102,3 @@ async def main():
     await monitor_symbols(client, symbols_list, interval, length, num_std_dev)
 
 
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        pass

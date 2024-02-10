@@ -118,3 +118,4 @@ client_session: <aiohttp.client.ClientSession object at 0x000001A6E40D72D0>
 2024-02-10 14:34:00,468 - ERROR - Unclosed connector
 connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x000001A6E409FCB0>, 14883.265)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F42F0>, 14886.265), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F4130>, 14886.296), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F4210>, 14886.296), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F43D0>, 14886.296)]']
 connector: <aiohttp.connector.TCPConnector object at 0x000001A6E40D7350>
+2024-02-10 23:00:46,203 - INFO - XRPUSDT Finished

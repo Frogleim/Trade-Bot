@@ -27,30 +27,36 @@ def read_alert():
 def run_trade(cryptocurrency, price, action):
     if cryptocurrency == 'XRPUSDT':
         clean_log_file()
+        start_time = time.time()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=xrp_trade.trade, args=(cryptocurrency, action, price)).start()
+        threading.Thread(target=xrp_trade.trade, args=(cryptocurrency, action, price, start_time)).start()
         print('Trade start successfully')
 
     elif cryptocurrency == 'ATOMUSDT':
         clean_log_file()
+        start_time = time.time()
+
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=atom_trade.trade, args=(cryptocurrency, action, price)).start()
+        threading.Thread(target=atom_trade.trade, args=(cryptocurrency, action, price, start_time)).start()
         print('Trade start successfully')
 
     elif cryptocurrency == 'MATICUSDT':
         clean_log_file()
+        start_time = time.time()
+
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=matic_trade.trade, args=(cryptocurrency, action, price)).start()
+        threading.Thread(target=matic_trade.trade, args=(cryptocurrency, action, price, start_time)).start()
         print('Trade start successfully')
 
     elif cryptocurrency == 'ADAUSDT':
         clean_log_file()
+        start_time = time.time()
         print('Clean alert file')
         print(f'Starting trade for symbol {cryptocurrency}')
-        threading.Thread(target=ada_trade.trade, args=(cryptocurrency, action, price)).start()
+        threading.Thread(target=ada_trade.trade, args=(cryptocurrency, action, price, start_time)).start()
         print('Trade start successfully')
 
     else:

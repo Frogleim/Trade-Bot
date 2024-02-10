@@ -33,3 +33,5 @@ error_logs_logger.setLevel(logging.ERROR)
 error_logs_handler = logging.FileHandler(error_logs_log_file_path)
 error_logs_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 error_logs_logger.addHandler(error_logs_handler)
+
+
