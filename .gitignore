@@ -10,3 +10,6 @@ core/__pycache__
 __pycache__
 venv
 core/trade/jupyter testing
+bot/.pytest_cache
+bot/__pycache__
+.vscode
