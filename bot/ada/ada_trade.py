@@ -1,6 +1,5 @@
 from binance.client import Client
-from . import tp_sl, config, pnl_calculator, position_handler
-from core.trade.bot import logging_settings
+from . import tp_sl, config, pnl_calculator, position_handler, logging_settings
 
 
 # Replace with your Binance API key and secret
