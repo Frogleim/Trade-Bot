@@ -9,7 +9,7 @@ symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
 is_empty = False
 data = None
 def clean_log_file():
-    with open('./logs/finish_trade.log.log', 'w') as log_file:
+    with open('./logs/finish_trade_log.log', 'w') as log_file:
         log_file.write('')
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
@@ -102,3 +102,10 @@ async def main():
     await monitor_symbols(client, symbols_list, interval, length, num_std_dev)
 
 
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        pass
+
+    clean_log_file()
