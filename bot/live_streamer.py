@@ -6,11 +6,15 @@ import logging_settings
 
 active_trades = {}
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
-is_empty = False
-data = None
+stop_loss_levels = {}  # Dictionary to store stop-loss levels for each symbol
+trailing_stop_distance = 0.02  # Example: 2% trailing stop distance
+
+
 def clean_log_file():
     with open('./logs/finish_trade_log.log', 'w') as log_file:
         log_file.write('')
+
+
 async def is_sideways_market(data, num_periods):
     bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
     upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
@@ -40,6 +44,9 @@ async def get_bollinger_bands(client, symbol, interval, length, num_std_dev, que
     await queue.put((symbol, df))
 
 
+def get_current_price(client, symbol):
+    current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+    return current_price
 
 
 def read_alert(path=None):
@@ -55,11 +62,13 @@ def read_alert(path=None):
 
 
 async def trigger(client, symbol, signal, close_price):
-    global active_trades, symbols_list
+    global active_trades, symbols_list, stop_loss_levels
     if signal != 'Hold':
         active_trades[symbol] = True  # Mark symbol as actively trading
+        stop_loss_levels[symbol] = close_price  # Record initial stop-loss level
         logging_settings.actions_logger.info(f'{symbol} {close_price} {signal}')
         symbols_list.remove(symbol)
+
 
 async def check_trade_status():
     global symbols_list, is_empty, data
@@ -69,8 +78,9 @@ async def check_trade_status():
         symbols_list.append(cryptocurrency)
         print(f'Trade for {cryptocurrency} was finished')
 
+
 async def monitor_symbol(client, symbol, interval, length, num_std_dev):
-    global active_trades
+    global active_trades, stop_loss_levels
 
     while True:
         if symbol not in active_trades:
@@ -83,7 +93,13 @@ async def monitor_symbol(client, symbol, interval, length, num_std_dev):
             await check_trade_status()
             clean_log_file()
             await trigger(client, symbol, market_condition, close_price)
+        else:
+            # Check if the price has surpassed the highest price since triggering the sell order
+            current_price = get_current_price(client, symbol)  # Example function to get current price
+            if current_price > stop_loss_levels[symbol]:
+                stop_loss_levels[symbol] = current_price * (1 - trailing_stop_distance)  # Update stop-loss level
         await asyncio.sleep(1)
+
 
 async def monitor_symbols(client, symbols, interval, length, num_std_dev):
     symbol_tasks = []

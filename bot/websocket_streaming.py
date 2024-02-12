@@ -62,7 +62,6 @@ class StreamingOrderBook(websocket.WebSocketApp):
         previous_volume = self.volumes[-2]
 
         if current_price > previous_price and current_volume > previous_volume:
-
             return "Confirmed uptrend: Rising prices with increasing volume"
         elif current_price < previous_price and current_volume > previous_volume:
             return "Potential downtrend reversal: Falling prices with increasing volume"
