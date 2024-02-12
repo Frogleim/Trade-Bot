@@ -8,6 +8,7 @@ active_trades = {}
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
 stop_loss_levels = {}  # Dictionary to store stop-loss levels for each symbol
 trailing_stop_distance = 0.02  # Example: 2% trailing stop distance
+volume_threshold = 1.5  # Current volume should be 1.5 times greater than average volume
 
 
 def clean_log_file():
@@ -148,4 +149,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
 
-    clean_log_file()
