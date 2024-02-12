@@ -49,6 +49,22 @@ def get_current_price(client, symbol):
     return current_price
 
 
+async def analyze_volume(client, symbol, interval, volume_threshold):
+    try:
+        klines = await client.futures_klines(symbol=symbol, interval=interval)
+    except Exception as e:
+        logging_settings.error_logs_logger.error(e)
+        klines = await client.futures_klines(symbol=symbol, interval=interval)
+
+    volumes = [float(kline[5]) for kline in klines]
+    average_volume = sum(volumes) / len(volumes)
+    current_volume = volumes[-1]
+
+    if current_volume > average_volume * volume_threshold:
+        return True  # Volume confirmation
+    else:
+        return False
+
 def read_alert(path=None):
     global data, is_empty
     with open('./logs/finish_trade_log.log', 'r') as alert_file:
@@ -79,7 +95,7 @@ async def check_trade_status():
         print(f'Trade for {cryptocurrency} was finished')
 
 
-async def monitor_symbol(client, symbol, interval, length, num_std_dev):
+async def monitor_symbol(client, symbol, interval, length, num_std_dev, volume_threshold):
     global active_trades, stop_loss_levels
 
     while True:
@@ -88,6 +104,14 @@ async def monitor_symbol(client, symbol, interval, length, num_std_dev):
             await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
             symbol, df = await queue.get()
             market_condition, close_price = await is_sideways_market(df, length)
+
+            # Volume confirmation
+            volume_confirmed = await analyze_volume(client, symbol, interval, volume_threshold)
+            if not volume_confirmed:
+                print(f"Volume confirmation not met for {symbol}. Waiting for stronger volume.")
+                await asyncio.sleep(60)  # Wait for a minute and check again
+                continue  # Skip to the next iteration if volume confirmation is not met
+
             print('Checking trades status')
             print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
             await check_trade_status()

@@ -12,10 +12,9 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 logging.basicConfig(
-                    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
 api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-
 
 
 def get_account_balance(client):
@@ -28,6 +27,32 @@ def get_ask_price(client, symbol):
     order_book = client.get_order_book(symbol=symbol)
     ask_price = float(order_book['asks'][0][0])
     return ask_price
+
+
+def stop_loss_short(symbol, quantity, price, stopPrice):
+    client = Client(api_key=api_key, api_secret=api_secret)
+    order = client.create_order(
+        symbol=symbol,
+        side=Client.SIDE_BUY,
+        type=Client.ORDER_TYPE_STOP_LOSS_LIMIT,
+        timeInForce=Client.TIME_IN_FORCE_GTC,
+        quantity=quantity,
+        price=price,
+        stopPrice=stopPrice)
+    print(order)
+
+
+def stop_loss_buy(symbol, quantity, price, stopPrice):
+    client = Client(api_key=api_key, api_secret=api_secret)
+    order = client.create_order(
+        symbol=symbol,
+        side=Client.SIDE_BUY,
+        type=Client.ORDER_TYPE_STOP_LOSS_LIMIT,
+        timeInForce=Client.TIME_IN_FORCE_GTC,
+        quantity=quantity,
+        price=price,
+        stopPrice=stopPrice)
+    print(order)
 
 
 def create_order(entry_price, side, percentage_of_balance=95, quantity=None):
