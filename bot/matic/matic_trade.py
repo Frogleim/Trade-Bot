@@ -31,6 +31,7 @@ def trade(symbol, signal, entry_price, start_time):
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price)
                 if res == 'Profit':
+
                     print(f'Closing Position with {res}')
                     try:
                         position_handler.close_position(side='long', quantity=config.position_size)
@@ -40,6 +41,8 @@ def trade(symbol, signal, entry_price, start_time):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
                 elif time.time() - start_time > 10800:
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
+
                     break
 
     if signal == 'Long':
@@ -70,5 +73,7 @@ def trade(symbol, signal, entry_price, start_time):
                         position_handler.close_position(side='short', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
-            elif time.time() - start_time > 10800:
-                break
+                elif time.time() - start_time > 10800:
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
+
+                    break

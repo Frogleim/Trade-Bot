@@ -1,8 +1,8 @@
 import asyncio
-import time
 from binance.client import AsyncClient
 import pandas as pd
-import logging_settings
+
+from bot import logging_settings
 
 active_trades = {}
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
@@ -10,45 +10,29 @@ stop_loss_levels = {}  # Dictionary to store stop-loss levels for each symbol
 trailing_stop_distance = 0.02  # Example: 2% trailing stop distance
 volume_threshold = 1.5  # Current volume should be 1.5 times greater than average volume
 
-
-def clean_log_file():
+async def clean_log_file():
     with open('./logs/finish_trade_log.log', 'w') as log_file:
         log_file.write('')
 
+def generate_signals(data, short_window=50, long_window=200):
+    signals = pd.DataFrame(index=data.index)
+    signals['signal'] = 0
 
-async def is_sideways_market(data, num_periods):
-    bollinger_values = data.iloc[-num_periods:][['upper_band', 'lower_band', 'close']]
-    upper_band, lower_band = bollinger_values['upper_band'].iloc[-1], bollinger_values['lower_band'].iloc[-1]
-    close_price = bollinger_values['close'].iloc[-2]
-    print(f'Lower Band: {lower_band} --> Upper Band: {upper_band} --> Close Price: {close_price}')
-    if close_price < lower_band:
-        return 'Long', close_price
-    elif close_price > upper_band:
-        return 'Short', close_price
-    else:
-        return 'Hold', close_price
+    # Calculate the moving averages
+    signals['short_mavg'] = data['close'].rolling(window=short_window, min_periods=1).mean()
+    signals['long_mavg'] = data['close'].rolling(window=long_window, min_periods=1).mean()
 
+    # Generate buy signals
+    signals.loc[signals['short_mavg'] > signals['long_mavg'], 'signal'] = 1
 
-async def get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue):
-    try:
-        klines = await client.futures_klines(symbol=symbol, interval=interval)
-    except Exception as e:
-        logging_settings.error_logs_logger.error(e)
-        klines = await client.futures_klines(symbol=symbol, interval=interval)
+    # Generate sell signals
+    signals.loc[signals['short_mavg'] < signals['long_mavg'], 'signal'] = -1
 
-    close_prices = [float(kline[4]) for kline in klines]
-    df = pd.DataFrame({'close': close_prices})
-    df['sma'] = df['close'].rolling(window=length).mean()
-    df['std_dev'] = df['close'].rolling(window=length).std()
-    df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
-    df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
-    await queue.put((symbol, df))
+    return signals
 
-
-def get_current_price(client, symbol):
-    current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+async def get_current_price(client, symbol):
+    current_price = await client.futures_ticker(symbol=symbol)['lastPrice']
     return current_price
-
 
 async def analyze_volume(client, symbol, interval, volume_threshold):
     try:
@@ -66,18 +50,6 @@ async def analyze_volume(client, symbol, interval, volume_threshold):
     else:
         return False
 
-def read_alert(path=None):
-    global data, is_empty
-    with open('./logs/finish_trade_log.log', 'r') as alert_file:
-        lines = alert_file.readlines()
-        if lines:
-            data = lines[0].strip().split(', ')  # Split the line into parts
-            is_empty = True
-        else:
-            is_empty = False
-    return is_empty, data
-
-
 async def trigger(client, symbol, signal, close_price):
     global active_trades, symbols_list, stop_loss_levels
     if signal != 'Hold':
@@ -86,66 +58,65 @@ async def trigger(client, symbol, signal, close_price):
         logging_settings.actions_logger.info(f'{symbol} {close_price} {signal}')
         symbols_list.remove(symbol)
 
-
 async def check_trade_status():
-    global symbols_list, is_empty, data
-    is_empty, data = read_alert()
-    if is_empty:
-        cryptocurrency = data[0].split()[5]
-        symbols_list.append(cryptocurrency)
-        print(f'Trade for {cryptocurrency} was finished')
+    global symbols_list, data
+    with open('./logs/finish_trade_log.log', 'r') as alert_file:
+        lines = alert_file.readlines()
+        if lines:
+            data = lines[0].strip().split(', ')  # Split the line into parts
+            cryptocurrency = data[0].split()[5]
+            symbols_list.append(cryptocurrency)
+            print(f'Trade for {cryptocurrency} was finished')
+            await clean_log_file()
 
 
-async def monitor_symbol(client, symbol, interval, length, num_std_dev, volume_threshold):
+async def monitor_symbol(client, symbol, interval, short_window, long_window, volume_threshold):
     global active_trades, stop_loss_levels
 
     while True:
         if symbol not in active_trades:
-            queue = asyncio.Queue()
-            await get_bollinger_bands(client, symbol, interval, length, num_std_dev, queue)
-            symbol, df = await queue.get()
-            market_condition, close_price = await is_sideways_market(df, length)
+            try:
+                klines = await client.futures_klines(symbol=symbol, interval=interval)
+            except Exception as e:
+                logging_settings.error_logs_logger.error(e)
+                klines = await client.futures_klines(symbol=symbol, interval=interval)
 
-            # Volume confirmation
-            volume_confirmed = await analyze_volume(client, symbol, interval, volume_threshold)
-            if not volume_confirmed:
-                print(f"Volume confirmation not met for {symbol}. Waiting for stronger volume.")
+            close_prices = [float(kline[4]) for kline in klines]
+            df = pd.DataFrame({'close': close_prices})
+            signals = generate_signals(df, short_window, long_window)
+            last_signal = signals['signal'].iloc[-1]
+            last_close_price = close_prices[-1]
+
+            if last_signal == 1:
+                await check_trade_status()  # Check if trade was finished
+                await trigger(client, symbol, 'Long', last_close_price)
+
+            elif last_signal == -1:
+                await check_trade_status()  # Check if trade was finished
+                await trigger(client, symbol, 'Short', last_close_price)
+            else:
                 await asyncio.sleep(60)  # Wait for a minute and check again
-                continue  # Skip to the next iteration if volume confirmation is not met
-
-            print('Checking trades status')
-            print(f"Market condition for {symbol}: {market_condition}, Close Price: {close_price}")
-            await check_trade_status()
-            clean_log_file()
-            await trigger(client, symbol, market_condition, close_price)
-        else:
-            # Check if the price has surpassed the highest price since triggering the sell order
-            current_price = get_current_price(client, symbol)  # Example function to get current price
-            if current_price > stop_loss_levels[symbol]:
-                stop_loss_levels[symbol] = current_price * (1 - trailing_stop_distance)  # Update stop-loss level
-        await asyncio.sleep(1)
+                continue
 
 
-async def monitor_symbols(client, symbols, interval, length, num_std_dev):
+
+async def monitor_symbols(client, symbols, interval, short_window, long_window, volume_threshold):
     symbol_tasks = []
     for symbol in symbols:
-        task = asyncio.create_task(monitor_symbol(client, symbol, interval, length, num_std_dev))
+        task = asyncio.create_task(monitor_symbol(client, symbol, interval, short_window, long_window, volume_threshold))
         symbol_tasks.append(task)
     await asyncio.gather(*symbol_tasks)
-
 
 async def main():
     global symbols_list
     client = await AsyncClient.create()
     interval = '3m'
-    length = 20
-    num_std_dev = 2
-    await monitor_symbols(client, symbols_list, interval, length, num_std_dev)
-
+    short_window = 50
+    long_window = 200
+    await monitor_symbols(client, symbols_list, interval, short_window, long_window, volume_threshold)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
-

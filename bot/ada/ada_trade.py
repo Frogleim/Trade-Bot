@@ -40,6 +40,7 @@ def trade(symbol, signal, entry_price, start_time):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
                 elif time.time() - start_time > 10800:
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
     if signal == 'Long':
@@ -70,5 +71,7 @@ def trade(symbol, signal, entry_price, start_time):
                         position_handler.close_position(side='short', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
-            elif time.time() - start_time > 10800:
-                break
+                elif time.time() - start_time > 10800:
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
+
+                    break

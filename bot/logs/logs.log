@@ -119,3 +119,13 @@ client_session: <aiohttp.client.ClientSession object at 0x000001A6E40D72D0>
 connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x000001A6E409FCB0>, 14883.265)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F42F0>, 14886.265), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F4130>, 14886.296), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F4210>, 14886.296), (<aiohttp.client_proto.ResponseHandler object at 0x000001A6E40F43D0>, 14886.296)]']
 connector: <aiohttp.connector.TCPConnector object at 0x000001A6E40D7350>
 2024-02-10 23:00:46,203 - INFO - XRPUSDT Finished
+2024-02-13 13:39:27,940 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000193DF633A90>
+2024-02-13 13:39:27,941 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x00000193DF5FFCB0>, 563.781)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x00000193DF650130>, 565.421), (<aiohttp.client_proto.ResponseHandler object at 0x00000193DF650210>, 565.437), (<aiohttp.client_proto.ResponseHandler object at 0x00000193DF6502F0>, 565.453)]']
+connector: <aiohttp.connector.TCPConnector object at 0x00000193DF633AD0>
+2024-02-13 13:45:05,454 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x00000264ADBD77D0>
+2024-02-13 13:45:05,454 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x00000264ADB9BEE0>, 901.343)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x00000264ADBF4360>, 902.968), (<aiohttp.client_proto.ResponseHandler object at 0x00000264ADBF4440>, 902.968)]']
+connector: <aiohttp.connector.TCPConnector object at 0x00000264ADBD7850>
