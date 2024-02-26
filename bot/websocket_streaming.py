@@ -23,15 +23,15 @@ class DataBase:
             database=self.database
         )
 
-    def insert_trades(self, quantity, price, side):
+    def insert_trades(self, quantity, price, side, timestamp):
         conn = self.connect()
         cursor = conn.cursor()
         if side:
-            cursor.execute("INSERT INTO trade_buyers (quantity, side, price) VALUES (%s, %s, %s)",
-                           (quantity, side, price))
+            cursor.execute("INSERT INTO trade_buyers (quantity, side, price, timestapmp) VALUES (%s, %s, %s, %s)",
+                           (quantity, side, price, timestamp))
         else:
-            cursor.execute("INSERT INTO trade_sellers (quantity, side, price) VALUES (%s, %s, %s)",
-                           (quantity, side, price))
+            cursor.execute("INSERT INTO trade_sellers (quantity, side, price, timestamp) VALUES (%s, %s, %s, %s)",
+                           (quantity, side, price, timestamp))
         conn.commit()
 
     def calculate_aggression_buyers(self):
@@ -74,10 +74,10 @@ class Streaming(websocket.WebSocketApp):
         db = DataBase()
         current_time = datetime.now()
         start_time = current_time.replace(minute=(current_time.minute // 15) * 15, second=0, microsecond=0)
-        end_time = start_time + timedelta(minutes=15)
-        db.delete_rows_by_time('trade_buyers', 'timestamp_column', start_time, end_time)
-        db.delete_rows_by_time('trade_sellers', 'timestamp_column', start_time, end_time)
-        db.insert_trades(quantity=data['q'], price=data['p'], side=data['m'])
+        # end_time = start_time + timedelta(minutes=15)
+        # db.delete_rows_by_time('trade_buyers', 'timestapmp', start_time, end_time)
+        # db.delete_rows_by_time('trade_sellers', 'timestamp', start_time, end_time)
+        db.insert_trades(quantity=data['q'], price=data['p'], side=data['m'], timestamp=start_time)
         db.calculate_aggression_buyers()
         db.calculate_aggression_sellers()
 
