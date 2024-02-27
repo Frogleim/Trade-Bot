@@ -8,11 +8,11 @@ import psycopg2
 
 class DataBase:
     def __init__(self):
-        self.user="postgres"
-        self.password="0000"
-        self.host="localhost"
-        self.port=5432
-        self.database="StreamSignal"
+        self.user = "postgres"
+        self.password = "0000"
+        self.host = "localhost"
+        self.port = 5432
+        self.database = "StreamSignal"
 
     def connect(self):
         return psycopg2.connect(
@@ -23,15 +23,15 @@ class DataBase:
             database=self.database
         )
 
-    def insert_trades(self, quantity, price, side):
+    def insert_trades(self, timestamp, quantity, price, side):
         conn = self.connect()
         cursor = conn.cursor()
         if side:
-            cursor.execute("INSERT INTO trade_buyers (quantity, side, price) VALUES (%s, %s, %s)",
-                           (quantity, side, price))
+            cursor.execute("INSERT INTO trade_buyers (timestamp, quantity, side, price) VALUES (%s, %s, %s, %s)",
+                           (timestamp, quantity, side, price))
         else:
-            cursor.execute("INSERT INTO trade_sellers (quantity, side, price) VALUES (%s, %s, %s)",
-                           (quantity, side, price))
+            cursor.execute("INSERT INTO trade_sellers (timestamp, quantity, side, price) VALUES (%s, %s, %s, %s)",
+                           (timestamp, quantity, side, price))
         conn.commit()
 
     def calculate_aggression_buyers(self):
@@ -57,32 +57,48 @@ class DataBase:
         cursor.execute(delete_query, (start_time, end_time))
         conn.commit()
 
+
 class Streaming(websocket.WebSocketApp):
     def __init__(self, url):
-        super().__init__(url=url, on_open=self.on_open)
-        self.on_message = lambda ws, msg: self.message(msg)
-        self.on_error = lambda ws, e: print('Error', e)
-        self.on_close = lambda ws: print('Closing')
-
+        super().__init__(url=url, on_open=self.on_open, on_message=self.on_message, on_error=self.on_error, on_close=self.on_close)
         self.run_forever()
 
     def on_open(self, ws):
         print('Websocket was opened')
 
-    def message(self, msg):
+    def on_message(self, ws, msg):
         data = json.loads(msg)
+        # Process the incoming message
+        self.process_message(data)
+
+    def on_error(self, ws, e):
+        print('Error', e)
+
+    def on_close(self, ws):
+        print('Closing')
+
+    def process_message(self, data):
+        # Initialize your DataBase instance
         db = DataBase()
+
+        # Get the current time
         current_time = datetime.now()
-        start_time = current_time.replace(minute=(current_time.minute // 15) * 15, second=0, microsecond=0)
-        end_time = start_time + timedelta(minutes=15)
-        db.delete_rows_by_time('trade_buyers', 'timestamp_column', start_time, end_time)
-        db.delete_rows_by_time('trade_sellers', 'timestamp_column', start_time, end_time)
-        db.insert_trades(quantity=data['q'], price=data['p'], side=data['m'])
+
+        # Update rows every 15 minutes
+        if current_time.minute % 15 == 0:
+            start_time = current_time - timedelta(minutes=15)
+            end_time = current_time
+
+            # Delete rows within the last 15 minutes
+            db.delete_rows_by_time('trade_buyers', 'timestamp', start_time, end_time)
+            db.delete_rows_by_time('trade_sellers', 'timestamp', start_time, end_time)
+
+        # Insert the current trade
+        db.insert_trades(current_time, data['q'], data['p'], data['m'])
+
+        # Calculate aggression
         db.calculate_aggression_buyers()
         db.calculate_aggression_sellers()
-
-
-
 
 
 class StreamingDepthBook(websocket.WebSocketApp):
@@ -114,8 +130,6 @@ class StreamingDepthBook(websocket.WebSocketApp):
                 print("There's more selling pressure (bearish)")
             else:
                 print("Bids and asks are balanced")
-
-
 
 
 class ForcedOrders(websocket.WebSocketApp):
@@ -158,7 +172,6 @@ if __name__ == '__main__':
     #     print("Connected to PostgreSQL")
     # except (Exception, psycopg2.Error) as error:
     #     print("Error while connecting to PostgreSQL:", error)
-    threading.Thread(target=Streaming, args=('wss://fstream.binance.com/ws/xrpusdt@aggTrade', )).start()
+    threading.Thread(target=Streaming, args=('wss://fstream.binance.com/ws/xrpusdt@aggTrade',)).start()
     # threading.Thread(target=StreamingDepthBook, args=('wss://fstream.binance.com/ws/xrpusdt@depth', )).start()
     # threading.Thread(target=ForcedOrders, args=('wss://fstream.binance.com/ws/xrpusdt@forceOrder', )).start()
-
