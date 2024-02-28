@@ -23,7 +23,6 @@ class DataBase:
             database=self.database
         )
 
-<<<<<<< HEAD
     def insert_trades(self, timestamp, quantity, price, side):
         conn = self.connect()
         cursor = conn.cursor()
@@ -33,17 +32,6 @@ class DataBase:
         else:
             cursor.execute("INSERT INTO trade_sellers (timestamp, quantity, side, price) VALUES (%s, %s, %s, %s)",
                            (timestamp, quantity, side, price))
-=======
-    def insert_trades(self, quantity, price, side, timestamp):
-        conn = self.connect()
-        cursor = conn.cursor()
-        if side:
-            cursor.execute("INSERT INTO trade_buyers (quantity, side, price, timestapmp) VALUES (%s, %s, %s, %s)",
-                           (quantity, side, price, timestamp))
-        else:
-            cursor.execute("INSERT INTO trade_sellers (quantity, side, price, timestamp) VALUES (%s, %s, %s, %s)",
-                           (quantity, side, price, timestamp))
->>>>>>> 44e5b6467dbf7e65027a042059d785996f6f6826
         conn.commit()
 
     def calculate_aggression_buyers(self):
@@ -80,8 +68,9 @@ class Streaming(websocket.WebSocketApp):
 
     def on_message(self, ws, msg):
         data = json.loads(msg)
+        print(data)
         # Process the incoming message
-        self.process_message(data)
+        # self.process_message(data)
 
     def on_error(self, ws, e):
         print('Error', e)
@@ -95,7 +84,6 @@ class Streaming(websocket.WebSocketApp):
 
         # Get the current time
         current_time = datetime.now()
-<<<<<<< HEAD
 
         # Update rows every 15 minutes
         if current_time.minute % 15 == 0:
@@ -110,13 +98,6 @@ class Streaming(websocket.WebSocketApp):
         db.insert_trades(current_time, data['q'], data['p'], data['m'])
 
         # Calculate aggression
-=======
-        start_time = current_time.replace(minute=(current_time.minute // 15) * 15, second=0, microsecond=0)
-        # end_time = start_time + timedelta(minutes=15)
-        # db.delete_rows_by_time('trade_buyers', 'timestapmp', start_time, end_time)
-        # db.delete_rows_by_time('trade_sellers', 'timestamp', start_time, end_time)
-        db.insert_trades(quantity=data['q'], price=data['p'], side=data['m'], timestamp=start_time)
->>>>>>> 44e5b6467dbf7e65027a042059d785996f6f6826
         db.calculate_aggression_buyers()
         db.calculate_aggression_sellers()
 
@@ -192,6 +173,6 @@ if __name__ == '__main__':
     #     print("Connected to PostgreSQL")
     # except (Exception, psycopg2.Error) as error:
     #     print("Error while connecting to PostgreSQL:", error)
-    threading.Thread(target=Streaming, args=('wss://fstream.binance.com/ws/xrpusdt@aggTrade',)).start()
+    threading.Thread(target=Streaming, args=('wss://fstream.binance.com/ws/xrpusdt@!bookTicker',)).start()
     # threading.Thread(target=StreamingDepthBook, args=('wss://fstream.binance.com/ws/xrpusdt@depth', )).start()
     # threading.Thread(target=ForcedOrders, args=('wss://fstream.binance.com/ws/xrpusdt@forceOrder', )).start()
