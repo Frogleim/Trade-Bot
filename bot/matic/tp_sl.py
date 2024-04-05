@@ -3,7 +3,10 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import config
+from . import config, db
+import time
+import logging_settings
+
 
 current_profit = 0
 profit_checkpoint_list = []
@@ -37,6 +40,7 @@ def method_name_decorator(func):
 
 
 def pnl_long(opened_price):
+    start_time = time.time()
     """
     Definition: Monitoring current position by profit checkpoint list
     Args:
@@ -49,7 +53,8 @@ def pnl_long(opened_price):
     global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-    except Exception:
+    except Exception as e:
+        logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e}--- Trying again...')
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
     current_profit = float(current_price) - float(opened_price)
@@ -64,13 +69,23 @@ def pnl_long(opened_price):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit}')
 
     if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
         if current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]:
+            total_time = time.time() - start_time
+            connect_base = db.DataBase()
+            connect_base.insert_trades(
+                symbol=config.trading_pair,
+                entry_price=opened_price,
+                close_price=current_price,
+                pnl=current_price - opened_price,
+                side='long',
+                time_in_trade=total_time
+            )
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
@@ -80,6 +95,7 @@ def pnl_long(opened_price):
 
 
 def pnl_short(opened_price):
+    start_time = time.time()
     """
     Definition: Monitoring current position by profit checkpoint list
 
@@ -91,7 +107,12 @@ def pnl_short(opened_price):
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
 
-    current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    try:
+        current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+    except Exception as e:
+        logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e} --- Trying again...')
+        current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+
     current_profit = float(opened_price) - float(current_price)
     logging.info(
         f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit}')
@@ -103,12 +124,23 @@ def pnl_short(opened_price):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit}')
     if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
         if current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]:
+            total_time = time.time() - start_time
+            connect_base = db.DataBase()
+            connect_base.insert_trades(
+                symbol=config.trading_pair,
+                entry_price=opened_price,
+                close_price=current_price,
+                pnl=opened_price - current_price,
+                side='short',
+                time_in_trade=total_time
+
+            )
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)

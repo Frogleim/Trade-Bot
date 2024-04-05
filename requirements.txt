@@ -4,3 +4,5 @@ transformers
 torch
 torchvision
 openai
+ccxt
+psycopg2

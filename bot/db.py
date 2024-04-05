@@ -4,10 +4,10 @@ import psycopg2
 class DataBase:
     def __init__(self):
         self.user = "postgres"
-        self.password = "0000"
+        self.password = "admin"
         self.host = "localhost"
         self.port = 5432
-        self.database = "StreamSignal"
+        self.database = "TradeBot"
 
     def connect(self):
         return psycopg2.connect(
@@ -18,15 +18,11 @@ class DataBase:
             database=self.database
         )
 
-    def insert_trades(self, timestamp, quantity, price, side):
+    def insert_trades(self, symbol, entry_price, close_price, pnl):
         conn = self.connect()
         cursor = conn.cursor()
-        if side:
-            cursor.execute("INSERT INTO trade_buyers (timestamp, quantity, side, price) VALUES (%s, %s, %s, %s)",
-                           (timestamp, quantity, side, price))
-        else:
-            cursor.execute("INSERT INTO trade_sellers (timestamp, quantity, side, price) VALUES (%s, %s, %s, %s)",
-                           (timestamp, quantity, side, price))
+        cursor.execute("INSERT INTO trades (symbol, entry_price, close_price, pnl, side) VALUES (%s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl))
         conn.commit()
 
     def calculate_aggression_buyers(self):

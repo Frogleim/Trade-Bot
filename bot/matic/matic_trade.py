@@ -7,7 +7,7 @@ client = Client(config.API_KEY, config.API_SECRET)
 
 
 def trade(symbol, signal, entry_price, start_time):
-    if signal == 'Short':
+    if signal == 'short':
         tp_sl.profit_checkpoint_list.clear()
         try:
             order_info = position_handler.place_sell_order(price=entry_price,
@@ -43,7 +43,7 @@ def trade(symbol, signal, entry_price, start_time):
 
                     break
 
-    if signal == 'Long':
+    if signal == 'long':
         tp_sl.profit_checkpoint_list.clear()
         try:
             order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
