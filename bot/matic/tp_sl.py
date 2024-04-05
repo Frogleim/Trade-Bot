@@ -8,13 +8,11 @@ from . import config
 current_profit = 0
 profit_checkpoint_list = []
 current_checkpoint = None
-api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
-api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 try:
-    client = Client(api_key, api_secret)
+    client = Client(config.API_KEY, config.API_SECRET)
 except Exception as e:
     print(e)
-    client = Client(api_key, api_secret)
+    client = Client(config.API_KEY, config.API_SECRET)
 price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)

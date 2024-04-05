@@ -13,8 +13,6 @@ parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 logging.basicConfig(
                     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
-api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
 
 
 
@@ -31,7 +29,7 @@ def get_ask_price(client, symbol):
 
 
 def create_order(entry_price, side, percentage_of_balance=95, quantity=None):
-    client = Client(api_key=api_key, api_secret=api_secret)
+    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
     symbol = 'ETHUSDT'
     if side == 'long':
         order = client.futures_create_order(
@@ -56,7 +54,7 @@ def create_order(entry_price, side, percentage_of_balance=95, quantity=None):
 
 
 def close_position(side, quantity):
-    client = Client(api_key=api_key, api_secret=api_secret)
+    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
     if side == 'long':
         order = client.futures_create_order(
             symbol=config.trading_pair,
@@ -77,7 +75,7 @@ def close_position(side, quantity):
 
 
 def place_buy_order(price, quantity, symbol):
-    client = Client(api_key=api_key, api_secret=api_secret)
+    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
     order = client.futures_create_order(
         symbol=symbol,
         side=Client.SIDE_BUY,
@@ -93,7 +91,7 @@ def place_buy_order(price, quantity, symbol):
 
 
 def place_sell_order(price, quantity, symbol):
-    client = Client(api_key=api_key, api_secret=api_secret)
+    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
 
     order = client.futures_create_order(
         symbol=symbol,

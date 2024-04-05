@@ -6,13 +6,15 @@ from ada import ada_trade
 import logging_settings
 import threading
 
-
 data = None
 is_empty = False
+
 
 def clean_log_file():
     with open('./logs/actions.log', 'w') as log_file:
         log_file.write('')
+
+
 def read_alert():
     global data, is_empty
     with open('./logs/actions.log', 'r') as alert_file:
@@ -23,6 +25,7 @@ def read_alert():
         else:
             is_empty = False
     return is_empty, data
+
 
 def run_trade(cryptocurrency, price, action):
     if cryptocurrency == 'XRPUSDT':
@@ -62,6 +65,7 @@ def run_trade(cryptocurrency, price, action):
     else:
         print(f"Unknown cryptocurrency: {cryptocurrency}")
 
+
 def continuously_check_signals():
     while True:
         is_empty, data = read_alert()
@@ -75,6 +79,7 @@ def continuously_check_signals():
         else:
             print("No signals found.")
         time.sleep(5)
+
 
 if __name__ == '__main__':
     continuously_check_signals()

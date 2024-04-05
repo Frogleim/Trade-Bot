@@ -1,6 +1,6 @@
 #testnet
-API_KEY = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
-API_SECRET = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
+API_KEY = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
+API_SECRET = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
 checkpoint_list = [0.02, 0.03, 0.05, 0.07]
 checkpoint_list_scalping = [3, 5, 6]
 

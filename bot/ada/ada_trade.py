@@ -4,9 +4,8 @@ from binance.client import Client
 from . import tp_sl, config, position_handler, logging_settings
 
 # Replace with your Binance API key and secret
-api_key = 'iyJXPaZztWrimkH6V57RGvStFgYQWRaaMdaYBQHHIEv0mMY1huCmrzTbXkaBjLFh'
-api_secret = 'hmrus7zI9PW2EXqsDVovoS2cEFRVsxeETGgBf4XJInOLFcmIXKNL23alGRNRbXKI'
-client = Client(api_key, api_secret)
+client = Client(config.API_KEY, config.API_SECRET)
+
 
 def trade(symbol, signal, entry_price, start_time):
     if signal == 'Short':

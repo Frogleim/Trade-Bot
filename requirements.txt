@@ -1,0 +1,6 @@
+python-binance
+pandas
+transformers
+torch
+torchvision
+openai

@@ -2,7 +2,7 @@ import asyncio
 from binance.client import AsyncClient
 import pandas as pd
 
-from bot import logging_settings
+import logging_settings
 
 active_trades = {}
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
@@ -10,9 +10,11 @@ stop_loss_levels = {}  # Dictionary to store stop-loss levels for each symbol
 trailing_stop_distance = 0.02  # Example: 2% trailing stop distance
 volume_threshold = 1.5  # Current volume should be 1.5 times greater than average volume
 
+
 async def clean_log_file():
     with open('./logs/finish_trade_log.log', 'w') as log_file:
         log_file.write('')
+
 
 def generate_signals(data, short_window=50, long_window=200):
     signals = pd.DataFrame(index=data.index)
@@ -30,9 +32,11 @@ def generate_signals(data, short_window=50, long_window=200):
 
     return signals
 
+
 async def get_current_price(client, symbol):
     current_price = await client.futures_ticker(symbol=symbol)['lastPrice']
     return current_price
+
 
 async def analyze_volume(client, symbol, interval, volume_threshold):
     try:
@@ -50,6 +54,7 @@ async def analyze_volume(client, symbol, interval, volume_threshold):
     else:
         return False
 
+
 async def trigger(client, symbol, signal, close_price):
     global active_trades, symbols_list, stop_loss_levels
     if signal != 'Hold':
@@ -57,6 +62,7 @@ async def trigger(client, symbol, signal, close_price):
         stop_loss_levels[symbol] = close_price  # Record initial stop-loss level
         logging_settings.actions_logger.info(f'{symbol} {close_price} {signal}')
         symbols_list.remove(symbol)
+
 
 async def check_trade_status():
     global symbols_list, data
@@ -99,13 +105,14 @@ async def monitor_symbol(client, symbol, interval, short_window, long_window, vo
                 continue
 
 
-
 async def monitor_symbols(client, symbols, interval, short_window, long_window, volume_threshold):
     symbol_tasks = []
     for symbol in symbols:
-        task = asyncio.create_task(monitor_symbol(client, symbol, interval, short_window, long_window, volume_threshold))
+        task = asyncio.create_task(
+            monitor_symbol(client, symbol, interval, short_window, long_window, volume_threshold))
         symbol_tasks.append(task)
     await asyncio.gather(*symbol_tasks)
+
 
 async def main():
     global symbols_list
@@ -114,6 +121,7 @@ async def main():
     short_window = 50
     long_window = 200
     await monitor_symbols(client, symbols_list, interval, short_window, long_window, volume_threshold)
+
 
 if __name__ == "__main__":
     try:
