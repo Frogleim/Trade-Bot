@@ -21,7 +21,7 @@ class DataBase:
     def insert_trades(self, symbol, entry_price, close_price, pnl, side, time_in_trade):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades (symbol, entry_price, close_price, pnl, side, time_in_trade) "
-                       "VALUES (%s, %s, %s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl, side, time_in_trade))
+        cursor.execute("INSERT INTO trades (symbol, entry_price, close_price, pnl, side) "
+                       "VALUES (%s, %s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl, side))
         conn.commit()

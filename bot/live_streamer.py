@@ -14,13 +14,16 @@ def start_trade():
     while True:
         current_price = client.futures_ticker(symbol=trading_pair)['lastPrice']
 
-        if float(current_price) - long_entry_price >= 0.002:
-            trade.run_trade(cryptocurrency=symbol, price=long_entry_price, action='long')
+        if float(current_price) >= long_entry_price and short_entry_price:
+            trade.run_trade(cryptocurrency=symbol, price=current_price, action='long')
             logging_settings.actions_logger.info('Long entry price: %.2f' % long_entry_price)
 
-        elif float(current_price) - short_entry_price <= -0.002:
-            trade.run_trade(cryptocurrency=symbol, price=short_entry_price, action='short')
+        elif float(current_price) <= long_entry_price and short_entry_price:
+            trade.run_trade(cryptocurrency=symbol, price=current_price, action='short')
             logging_settings.actions_logger.info('Short entry price: %.2f' % short_entry_price)
+        elif long_entry_price < float(current_price) < short_entry_price:
+            logging_settings.actions_logger.info('Hold..: %.2f' % short_entry_price)
+
         else:
             logging_settings.actions_logger.info('Waiting for price action...')
 

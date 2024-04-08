@@ -82,7 +82,7 @@ def pnl_long(opened_price):
                 symbol=config.trading_pair,
                 entry_price=opened_price,
                 close_price=current_price,
-                pnl=current_price - opened_price,
+                pnl=float(current_price) - float(opened_price),
                 side='long',
                 time_in_trade=total_time
             )

@@ -13,3 +13,4 @@ core/trade/jupyter testing
 bot/.pytest_cache
 bot/__pycache__
 .vscode
+jupyter_data/.ipynb_checkpoints
