@@ -2,16 +2,14 @@ import numpy as np
 import random
 import ccxt
 import pandas as pd
-import time
-from binance.client import Client
-from matic import trade_simulate
+import pickle
 
 # Constants
+NUM_EPISODES = 1000
 LEARNING_RATE = 0.1
 DISCOUNT_FACTOR = 0.99
 EPSILON = 0.1
 
-client = Client()
 # Define action space
 ACTIONS = ['buy', 'sell', 'hold']
 
@@ -71,16 +69,49 @@ def train_agent(df):
     """
     Train the RL agent using Q-learning.
     """
-    # Implement training here
-    pass
+    for episode in range(NUM_EPISODES):
+        entry_price = 0.0  # Reset entry price for each episode
+        state = get_state(df, 0)
+
+        for t in range(1, len(df)):
+            action = choose_action(state)
+
+            if action == 'buy' and entry_price == 0.0:
+                entry_price = df.at[t, 'close']
+
+            reward = get_reward(action, entry_price, df.at[t, 'close'])
+            next_state = get_state(df, t)
+
+            update_q_table(state, action, reward, next_state)
+
+            state = next_state
+
+        # Save the Q-values after each episode
+        save_model(Q, f'Q_values_episode_{episode}.pkl')
+
+
+def save_model(model, filename):
+    """
+    Save the model (Q-values) to a file.
+    """
+    with open(filename, 'wb') as f:
+        pickle.dump(model, f)
+
+
+def load_model(filename):
+    """
+    Load the model (Q-values) from a file.
+    """
+    with open(filename, 'rb') as f:
+        model = pickle.load(f)
+    return model
 
 
 def get_signal():
-    """
-    Fetch real-time market data from the exchange.
-    """
+    global long_entry_price, short_entry_price
+
     exchange = ccxt.binance({'option': {'defaultMarket': 'futures'}})
-    symbol = 'BTC/USDT'
+    symbol = 'MATIC/USDT'
     timeframe = '5m'
     ohlcv = exchange.fetch_ohlcv(symbol, timeframe)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
@@ -96,46 +127,106 @@ def get_signal():
     df['ema_long'] = df['close'].ewm(span=long_period).mean()
     df['macd'] = df['ema_short'] - df['ema_long']
     df['signal_line'] = df['macd'].ewm(span=signal_period).mean()
+    df['long_entry'] = (df['ema10'] > df['ema20']) & (df['%K'] > df['%D']) & (df['macd'] > df['signal_line'])
+    df['long_exit'] = df['close'].pct_change() > 0.01  # 1% profit target as exit signal
+    df['short_entry'] = (df['ema10'] < df['ema20']) & (df['%K'] < df['%D']) & (df['macd'] < df['signal_line'])
+    df['short_exit'] = df['close'].pct_change() < -0.01  # 1% profit target as exit signal
     return df
 
 
-def execute_trade(action):
+def evaluate_agent(df):
     """
-    Execute the trade based on the chosen action.
+    Evaluate the RL agent's performance in a simulated trading environment.
     """
-    symbol = 'BTC/USDT'
-    signal = 'long' if action == 'buy' else 'short' if action == 'sell' else 'hold'
-    entry_price = 0.0  # Initialize entry price
-    start_time = time.time()  # Start time of the trade
+    total_profit = 0.0
+    entry_price = 0.0
+    in_trade = False
 
-    # Execute trade simulation
-    if signal in ['long', 'short']:
-        if action == 'buy':
-            entry_price = client.get_symbol_ticker(symbol=symbol)['price']
-        return trade_simulate.trade(symbol, signal, entry_price, start_time)
-
-
-def live_trading():
-    """
-    Perform live trading with the trained RL agent.
-    """
-    print('Starting trading')
-    print('-----------------')
-    while True:
-        # Fetch real-time market data
-        print('Getting signals')
-        df = get_signal()
-        state = get_state(df, len(df) - 1)
+    for t in range(1, len(df)):
+        state = get_state(df, t)
         action = choose_action(state)
-        print('Starting trade')
-        reward = execute_trade(action)
-        update_q_table(state, action, reward, get_state(df, len(df) - 1))  # Update Q-table with reward
-        time.sleep(60)  # Sleep for 1 minute
+
+        if action == 'buy' and not in_trade:
+            entry_price = df.at[t, 'close']
+            in_trade = True
+            print(f"Buy at {entry_price}")
+        elif action == 'sell' and in_trade:
+            profit = df.at[t, 'close'] - entry_price
+            total_profit += profit
+            print(f"Sell at {df.at[t, 'close']}, Profit: {profit}")
+            in_trade = False
+
+    print(f"Total Profit: {total_profit}")
+
+
+def calculate_win_rate(df):
+    """
+    Calculate the win rate of the RL agent's trades.
+    """
+    total_trades = 0
+    profitable_trades = 0
+    entry_price = 0.0
+    in_trade = False
+
+    for t in range(1, len(df)):
+        state = get_state(df, t)
+        action = choose_action(state)
+
+        if action == 'buy' and not in_trade:
+            entry_price = df.at[t, 'close']
+            in_trade = True
+            total_trades += 1
+        elif action == 'sell' and in_trade:
+            total_trades += 1
+            profit = df.at[t, 'close'] - entry_price
+            if profit > 0:
+                profitable_trades += 1
+            in_trade = False
+
+    win_rate = (profitable_trades / total_trades) * 100 if total_trades > 0 else 0
+    return win_rate
+
+
+def train_and_evaluate_until_improvement():
+    """
+    Train and evaluate the RL agent until it achieves a win rate of 70% or higher.
+    """
+    best_win_rate = 0.0
+    best_Q = None
+
+    while True:
+        # Load Q-values from the best model (if available)
+        if best_Q is not None:
+            Q = best_Q.copy()
+
+        # Train RL agent
+        df = get_signal()
+        train_agent(df)
+
+        # Evaluate performance
+        evaluate_agent(df)
+
+        # Calculate win rate
+        win_rate = calculate_win_rate(df)
+        print(f"Win Rate: {win_rate:.2f}%")
+
+        # Check if win rate improved
+        if win_rate >= 70.0:
+            best_Q = Q.copy()
+            break  # Exit loop if win rate is 70% or higher
+
+        # Update best win rate if current win rate is better
+        if win_rate > best_win_rate:
+            best_win_rate = win_rate
+            best_Q = Q.copy()
+
+    # Return the best Q-values and win rate
+    return best_Q, best_win_rate
 
 
 def main():
-    # Start live trading
-    live_trading()
+    best_Q, best_win_rate = train_and_evaluate_until_improvement()
+    print(f"Best Win Rate Achieved: {best_win_rate:.2f}%")
 
 
 if __name__ == "__main__":

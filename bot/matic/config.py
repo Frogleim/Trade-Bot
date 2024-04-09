@@ -1,7 +1,7 @@
 #testnet
 API_KEY = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
 API_SECRET = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
-checkpoint_list = [0.0008, 0.001, 0.0012, 0.0014]
+checkpoint_list = [0.0012, 0.0014]
 checkpoint_list_atom = [0.03, 0.05, 0.07]
 checkpoint_list_scalping = [3, 5, 6]
 

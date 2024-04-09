@@ -11,7 +11,7 @@ def run_trade(cryptocurrency, price, action):
     if cryptocurrency == 'MATICUSDT':
         start_time = time.time()
         print(f'Starting trade for symbol {cryptocurrency} ---> side: {action} ---> price: {price}')
-        trade_simulate.trade(cryptocurrency, action, price, start_time)
+        matic_trade.trade(cryptocurrency, action, price, start_time)
         logging_settings.actions_logger.info(f'Starting trade for symbol {cryptocurrency} '
                                              f'---> side: {action} ---> price: {price}')
     else:
