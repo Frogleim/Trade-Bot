@@ -24,3 +24,7 @@ def trade(symbol, signal, entry_price, start_time):
                 print(f'Closing Position with {res}')
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
+
+
+
+# 091

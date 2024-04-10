@@ -1,9 +1,11 @@
 import pandas as pd
 import ccxt
-import db
+from binance.client import Client
+import numpy as np
 
 long_entry_price = 0.00
 short_entry_price = 0.00
+client = Client(api_key='YOUR_API_KEY', api_secret='YOUR_API_SECRET')
 
 
 def get_signal():
@@ -50,5 +52,45 @@ def get_signal():
     return long_entry_price, short_entry_price
 
 
+def get_latest_candlestick(symbol):
+    """Fetches the latest 5-minute candlestick data for the specified symbol."""
+    candles = client.futures_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_5MINUTE, limit=1)
+    latest_candle = candles[0]
+    df = pd.DataFrame([latest_candle], columns=['timestamp', 'open', 'high', 'low', 'close', 'volume',
+                                                'close_time', 'quote_asset_volume', 'number_of_trades',
+                                                'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume',
+                                                'ignore'])
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+    df.set_index('timestamp', inplace=True)
+    return df.astype(float)
+
+
+def calculate_sma(df, window):
+    """Calculates Simple Moving Average (SMA) for a specified window."""
+    return df['close'].rolling(window=window).mean()
+
+
+def generate_signal(symbol, short_window=20, long_window=50):
+    """Generates a buy or sell signal along with the signal price based on SMA analysis of the latest candlestick."""
+    latest_candle = get_latest_candlestick(symbol)
+    short_sma = calculate_sma(latest_candle, short_window)
+    long_sma = calculate_sma(latest_candle, long_window)
+
+    signal_price = latest_candle.iloc[-1]['close']
+
+    if short_sma.iloc[-1] > long_sma.iloc[-1]:
+        return "Buy", signal_price  # If short-term SMA is above long-term SMA, generate a buy signal
+    else:
+        return "Sell", signal_price  # Otherwise, generate a sell signal
+
+
+def main():
+    symbol = 'MATICUSDT'  # Example symbol (Bitcoin against USDT)
+    signal, signal_price = generate_signal(symbol)  # Generate signal for the specified symbol
+    print("Signal:", signal)
+    print("Signal Price:", signal_price)
+    return signal, signal_price
+
+
 if __name__ == '__main__':
-    get_signal()
+    main()

@@ -69,7 +69,7 @@ def pnl_long(opened_price):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
     if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
@@ -124,7 +124,7 @@ def pnl_short(opened_price):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
