@@ -10,7 +10,7 @@ core/__pycache__
 __pycache__
 venv
 core/trade/jupyter testing
-bot/.pytest_cache
-bot/__pycache__
+coins_trade/.pytest_cache
+coins_trade/__pycache__
 .vscode
 jupyter_data/.ipynb_checkpoints

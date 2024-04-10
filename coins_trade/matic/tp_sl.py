@@ -20,7 +20,7 @@ price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
-files_dir = os.path.join(grandparent_dir, "bot")
+files_dir = os.path.join(grandparent_dir, "coins_trade")
 logging.basicConfig(
     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 console_handler = logging.StreamHandler(sys.stdout)
@@ -71,7 +71,7 @@ def pnl_long(opened_price):
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
-    if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
+    if len(profit_checkpoint_list) > 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -125,7 +125,7 @@ def pnl_short(opened_price):
                 logging.info(message)
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
-    if len(profit_checkpoint_list) >= 0 and current_checkpoint is not None:
+    if len(profit_checkpoint_list) > 0 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
@@ -136,7 +136,7 @@ def pnl_short(opened_price):
                 symbol=config.trading_pair,
                 entry_price=opened_price,
                 close_price=current_price,
-                pnl=opened_price - current_price,
+                pnl=float(opened_price) - float(current_price),
                 side='short',
                 time_in_trade=total_time
 

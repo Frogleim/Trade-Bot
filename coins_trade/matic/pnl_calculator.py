@@ -8,7 +8,7 @@ import math
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-files_dir = os.path.join(parent_dir, "bot")
+files_dir = os.path.join(parent_dir, "coins_trade")
 client = Client(config.API_KEY, config.API_SECRET)
 percentage_increase = 0.0
 
