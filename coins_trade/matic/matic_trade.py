@@ -6,9 +6,12 @@ from . import tp_sl, config, position_handler, logging_settings
 client = Client(config.API_KEY, config.API_SECRET)
 
 
-def trade(symbol, signal, entry_price, start_time):
+def trade(symbol, signal, entry_price):
+    start_time = time.time()
+    print(f"starting time {start_time}")
     if signal == 'short':
         tp_sl.profit_checkpoint_list.clear()
+        tp_sl.current_profit = 0.00
         try:
             order_info = position_handler.place_sell_order(price=entry_price,
                                                            quantity=config.position_size,
@@ -38,13 +41,11 @@ def trade(symbol, signal, entry_price, start_time):
                         position_handler.close_position(side='long', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
-                elif time.time() - start_time > 10800:
-                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
-
-                    break
 
     if signal == 'long':
         tp_sl.profit_checkpoint_list.clear()
+        tp_sl.current_profit = 0.00
+
         try:
             order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
                                                           symbol=symbol)
@@ -70,8 +71,4 @@ def trade(symbol, signal, entry_price, start_time):
                         print(e)
                         position_handler.close_position(side='short', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
-                    break
-                elif time.time() - start_time > 10800:
-                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
-
                     break

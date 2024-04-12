@@ -10,7 +10,7 @@ import logging_settings
 
 current_profit = 0
 profit_checkpoint_list = []
-current_checkpoint = None
+current_checkpoint = 0.00
 try:
     client = Client(config.API_KEY, config.API_SECRET)
 except Exception as e:
@@ -51,6 +51,8 @@ def pnl_long(opened_price):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
+
+    print(current_profit, current_checkpoint, profit_checkpoint_list)
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
     except Exception as e:
@@ -58,9 +60,9 @@ def pnl_long(opened_price):
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
     current_profit = float(current_price) - float(opened_price)
-    logging.info(
-        f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
-    )
+    # logging_settings.system_log.info(
+    #     f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
+    # )
     for i in range(len(config.checkpoint_list) - 1):
         if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:  # Check if it's a new checkpoint
@@ -71,11 +73,12 @@ def pnl_long(opened_price):
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
-    if len(profit_checkpoint_list) > 0 and current_checkpoint is not None:
+    if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]:
+        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]
+                and current_profit > 0):
             total_time = time.time() - start_time
             connect_base = db.DataBase()
             connect_base.insert_trades(
@@ -106,6 +109,8 @@ def pnl_short(opened_price):
 
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
+    print(current_profit, current_checkpoint, profit_checkpoint_list)
+
 
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
@@ -114,8 +119,8 @@ def pnl_short(opened_price):
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
     current_profit = float(opened_price) - float(current_price)
-    logging.info(
-        f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit}')
+    # logging_settings.system_log.info(
+    #     f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit}')
     for i in range(len(config.checkpoint_list) - 1):
         if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:
@@ -125,11 +130,12 @@ def pnl_short(opened_price):
                 logging.info(message)
 
     logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
-    if len(profit_checkpoint_list) > 0 and current_checkpoint is not None:
+    if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]:
+        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= config.checkpoint_list[-1]
+                and current_profit > 0):
             total_time = time.time() - start_time
             connect_base = db.DataBase()
             connect_base.insert_trades(

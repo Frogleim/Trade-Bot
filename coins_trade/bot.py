@@ -24,14 +24,14 @@ def start_trade():
 
 def run():
     print('Bot started')
-    print('Waiting for 30 min before starting... ')
     while True:
-        time.sleep(1800)
 
         print('Trading pair: %s' % trading_pair)
         print("---------------------------------")
         print('Waiting for price action...')
         start_trade()
+        # time.sleep(1800)
+
 
 
 if __name__ == '__main__':

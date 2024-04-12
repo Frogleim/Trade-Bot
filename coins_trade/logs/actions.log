@@ -214,3 +214,63 @@
 2024-04-10 16:16:20,770 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88070
 2024-04-10 16:16:20,770 - INFO - Short entry price: 0.88
 2024-04-10 16:16:20,770 - INFO - Short entry price: 0.88
+2024-04-10 16:51:18,965 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.86980
+2024-04-10 16:51:18,965 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.86980
+2024-04-10 16:51:18,965 - INFO - Short entry price: 0.87
+2024-04-10 16:51:18,965 - INFO - Short entry price: 0.87
+2024-04-11 13:58:36,374 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88610
+2024-04-11 13:58:36,374 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88610
+2024-04-11 13:58:36,374 - INFO - Short entry price: 0.89
+2024-04-11 13:58:36,374 - INFO - Short entry price: 0.89
+2024-04-11 14:13:57,169 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88620
+2024-04-11 14:13:57,169 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88620
+2024-04-11 14:13:57,169 - INFO - Short entry price: 0.89
+2024-04-11 14:13:57,169 - INFO - Short entry price: 0.89
+2024-04-11 15:03:49,531 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88250
+2024-04-11 15:03:49,531 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.88250
+2024-04-11 15:03:49,531 - INFO - Short entry price: 0.88
+2024-04-11 15:03:49,531 - INFO - Short entry price: 0.88
+2024-04-11 15:35:46,333 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87890
+2024-04-11 15:35:46,333 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87890
+2024-04-11 15:35:46,333 - INFO - Short entry price: 0.88
+2024-04-11 15:35:46,333 - INFO - Short entry price: 0.88
+2024-04-11 20:15:14,158 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87250
+2024-04-11 20:15:14,158 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87250
+2024-04-11 20:15:14,159 - INFO - Short entry price: 0.87
+2024-04-11 20:15:14,159 - INFO - Short entry price: 0.87
+2024-04-11 20:45:53,323 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.86560
+2024-04-11 20:45:53,323 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.86560
+2024-04-11 20:45:53,324 - INFO - Short entry price: 0.87
+2024-04-11 20:45:53,324 - INFO - Short entry price: 0.87
+2024-04-11 21:38:11,181 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87400
+2024-04-11 21:38:11,181 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87400
+2024-04-11 21:38:11,181 - INFO - Short entry price: 0.87
+2024-04-11 21:38:11,181 - INFO - Short entry price: 0.87
+2024-04-11 22:15:26,727 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87620
+2024-04-11 22:15:26,727 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.87620
+2024-04-11 22:15:26,727 - INFO - Short entry price: 0.88
+2024-04-11 22:15:26,727 - INFO - Short entry price: 0.88
+2024-04-12 09:18:58,761 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.89030
+2024-04-12 09:18:58,761 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.89030
+2024-04-12 09:18:58,762 - INFO - Short entry price: 0.89
+2024-04-12 09:18:58,762 - INFO - Short entry price: 0.89
+2024-04-12 21:16:12,276 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83870
+2024-04-12 21:16:12,276 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83870
+2024-04-12 21:16:12,277 - INFO - Short entry price: 0.84
+2024-04-12 21:16:12,277 - INFO - Short entry price: 0.84
+2024-04-12 21:20:22,223 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83760
+2024-04-12 21:20:22,223 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83760
+2024-04-12 21:20:22,223 - INFO - Short entry price: 0.84
+2024-04-12 21:20:22,223 - INFO - Short entry price: 0.84
+2024-04-12 21:20:42,597 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83610
+2024-04-12 21:20:42,597 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83610
+2024-04-12 21:20:42,597 - INFO - Short entry price: 0.84
+2024-04-12 21:20:42,597 - INFO - Short entry price: 0.84
+2024-04-12 21:21:20,485 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83470
+2024-04-12 21:21:20,485 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.83470
+2024-04-12 21:21:20,485 - INFO - Short entry price: 0.83
+2024-04-12 21:21:20,485 - INFO - Short entry price: 0.83
+2024-04-12 21:31:20,571 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.79670
+2024-04-12 21:31:20,571 - INFO - Starting trade for symbol MATICUSDT ---> side: short ---> price: 0.79670
+2024-04-12 21:31:20,571 - INFO - Short entry price: 0.80
+2024-04-12 21:31:20,571 - INFO - Short entry price: 0.80
