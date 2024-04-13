@@ -12,6 +12,8 @@ def trade(symbol, signal, entry_price):
     if signal == 'short':
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
+        tp_sl.current_checkpoint = 0.00
+
         try:
             order_info = position_handler.place_sell_order(price=entry_price,
                                                            quantity=config.position_size,
@@ -45,6 +47,8 @@ def trade(symbol, signal, entry_price):
     if signal == 'long':
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
+        tp_sl.current_checkpoint = 0.00
+
 
         try:
             order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
