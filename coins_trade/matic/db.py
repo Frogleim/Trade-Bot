@@ -25,3 +25,12 @@ class DataBase:
                        "VALUES (%s, %s, %s, %s, %s)",
                        (symbol, entry_price, close_price, pnl, side))
         conn.commit()
+
+    def insert_test_trades(self, entry_time, entry_price, close_price, pnl, side, exit_time):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO test_trades (entry_time, entry_price, exit_price, pnl, side, exit_price)"
+                       "VALUES (%s, %s, %s, %s, %s, %s)",
+                       (entry_time, entry_price, close_price, pnl, side, exit_time))
+        conn.commit()
+

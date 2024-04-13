@@ -1,5 +1,7 @@
 import os
 import logging
+from datetime import datetime
+
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -40,3 +42,5 @@ system_log_handler = logging.FileHandler(system_logs_log_file_path)
 system_log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 system_log.addHandler(system_log_handler)
 
+current_datetime = datetime.now()
+print(current_datetime)

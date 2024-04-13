@@ -54,7 +54,7 @@ def get_signal():
 
 def get_latest_candlestick(symbol):
     """Fetches the latest 5-minute candlestick data for the specified symbol."""
-    candles = client.futures_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_5MINUTE, limit=1)
+    candles = client.futures_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_5MINUTE, limit=5)
     latest_candle = candles[0]
     df = pd.DataFrame([latest_candle], columns=['timestamp', 'open', 'high', 'low', 'close', 'volume',
                                                 'close_time', 'quote_asset_volume', 'number_of_trades',
