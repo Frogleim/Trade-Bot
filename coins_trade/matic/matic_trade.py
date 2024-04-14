@@ -1,12 +1,15 @@
 import time
 from binance.client import Client
 from . import tp_sl, config, position_handler, logging_settings
+from datetime import datetime
 
 # Replace with your Binance API key and secret
 client = Client(config.API_KEY, config.API_SECRET)
 
 
 def trade(symbol, signal, entry_price):
+    current_time = datetime.now()
+
     start_time = time.time()
     print(f"starting time {start_time}")
     if signal == 'short':
@@ -32,7 +35,7 @@ def trade(symbol, signal, entry_price):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price)
+                res = tp_sl.pnl_short(entry_price, current_time)
                 if res == 'Profit':
 
                     print(f'Closing Position with {res}')
@@ -66,7 +69,7 @@ def trade(symbol, signal, entry_price):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price)
+                res = tp_sl.pnl_long(entry_price, current_time)
                 if res == 'Profit':
                     print(f'Closing Position with {res}')
                     try:
