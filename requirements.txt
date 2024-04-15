@@ -5,4 +5,3 @@ torch
 torchvision
 openai
 ccxt
-psycopg2

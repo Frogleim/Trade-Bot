@@ -1,7 +1,7 @@
 API_KEY = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
 API_SECRET = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
 # use this for mainnet
-checkpoint_list = [0.0012, 0.0014, 0.0018, 0.0026, 0.0030]
+checkpoint_list = [12, 16, 18, 20, 22]
 # Test checkpoints
 # checkpoint_list = [0.0018, 0.0026, 0.0030, 0.0033]
 

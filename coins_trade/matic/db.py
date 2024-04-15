@@ -1,5 +1,5 @@
 import psycopg2
-
+import config
 
 class DataBase:
     def __init__(self):
@@ -34,3 +34,13 @@ class DataBase:
                        (entry_time, entry_price, close_price, pnl, side, exit_time))
         conn.commit()
 
+
+
+if __name__ =="__main__":
+    from binance.client import Client
+
+    client = Client(config.API_KEY, config.API_SECRET)
+
+    orders = client.futures_position_information(symbol='MATICUSDT')
+    pnl = float(orders[0]['unRealizedProfit']) * 1000
+    print(f'PNL: {pnl}%')

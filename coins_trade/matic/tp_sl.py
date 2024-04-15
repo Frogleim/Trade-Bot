@@ -3,11 +3,10 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import config, db
+from . import config
 import time
 import logging_settings
 from datetime import datetime
-
 
 current_profit = 0
 profit_checkpoint_list = []
@@ -55,30 +54,36 @@ def pnl_long(opened_price, entry_time):
 
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+        orders = client.futures_position_information(symbol='MATICUSDT')
+        pnl = float(orders[0]['unRealizedProfit']) * 1000
     except Exception as e:
+        orders = client.futures_position_information(symbol='MATICUSDT')
+        pnl = float(orders[0]['unRealizedProfit']) * 1000
         logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e}--- Trying again...')
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
-    current_profit = float(current_price) - float(opened_price)
     # logging_settings.system_log.info(
     #     f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit} ---'
     # )
     for i in range(len(config.checkpoint_list) - 1):
-        if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
+        if config.checkpoint_list[i] <= pnl < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:  # Check if it's a new checkpoint
                 current_checkpoint = config.checkpoint_list[i]
                 profit_checkpoint_list.append(current_checkpoint)
-                message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
+                message = f'Current profit is: {pnl}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {pnl} --> Current Price {current_price}')
+
+    if pnl < -80:
+        return 'Loss'
 
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if (current_profit < profit_checkpoint_list[-1] or current_profit >= config.checkpoint_list[-1]
-                and current_profit > 0):
+        if (pnl < profit_checkpoint_list[-1] or pnl >= config.checkpoint_list[-1]
+                and pnl > 0):
             exit_time = datetime.now()
 
             # connect_base = db.DataBase()
@@ -92,7 +97,7 @@ def pnl_long(opened_price, entry_time):
             # )
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
-                f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
+                f'Close Price: {round(float(current_price), 1)}\nProfit: {round(pnl, 1)}'
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             return 'Profit'
@@ -111,31 +116,36 @@ def pnl_short(opened_price, entry_time):
     """
     global current_profit, current_checkpoint, profit_checkpoint_list
 
-
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+        orders = client.futures_position_information(symbol='MATICUSDT')
+        pnl = float(orders[0]['unRealizedProfit']) * 1000
     except Exception as e:
-        logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e} --- Trying again...')
+        orders = client.futures_position_information(symbol='MATICUSDT')
+        pnl = float(orders[0]['unRealizedProfit']) * 1000
+        logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e}--- Trying again...')
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
-    current_profit = float(opened_price) - float(current_price)
+    if pnl < -80:
+        return 'Loss'
+
     # logging_settings.system_log.info(
     #     f'Entry Price: {opened_price} --- Current Price: {current_price} --- Current Profit: {current_profit}')
     for i in range(len(config.checkpoint_list) - 1):
-        if config.checkpoint_list[i] <= current_profit < config.checkpoint_list[i + 1]:
+        if config.checkpoint_list[i] <= pnl < config.checkpoint_list[i + 1]:
             if current_checkpoint != config.checkpoint_list[i]:
                 current_checkpoint = config.checkpoint_list[i]
                 profit_checkpoint_list.append(current_checkpoint)
-                message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
+                message = f'Current profit is: {pnl}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
+    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {pnl} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if (current_profit < profit_checkpoint_list[-1] or current_profit >= config.checkpoint_list[-1]
-                and current_profit > 0):
+        if (pnl < profit_checkpoint_list[-1] or pnl >= config.checkpoint_list[-1]
+                and pnl > 0):
             total_time = time.time() - start_time
             # connect_base = db.DataBase()
             # exit_time = datetime.now()
@@ -149,7 +159,7 @@ def pnl_short(opened_price, entry_time):
             #
             # )
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
-                   f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
+                   f'Close Price: {round(float(current_price), 1)}\nProfit: {round(pnl, 1)}'
             logging.info(body)
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
