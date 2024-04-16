@@ -3,16 +3,12 @@ from binance.client import Client
 from . import tp_sl, config, position_handler, logging_settings
 from datetime import datetime
 
-# Replace with your Binance API key and secret
-
 client = Client(config.API_KEY, config.API_SECRET)
 
 
 def trade(symbol, signal, entry_price):
     current_time = datetime.now()
-
     start_time = time.time()
-    print(f"starting time {start_time}")
     if signal == 'short':
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
@@ -23,7 +19,7 @@ def trade(symbol, signal, entry_price):
                                                            quantity=config.position_size,
                                                            symbol=symbol)
         except Exception as e:
-            print(e)
+            logging_settings.error_logs_logger.error(e)
             order_info = position_handler.place_sell_order(price=entry_price,
                                                            quantity=config.position_size,
                                                            symbol=symbol)
@@ -39,21 +35,21 @@ def trade(symbol, signal, entry_price):
                 res = tp_sl.pnl_short(entry_price, current_time)
                 if res == 'Profit':
 
-                    print(f'Closing Position with {res}')
+                    logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
                         position_handler.close_position(side='long', quantity=config.position_size)
                     except Exception as e:
-                        print(e)
+                        logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
                 if res == 'Loss':
-                    print(f'Closing Position with {res}')
+                    logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
                         position_handler.close_position(side='long', quantity=config.position_size)
                     except Exception as e:
-                        print(e)
+                        logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
@@ -67,7 +63,7 @@ def trade(symbol, signal, entry_price):
             order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
                                                           symbol=symbol)
         except Exception as e:
-            print(e)
+            logging_settings.error_logs_logger.error(e)
             order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
                                                           symbol=symbol)
         while True:
@@ -81,22 +77,21 @@ def trade(symbol, signal, entry_price):
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_long(entry_price, current_time)
                 if res == 'Profit':
-                    print(f'Closing Position with {res}')
+                    logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
                         position_handler.close_position(side='short', quantity=config.position_size)
                     except Exception as e:
-                        print(e)
+                        logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
                 if res == 'Loss':
-                    print(f'Closing Position with {res}')
+                    logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
                         position_handler.close_position(side='short', quantity=config.position_size)
                     except Exception as e:
-                        print(e)
+                        logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=config.position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
-

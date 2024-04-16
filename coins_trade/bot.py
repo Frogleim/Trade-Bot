@@ -4,14 +4,15 @@ from binance.client import Client
 import logging_settings
 import time
 
-symbol = 'MATICUSDT'
 
 client = Client(api_key='<KEY>', api_secret='<KEY>')
 trading_pair = 'MATICUSDT'
+symbols = ['MATICUSDT', 'ADAUSDT']
 
 
 def start_trade():
-    signal, price = strategy.main()
+    signal, price = strategy.main(symbols)
+
     current_price = client.futures_ticker(symbol=trading_pair)['lastPrice']
     if signal == "Buy":
         trade.run_trade(cryptocurrency=symbol, price=current_price, action='long')

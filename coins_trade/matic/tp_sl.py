@@ -84,17 +84,7 @@ def pnl_long(opened_price, entry_time):
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
         if (pnl < profit_checkpoint_list[-1] or pnl >= config.checkpoint_list[-1]
                 and pnl > 0):
-            exit_time = datetime.now()
 
-            # connect_base = db.DataBase()
-            # connect_base.insert_test_trades(
-            #     entry_time=entry_time,
-            #     entry_price=opened_price,
-            #     close_price=current_price,
-            #     pnl=float(current_price) - float(opened_price),
-            #     side='long',
-            #     exit_time=exit_time
-            # )
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(pnl, 1)}'
@@ -146,18 +136,7 @@ def pnl_short(opened_price, entry_time):
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
         if (pnl < profit_checkpoint_list[-1] or pnl >= config.checkpoint_list[-1]
                 and pnl > 0):
-            total_time = time.time() - start_time
-            # connect_base = db.DataBase()
-            # exit_time = datetime.now()
-            # connect_base.insert_test_trades(
-            #     entry_time=entry_time,
-            #     entry_price=opened_price,
-            #     close_price=current_price,
-            #     pnl=float(opened_price) - float(current_price),
-            #     side='short',
-            #     exit_time=exit_time
-            #
-            # )
+
             body = f'Position closed!\nPosition data\nSymbol: {config.trading_pair}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(pnl, 1)}'
             logging.info(body)

@@ -6,16 +6,17 @@ import numpy as np
 long_entry_price = 0.00
 short_entry_price = 0.00
 client = Client(api_key='YOUR_API_KEY', api_secret='YOUR_API_SECRET')
-
+signal_list = []
 
 def get_signal():
     global long_entry_price, short_entry_price
 
-    exchange = ccxt.binance({'option': {'defaultMarket': 'futures'}})
-    symbol = 'MATIC/USDT'
+    exchange = ccxt.binance({'option': {'defaultType': 'future'}})
+    symbol = 'MATICUSDT'
     timeframe = '5m'
     ohlcv = exchange.fetch_ohlcv(symbol, timeframe)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+    print(df.head())
     df['ema10'] = df['close'].ewm(span=10).mean()
     df['ema20'] = df['close'].ewm(span=20).mean()
     k_period, d_period = 14, 3
@@ -80,18 +81,26 @@ def generate_signal(symbol, short_window=20, long_window=50):
     signal_price = latest_candle.iloc[-1]['close']
 
     if short_sma.iloc[-1] > long_sma.iloc[-1]:
-        return "Buy", signal_price  # If short-term SMA is above long-term SMA, generate a buy signal
+        return "Buy", signal_price
     else:
-        return "Sell", signal_price  # Otherwise, generate a sell signal
+        return "Sell", signal_price
 
 
-def main():
-    symbol = 'MATICUSDT'  # Example symbol (Bitcoin against USDT)
-    signal, signal_price = generate_signal(symbol)  # Generate signal for the specified symbol
-    print("Signal:", signal)
-    print("Signal Price:", signal_price)
-    return signal, signal_price
+def main(symbols):
+    global signal_list
+
+    for symbol in symbols:
+        print(symbol)
+        signal, signal_price = generate_signal(symbol)
+        print("Signal:", signal)
+        print("Signal Price:", signal_price)
+        signal_dict = {'symbol': symbol, 'signal': signal, 'signal_price': signal_price}
+        signal_list.append(signal_dict)
+    return signal_list
 
 
 if __name__ == '__main__':
-    get_signal()
+    symbols = ['MATICUSDT', 'ADAUSDT']
+
+    signal_data = main(symbols)
+    print(signal_data)
