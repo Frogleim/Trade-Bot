@@ -6,7 +6,7 @@ from datetime import datetime
 client = Client(config.API_KEY, config.API_SECRET)
 
 
-def trade(symbol, signal, entry_price):
+def trade(symbol, signal, entry_price, position_size):
     current_time = datetime.now()
     start_time = time.time()
     if signal == 'short':
@@ -16,12 +16,12 @@ def trade(symbol, signal, entry_price):
 
         try:
             order_info = position_handler.place_sell_order(price=entry_price,
-                                                           quantity=config.position_size,
+                                                           quantity=position_size,
                                                            symbol=symbol)
         except Exception as e:
             logging_settings.error_logs_logger.error(e)
             order_info = position_handler.place_sell_order(price=entry_price,
-                                                           quantity=config.position_size,
+                                                           quantity=position_size,
                                                            symbol=symbol)
         while True:
             open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
@@ -37,20 +37,20 @@ def trade(symbol, signal, entry_price):
 
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
-                        position_handler.close_position(side='long', quantity=config.position_size)
+                        position_handler.close_position(side='long', quantity=position_size)
                     except Exception as e:
                         logging_settings.error_logs_logger.error(e)
-                        position_handler.close_position(side='long', quantity=config.position_size)
+                        position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
                 if res == 'Loss':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
-                        position_handler.close_position(side='long', quantity=config.position_size)
+                        position_handler.close_position(side='long', quantity=position_size)
                     except Exception as e:
                         logging_settings.error_logs_logger.error(e)
-                        position_handler.close_position(side='long', quantity=config.position_size)
+                        position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
@@ -60,11 +60,11 @@ def trade(symbol, signal, entry_price):
         tp_sl.current_checkpoint = 0.00
 
         try:
-            order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price, quantity=position_size,
                                                           symbol=symbol)
         except Exception as e:
             logging_settings.error_logs_logger.error(e)
-            order_info = position_handler.place_buy_order(price=entry_price, quantity=config.position_size,
+            order_info = position_handler.place_buy_order(price=entry_price, quantity=position_size,
                                                           symbol=symbol)
         while True:
             open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
@@ -79,19 +79,22 @@ def trade(symbol, signal, entry_price):
                 if res == 'Profit':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
-                        position_handler.close_position(side='short', quantity=config.position_size)
+                        position_handler.close_position(side='short', quantity=position_size)
                     except Exception as e:
                         logging_settings.error_logs_logger.error(e)
-                        position_handler.close_position(side='short', quantity=config.position_size)
+                        position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
                 if res == 'Loss':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:
-                        position_handler.close_position(side='short', quantity=config.position_size)
+                        position_handler.close_position(side='short', quantity=position_size)
                     except Exception as e:
                         logging_settings.error_logs_logger.error(e)
-                        position_handler.close_position(side='short', quantity=config.position_size)
+                        position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
+
+    else:
+        print(f'Wrong signal --- {signal}')

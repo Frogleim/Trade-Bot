@@ -7,10 +7,10 @@ grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(grandparent_dir, r"Trade-Bot/coins_trade")
 user_count = None
 log_file_path = os.path.join(files_dir, 'logs', 'logs.log')
-actions_log_file_path = os.path.join(files_dir, 'logs', 'actions.log')
+actions_log_file_path = os.path.join(files_dir, 'logs', 'signal_log.log')
 error_logs_log_file_path = os.path.join(files_dir, 'logs', 'error_logs.log')
 finish_trade_log_file_path = os.path.join(files_dir, 'logs', 'finish_trade_log.log')
-
+system_trade_log_file_path = os.path.join(files_dir, 'logs', 'system_trade_log.log')
 # Define a formatter for log messages
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
@@ -24,7 +24,7 @@ logging.root.addHandler(console_handler)
 logging.basicConfig(filename=log_file_path, level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure the 'actions.log' logger
-actions_logger = logging.getLogger('actions_log')
+actions_logger = logging.getLogger('signal_log')
 actions_logger.setLevel(logging.INFO)
 actions_handler = logging.FileHandler(actions_log_file_path)
 actions_handler.setFormatter(formatter)
@@ -43,3 +43,10 @@ error_logs_logger.setLevel(logging.ERROR)
 error_logs_handler = logging.FileHandler(error_logs_log_file_path)
 error_logs_handler.setFormatter(formatter)
 error_logs_logger.addHandler(error_logs_handler)
+
+# Configure the 'system_trade_log.log' logger
+system_logs_logger = logging.getLogger('system_trade_log')
+system_logs_logger.setLevel(logging.INFO)
+system_logs_handler = logging.FileHandler(system_trade_log_file_path)
+system_logs_handler.setFormatter(formatter)
+system_logs_logger.addHandler(system_logs_handler)

@@ -1,0 +1,14 @@
+{
+  "cryptocurrency":
+          [
+            {
+              "symbol": "MATICUSDT",
+              "position_size": 10
+            },
+
+            {
+              "symbol": "ADAUSDT",
+              "position_size": 30
+            }
+          ]
+}

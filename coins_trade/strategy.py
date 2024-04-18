@@ -89,13 +89,12 @@ def generate_signal(symbol, short_window=20, long_window=50):
 def main(symbols):
     global signal_list
 
-    for symbol in symbols:
-        print(symbol)
-        signal, signal_price = generate_signal(symbol)
-        print("Signal:", signal)
-        print("Signal Price:", signal_price)
-        signal_dict = {'symbol': symbol, 'signal': signal, 'signal_price': signal_price}
-        signal_list.append(signal_dict)
+    print(symbols)
+    signal, signal_price = generate_signal(symbols)
+    print("Signal:", signal)
+    print("Signal Price:", signal_price)
+    signal_dict = {'symbol': symbols, 'signal': signal, 'signal_price': signal_price}
+    signal_list.append(signal_dict)
     return signal_list
 
 

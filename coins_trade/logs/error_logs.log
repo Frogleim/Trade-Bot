@@ -2,3 +2,47 @@
 2024-04-05 21:35:48,172 - ERROR - Error while monitoring current position: HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10) --- Trying again...
 2024-04-05 21:41:28,634 - ERROR - Error while monitoring current position: HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10) --- Trying again...
 2024-04-05 21:41:28,634 - ERROR - Error while monitoring current position: HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10) --- Trying again...
+2024-04-17 22:36:05,119 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-17 22:36:05,119 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:17:28,703 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:28,703 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:30,685 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:30,685 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:37,688 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:37,688 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:39,736 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:17:39,736 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.80.222
+2024-04-18 16:19:49,072 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:19:49,072 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:19:57,974 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:19:57,974 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:07,008 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:07,008 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:16,036 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:16,036 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:25,071 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:25,071 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:34,036 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:34,036 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:43,136 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:43,136 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:52,195 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:20:52,195 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:01,185 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:01,185 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:10,547 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:10,547 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:19,122 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:19,122 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:28,112 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:28,112 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:37,129 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:37,129 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:46,083 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:46,083 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:55,271 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:21:55,271 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:22:04,124 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:22:04,124 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:23:54,913 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-04-18 16:23:54,913 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
