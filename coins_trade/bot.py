@@ -17,7 +17,7 @@ not_trading_symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
 
 def read_config_json():
     logging_settings.system_logs_logger.info('Reading config file')
-    with open('config.json', 'r') as f:
+    with open(f'{base_dir}/config.json', 'r') as f:
         data = json.load(f)
     return data
 

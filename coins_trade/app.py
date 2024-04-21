@@ -1,11 +1,12 @@
-from coins_trade import bot, trade
+import bot, trade
+import threading
 
 
 def main():
     print("Welcome to Coins Trade!")
     print("Running on Coins Trade")
-    bot.run()
-    trade.continuously_check_signals()
+    threading.Thread(target=bot.run).start()
+    threading.Thread(target=trade.continuously_check_signals).start()
     print("Coins Trade is done!")
 
 

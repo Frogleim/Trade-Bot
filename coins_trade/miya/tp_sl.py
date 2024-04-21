@@ -5,7 +5,7 @@ from collections import Counter
 from binance.client import Client
 from . import config
 import time
-import logging_settings
+from . import logging_settings
 from datetime import datetime
 
 current_profit = 0
