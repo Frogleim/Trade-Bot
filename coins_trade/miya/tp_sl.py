@@ -54,11 +54,11 @@ def pnl_long(opened_price, entry_time):
 
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-        orders = client.futures_position_information(symbol='MATICUSDT')
-        pnl = float(orders[0]['unRealizedProfit']) * 1000
+        orders = client.futures_position_information(symbol=config.trading_pair)
+        pnl = float(orders[0]['unRealizedProfit']) * 100
     except Exception as e:
-        orders = client.futures_position_information(symbol='MATICUSDT')
-        pnl = float(orders[0]['unRealizedProfit']) * 1000
+        orders = client.futures_position_information(symbol=config.trading_pair)
+        pnl = float(orders[0]['unRealizedProfit']) * 100
         logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e}--- Trying again...')
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 
@@ -73,7 +73,7 @@ def pnl_long(opened_price, entry_time):
                 message = f'Current profit is: {pnl}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {pnl} --> Current Price {current_price}')
+    logging.warning(f'Symbol --> {config.trading_pair} Current checkpoint: --> {current_checkpoint} --> {pnl} --> Current Price {current_price}')
 
     if pnl < -80:
         return 'Loss'
@@ -108,11 +108,11 @@ def pnl_short(opened_price, entry_time):
 
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
-        orders = client.futures_position_information(symbol='MATICUSDT')
-        pnl = float(orders[0]['unRealizedProfit']) * 1000
+        orders = client.futures_position_information(symbol=config.trading_pair)
+        pnl = float(orders[0]['unRealizedProfit']) * 100
     except Exception as e:
-        orders = client.futures_position_information(symbol='MATICUSDT')
-        pnl = float(orders[0]['unRealizedProfit']) * 1000
+        orders = client.futures_position_information(symbol=config.trading_pair)
+        pnl = float(orders[0]['unRealizedProfit']) * 100
         logging_settings.error_logs_logger.error(f'Error while monitoring current position: {e}--- Trying again...')
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
 

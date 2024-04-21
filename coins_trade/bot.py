@@ -12,6 +12,7 @@ client = Client()
 base_dir = os.path.dirname(os.path.abspath(__file__))
 files_dir = os.path.join(base_dir, r"miya")
 symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
+not_trading_symbols_list = ['XRPUSDT', 'ATOMUSDT', 'ADAUSDT', 'MATICUSDT']
 
 
 def read_config_json():
@@ -21,6 +22,12 @@ def read_config_json():
     return data
 
 
+def rewrite_config_json(data):
+    logging_settings.system_logs_logger.info('Rewriting config file')
+    with open('config.json', 'w') as f:
+        pass
+
+
 def clean_log_file():
     logging_settings.system_logs_logger.info('Cleaning log file.')
     with open('./logs/finish_trade_log.log', 'w') as log_file:
@@ -28,13 +35,16 @@ def clean_log_file():
 
 
 def process_symbol(symbol):
-    print(f'Processing symbol {symbol}')
+    logging_settings.system_logs_logger.info(f'Processing symbol {symbol}')
     signal_list = strategy.main(symbol['symbol'])
-    for signal_data in signal_list:
-        signal = signal_data['signal']
-        signal_price = signal_data['signal_price']
-        logging_settings.actions_logger.info(f'{symbol["symbol"]} {signal_price} {signal} {symbol["position_size"]}')
-
+    print(not_trading_symbols_list)
+    if symbol['symbol'] in not_trading_symbols_list:
+        for signal_data in signal_list:
+            signal = signal_data['signal']
+            signal_price = signal_data['signal_price']
+            logging_settings.actions_logger.info(
+                f'{symbol["symbol"]} {signal_price} {signal} {symbol["position_size"]}')
+            not_trading_symbols_list.remove(symbol['symbol'])
 
 def check_trade_status():
     global symbols_list
@@ -46,22 +56,23 @@ def check_trade_status():
                 cryptocurrency = data[0].split()[5]
                 symbols_list.append(cryptocurrency)
                 logging_settings.system_logs_logger.info(f'Trade for {cryptocurrency} was finished')
-                return True
+                return True, cryptocurrency
 
 
 def run():
     logging_settings.system_logs_logger.info('Bot started')
     while True:
-        print("---------------------------------")
         logging_settings.system_logs_logger.info('Waiting for price signals...')
         symbols = read_config_json()
         with multiprocessing.Pool() as pool:
             pool.map(process_symbol, symbols['cryptocurrency'])
+
         logging_settings.system_logs_logger.info('Waiting for trade finished...')
-        is_finished = check_trade_status()
-        logging_settings.system_logs_logger.info(f'All trades Finished trade for symbol')
+        is_finished, cryptocurrency = check_trade_status()
+        logging_settings.system_logs_logger.info(f'Finished trade for symbol {cryptocurrency}')
         if is_finished:
             clean_log_file()
+            not_trading_symbols_list.append(cryptocurrency)
             time.sleep(1800)
 
 

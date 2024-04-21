@@ -1,5 +1,5 @@
-import threading
 from miya import miya_trade
+import threading
 import time
 
 data = None
@@ -26,32 +26,45 @@ def read_alert():
 
 def start_trade(cryptocurrency, price, action, position_size):
     if action == 'Buy':
-        threading.Thread(target=miya_trade.trade, args=(cryptocurrency, 'long', price, position_size, )).start()
-        # run_trade.trade(cryptocurrency, price, action, position_size)
+        miya_trade.trade(cryptocurrency, 'long', price, position_size)
         print("Trade started for:", cryptocurrency)  # Adding a print statement
     elif action == 'Sell':
-        threading.Thread(target=miya_trade.trade, args=(cryptocurrency, 'short', price, position_size,)).start()
         print("Trade started for:", cryptocurrency)  # Adding a print statement
+        miya_trade.trade(cryptocurrency, 'short', price, position_size)
+
+
+def process_signal_line(line):
+    parts = line.split()
+    if len(parts) >= 8:
+        cryptocurrency = parts[5]
+        price = float(parts[6])
+        action = parts[7]
+        position_size = int(parts[8])
+        print(
+            f"Received signal for {cryptocurrency} at price {price} with action {action} position size {parts[8]}")
+        start_trade(cryptocurrency, price, action, position_size)
+        time.sleep(2)
+    else:
+        print("Invalid data format for line:", line)
 
 
 def continuously_check_signals():
     while True:
         empty, data = read_alert()
         if empty:
+            threads = []
             for line in data:
-                parts = line.split()
-                if len(parts) >= 8:
-                    cryptocurrency = parts[5]
-                    price = float(parts[6])
-                    action = parts[7]
-                    position_size = int(parts[8])
-                    print(
-                        f"Received signal for {cryptocurrency} at price {price} with action {action} position size {parts[8]}")
-                    start_trade(cryptocurrency, price, action, position_size)
-                    clean_log_file()
-                    time.sleep(2)
-                else:
-                    print("Invalid data format for line:", line)
+                # Create a thread for each signal
+                process_signal_line(line)
+                # thread = threading.Thread(target=process_signal_line, args=(line,))
+                # threads.append(thread)
+                # thread.start()
+
+            # Wait for all threads to finish
+            # for thread in threads:
+            #     thread.join()
+
+            clean_log_file()
         else:
             print("No signals found.")
         time.sleep(5)
