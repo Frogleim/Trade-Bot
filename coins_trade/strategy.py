@@ -54,25 +54,30 @@ def get_signal():
 
 
 def get_latest_candlestick(symbol):
-    """Fetches the latest 5-minute candlestick data for the specified symbol."""
+    """
+    Fetches the latest 5-minute candlestick data for the specified symbol.
+    """
     candles = client.futures_klines(symbol=symbol, interval='5m', limit=20)
-    latest_candle = candles[0]
-    df = pd.DataFrame([latest_candle], columns=['timestamp', 'open', 'high', 'low', 'close', 'volume',
-                                                'close_time', 'quote_asset_volume', 'number_of_trades',
-                                                'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume',
-                                                'ignore'])
+    df = pd.DataFrame(candles, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume',
+                                        'close_time', 'quote_asset_volume', 'number_of_trades',
+                                        'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume',
+                                        'ignore'])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
     df.set_index('timestamp', inplace=True)
     return df.astype(float)
 
 
 def calculate_sma(close_prices, window):
-    """Calculates Simple Moving Average (SMA) for a specified window."""
+    """
+    Calculates Simple Moving Average (SMA) for a specified window.
+    """
     return close_prices.rolling(window=window).mean()
 
 
 def generate_signal(symbol, short_window=20, long_window=50):
-    """Generates a buy or sell signal along with the signal price based on SMA analysis of the latest candlestick."""
+    """
+    Generates a buy or sell signal along with the signal price based on SMA analysis of the latest candlestick.
+    """
     latest_candle = get_latest_candlestick(symbol)
     close_prices = latest_candle['close']
     short_sma = calculate_sma(close_prices, short_window)

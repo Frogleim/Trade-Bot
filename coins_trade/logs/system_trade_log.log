@@ -327,3 +327,18 @@
 2024-04-23 12:48:10,099 - INFO - Reading config file
 2024-04-23 12:48:10,149 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
 2024-04-23 12:48:11,989 - INFO - Waiting for trade finished...
+2024-04-23 12:49:04,458 - INFO - Trade for MATICUSDT was finished
+2024-04-23 12:49:04,458 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 12:49:04,458 - INFO - Cleaning log file.
+2024-04-23 13:19:04,558 - INFO - Waiting for price signals...
+2024-04-23 13:19:04,558 - INFO - Reading config file
+2024-04-23 13:19:04,692 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 13:19:06,417 - INFO - Waiting for trade finished...
+2024-04-23 15:05:52,460 - INFO - Bot started
+2024-04-23 15:05:52,461 - INFO - Waiting for price signals...
+2024-04-23 15:05:52,461 - INFO - Reading config file
+2024-04-23 15:05:52,520 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 15:05:54,016 - INFO - Waiting for trade finished...
+2024-04-23 15:36:29,724 - INFO - Trade for MATICUSDT was finished
+2024-04-23 15:36:29,724 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 15:36:29,724 - INFO - Cleaning log file.
