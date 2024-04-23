@@ -54,7 +54,6 @@ def continuously_check_signals():
         if empty:
             threads = []
             for line in data:
-                # Create a thread for each signal
                 process_signal_line(line)
                 # thread = threading.Thread(target=process_signal_line, args=(line,))
                 # threads.append(thread)

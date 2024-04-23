@@ -342,3 +342,7 @@
 2024-04-23 15:36:29,724 - INFO - Trade for MATICUSDT was finished
 2024-04-23 15:36:29,724 - INFO - Finished trade for symbol MATICUSDT
 2024-04-23 15:36:29,724 - INFO - Cleaning log file.
+2024-04-23 16:06:29,823 - INFO - Waiting for price signals...
+2024-04-23 16:06:29,824 - INFO - Reading config file
+2024-04-23 16:06:29,961 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 16:06:31,395 - INFO - Waiting for trade finished...
