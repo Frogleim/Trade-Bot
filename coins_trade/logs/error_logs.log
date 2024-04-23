@@ -48,3 +48,7 @@
 2024-04-18 16:23:54,913 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
 2024-04-20 17:23:00,251 - ERROR - Error while monitoring current position: APIError(code=-1003): Too many requests; current limit of IP(46.70.80.222) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API.--- Trying again...
 2024-04-20 17:23:00,251 - ERROR - Error while monitoring current position: APIError(code=-1003): Too many requests; current limit of IP(46.70.80.222) is 2400 requests per minute. Please use the websocket for live updates to avoid polling the API.--- Trying again...
+2024-04-23 11:25:38,485 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.183.185
+2024-04-23 11:25:38,485 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.183.185
+2024-04-23 12:46:55,228 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.183.185
+2024-04-23 12:46:55,228 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.70.183.185

@@ -27,6 +27,8 @@ def trade(symbol, signal, entry_price, position_size):
             open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
                 if time.time() - start_time > 180:
+                    print(time.time() - start_time)
+                    print(open_orders['status'])
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
@@ -70,6 +72,9 @@ def trade(symbol, signal, entry_price, position_size):
             open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
             if open_orders['status'] == 'NEW':
                 if time.time() - start_time > 180:
+                    print(time.time() - start_time)
+                    print(open_orders['status'])
+
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
@@ -96,5 +101,4 @@ def trade(symbol, signal, entry_price, position_size):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
-    else:
-        print(f'Wrong signal --- {signal}')
+

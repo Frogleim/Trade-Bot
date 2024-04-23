@@ -101,5 +101,5 @@ def main(symbols):
 if __name__ == '__main__':
     symbols = ['MATICUSDT', 'ADAUSDT']
 
-    signal_data = main(symbols)
+    signal_data = main(symbols[0])
     print(signal_data)

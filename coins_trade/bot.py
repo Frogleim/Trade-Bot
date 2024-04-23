@@ -46,6 +46,7 @@ def process_symbol(symbol):
                 f'{symbol["symbol"]} {signal_price} {signal} {symbol["position_size"]}')
             not_trading_symbols_list.remove(symbol['symbol'])
 
+
 def check_trade_status():
     global symbols_list
     while True:
