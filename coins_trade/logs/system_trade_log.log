@@ -346,3 +346,995 @@
 2024-04-23 16:06:29,824 - INFO - Reading config file
 2024-04-23 16:06:29,961 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
 2024-04-23 16:06:31,395 - INFO - Waiting for trade finished...
+2024-04-23 17:16:53,172 - INFO - Bot started
+2024-04-23 17:16:53,173 - INFO - Waiting for price signals...
+2024-04-23 17:16:53,173 - INFO - Reading config file
+2024-04-23 17:16:53,227 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 17:16:53,774 - INFO - Waiting for trade finished...
+2024-04-23 17:42:54,512 - INFO - Trade for MATICUSDT was finished
+2024-04-23 17:42:54,513 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 17:42:54,513 - INFO - Cleaning log file.
+2024-04-23 18:12:54,611 - INFO - Waiting for price signals...
+2024-04-23 18:12:54,612 - INFO - Reading config file
+2024-04-23 18:12:55,687 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 18:12:57,500 - INFO - Waiting for trade finished...
+2024-04-23 18:41:51,439 - INFO - Trade for MATICUSDT was finished
+2024-04-23 18:41:51,440 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 18:41:51,440 - INFO - Cleaning log file.
+2024-04-23 19:11:51,539 - INFO - Waiting for price signals...
+2024-04-23 19:11:51,540 - INFO - Reading config file
+2024-04-23 19:11:52,004 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 19:11:53,811 - INFO - Waiting for trade finished...
+2024-04-23 19:16:45,483 - INFO - Trade for MATICUSDT was finished
+2024-04-23 19:16:45,491 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 19:16:45,492 - INFO - Cleaning log file.
+2024-04-23 19:46:45,591 - INFO - Waiting for price signals...
+2024-04-23 19:46:45,592 - INFO - Reading config file
+2024-04-23 19:46:46,119 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 19:46:47,033 - INFO - Waiting for trade finished...
+2024-04-23 19:57:34,351 - INFO - Trade for MATICUSDT was finished
+2024-04-23 19:57:34,352 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 19:57:34,352 - INFO - Cleaning log file.
+2024-04-23 20:27:34,451 - INFO - Waiting for price signals...
+2024-04-23 20:27:34,451 - INFO - Reading config file
+2024-04-23 20:27:34,896 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 20:27:36,382 - INFO - Waiting for trade finished...
+2024-04-23 20:56:51,489 - INFO - Trade for MATICUSDT was finished
+2024-04-23 20:56:51,490 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 20:56:51,490 - INFO - Cleaning log file.
+2024-04-23 21:26:51,587 - INFO - Waiting for price signals...
+2024-04-23 21:26:51,588 - INFO - Reading config file
+2024-04-23 21:26:52,060 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 21:26:53,551 - INFO - Waiting for trade finished...
+2024-04-23 22:08:01,644 - INFO - Trade for MATICUSDT was finished
+2024-04-23 22:08:01,644 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 22:08:01,644 - INFO - Cleaning log file.
+2024-04-23 22:38:01,743 - INFO - Waiting for price signals...
+2024-04-23 22:38:01,744 - INFO - Reading config file
+2024-04-23 22:38:02,056 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 22:38:03,662 - INFO - Waiting for trade finished...
+2024-04-23 22:41:05,508 - INFO - Trade for MATICUSDT was finished
+2024-04-23 22:41:05,508 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 22:41:05,508 - INFO - Cleaning log file.
+2024-04-23 23:11:05,607 - INFO - Waiting for price signals...
+2024-04-23 23:11:05,608 - INFO - Reading config file
+2024-04-23 23:11:06,052 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 23:11:07,761 - INFO - Waiting for trade finished...
+2024-04-23 23:17:20,635 - INFO - Trade for MATICUSDT was finished
+2024-04-23 23:17:20,636 - INFO - Finished trade for symbol MATICUSDT
+2024-04-23 23:17:20,636 - INFO - Cleaning log file.
+2024-04-23 23:47:20,644 - INFO - Waiting for price signals...
+2024-04-23 23:47:20,644 - INFO - Reading config file
+2024-04-23 23:47:20,692 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-23 23:47:22,502 - INFO - Waiting for trade finished...
+2024-04-24 00:06:13,637 - INFO - Trade for MATICUSDT was finished
+2024-04-24 00:06:13,637 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 00:06:13,637 - INFO - Cleaning log file.
+2024-04-24 00:36:13,737 - INFO - Waiting for price signals...
+2024-04-24 00:36:13,737 - INFO - Reading config file
+2024-04-24 00:36:13,784 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 00:36:15,500 - INFO - Waiting for trade finished...
+2024-04-24 01:08:16,425 - INFO - Trade for MATICUSDT was finished
+2024-04-24 01:08:16,425 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 01:08:16,425 - INFO - Cleaning log file.
+2024-04-24 01:38:16,525 - INFO - Waiting for price signals...
+2024-04-24 01:38:16,526 - INFO - Reading config file
+2024-04-24 01:38:16,572 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 01:38:18,392 - INFO - Waiting for trade finished...
+2024-04-24 02:52:41,970 - INFO - Trade for MATICUSDT was finished
+2024-04-24 02:52:41,970 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 02:52:41,970 - INFO - Cleaning log file.
+2024-04-24 03:22:42,004 - INFO - Waiting for price signals...
+2024-04-24 03:22:42,004 - INFO - Reading config file
+2024-04-24 03:22:42,051 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 03:22:43,847 - INFO - Waiting for trade finished...
+2024-04-24 04:32:15,140 - INFO - Trade for MATICUSDT was finished
+2024-04-24 04:32:15,140 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 04:32:15,140 - INFO - Cleaning log file.
+2024-04-24 05:02:15,167 - INFO - Waiting for price signals...
+2024-04-24 05:02:15,167 - INFO - Reading config file
+2024-04-24 05:02:15,214 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 05:02:16,884 - INFO - Waiting for trade finished...
+2024-04-24 05:13:54,745 - INFO - Trade for MATICUSDT was finished
+2024-04-24 05:13:54,746 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 05:13:54,746 - INFO - Cleaning log file.
+2024-04-24 05:43:54,810 - INFO - Waiting for price signals...
+2024-04-24 05:43:54,810 - INFO - Reading config file
+2024-04-24 05:43:54,857 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 05:43:56,566 - INFO - Waiting for trade finished...
+2024-04-24 06:05:07,734 - INFO - Trade for MATICUSDT was finished
+2024-04-24 06:05:07,734 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 06:05:07,734 - INFO - Cleaning log file.
+2024-04-24 06:35:07,736 - INFO - Waiting for price signals...
+2024-04-24 06:35:07,736 - INFO - Reading config file
+2024-04-24 06:35:07,783 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 06:35:09,489 - INFO - Waiting for trade finished...
+2024-04-24 07:35:15,647 - INFO - Trade for MATICUSDT was finished
+2024-04-24 07:35:15,647 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 07:35:15,647 - INFO - Cleaning log file.
+2024-04-24 08:05:15,748 - INFO - Waiting for price signals...
+2024-04-24 08:05:15,748 - INFO - Reading config file
+2024-04-24 08:05:15,796 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 08:05:17,525 - INFO - Waiting for trade finished...
+2024-04-24 08:45:23,582 - INFO - Trade for MATICUSDT was finished
+2024-04-24 08:45:23,582 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 08:45:23,582 - INFO - Cleaning log file.
+2024-04-24 09:15:23,682 - INFO - Waiting for price signals...
+2024-04-24 09:15:23,683 - INFO - Reading config file
+2024-04-24 09:15:23,729 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 100}
+2024-04-24 09:15:25,533 - INFO - Waiting for trade finished...
+2024-04-24 09:25:52,615 - INFO - Bot started
+2024-04-24 09:25:52,615 - INFO - Waiting for price signals...
+2024-04-24 09:25:52,615 - INFO - Reading config file
+2024-04-24 09:25:52,663 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:26:29,274 - INFO - Bot started
+2024-04-24 09:26:29,274 - INFO - Waiting for price signals...
+2024-04-24 09:26:29,274 - INFO - Reading config file
+2024-04-24 09:26:29,320 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:28:00,000 - INFO - Bot started
+2024-04-24 09:28:00,001 - INFO - Waiting for price signals...
+2024-04-24 09:28:00,001 - INFO - Reading config file
+2024-04-24 09:28:00,045 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:32:30,029 - INFO - Bot started
+2024-04-24 09:32:30,029 - INFO - Waiting for price signals...
+2024-04-24 09:32:30,029 - INFO - Reading config file
+2024-04-24 09:32:30,074 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:32:31,890 - INFO - Waiting for trade finished...
+2024-04-24 09:32:31,890 - INFO - Trade for MATICUSDT was finished
+2024-04-24 09:32:31,890 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 09:32:31,890 - INFO - Cleaning log file.
+2024-04-24 09:34:50,115 - INFO - Bot started
+2024-04-24 09:34:50,115 - INFO - Waiting for price signals...
+2024-04-24 09:34:50,116 - INFO - Reading config file
+2024-04-24 09:34:50,160 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:34:51,965 - INFO - MATICUSDT Hold
+2024-04-24 09:34:51,975 - INFO - Waiting for trade finished...
+2024-04-24 09:34:51,975 - INFO - Trade for MATICUSDT was finished
+2024-04-24 09:34:51,975 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 09:34:51,975 - INFO - Cleaning log file.
+2024-04-24 09:35:08,134 - INFO - Bot started
+2024-04-24 09:35:08,135 - INFO - Waiting for price signals...
+2024-04-24 09:35:08,135 - INFO - Reading config file
+2024-04-24 09:35:08,180 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 09:35:09,782 - INFO - MATICUSDT Hold
+2024-04-24 09:35:09,791 - INFO - Waiting for trade finished...
+2024-04-24 09:35:09,791 - INFO - Trade for MATICUSDT was finished
+2024-04-24 09:35:09,791 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 09:35:09,791 - INFO - Cleaning log file.
+2024-04-24 09:36:43,367 - INFO - No signals found.
+2024-04-24 09:36:48,372 - INFO - No signals found.
+2024-04-24 09:36:53,378 - INFO - No signals found.
+2024-04-24 09:36:58,380 - INFO - No signals found.
+2024-04-24 09:37:03,385 - INFO - No signals found.
+2024-04-24 09:37:08,390 - INFO - No signals found.
+2024-04-24 09:37:13,391 - INFO - No signals found.
+2024-04-24 09:37:18,397 - INFO - No signals found.
+2024-04-24 09:37:23,399 - INFO - No signals found.
+2024-04-24 09:37:28,405 - INFO - No signals found.
+2024-04-24 09:37:33,407 - INFO - No signals found.
+2024-04-24 09:37:38,411 - INFO - No signals found.
+2024-04-24 09:37:43,416 - INFO - No signals found.
+2024-04-24 09:37:48,419 - INFO - No signals found.
+2024-04-24 09:37:53,423 - INFO - No signals found.
+2024-04-24 09:37:58,427 - INFO - No signals found.
+2024-04-24 09:38:03,431 - INFO - No signals found.
+2024-04-24 09:38:08,435 - INFO - No signals found.
+2024-04-24 09:38:13,441 - INFO - No signals found.
+2024-04-24 09:38:18,443 - INFO - No signals found.
+2024-04-24 09:38:23,449 - INFO - No signals found.
+2024-04-24 09:38:28,454 - INFO - No signals found.
+2024-04-24 09:38:33,459 - INFO - No signals found.
+2024-04-24 09:38:38,463 - INFO - No signals found.
+2024-04-24 09:38:43,467 - INFO - No signals found.
+2024-04-24 09:38:48,471 - INFO - No signals found.
+2024-04-24 09:38:53,477 - INFO - No signals found.
+2024-04-24 09:38:58,479 - INFO - No signals found.
+2024-04-24 09:39:03,485 - INFO - No signals found.
+2024-04-24 09:39:08,487 - INFO - No signals found.
+2024-04-24 09:39:13,491 - INFO - No signals found.
+2024-04-24 09:39:18,497 - INFO - No signals found.
+2024-04-24 09:39:23,499 - INFO - No signals found.
+2024-04-24 09:39:28,503 - INFO - No signals found.
+2024-04-24 09:39:33,507 - INFO - No signals found.
+2024-04-24 09:39:38,513 - INFO - No signals found.
+2024-04-24 09:39:43,517 - INFO - No signals found.
+2024-04-24 09:39:48,520 - INFO - No signals found.
+2024-04-24 09:39:53,523 - INFO - No signals found.
+2024-04-24 09:39:58,527 - INFO - No signals found.
+2024-04-24 09:40:03,531 - INFO - No signals found.
+2024-04-24 09:40:08,535 - INFO - No signals found.
+2024-04-24 09:40:13,539 - INFO - No signals found.
+2024-04-24 09:40:18,543 - INFO - No signals found.
+2024-04-24 09:40:23,547 - INFO - No signals found.
+2024-04-24 09:40:28,551 - INFO - No signals found.
+2024-04-24 09:40:33,555 - INFO - No signals found.
+2024-04-24 09:40:38,559 - INFO - No signals found.
+2024-04-24 09:40:43,563 - INFO - No signals found.
+2024-04-24 09:40:48,569 - INFO - No signals found.
+2024-04-24 09:40:53,571 - INFO - No signals found.
+2024-04-24 09:40:58,575 - INFO - No signals found.
+2024-04-24 09:41:03,579 - INFO - No signals found.
+2024-04-24 09:41:08,583 - INFO - No signals found.
+2024-04-24 09:41:13,588 - INFO - No signals found.
+2024-04-24 09:41:18,591 - INFO - No signals found.
+2024-04-24 09:41:23,597 - INFO - No signals found.
+2024-04-24 09:41:28,600 - INFO - No signals found.
+2024-04-24 09:41:33,603 - INFO - No signals found.
+2024-04-24 09:41:38,607 - INFO - No signals found.
+2024-04-24 09:41:43,613 - INFO - No signals found.
+2024-04-24 09:41:48,615 - INFO - No signals found.
+2024-04-24 09:41:53,621 - INFO - No signals found.
+2024-04-24 09:41:58,626 - INFO - No signals found.
+2024-04-24 09:42:03,631 - INFO - No signals found.
+2024-04-24 09:42:08,635 - INFO - No signals found.
+2024-04-24 09:42:13,641 - INFO - No signals found.
+2024-04-24 09:42:18,646 - INFO - No signals found.
+2024-04-24 09:42:23,651 - INFO - No signals found.
+2024-04-24 09:42:28,655 - INFO - No signals found.
+2024-04-24 09:42:33,659 - INFO - No signals found.
+2024-04-24 09:42:38,663 - INFO - No signals found.
+2024-04-24 09:42:43,667 - INFO - No signals found.
+2024-04-24 09:42:48,671 - INFO - No signals found.
+2024-04-24 09:42:53,677 - INFO - No signals found.
+2024-04-24 09:42:58,682 - INFO - No signals found.
+2024-04-24 09:43:03,688 - INFO - No signals found.
+2024-04-24 09:43:08,691 - INFO - No signals found.
+2024-04-24 09:43:13,695 - INFO - No signals found.
+2024-04-24 09:43:18,701 - INFO - No signals found.
+2024-04-24 09:43:23,703 - INFO - No signals found.
+2024-04-24 09:43:28,709 - INFO - No signals found.
+2024-04-24 09:43:33,710 - INFO - No signals found.
+2024-04-24 09:43:38,715 - INFO - No signals found.
+2024-04-24 09:43:43,720 - INFO - No signals found.
+2024-04-24 09:43:48,723 - INFO - No signals found.
+2024-04-24 09:43:53,727 - INFO - No signals found.
+2024-04-24 09:43:58,733 - INFO - No signals found.
+2024-04-24 09:44:03,738 - INFO - No signals found.
+2024-04-24 09:44:08,743 - INFO - No signals found.
+2024-04-24 09:44:13,747 - INFO - No signals found.
+2024-04-24 09:44:18,751 - INFO - No signals found.
+2024-04-24 09:44:23,755 - INFO - No signals found.
+2024-04-24 09:44:28,759 - INFO - No signals found.
+2024-04-24 09:44:33,763 - INFO - No signals found.
+2024-04-24 09:44:38,767 - INFO - No signals found.
+2024-04-24 09:44:43,771 - INFO - No signals found.
+2024-04-24 09:44:48,777 - INFO - No signals found.
+2024-04-24 09:44:53,779 - INFO - No signals found.
+2024-04-24 09:44:58,783 - INFO - No signals found.
+2024-04-24 09:45:03,788 - INFO - No signals found.
+2024-04-24 09:45:08,793 - INFO - No signals found.
+2024-04-24 09:45:13,795 - INFO - No signals found.
+2024-04-24 09:45:18,799 - INFO - No signals found.
+2024-04-24 09:45:23,805 - INFO - No signals found.
+2024-04-24 09:45:28,807 - INFO - No signals found.
+2024-04-24 09:45:33,813 - INFO - No signals found.
+2024-04-24 09:45:38,815 - INFO - No signals found.
+2024-04-24 09:45:43,819 - INFO - No signals found.
+2024-04-24 09:45:48,823 - INFO - No signals found.
+2024-04-24 09:45:53,827 - INFO - No signals found.
+2024-04-24 09:45:58,831 - INFO - No signals found.
+2024-04-24 09:46:03,835 - INFO - No signals found.
+2024-04-24 09:46:08,839 - INFO - No signals found.
+2024-04-24 09:46:13,843 - INFO - No signals found.
+2024-04-24 09:46:18,849 - INFO - No signals found.
+2024-04-24 09:46:23,851 - INFO - No signals found.
+2024-04-24 09:46:28,857 - INFO - No signals found.
+2024-04-24 09:46:33,862 - INFO - No signals found.
+2024-04-24 09:46:38,867 - INFO - No signals found.
+2024-04-24 09:46:43,873 - INFO - No signals found.
+2024-04-24 09:46:48,878 - INFO - No signals found.
+2024-04-24 09:46:53,883 - INFO - No signals found.
+2024-04-24 09:46:58,887 - INFO - No signals found.
+2024-04-24 09:47:03,891 - INFO - No signals found.
+2024-04-24 09:47:08,895 - INFO - No signals found.
+2024-04-24 09:47:13,901 - INFO - No signals found.
+2024-04-24 09:47:18,903 - INFO - No signals found.
+2024-04-24 09:47:23,907 - INFO - No signals found.
+2024-04-24 09:47:28,911 - INFO - No signals found.
+2024-04-24 09:47:33,915 - INFO - No signals found.
+2024-04-24 09:47:38,919 - INFO - No signals found.
+2024-04-24 09:47:43,925 - INFO - No signals found.
+2024-04-24 09:47:48,927 - INFO - No signals found.
+2024-04-24 09:47:53,933 - INFO - No signals found.
+2024-04-24 09:47:58,935 - INFO - No signals found.
+2024-04-24 09:48:03,939 - INFO - No signals found.
+2024-04-24 09:48:08,943 - INFO - No signals found.
+2024-04-24 09:48:13,948 - INFO - No signals found.
+2024-04-24 09:48:18,951 - INFO - No signals found.
+2024-04-24 09:48:23,953 - INFO - No signals found.
+2024-04-24 09:48:28,958 - INFO - No signals found.
+2024-04-24 09:48:33,963 - INFO - No signals found.
+2024-04-24 09:48:38,968 - INFO - No signals found.
+2024-04-24 09:48:43,973 - INFO - No signals found.
+2024-04-24 09:48:48,978 - INFO - No signals found.
+2024-04-24 09:48:53,983 - INFO - No signals found.
+2024-04-24 09:48:58,985 - INFO - No signals found.
+2024-04-24 09:49:03,988 - INFO - No signals found.
+2024-04-24 09:49:08,993 - INFO - No signals found.
+2024-04-24 09:49:13,995 - INFO - No signals found.
+2024-04-24 09:49:19,001 - INFO - No signals found.
+2024-04-24 09:49:24,006 - INFO - No signals found.
+2024-04-24 09:49:29,007 - INFO - No signals found.
+2024-04-24 09:49:34,011 - INFO - No signals found.
+2024-04-24 09:49:39,015 - INFO - No signals found.
+2024-04-24 09:49:44,019 - INFO - No signals found.
+2024-04-24 09:49:49,025 - INFO - No signals found.
+2024-04-24 09:49:54,026 - INFO - No signals found.
+2024-04-24 09:49:59,031 - INFO - No signals found.
+2024-04-24 09:50:04,035 - INFO - No signals found.
+2024-04-24 09:50:09,039 - INFO - No signals found.
+2024-04-24 09:50:14,045 - INFO - No signals found.
+2024-04-24 09:50:19,050 - INFO - No signals found.
+2024-04-24 09:50:24,055 - INFO - No signals found.
+2024-04-24 09:50:29,060 - INFO - No signals found.
+2024-04-24 09:50:34,063 - INFO - No signals found.
+2024-04-24 09:50:39,067 - INFO - No signals found.
+2024-04-24 09:50:44,073 - INFO - No signals found.
+2024-04-24 09:50:49,076 - INFO - No signals found.
+2024-04-24 09:50:54,082 - INFO - No signals found.
+2024-04-24 09:50:59,087 - INFO - No signals found.
+2024-04-24 09:51:04,091 - INFO - No signals found.
+2024-04-24 09:51:09,096 - INFO - No signals found.
+2024-04-24 09:51:14,099 - INFO - No signals found.
+2024-04-24 09:51:19,102 - INFO - No signals found.
+2024-04-24 09:51:24,103 - INFO - No signals found.
+2024-04-24 09:51:29,107 - INFO - No signals found.
+2024-04-24 09:51:34,111 - INFO - No signals found.
+2024-04-24 09:51:39,117 - INFO - No signals found.
+2024-04-24 09:51:44,119 - INFO - No signals found.
+2024-04-24 09:51:49,123 - INFO - No signals found.
+2024-04-24 09:51:54,129 - INFO - No signals found.
+2024-04-24 09:51:59,131 - INFO - No signals found.
+2024-04-24 09:52:04,135 - INFO - No signals found.
+2024-04-24 09:52:09,139 - INFO - No signals found.
+2024-04-24 09:52:14,143 - INFO - No signals found.
+2024-04-24 09:52:19,147 - INFO - No signals found.
+2024-04-24 09:52:24,151 - INFO - No signals found.
+2024-04-24 09:52:29,157 - INFO - No signals found.
+2024-04-24 09:52:34,159 - INFO - No signals found.
+2024-04-24 09:52:39,163 - INFO - No signals found.
+2024-04-24 09:52:44,167 - INFO - No signals found.
+2024-04-24 09:52:49,171 - INFO - No signals found.
+2024-04-24 09:52:54,176 - INFO - No signals found.
+2024-04-24 09:52:59,180 - INFO - No signals found.
+2024-04-24 09:53:04,186 - INFO - No signals found.
+2024-04-24 09:53:09,191 - INFO - No signals found.
+2024-04-24 09:53:14,195 - INFO - No signals found.
+2024-04-24 09:53:19,199 - INFO - No signals found.
+2024-04-24 09:53:24,205 - INFO - No signals found.
+2024-04-24 09:53:29,210 - INFO - No signals found.
+2024-04-24 09:53:34,211 - INFO - No signals found.
+2024-04-24 09:53:39,217 - INFO - No signals found.
+2024-04-24 09:53:44,219 - INFO - No signals found.
+2024-04-24 09:53:49,223 - INFO - No signals found.
+2024-04-24 09:53:54,227 - INFO - No signals found.
+2024-04-24 09:53:59,233 - INFO - No signals found.
+2024-04-24 09:54:04,235 - INFO - No signals found.
+2024-04-24 09:54:09,241 - INFO - No signals found.
+2024-04-24 09:54:14,246 - INFO - No signals found.
+2024-04-24 09:54:19,251 - INFO - No signals found.
+2024-04-24 09:54:24,255 - INFO - No signals found.
+2024-04-24 09:54:29,259 - INFO - No signals found.
+2024-04-24 09:54:34,265 - INFO - No signals found.
+2024-04-24 09:54:39,267 - INFO - No signals found.
+2024-04-24 09:54:44,271 - INFO - No signals found.
+2024-04-24 09:54:49,275 - INFO - No signals found.
+2024-04-24 09:54:54,281 - INFO - No signals found.
+2024-04-24 09:54:59,284 - INFO - No signals found.
+2024-04-24 09:55:04,289 - INFO - No signals found.
+2024-04-24 09:55:09,294 - INFO - No signals found.
+2024-04-24 09:55:14,299 - INFO - No signals found.
+2024-04-24 09:55:19,303 - INFO - No signals found.
+2024-04-24 09:55:24,309 - INFO - No signals found.
+2024-04-24 09:55:29,311 - INFO - No signals found.
+2024-04-24 09:55:34,317 - INFO - No signals found.
+2024-04-24 09:55:39,319 - INFO - No signals found.
+2024-04-24 09:55:44,324 - INFO - No signals found.
+2024-04-24 09:55:49,329 - INFO - No signals found.
+2024-04-24 09:55:54,334 - INFO - No signals found.
+2024-04-24 09:55:59,339 - INFO - No signals found.
+2024-04-24 09:56:04,344 - INFO - No signals found.
+2024-04-24 09:56:09,347 - INFO - No signals found.
+2024-04-24 09:56:14,353 - INFO - No signals found.
+2024-04-24 09:56:19,358 - INFO - No signals found.
+2024-04-24 09:56:24,363 - INFO - No signals found.
+2024-04-24 09:56:29,369 - INFO - No signals found.
+2024-04-24 09:56:34,374 - INFO - No signals found.
+2024-04-24 09:56:39,375 - INFO - No signals found.
+2024-04-24 09:56:44,379 - INFO - No signals found.
+2024-04-24 09:56:49,383 - INFO - No signals found.
+2024-04-24 09:56:54,387 - INFO - No signals found.
+2024-04-24 09:56:59,391 - INFO - No signals found.
+2024-04-24 09:57:04,397 - INFO - No signals found.
+2024-04-24 09:57:09,402 - INFO - No signals found.
+2024-04-24 09:57:14,403 - INFO - No signals found.
+2024-04-24 09:57:19,409 - INFO - No signals found.
+2024-04-24 09:57:24,414 - INFO - No signals found.
+2024-04-24 09:57:29,419 - INFO - No signals found.
+2024-04-24 09:57:34,423 - INFO - No signals found.
+2024-04-24 09:57:39,427 - INFO - No signals found.
+2024-04-24 09:57:44,432 - INFO - No signals found.
+2024-04-24 09:57:49,438 - INFO - No signals found.
+2024-04-24 09:57:54,440 - INFO - No signals found.
+2024-04-24 09:57:59,443 - INFO - No signals found.
+2024-04-24 09:58:04,447 - INFO - No signals found.
+2024-04-24 09:58:09,451 - INFO - No signals found.
+2024-04-24 09:58:14,455 - INFO - No signals found.
+2024-04-24 09:58:19,461 - INFO - No signals found.
+2024-04-24 09:58:24,463 - INFO - No signals found.
+2024-04-24 09:58:29,468 - INFO - No signals found.
+2024-04-24 09:58:34,471 - INFO - No signals found.
+2024-04-24 09:58:39,477 - INFO - No signals found.
+2024-04-24 09:58:44,479 - INFO - No signals found.
+2024-04-24 09:58:49,483 - INFO - No signals found.
+2024-04-24 09:58:54,487 - INFO - No signals found.
+2024-04-24 09:58:59,493 - INFO - No signals found.
+2024-04-24 09:59:04,498 - INFO - No signals found.
+2024-04-24 09:59:09,499 - INFO - No signals found.
+2024-04-24 09:59:14,503 - INFO - No signals found.
+2024-04-24 09:59:19,507 - INFO - No signals found.
+2024-04-24 09:59:24,511 - INFO - No signals found.
+2024-04-24 09:59:29,515 - INFO - No signals found.
+2024-04-24 09:59:34,519 - INFO - No signals found.
+2024-04-24 09:59:39,523 - INFO - No signals found.
+2024-04-24 09:59:44,527 - INFO - No signals found.
+2024-04-24 09:59:49,531 - INFO - No signals found.
+2024-04-24 09:59:54,535 - INFO - No signals found.
+2024-04-24 09:59:59,539 - INFO - No signals found.
+2024-04-24 10:00:04,543 - INFO - No signals found.
+2024-04-24 10:00:09,549 - INFO - No signals found.
+2024-04-24 10:00:14,551 - INFO - No signals found.
+2024-04-24 10:00:19,555 - INFO - No signals found.
+2024-04-24 10:00:24,559 - INFO - No signals found.
+2024-04-24 10:00:29,565 - INFO - No signals found.
+2024-04-24 10:00:34,567 - INFO - No signals found.
+2024-04-24 10:00:39,571 - INFO - No signals found.
+2024-04-24 10:00:44,575 - INFO - No signals found.
+2024-04-24 10:00:49,579 - INFO - No signals found.
+2024-04-24 10:00:54,584 - INFO - No signals found.
+2024-04-24 10:00:59,587 - INFO - No signals found.
+2024-04-24 10:01:04,591 - INFO - No signals found.
+2024-04-24 10:01:09,595 - INFO - No signals found.
+2024-04-24 10:01:14,599 - INFO - No signals found.
+2024-04-24 10:01:19,605 - INFO - No signals found.
+2024-04-24 10:01:24,610 - INFO - No signals found.
+2024-04-24 10:01:29,615 - INFO - No signals found.
+2024-04-24 10:01:34,621 - INFO - No signals found.
+2024-04-24 10:01:39,623 - INFO - No signals found.
+2024-04-24 10:01:44,627 - INFO - No signals found.
+2024-04-24 10:01:49,633 - INFO - No signals found.
+2024-04-24 10:01:54,635 - INFO - No signals found.
+2024-04-24 10:01:59,639 - INFO - No signals found.
+2024-04-24 10:02:04,643 - INFO - No signals found.
+2024-04-24 10:02:09,647 - INFO - No signals found.
+2024-04-24 10:02:14,651 - INFO - No signals found.
+2024-04-24 10:02:19,657 - INFO - No signals found.
+2024-04-24 10:02:24,659 - INFO - No signals found.
+2024-04-24 10:02:29,663 - INFO - No signals found.
+2024-04-24 10:02:34,667 - INFO - No signals found.
+2024-04-24 10:02:39,671 - INFO - No signals found.
+2024-04-24 10:02:44,675 - INFO - No signals found.
+2024-04-24 10:02:49,679 - INFO - No signals found.
+2024-04-24 10:02:54,683 - INFO - No signals found.
+2024-04-24 10:02:59,687 - INFO - No signals found.
+2024-04-24 10:03:04,692 - INFO - No signals found.
+2024-04-24 10:03:09,695 - INFO - No signals found.
+2024-04-24 10:03:14,699 - INFO - No signals found.
+2024-04-24 10:03:19,705 - INFO - No signals found.
+2024-04-24 10:03:24,710 - INFO - No signals found.
+2024-04-24 10:03:29,712 - INFO - No signals found.
+2024-04-24 10:03:34,718 - INFO - No signals found.
+2024-04-24 10:03:39,719 - INFO - No signals found.
+2024-04-24 10:03:44,723 - INFO - No signals found.
+2024-04-24 10:03:49,727 - INFO - No signals found.
+2024-04-24 10:03:54,731 - INFO - No signals found.
+2024-04-24 10:03:59,735 - INFO - No signals found.
+2024-04-24 10:04:04,739 - INFO - No signals found.
+2024-04-24 10:04:09,743 - INFO - No signals found.
+2024-04-24 10:04:14,747 - INFO - No signals found.
+2024-04-24 10:04:19,751 - INFO - No signals found.
+2024-04-24 10:04:24,755 - INFO - No signals found.
+2024-04-24 10:04:29,761 - INFO - No signals found.
+2024-04-24 10:04:34,763 - INFO - No signals found.
+2024-04-24 10:04:39,767 - INFO - No signals found.
+2024-04-24 10:04:44,771 - INFO - No signals found.
+2024-04-24 10:04:49,775 - INFO - No signals found.
+2024-04-24 10:04:54,779 - INFO - No signals found.
+2024-04-24 10:04:59,783 - INFO - No signals found.
+2024-04-24 10:05:04,787 - INFO - No signals found.
+2024-04-24 10:05:09,793 - INFO - No signals found.
+2024-04-24 10:05:09,871 - INFO - Waiting for price signals...
+2024-04-24 10:05:09,871 - INFO - Reading config file
+2024-04-24 10:05:09,929 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 10:05:11,639 - INFO - Waiting for trade finished...
+2024-04-24 10:05:14,798 - INFO - Received signal for MATICUSDT at price 0.751 with action Buy position size 10
+2024-04-24 10:41:26,848 - INFO - Trade for MATICUSDT was finished
+2024-04-24 10:41:26,848 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 10:41:26,848 - INFO - Cleaning log file.
+2024-04-24 10:41:28,851 - INFO - Received signal for MATICUSDT at price 0.751 with action Buy position size 10
+2024-04-24 10:44:36,047 - INFO - No signals found.
+2024-04-24 10:44:41,051 - INFO - No signals found.
+2024-04-24 10:44:46,055 - INFO - No signals found.
+2024-04-24 10:44:51,059 - INFO - No signals found.
+2024-04-24 10:44:56,063 - INFO - No signals found.
+2024-04-24 10:45:01,068 - INFO - No signals found.
+2024-04-24 10:45:06,071 - INFO - No signals found.
+2024-04-24 10:45:11,075 - INFO - No signals found.
+2024-04-24 10:45:16,080 - INFO - No signals found.
+2024-04-24 10:45:21,083 - INFO - No signals found.
+2024-04-24 10:45:26,089 - INFO - No signals found.
+2024-04-24 10:45:31,093 - INFO - No signals found.
+2024-04-24 10:45:36,096 - INFO - No signals found.
+2024-04-24 10:45:41,099 - INFO - No signals found.
+2024-04-24 10:45:46,103 - INFO - No signals found.
+2024-04-24 10:45:51,107 - INFO - No signals found.
+2024-04-24 10:45:56,111 - INFO - No signals found.
+2024-04-24 10:46:01,115 - INFO - No signals found.
+2024-04-24 10:46:06,119 - INFO - No signals found.
+2024-04-24 10:46:11,123 - INFO - No signals found.
+2024-04-24 10:46:16,127 - INFO - No signals found.
+2024-04-24 10:46:21,132 - INFO - No signals found.
+2024-04-24 10:46:26,135 - INFO - No signals found.
+2024-04-24 10:46:31,139 - INFO - No signals found.
+2024-04-24 10:46:36,143 - INFO - No signals found.
+2024-04-24 10:46:41,147 - INFO - No signals found.
+2024-04-24 10:46:46,151 - INFO - No signals found.
+2024-04-24 10:46:51,157 - INFO - No signals found.
+2024-04-24 10:46:56,162 - INFO - No signals found.
+2024-04-24 10:47:01,164 - INFO - No signals found.
+2024-04-24 10:47:06,167 - INFO - No signals found.
+2024-04-24 10:47:11,173 - INFO - No signals found.
+2024-04-24 10:47:16,176 - INFO - No signals found.
+2024-04-24 10:47:21,179 - INFO - No signals found.
+2024-04-24 10:47:26,183 - INFO - No signals found.
+2024-04-24 10:47:31,188 - INFO - No signals found.
+2024-04-24 10:47:36,191 - INFO - No signals found.
+2024-04-24 10:47:41,195 - INFO - No signals found.
+2024-04-24 10:47:46,200 - INFO - No signals found.
+2024-04-24 10:47:51,203 - INFO - No signals found.
+2024-04-24 10:47:56,207 - INFO - No signals found.
+2024-04-24 10:48:01,211 - INFO - No signals found.
+2024-04-24 10:48:06,215 - INFO - No signals found.
+2024-04-24 10:48:11,219 - INFO - No signals found.
+2024-04-24 10:48:16,223 - INFO - No signals found.
+2024-04-24 10:48:21,228 - INFO - No signals found.
+2024-04-24 10:48:26,232 - INFO - No signals found.
+2024-04-24 10:48:31,235 - INFO - No signals found.
+2024-04-24 10:48:36,239 - INFO - No signals found.
+2024-04-24 10:48:41,243 - INFO - No signals found.
+2024-04-24 10:48:46,247 - INFO - No signals found.
+2024-04-24 10:48:51,253 - INFO - No signals found.
+2024-04-24 10:48:56,255 - INFO - No signals found.
+2024-04-24 10:49:01,259 - INFO - No signals found.
+2024-04-24 10:49:06,263 - INFO - No signals found.
+2024-04-24 10:49:11,267 - INFO - No signals found.
+2024-04-24 10:49:16,271 - INFO - No signals found.
+2024-04-24 10:49:21,275 - INFO - No signals found.
+2024-04-24 10:49:26,279 - INFO - No signals found.
+2024-04-24 10:49:31,283 - INFO - No signals found.
+2024-04-24 10:49:36,287 - INFO - No signals found.
+2024-04-24 10:49:41,291 - INFO - No signals found.
+2024-04-24 10:49:46,296 - INFO - No signals found.
+2024-04-24 10:49:51,299 - INFO - No signals found.
+2024-04-24 10:49:56,305 - INFO - No signals found.
+2024-04-24 10:50:01,307 - INFO - No signals found.
+2024-04-24 10:50:06,312 - INFO - No signals found.
+2024-04-24 10:50:11,315 - INFO - No signals found.
+2024-04-24 10:50:16,319 - INFO - No signals found.
+2024-04-24 10:50:21,323 - INFO - No signals found.
+2024-04-24 10:50:26,327 - INFO - No signals found.
+2024-04-24 10:50:31,331 - INFO - No signals found.
+2024-04-24 10:50:36,335 - INFO - No signals found.
+2024-04-24 10:50:41,339 - INFO - No signals found.
+2024-04-24 10:50:46,344 - INFO - No signals found.
+2024-04-24 10:50:51,347 - INFO - No signals found.
+2024-04-24 10:50:56,351 - INFO - No signals found.
+2024-04-24 10:51:01,355 - INFO - No signals found.
+2024-04-24 10:51:06,359 - INFO - No signals found.
+2024-04-24 10:51:11,365 - INFO - No signals found.
+2024-04-24 10:51:16,367 - INFO - No signals found.
+2024-04-24 10:51:21,372 - INFO - No signals found.
+2024-04-24 10:51:26,375 - INFO - No signals found.
+2024-04-24 10:51:31,379 - INFO - No signals found.
+2024-04-24 10:51:36,385 - INFO - No signals found.
+2024-04-24 10:51:41,387 - INFO - No signals found.
+2024-04-24 10:51:46,391 - INFO - No signals found.
+2024-04-24 10:51:51,396 - INFO - No signals found.
+2024-04-24 10:51:56,402 - INFO - No signals found.
+2024-04-24 10:52:01,407 - INFO - No signals found.
+2024-04-24 10:52:06,411 - INFO - No signals found.
+2024-04-24 10:52:11,416 - INFO - No signals found.
+2024-04-24 10:52:16,419 - INFO - No signals found.
+2024-04-24 10:52:21,423 - INFO - No signals found.
+2024-04-24 10:52:26,427 - INFO - No signals found.
+2024-04-24 10:52:31,431 - INFO - No signals found.
+2024-04-24 10:52:36,435 - INFO - No signals found.
+2024-04-24 10:52:41,439 - INFO - No signals found.
+2024-04-24 10:52:46,443 - INFO - No signals found.
+2024-04-24 10:52:51,447 - INFO - No signals found.
+2024-04-24 10:52:56,451 - INFO - No signals found.
+2024-04-24 10:53:01,456 - INFO - No signals found.
+2024-04-24 10:53:06,459 - INFO - No signals found.
+2024-04-24 10:53:11,464 - INFO - No signals found.
+2024-04-24 10:53:16,467 - INFO - No signals found.
+2024-04-24 10:53:21,471 - INFO - No signals found.
+2024-04-24 10:53:26,475 - INFO - No signals found.
+2024-04-24 10:53:31,479 - INFO - No signals found.
+2024-04-24 10:53:36,484 - INFO - No signals found.
+2024-04-24 10:53:41,488 - INFO - No signals found.
+2024-04-24 10:53:46,491 - INFO - No signals found.
+2024-04-24 10:53:51,495 - INFO - No signals found.
+2024-04-24 10:53:56,499 - INFO - No signals found.
+2024-04-24 10:54:01,504 - INFO - No signals found.
+2024-04-24 10:54:06,507 - INFO - No signals found.
+2024-04-24 10:54:11,510 - INFO - No signals found.
+2024-04-24 10:54:16,515 - INFO - No signals found.
+2024-04-24 10:54:21,519 - INFO - No signals found.
+2024-04-24 10:54:26,524 - INFO - No signals found.
+2024-04-24 10:54:31,527 - INFO - No signals found.
+2024-04-24 10:54:36,532 - INFO - No signals found.
+2024-04-24 10:54:41,535 - INFO - No signals found.
+2024-04-24 10:54:46,539 - INFO - No signals found.
+2024-04-24 10:54:51,543 - INFO - No signals found.
+2024-04-24 10:54:56,547 - INFO - No signals found.
+2024-04-24 10:55:01,552 - INFO - No signals found.
+2024-04-24 10:55:06,556 - INFO - No signals found.
+2024-04-24 10:55:11,559 - INFO - No signals found.
+2024-04-24 10:55:16,565 - INFO - No signals found.
+2024-04-24 10:55:21,569 - INFO - No signals found.
+2024-04-24 10:55:26,571 - INFO - No signals found.
+2024-04-24 10:55:31,575 - INFO - No signals found.
+2024-04-24 10:55:36,579 - INFO - No signals found.
+2024-04-24 10:55:41,584 - INFO - No signals found.
+2024-04-24 10:55:46,589 - INFO - No signals found.
+2024-04-24 10:55:51,591 - INFO - No signals found.
+2024-04-24 10:55:56,595 - INFO - No signals found.
+2024-04-24 10:56:01,599 - INFO - No signals found.
+2024-04-24 10:56:06,603 - INFO - No signals found.
+2024-04-24 10:56:11,607 - INFO - No signals found.
+2024-04-24 10:56:16,611 - INFO - No signals found.
+2024-04-24 10:56:21,617 - INFO - No signals found.
+2024-04-24 10:56:26,619 - INFO - No signals found.
+2024-04-24 10:56:31,623 - INFO - No signals found.
+2024-04-24 10:56:36,628 - INFO - No signals found.
+2024-04-24 10:56:41,631 - INFO - No signals found.
+2024-04-24 10:56:46,635 - INFO - No signals found.
+2024-04-24 10:56:51,639 - INFO - No signals found.
+2024-04-24 10:56:56,643 - INFO - No signals found.
+2024-04-24 10:57:01,647 - INFO - No signals found.
+2024-04-24 10:57:06,651 - INFO - No signals found.
+2024-04-24 10:57:11,655 - INFO - No signals found.
+2024-04-24 10:57:16,659 - INFO - No signals found.
+2024-04-24 10:57:21,663 - INFO - No signals found.
+2024-04-24 10:57:26,667 - INFO - No signals found.
+2024-04-24 10:57:31,671 - INFO - No signals found.
+2024-04-24 10:57:36,676 - INFO - No signals found.
+2024-04-24 10:57:41,679 - INFO - No signals found.
+2024-04-24 10:57:46,683 - INFO - No signals found.
+2024-04-24 10:57:51,688 - INFO - No signals found.
+2024-04-24 10:57:56,693 - INFO - No signals found.
+2024-04-24 10:58:01,696 - INFO - No signals found.
+2024-04-24 10:58:06,699 - INFO - No signals found.
+2024-04-24 10:58:11,703 - INFO - No signals found.
+2024-04-24 10:58:16,707 - INFO - No signals found.
+2024-04-24 10:58:21,711 - INFO - No signals found.
+2024-04-24 10:58:26,715 - INFO - No signals found.
+2024-04-24 10:58:31,719 - INFO - No signals found.
+2024-04-24 10:58:36,723 - INFO - No signals found.
+2024-04-24 10:58:41,729 - INFO - No signals found.
+2024-04-24 10:58:46,731 - INFO - No signals found.
+2024-04-24 10:58:51,735 - INFO - No signals found.
+2024-04-24 10:58:56,741 - INFO - No signals found.
+2024-04-24 10:59:01,743 - INFO - No signals found.
+2024-04-24 10:59:06,748 - INFO - No signals found.
+2024-04-24 10:59:11,751 - INFO - No signals found.
+2024-04-24 10:59:16,755 - INFO - No signals found.
+2024-04-24 10:59:21,759 - INFO - No signals found.
+2024-04-24 10:59:26,765 - INFO - No signals found.
+2024-04-24 10:59:31,770 - INFO - No signals found.
+2024-04-24 10:59:36,771 - INFO - No signals found.
+2024-04-24 10:59:41,775 - INFO - No signals found.
+2024-04-24 10:59:46,779 - INFO - No signals found.
+2024-04-24 10:59:51,783 - INFO - No signals found.
+2024-04-24 10:59:56,787 - INFO - No signals found.
+2024-04-24 11:00:01,791 - INFO - No signals found.
+2024-04-24 11:00:06,795 - INFO - No signals found.
+2024-04-24 11:00:11,799 - INFO - No signals found.
+2024-04-24 11:00:16,803 - INFO - No signals found.
+2024-04-24 11:00:21,808 - INFO - No signals found.
+2024-04-24 11:00:26,812 - INFO - No signals found.
+2024-04-24 11:00:31,817 - INFO - No signals found.
+2024-04-24 11:00:36,819 - INFO - No signals found.
+2024-04-24 11:00:41,823 - INFO - No signals found.
+2024-04-24 11:00:46,827 - INFO - No signals found.
+2024-04-24 11:00:51,831 - INFO - No signals found.
+2024-04-24 11:00:56,835 - INFO - No signals found.
+2024-04-24 11:01:01,839 - INFO - No signals found.
+2024-04-24 11:01:06,843 - INFO - No signals found.
+2024-04-24 11:01:11,847 - INFO - No signals found.
+2024-04-24 11:01:16,851 - INFO - No signals found.
+2024-04-24 11:01:21,855 - INFO - No signals found.
+2024-04-24 11:01:26,860 - INFO - No signals found.
+2024-04-24 11:01:31,864 - INFO - No signals found.
+2024-04-24 11:01:36,867 - INFO - No signals found.
+2024-04-24 11:01:41,871 - INFO - No signals found.
+2024-04-24 11:01:46,875 - INFO - No signals found.
+2024-04-24 11:01:51,879 - INFO - No signals found.
+2024-04-24 11:01:56,883 - INFO - No signals found.
+2024-04-24 11:02:01,887 - INFO - No signals found.
+2024-04-24 11:02:06,891 - INFO - No signals found.
+2024-04-24 11:02:11,895 - INFO - No signals found.
+2024-04-24 11:02:16,899 - INFO - No signals found.
+2024-04-24 11:02:21,903 - INFO - No signals found.
+2024-04-24 11:02:26,907 - INFO - No signals found.
+2024-04-24 11:02:31,911 - INFO - No signals found.
+2024-04-24 11:02:36,915 - INFO - No signals found.
+2024-04-24 11:02:41,919 - INFO - No signals found.
+2024-04-24 11:02:46,924 - INFO - No signals found.
+2024-04-24 11:02:51,927 - INFO - No signals found.
+2024-04-24 11:02:56,931 - INFO - No signals found.
+2024-04-24 11:03:01,935 - INFO - No signals found.
+2024-04-24 11:03:06,939 - INFO - No signals found.
+2024-04-24 11:03:11,943 - INFO - No signals found.
+2024-04-24 11:03:16,947 - INFO - No signals found.
+2024-04-24 11:03:21,951 - INFO - No signals found.
+2024-04-24 11:03:26,955 - INFO - No signals found.
+2024-04-24 11:03:31,959 - INFO - No signals found.
+2024-04-24 11:03:36,963 - INFO - No signals found.
+2024-04-24 11:03:41,969 - INFO - No signals found.
+2024-04-24 11:03:46,971 - INFO - No signals found.
+2024-04-24 11:03:51,975 - INFO - No signals found.
+2024-04-24 11:03:56,979 - INFO - No signals found.
+2024-04-24 11:04:01,984 - INFO - No signals found.
+2024-04-24 11:04:06,987 - INFO - No signals found.
+2024-04-24 11:04:11,991 - INFO - No signals found.
+2024-04-24 11:04:16,995 - INFO - No signals found.
+2024-04-24 11:04:21,999 - INFO - No signals found.
+2024-04-24 11:04:27,004 - INFO - No signals found.
+2024-04-24 11:04:32,007 - INFO - No signals found.
+2024-04-24 11:04:37,011 - INFO - No signals found.
+2024-04-24 11:04:42,017 - INFO - No signals found.
+2024-04-24 11:04:47,020 - INFO - No signals found.
+2024-04-24 11:04:52,023 - INFO - No signals found.
+2024-04-24 11:04:57,027 - INFO - No signals found.
+2024-04-24 11:05:02,031 - INFO - No signals found.
+2024-04-24 11:05:07,035 - INFO - No signals found.
+2024-04-24 11:05:12,039 - INFO - No signals found.
+2024-04-24 11:05:17,043 - INFO - No signals found.
+2024-04-24 11:05:22,049 - INFO - No signals found.
+2024-04-24 11:05:27,051 - INFO - No signals found.
+2024-04-24 11:05:32,055 - INFO - No signals found.
+2024-04-24 11:05:37,059 - INFO - No signals found.
+2024-04-24 11:05:42,063 - INFO - No signals found.
+2024-04-24 11:05:47,067 - INFO - No signals found.
+2024-04-24 11:05:52,071 - INFO - No signals found.
+2024-04-24 11:05:57,075 - INFO - No signals found.
+2024-04-24 11:06:02,079 - INFO - No signals found.
+2024-04-24 11:06:07,083 - INFO - No signals found.
+2024-04-24 11:06:12,087 - INFO - No signals found.
+2024-04-24 11:06:17,091 - INFO - No signals found.
+2024-04-24 11:06:22,095 - INFO - No signals found.
+2024-04-24 11:06:27,099 - INFO - No signals found.
+2024-04-24 11:06:32,103 - INFO - No signals found.
+2024-04-24 11:06:37,107 - INFO - No signals found.
+2024-04-24 11:06:42,111 - INFO - No signals found.
+2024-04-24 11:06:47,115 - INFO - No signals found.
+2024-04-24 11:06:52,119 - INFO - No signals found.
+2024-04-24 11:06:57,123 - INFO - No signals found.
+2024-04-24 11:07:02,127 - INFO - No signals found.
+2024-04-24 11:07:07,131 - INFO - No signals found.
+2024-04-24 11:07:12,135 - INFO - No signals found.
+2024-04-24 11:07:17,139 - INFO - No signals found.
+2024-04-24 11:07:22,143 - INFO - No signals found.
+2024-04-24 11:07:27,147 - INFO - No signals found.
+2024-04-24 11:07:32,151 - INFO - No signals found.
+2024-04-24 11:07:37,155 - INFO - No signals found.
+2024-04-24 11:07:42,159 - INFO - No signals found.
+2024-04-24 11:07:47,163 - INFO - No signals found.
+2024-04-24 11:07:52,167 - INFO - No signals found.
+2024-04-24 11:07:57,171 - INFO - No signals found.
+2024-04-24 11:08:02,176 - INFO - No signals found.
+2024-04-24 11:08:07,179 - INFO - No signals found.
+2024-04-24 11:08:12,183 - INFO - No signals found.
+2024-04-24 11:08:17,187 - INFO - No signals found.
+2024-04-24 11:08:22,191 - INFO - No signals found.
+2024-04-24 11:08:27,195 - INFO - No signals found.
+2024-04-24 11:08:32,199 - INFO - No signals found.
+2024-04-24 11:08:37,203 - INFO - No signals found.
+2024-04-24 11:08:42,207 - INFO - No signals found.
+2024-04-24 11:08:47,212 - INFO - No signals found.
+2024-04-24 11:08:52,215 - INFO - No signals found.
+2024-04-24 11:08:57,219 - INFO - No signals found.
+2024-04-24 11:09:02,223 - INFO - No signals found.
+2024-04-24 11:09:07,228 - INFO - No signals found.
+2024-04-24 11:09:12,231 - INFO - No signals found.
+2024-04-24 11:09:17,236 - INFO - No signals found.
+2024-04-24 11:09:22,241 - INFO - No signals found.
+2024-04-24 11:09:27,245 - INFO - No signals found.
+2024-04-24 11:09:32,247 - INFO - No signals found.
+2024-04-24 11:09:37,251 - INFO - No signals found.
+2024-04-24 11:09:42,255 - INFO - No signals found.
+2024-04-24 11:09:47,260 - INFO - No signals found.
+2024-04-24 11:09:52,263 - INFO - No signals found.
+2024-04-24 11:09:57,267 - INFO - No signals found.
+2024-04-24 11:10:02,271 - INFO - No signals found.
+2024-04-24 11:10:07,275 - INFO - No signals found.
+2024-04-24 11:10:12,279 - INFO - No signals found.
+2024-04-24 11:10:17,283 - INFO - No signals found.
+2024-04-24 11:10:22,287 - INFO - No signals found.
+2024-04-24 11:10:27,291 - INFO - No signals found.
+2024-04-24 11:10:32,296 - INFO - No signals found.
+2024-04-24 11:10:37,300 - INFO - No signals found.
+2024-04-24 11:10:42,303 - INFO - No signals found.
+2024-04-24 11:10:47,307 - INFO - No signals found.
+2024-04-24 11:10:52,311 - INFO - No signals found.
+2024-04-24 11:10:57,315 - INFO - No signals found.
+2024-04-24 11:11:02,319 - INFO - No signals found.
+2024-04-24 11:11:07,323 - INFO - No signals found.
+2024-04-24 11:11:12,327 - INFO - No signals found.
+2024-04-24 11:11:17,331 - INFO - No signals found.
+2024-04-24 11:11:22,335 - INFO - No signals found.
+2024-04-24 11:11:26,947 - INFO - Waiting for price signals...
+2024-04-24 11:11:26,948 - INFO - Reading config file
+2024-04-24 11:11:26,992 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 11:11:27,339 - INFO - No signals found.
+2024-04-24 11:11:28,410 - INFO - MATICUSDT Hold
+2024-04-24 11:11:28,418 - INFO - Waiting for trade finished...
+2024-04-24 11:11:28,418 - INFO - Trade for MATICUSDT was finished
+2024-04-24 11:11:28,418 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 11:11:28,418 - INFO - Cleaning log file.
+2024-04-24 11:11:32,343 - INFO - No signals found.
+2024-04-24 11:11:37,347 - INFO - No signals found.
+2024-04-24 11:11:42,351 - INFO - No signals found.
+2024-04-24 11:11:47,355 - INFO - No signals found.
+2024-04-24 11:11:52,359 - INFO - No signals found.
+2024-04-24 11:11:57,365 - INFO - No signals found.
+2024-04-24 11:12:02,367 - INFO - No signals found.
+2024-04-24 11:12:07,371 - INFO - No signals found.
+2024-04-24 11:12:12,375 - INFO - No signals found.
+2024-04-24 11:12:17,379 - INFO - No signals found.
+2024-04-24 11:12:22,383 - INFO - No signals found.
+2024-04-24 11:12:27,387 - INFO - No signals found.
+2024-04-24 11:12:32,391 - INFO - No signals found.
+2024-04-24 11:12:37,395 - INFO - No signals found.
+2024-04-24 11:12:42,399 - INFO - No signals found.
+2024-04-24 11:12:47,404 - INFO - No signals found.
+2024-04-24 11:12:52,407 - INFO - No signals found.
+2024-04-24 11:12:57,411 - INFO - No signals found.
+2024-04-24 11:13:02,415 - INFO - No signals found.
+2024-04-24 11:13:07,419 - INFO - No signals found.
+2024-04-24 11:13:12,424 - INFO - No signals found.
+2024-04-24 11:13:17,428 - INFO - No signals found.
+2024-04-24 11:13:22,431 - INFO - No signals found.
+2024-04-24 11:13:27,435 - INFO - No signals found.
+2024-04-24 11:13:32,439 - INFO - No signals found.
+2024-04-24 11:13:37,443 - INFO - No signals found.
+2024-04-24 11:13:42,447 - INFO - No signals found.
+2024-04-24 11:13:47,451 - INFO - No signals found.
+2024-04-24 11:13:52,454 - INFO - No signals found.
+2024-04-24 11:13:57,455 - INFO - No signals found.
+2024-04-24 11:14:02,461 - INFO - No signals found.
+2024-04-24 11:14:07,466 - INFO - No signals found.
+2024-04-24 11:14:12,471 - INFO - No signals found.
+2024-04-24 11:14:17,475 - INFO - No signals found.
+2024-04-24 11:14:22,479 - INFO - No signals found.
+2024-04-24 11:14:27,485 - INFO - No signals found.
+2024-04-24 11:14:32,490 - INFO - No signals found.
+2024-04-24 11:14:37,491 - INFO - No signals found.
+2024-04-24 11:14:42,497 - INFO - No signals found.
+2024-04-24 11:14:47,499 - INFO - No signals found.
+2024-04-24 11:14:52,503 - INFO - No signals found.
+2024-04-24 11:14:57,507 - INFO - No signals found.
+2024-04-24 11:15:02,513 - INFO - No signals found.
+2024-04-24 11:15:07,515 - INFO - No signals found.
+2024-04-24 11:15:12,521 - INFO - No signals found.
+2024-04-24 11:15:17,526 - INFO - No signals found.
+2024-04-24 11:15:22,527 - INFO - No signals found.
+2024-04-24 11:15:27,533 - INFO - No signals found.
+2024-04-24 11:15:32,537 - INFO - No signals found.
+2024-04-24 11:15:37,539 - INFO - No signals found.
+2024-04-24 11:15:42,543 - INFO - No signals found.
+2024-04-24 11:15:47,549 - INFO - No signals found.
+2024-04-24 11:15:52,554 - INFO - No signals found.
+2024-04-24 11:15:57,556 - INFO - No signals found.
+2024-04-24 11:16:02,562 - INFO - No signals found.
+2024-04-24 11:16:07,563 - INFO - No signals found.
+2024-04-24 11:16:12,569 - INFO - No signals found.
+2024-04-24 11:16:17,572 - INFO - No signals found.
+2024-04-24 11:16:22,577 - INFO - No signals found.
+2024-04-24 11:16:27,583 - INFO - No signals found.
+2024-04-24 11:16:32,587 - INFO - No signals found.
+2024-04-24 11:16:37,593 - INFO - No signals found.
+2024-04-24 11:16:42,598 - INFO - No signals found.
+2024-04-24 11:16:47,603 - INFO - No signals found.
+2024-04-24 11:16:52,609 - INFO - No signals found.
+2024-04-24 11:16:57,614 - INFO - No signals found.
+2024-04-24 11:41:28,485 - INFO - Waiting for price signals...
+2024-04-24 11:41:28,485 - INFO - Reading config file
+2024-04-24 11:41:28,555 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 11:41:30,383 - INFO - MATICUSDT Hold
+2024-04-24 11:41:30,392 - INFO - Waiting for trade finished...
+2024-04-24 11:41:30,392 - INFO - Trade for MATICUSDT was finished
+2024-04-24 11:41:30,392 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 11:41:30,392 - INFO - Cleaning log file.
+2024-04-24 12:11:30,423 - INFO - Waiting for price signals...
+2024-04-24 12:11:30,424 - INFO - Reading config file
+2024-04-24 12:11:30,482 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 12:11:32,117 - INFO - MATICUSDT Hold
+2024-04-24 12:11:32,125 - INFO - Waiting for trade finished...
+2024-04-24 12:11:32,125 - INFO - Trade for MATICUSDT was finished
+2024-04-24 12:11:32,125 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 12:11:32,125 - INFO - Cleaning log file.
+2024-04-24 12:41:32,138 - INFO - Waiting for price signals...
+2024-04-24 12:41:32,138 - INFO - Reading config file
+2024-04-24 12:41:32,198 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 12:41:32,981 - INFO - MATICUSDT Hold
+2024-04-24 12:41:32,990 - INFO - Waiting for trade finished...
+2024-04-24 12:41:32,990 - INFO - Trade for MATICUSDT was finished
+2024-04-24 12:41:32,990 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 12:41:32,990 - INFO - Cleaning log file.
+2024-04-24 13:11:33,090 - INFO - Waiting for price signals...
+2024-04-24 13:11:33,090 - INFO - Reading config file
+2024-04-24 13:11:33,147 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 13:11:34,918 - INFO - MATICUSDT Hold
+2024-04-24 13:11:34,927 - INFO - Waiting for trade finished...
+2024-04-24 13:11:34,927 - INFO - Trade for MATICUSDT was finished
+2024-04-24 13:11:34,927 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 13:11:34,927 - INFO - Cleaning log file.
+2024-04-24 13:41:35,025 - INFO - Waiting for price signals...
+2024-04-24 13:41:35,025 - INFO - Reading config file
+2024-04-24 13:41:35,080 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 13:41:36,894 - INFO - MATICUSDT Hold
+2024-04-24 13:41:36,904 - INFO - Waiting for trade finished...
+2024-04-24 13:41:36,904 - INFO - Trade for MATICUSDT was finished
+2024-04-24 13:41:36,904 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 13:41:36,904 - INFO - Cleaning log file.
+2024-04-24 13:44:58,822 - INFO - No signals found.
+2024-04-24 13:45:03,823 - INFO - No signals found.
+2024-04-24 13:45:08,827 - INFO - No signals found.
+2024-04-24 13:45:13,831 - INFO - No signals found.
+2024-04-24 13:45:18,835 - INFO - No signals found.
+2024-04-24 13:45:23,839 - INFO - No signals found.
+2024-04-24 13:48:07,242 - INFO - No signals found.
+2024-04-24 13:48:12,243 - INFO - No signals found.
+2024-04-24 13:48:13,594 - INFO - Bot started
+2024-04-24 13:48:13,594 - INFO - Waiting for price signals...
+2024-04-24 13:48:13,594 - INFO - Reading config file
+2024-04-24 13:48:13,645 - INFO - Processing symbol {'symbol': 'MATICUSDT', 'position_size': 10}
+2024-04-24 13:48:15,443 - INFO - MATICUSDT Hold
+2024-04-24 13:48:15,451 - INFO - Waiting for trade finished...
+2024-04-24 13:48:15,451 - INFO - Trade for MATICUSDT was finished
+2024-04-24 13:48:15,451 - INFO - Finished trade for symbol MATICUSDT
+2024-04-24 13:48:15,451 - INFO - Cleaning log file.
+2024-04-24 13:48:17,247 - INFO - No signals found.
+2024-04-24 13:48:22,251 - INFO - No signals found.
+2024-04-24 13:48:27,255 - INFO - No signals found.
+2024-04-24 13:48:32,259 - INFO - No signals found.
+2024-04-24 13:48:37,263 - INFO - No signals found.
+2024-04-24 13:48:42,267 - INFO - No signals found.
+2024-04-24 13:48:47,272 - INFO - No signals found.
+2024-04-24 13:48:52,275 - INFO - No signals found.
+2024-04-24 13:48:57,280 - INFO - No signals found.
+2024-04-24 13:49:02,283 - INFO - No signals found.
+2024-04-24 13:49:07,287 - INFO - No signals found.
+2024-04-24 13:49:12,291 - INFO - No signals found.
+2024-04-24 13:49:17,297 - INFO - No signals found.
+2024-04-24 13:49:22,299 - INFO - No signals found.
+2024-04-24 13:49:27,303 - INFO - No signals found.
+2024-04-24 13:49:32,308 - INFO - No signals found.
+2024-04-24 13:49:37,313 - INFO - No signals found.
+2024-04-24 13:49:42,315 - INFO - No signals found.
+2024-04-24 13:49:47,319 - INFO - No signals found.
+2024-04-24 13:49:52,323 - INFO - No signals found.
+2024-04-24 13:49:57,327 - INFO - No signals found.
+2024-04-24 13:50:02,331 - INFO - No signals found.
+2024-04-24 13:50:07,336 - INFO - No signals found.
+2024-04-24 13:50:12,339 - INFO - No signals found.
+2024-04-24 13:50:17,345 - INFO - No signals found.
+2024-04-24 13:50:22,348 - INFO - No signals found.
+2024-04-24 13:50:27,351 - INFO - No signals found.
+2024-04-24 13:50:32,355 - INFO - No signals found.
+2024-04-24 13:50:37,359 - INFO - No signals found.
+2024-04-24 13:50:42,363 - INFO - No signals found.
+2024-04-24 13:50:47,367 - INFO - No signals found.
+2024-04-24 13:50:52,372 - INFO - No signals found.

@@ -36,12 +36,16 @@ def clean_log_file():
 
 def process_symbol(symbol):
     logging_settings.system_logs_logger.info(f'Processing symbol {symbol}')
-    signal_list = strategy.main(symbol['symbol'])
-    print(not_trading_symbols_list)
+    df = strategy.get_latest_candlestick(symbol['symbol'])
+    signal_list = strategy.generate_signal(df)
     if symbol['symbol'] in not_trading_symbols_list:
-        for signal_data in signal_list:
-            signal = signal_data['signal']
-            signal_price = signal_data['signal_price']
+        for _ in signal_list:
+            if signal_list[0] == 'Hold':
+                logging_settings.finish_trade_log.info(f'{symbol["symbol"]} Finished')
+                logging_settings.system_logs_logger.info(f'{symbol["symbol"]} Hold')
+                break
+            signal = signal_list[0]
+            signal_price = signal_list[1]
             logging_settings.actions_logger.info(
                 f'{symbol["symbol"]} {signal_price} {signal} {symbol["position_size"]}')
             not_trading_symbols_list.remove(symbol['symbol'])

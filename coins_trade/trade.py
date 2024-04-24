@@ -1,6 +1,7 @@
 from miya import miya_trade
 import threading
 import time
+import logging_settings
 
 data = None
 not_empty = False
@@ -15,7 +16,6 @@ def read_alert():
     global data, not_empty
     with open('./logs/signal_log.log', 'r') as alert_file:
         lines = alert_file.readlines()
-        print(lines)
         if lines:
             data = lines[0].strip().split(', ')  # Split the line into parts
             not_empty = True
@@ -27,10 +27,12 @@ def read_alert():
 def start_trade(cryptocurrency, price, action, position_size):
     if action == 'Buy':
         miya_trade.trade(cryptocurrency, 'long', price, position_size)
-        print("Trade started for:", cryptocurrency)  # Adding a print statement
+        logging_settings.system_logs_logger.info("Trade started for:", cryptocurrency)  # Adding a print statement
     elif action == 'Sell':
-        print("Trade started for:", cryptocurrency)  # Adding a print statement
+        logging_settings.system_logs_logger.info("Trade started for:", cryptocurrency)  # Adding a print statement
         miya_trade.trade(cryptocurrency, 'short', price, position_size)
+    else:
+        print("Holding: ", cryptocurrency)
 
 
 def process_signal_line(line):
@@ -40,32 +42,23 @@ def process_signal_line(line):
         price = float(parts[6])
         action = parts[7]
         position_size = int(parts[8])
-        print(
+        logging_settings.system_logs_logger.info(
             f"Received signal for {cryptocurrency} at price {price} with action {action} position size {parts[8]}")
         start_trade(cryptocurrency, price, action, position_size)
         time.sleep(2)
     else:
-        print("Invalid data format for line:", line)
+        logging_settings.error_logs_logger.error("Invalid data format for line:", line)
 
 
 def continuously_check_signals():
     while True:
         empty, data = read_alert()
         if empty:
-            threads = []
             for line in data:
                 process_signal_line(line)
-                # thread = threading.Thread(target=process_signal_line, args=(line,))
-                # threads.append(thread)
-                # thread.start()
-
-            # Wait for all threads to finish
-            # for thread in threads:
-            #     thread.join()
-
             clean_log_file()
         else:
-            print("No signals found.")
+            logging_settings.system_logs_logger.info("No signals found.")
         time.sleep(5)
 
 
