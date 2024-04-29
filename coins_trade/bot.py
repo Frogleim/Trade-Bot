@@ -1,10 +1,8 @@
-import multiprocessing
 import time
 import strategy
 import logging_settings
 from binance.client import Client
 import json
-import importlib.util
 import os
 
 client = Client()
@@ -36,19 +34,20 @@ def clean_log_file():
 
 def process_symbol(symbol):
     logging_settings.system_logs_logger.info(f'Processing symbol {symbol}')
-    df = strategy.get_latest_candlestick(symbol['symbol'])
-    signal_list = strategy.generate_signal(df)
-    if symbol['symbol'] in not_trading_symbols_list:
-        for _ in signal_list:
-            if signal_list[0] == 'Hold':
-                logging_settings.finish_trade_log.info(f'{symbol["symbol"]} Finished')
-                logging_settings.system_logs_logger.info(f'{symbol["symbol"]} Hold')
+    df = strategy.get_latest_candlestick(symbol[0]['symbol'])
+    signal, price = strategy.generate_signal(df)
+    if symbol[0]['symbol'] in not_trading_symbols_list:
+        while True:
+            logging_settings.system_logs_logger.info(f'{symbol[0]["symbol"]} Hold')
+            if signal != 'Hold':
+                logging_settings.system_logs_logger.info(f'{symbol[0]["symbol"]} is not Hold')
+
                 break
-            signal = signal_list[0]
-            signal_price = signal_list[1]
-            logging_settings.actions_logger.info(
-                f'{symbol["symbol"]} {signal_price} {signal} {symbol["position_size"]}')
-            not_trading_symbols_list.remove(symbol['symbol'])
+            time.sleep(500)
+        signal = signal
+        signal_price = signal
+        logging_settings.actions_logger.info(
+            f'{symbol[0]["symbol"]} {signal_price} {signal} {symbol[0]["position_size"]}')
 
 
 def check_trade_status():
@@ -69,9 +68,7 @@ def run():
     while True:
         logging_settings.system_logs_logger.info('Waiting for price signals...')
         symbols = read_config_json()
-        with multiprocessing.Pool() as pool:
-            pool.map(process_symbol, symbols['cryptocurrency'])
-
+        process_symbol(symbols["cryptocurrency"])
         logging_settings.system_logs_logger.info('Waiting for trade finished...')
         is_finished, cryptocurrency = check_trade_status()
         logging_settings.system_logs_logger.info(f'Finished trade for symbol {cryptocurrency}')

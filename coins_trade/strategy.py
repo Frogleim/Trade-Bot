@@ -36,20 +36,28 @@ def generate_signal(df):
     ema_long = calculate_ema(close, 26)
     rsi = calculate_rsi(close, 14)
 
+    # Implement MACD
+    macd = ema_short - ema_long
+    signal_line = calculate_ema(macd, 9)
+
+    # Implement ATR
+    high_low = df['high'] - df['low']
+    high_close = np.abs(df['high'] - df['close'].shift())
+    low_close = np.abs(df['low'] - df['close'].shift())
+    tr = pd.DataFrame([high_low, high_close, low_close]).max()
+    atr = tr.rolling(window=14).mean()
+
     last_price = close.iloc[-1]
-    signal_price = last_price
-    if ema_short.iloc[-1] > ema_long.iloc[-1] and rsi.iloc[-1] < 30:
-        return "Buy", signal_price
-    elif ema_short.iloc[-1] < ema_long.iloc[-1] and rsi.iloc[-1] > 70:
-        return "Sell", signal_price
+    if macd.iloc[-1] > signal_line.iloc[-1] and rsi.iloc[-1] > 50:
+        return "Buy", last_price
+    elif macd.iloc[-1] < signal_line.iloc[-1] and rsi.iloc[-1] < 50:
+        return "Sell", last_price
     else:
-        return "Hold", signal_price
+        return "Hold", last_price
 
 
-# Example usage
 if __name__ == '__main__':
     symbol = 'MATICUSDT'
-
     df = get_latest_candlestick(symbol)
     signal, price = generate_signal(df)
     print(f"Signal: {signal}, at Price: {price}")
