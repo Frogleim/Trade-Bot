@@ -48,9 +48,9 @@ def generate_signal(df):
     atr = tr.rolling(window=14).mean()
 
     last_price = close.iloc[-1]
-    if macd.iloc[-1] > signal_line.iloc[-1] and rsi.iloc[-1] > 50:
+    if macd.iloc[-1] > signal_line.iloc[-1]:
         return "Buy", last_price
-    elif macd.iloc[-1] < signal_line.iloc[-1] and rsi.iloc[-1] < 50:
+    elif macd.iloc[-1] < signal_line.iloc[-1]:
         return "Sell", last_price
     else:
         return "Hold", last_price

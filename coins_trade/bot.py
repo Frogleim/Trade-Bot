@@ -45,9 +45,8 @@ def process_symbol(symbol):
                 break
             time.sleep(500)
         signal = signal
-        signal_price = signal
         logging_settings.actions_logger.info(
-            f'{symbol[0]["symbol"]} {signal_price} {signal} {symbol[0]["position_size"]}')
+            f'{symbol[0]["symbol"]} {price} {signal} {symbol[0]["position_size"]}')
 
 
 def check_trade_status():
