@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  bot:
+    build:
+      context: .
+    restart: always
+  trade:
+    build: coins_trade
+    restart: always
