@@ -3,10 +3,13 @@ import talib
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
+import pickle
+
 
 def read_data():
     df = pd.read_csv('./data/MATICUSDT_feature.csv')
     return df
+
 
 df = read_data()
 
@@ -40,3 +43,5 @@ predictions = model.predict(X_test)
 
 # Evaluate the model
 print(classification_report(y_test, predictions))
+with open('./model/random_forest_model.sav', 'wb') as file:
+    pickle.dump(model, file)
