@@ -1,16 +1,4 @@
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import tensorflow as tf
-
-datagen = ImageDataGenerator(
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
-    shear_range=0.1,
-    zoom_range=0.2,
-    horizontal_flip=True,
-    fill_mode='nearest',
-    validation_split=0.2  # Use 20% of the data as validation data
-)
 
 batch_size = 32
 img_height = 180
