@@ -34,7 +34,7 @@ X_train['close_time'] = pd.to_datetime(X_train['close_time']).view(int) / 1e9
 X_test['close_time'] = pd.to_datetime(X_test['close_time']).view(int) / 1e9
 # Initialize the model
 model = RandomForestClassifier(n_estimators=100, random_state=42)
-
+print(X_test)
 # Train the model
 model.fit(X_train, y_train)
 
