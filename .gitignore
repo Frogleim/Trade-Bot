@@ -14,3 +14,4 @@ coins_trade/.pytest_cache
 coins_trade/__pycache__
 .vscode
 jupyter_data/.ipynb_checkpoints
+model_building/models/model.pkl
