@@ -22,7 +22,7 @@ client = Client(api_key, api_secret)
 ma1 = 12
 ma2 = 26
 ticker = 'BTCUSDT'
-interval = Client.KLINE_INTERVAL_1MINUTE
+interval = Client.KLINE_INTERVAL_15MINUTE
 
 
 # Simple moving average
@@ -69,7 +69,7 @@ def update_data(df, new_data):
 
 # Write signals to a text file
 def write_signal_to_file(signal_data):
-    with open('signals.txt', 'a') as f:
+    with open('./backtesting/backtesting_15min.txt', 'a') as f:
         f.write(f"{signal_data}\n")
 
 
