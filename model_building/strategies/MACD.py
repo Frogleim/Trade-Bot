@@ -69,6 +69,7 @@ def update_data(df, new_data):
 
 # Write signals to a text file
 def write_signal_to_file(signal_data):
+    print(f'Writing into backtesting_15min.txt')
     with open('./backtesting/backtesting_15min.txt', 'a') as f:
         f.write(f"{signal_data}\n")
 
@@ -86,11 +87,10 @@ def process_message(msg):
         'ma1': latest_signal['ma1'],
         'ma2': latest_signal['ma2'],
         'positions': latest_signal['positions'],
-        'signals': latest_signal['signals'],
+        'signals': "Buy" if latest_signal['signals'] == 1.0 else "Sell",
         'oscillator': latest_signal['oscillator']
     }
     write_signal_to_file(signal_data)
-    print(latest_signal)  # Print the latest signal
 
 
 # Main function to start WebSocket and fetch initial data
