@@ -1,3 +1,4 @@
+import joblib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -17,7 +18,7 @@ client = Client(api_key, api_secret)
 # Global variables to hold the moving averages and other parameters
 ma1 = 12
 ma2 = 26
-ticker = 'BTCUSDT'
+ticker = 'MATICUSDT'
 interval = Client.KLINE_INTERVAL_15MINUTE
 
 
@@ -67,6 +68,7 @@ def train_model(X_train, y_train):
 
     model = RandomForestClassifier(n_estimators=100, random_state=42)
     model.fit(X_train, y_train)
+    joblib.dump(model, "macd_model.pkl")
     return model
 
 
@@ -99,16 +101,16 @@ def main():
     evaluate_model(model, X_test, y_test)
 
     # Start WebSocket manager for real-time predictions
-    twm = ThreadedWebsocketManager(api_key=api_key, api_secret=api_secret)
-    twm.start()
-    twm.start_kline_socket(callback=lambda msg: process_message(msg, model), symbol=ticker, interval=interval)
+    # twm = ThreadedWebsocketManager(api_key=api_key, api_secret=api_secret)
+    # twm.start()
+    # twm.start_kline_socket(callback=lambda msg: process_message(msg, model), symbol=ticker, interval=interval)
 
     # Keep the script running
-    try:
-        while True:
-            pass
-    except KeyboardInterrupt:
-        twm.stop()
+    # try:
+    #     while True:
+    #         pass
+    # except KeyboardInterrupt:
+    #     twm.stop()
 
 
 # Process message from WebSocket

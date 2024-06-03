@@ -12,6 +12,7 @@ from binance.client import Client
 from binance.enums import HistoricalKlinesType
 from binance import ThreadedWebsocketManager
 import os
+import joblib
 
 # Initialize Binance client
 api_key = os.getenv('BINANCE_API_KEY')
@@ -57,66 +58,37 @@ def fetch_binance_data(ticker, start_date, end_date, interval):
     return data
 
 
-# Update DataFrame with new price data
-def update_data(df, new_data):
-    new_df = pd.DataFrame([new_data], columns=['timestamp', 'Open', 'High', 'Low', 'Close', 'Volume'])
-    new_df['timestamp'] = pd.to_datetime(new_df['timestamp'], unit='ms')
-    new_df.set_index('timestamp', inplace=True)
-    new_df = new_df[['Open', 'High', 'Low', 'Close', 'Volume']].astype(float)
-    df = pd.concat([df, new_df])
-    return df
+# Backtest function with take profit and stop loss
+def backtest(signals, capital, take_profit, stop_loss):
+    positions = []
+    balance = capital
+    btc_balance = 0
+    entry_price = 0
+    for i in range(len(signals)):
+        if signals['signals'][i] == 1 and btc_balance == 0:  # Buy signal
+            btc_balance = balance / signals['Close'][i]
+            balance = 0
+            entry_price = signals['Close'][i]
+            positions.append(('Buy', signals.index[i], signals['Close'][i], btc_balance))
+        elif btc_balance > 0:
+            price_change = (signals['Close'][i] - entry_price) / entry_price
+            if price_change >= take_profit or price_change <= stop_loss:
+                balance = btc_balance * signals['Close'][i]
+                btc_balance = 0
+                positions.append(('Sell', signals.index[i], signals['Close'][i], balance))
+    return positions, balance
 
 
-# Write signals to a text file
-def write_signal_to_file(signal_data):
-    print(f'Writing into backtesting_15min.txt')
-    with open('./backtesting/backtesting_15min.txt', 'a') as f:
-        f.write(f"{signal_data}\n")
+# Main execution
+if __name__ == "__main__":
+    starting_capital = 100  # Starting capital in USD
+    take_profit = 0.060  # 0.6%
+    stop_loss = -0.0045  # -0.45%
 
+    data = fetch_binance_data(ticker, "1 Jan 2023", "1 Jan 2024", interval)
+    signals = signal_generation(data, macd, ma1, ma2)
+    positions, final_balance = backtest(signals, starting_capital, take_profit, stop_loss)
 
-# Process message from WebSocket
-def process_message(msg):
-    global df, ma1, ma2
-    new_data = [msg['E'], msg['k']['o'], msg['k']['h'], msg['k']['l'], msg['k']['c'], msg['k']['v']]
-    df = update_data(df, new_data)
-    df = signal_generation(df, macd, ma1, ma2)
-    latest_signal = df.iloc[-1]
-    signal_data = {
-        'timestamp': latest_signal.name,
-        'Close': latest_signal['Close'],
-        'ma1': latest_signal['ma1'],
-        'ma2': latest_signal['ma2'],
-        'positions': latest_signal['positions'],
-        'signals': "Buy" if latest_signal['signals'] == 1.0 else "Sell",
-        'oscillator': latest_signal['oscillator']
-    }
-    write_signal_to_file(signal_data)
-
-
-# Main function to start WebSocket and fetch initial data
-def main():
-    global df, ma1, ma2, ticker, interval
-    start_date = '2023-01-01'
-    end_date = '2023-12-31'
-
-    # Fetch historical data
-    df = fetch_binance_data(ticker, start_date, end_date, interval)
-    df = signal_generation(df, macd, ma1, ma2)
-
-    # Start WebSocket manager
-    twm = ThreadedWebsocketManager(api_key=api_key, api_secret=api_secret)
-    twm.start()
-
-    # Subscribe to the kline WebSocket
-    twm.start_kline_socket(callback=process_message, symbol=ticker, interval=interval)
-
-    # Keep the script running
-    try:
-        while True:
-            pass
-    except KeyboardInterrupt:
-        twm.stop()
-
-
-if __name__ == '__main__':
-    main()
+    # Save results to CSV
+    results = pd.DataFrame(positions, columns=['Action', 'Date', 'Price', 'Balance/Qty'])
+    results.to_csv('./backtesting/backtest_results.csv', index=False)

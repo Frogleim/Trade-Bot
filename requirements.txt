@@ -8,4 +8,7 @@ tensorflow
 scipy
 matplotlib
 opencv-python
-
+flask
+dash
+plotly
+scikit-learn
