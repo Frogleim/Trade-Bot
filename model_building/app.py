@@ -9,7 +9,7 @@ import numpy as np
 
 
 # Function to fetch OHLCV data from Binance
-def fetch_ohlcv(symbol='MATIC/USDT', timeframe='1m', limit=100):
+def fetch_ohlcv(symbol='MATIC/USDT', timeframe='15m', limit=100):
     exchange = ccxt.binance()
     ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
@@ -62,7 +62,7 @@ app.layout = html.Div([
     dcc.Graph(id='live-candlestick-chart'),
     dcc.Interval(
         id='interval-component',
-        interval=60 * 1000,  # Update every minute
+        interval=60 * 1000,  # Update every 15 minutes
         n_intervals=0
     )
 ])
@@ -74,7 +74,7 @@ def update_chart(n):
     df = fetch_ohlcv()
     signals = generate_signals(df)
     positions, _ = backtest(signals, 100, 0.0060, -0.0045)
-
+    print(positions)
     buys = [pos for pos in positions if pos[0] == 'Buy']
     sells = [pos for pos in positions if pos[0] == 'Sell']
 
@@ -87,21 +87,23 @@ def update_chart(n):
         name='Candlesticks'
     )])
 
+    last_candle = df.iloc[-1]
+
     if buys:
         fig.add_trace(go.Scatter(
-            x=[buy[1] for buy in buys],
-            y=[buy[2] for buy in buys],
+            x=[last_candle['timestamp']],
+            y=[last_candle['close']],
             mode='markers',
-            marker=dict(symbol='triangle-up', color='green', size=10),
+            marker=dict(symbol='triangle-up', color='green', size=15),
             name='Buy'
         ))
 
     if sells:
         fig.add_trace(go.Scatter(
-            x=[sell[1] for sell in sells],
-            y=[sell[2] for sell in sells],
+            x=[last_candle['timestamp']],
+            y=[last_candle['close']],
             mode='markers',
-            marker=dict(symbol='triangle-down', color='red', size=10),
+            marker=dict(symbol='triangle-down', color='red', size=15),
             name='Sell'
         ))
 
