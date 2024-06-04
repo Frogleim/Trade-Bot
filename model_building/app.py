@@ -6,6 +6,7 @@ import pandas as pd
 import plotly.graph_objs as go
 import io
 import numpy as np
+from strategies import patterns
 
 
 # Function to fetch OHLCV data from Binance
@@ -15,27 +16,6 @@ def fetch_ohlcv(symbol='MATIC/USDT', timeframe='15m', limit=100):
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
     return df
-
-
-# Backtest function with take profit and stop loss
-def backtest(signals, capital, take_profit, stop_loss):
-    positions = []
-    balance = capital
-    btc_balance = 0
-    entry_price = 0
-    for i in range(len(signals)):
-        if signals['signals'][i] == 1 and btc_balance == 0:  # Buy signal
-            btc_balance = balance / signals['close'][i]
-            balance = 0
-            entry_price = signals['close'][i]
-            positions.append(('Buy', signals.index[i], signals['close'][i], btc_balance))
-        elif btc_balance > 0:
-            price_change = (signals['close'][i] - entry_price) / entry_price
-            if price_change >= take_profit or price_change <= stop_loss:
-                balance = btc_balance * signals['close'][i]
-                btc_balance = 0
-                positions.append(('Sell', signals.index[i], signals['close'][i], balance))
-    return positions, balance
 
 
 def generate_signals(df):
@@ -73,11 +53,9 @@ app.layout = html.Div([
 def update_chart(n):
     df = fetch_ohlcv()
     signals = generate_signals(df)
-    positions, _ = backtest(signals, 100, 0.0060, -0.0045)
-    print(positions)
-    buys = [pos for pos in positions if pos[0] == 'Buy']
-    sells = [pos for pos in positions if pos[0] == 'Sell']
-
+    signal = signals['signals'].iloc[-1]
+    print(f"Signal: {signal}")
+    patterns_signal = patterns.detect_head_shoulder(df)
     fig = go.Figure(data=[go.Candlestick(
         x=df['timestamp'],
         open=df['open'],
@@ -88,8 +66,14 @@ def update_chart(n):
     )])
 
     last_candle = df.iloc[-1]
+    print(patterns_signal['head_shoulder_pattern'].iloc[-1])
+    position_closed_text = ""
 
-    if buys:
+    if patterns_signal['head_shoulder_pattern'].iloc[-1] == 'Head and Shoulder':
+        pass
+
+    if signal > 0:
+        entry_price = last_candle['close']
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],
             y=[last_candle['close']],
@@ -97,8 +81,12 @@ def update_chart(n):
             marker=dict(symbol='triangle-up', color='green', size=15),
             name='Buy'
         ))
+        if float(last_candle['close']) - float(entry_price) >= 0.022:
+            position_closed_text = "Position closed with profit: 0.022"
+            print(position_closed_text)
 
-    if sells:
+    if signal < 0:
+        entry_price = last_candle['close']
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],
             y=[last_candle['close']],
@@ -106,12 +94,28 @@ def update_chart(n):
             marker=dict(symbol='triangle-down', color='red', size=15),
             name='Sell'
         ))
+        if float(entry_price) - float(last_candle['close']) <= -0.022:
+            position_closed_text = "Position closed with profit: 0.022"
+            print(position_closed_text)
 
     fig.update_layout(
         title='MATIC/USDT Live Candlestick Chart',
         xaxis_title='Time',
         yaxis_title='Price (USDT)',
-        xaxis_rangeslider_visible=False
+        xaxis_rangeslider_visible=False,
+        annotations=[go.layout.Annotation(
+            xref='paper',
+            yref='paper',
+            x=0.5,
+            y=0,
+            showarrow=False,
+            text=position_closed_text,
+            font=dict(
+                size=12,
+                color="black"
+            ),
+            align="center"
+        )] if position_closed_text else []
     )
     return fig
 

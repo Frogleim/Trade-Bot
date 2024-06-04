@@ -12,3 +12,4 @@ flask
 dash
 plotly
 scikit-learn
+tradingpattern
