@@ -4,10 +4,8 @@ ccxt
 fastapi
 uvicorn
 Pillow
-tensorflow
 scipy
 matplotlib
-opencv-python
 flask
 dash
 plotly
