@@ -7,7 +7,7 @@ class DataBase:
         self.password = "admin"
         self.host = "localhost"
         self.port = 5432
-        self.database = "TradeBot"
+        self.database = "miya"
 
     def connect(self):
         return psycopg2.connect(

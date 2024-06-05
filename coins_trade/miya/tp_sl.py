@@ -3,9 +3,9 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import config
+from . import config, logging_settings
 import time
-import logging_settings
+# import logging_settings
 
 
 current_profit = 0

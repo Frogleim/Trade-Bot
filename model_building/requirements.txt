@@ -9,6 +9,6 @@ matplotlib
 flask
 dash
 plotly
+scikit-learn
 tradingpattern
 colorama
-psycopg2
