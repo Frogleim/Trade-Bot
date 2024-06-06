@@ -3,10 +3,12 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import config, logging_settings
+from . import config, logging_settings, db
 import time
+
 # import logging_settings
 
+my_db = db.DataBase()
 
 current_profit = 0
 profit_checkpoint_list = []
@@ -40,7 +42,6 @@ def method_name_decorator(func):
 
 
 def pnl_long(opened_price, current_time=None):
-
     global current_profit, current_checkpoint, profit_checkpoint_list
 
     print(current_profit, current_checkpoint, profit_checkpoint_list)
@@ -61,7 +62,8 @@ def pnl_long(opened_price, current_time=None):
 
     if float(current_profit) <= -0.0075:
         return 'Loss'
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
+    logging.warning(
+        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
@@ -74,11 +76,12 @@ def pnl_long(opened_price, current_time=None):
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+            my_db.insert_test_trades(symbol=config.trading_pair, entry_price=opened_price, close_price='0.0', pnl=current_profit)
+
             return 'Profit'
 
 
 def pnl_short(opened_price, current_time=None):
-
     global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
@@ -98,7 +101,8 @@ def pnl_short(opened_price, current_time=None):
     if float(current_profit) <= -0.0075:
         return 'Loss'
 
-    logging.warning(f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
+    logging.warning(
+        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
@@ -110,4 +114,6 @@ def pnl_short(opened_price, current_time=None):
             logging.info(body)
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
+            my_db.insert_test_trades(symbol=config.trading_pair, entry_price=opened_price, close_price='0.0', pnl=current_profit)
+
             return 'Profit'

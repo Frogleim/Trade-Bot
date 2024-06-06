@@ -25,7 +25,19 @@ class DataBase:
                        (symbol, signal, entry_price))
         conn.commit()
 
+    def get_signal(self, symbol):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM signals WHERE coin='{symbol}'")
+        rows = cursor.fetchall()
+        print(len(rows))
+        if len(rows) > 0:
+            return rows[-1]
+        else:
+            return None
 
 if __name__ == '__main__':
+    symbol = 'MATICUSDT'
     db = DataBase()
-    db.insert_trades(symbol='MATICUSDT', entry_price='0.77', signal='Buy')
+    rows = db.get_signal(symbol=symbol)
+    print(rows)

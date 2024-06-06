@@ -1,9 +1,10 @@
-from coins_trade.miya import miya_trade
+from coins_trade.miya import miya_trade, trade_simulate
 from model_building.strategies import MACD
 from colorama import init, Fore, Back, Style
 from binance.client import Client
 import pandas as pd
 import numpy as np
+from db import DataBase
 from tqdm import tqdm
 import time
 
@@ -12,6 +13,7 @@ init()
 client = Client()
 start_date = '1 Jan, 2023'
 end_date = '1 May, 2024'
+symbol = 'MATICUSDT'
 
 
 def fetch_ohlcv(symbol='MATICUSDT', timeframe=Client.KLINE_INTERVAL_15MINUTE, limit=100):
@@ -36,8 +38,20 @@ def generate_signals(df):
     return signals
 
 
-if __name__ == '__main__':
-    print(Fore.YELLOW + 'Fetching OHLCV...')
-    df = fetch_ohlcv()
+def start_trade():
+    print(Fore.GREEN + f'Starting trade for symbol {symbol}')
+    my_db = DataBase()
+    signal_data = my_db.get_signal(symbol=symbol)
+    if signal_data is not None:
+        signal = signal_data[1]
+        entry_price = signal_data[2]
+        trade_simulate.trade(symbol=symbol, signal=signal, entry_price=entry_price)
+    print(Fore.RED + "No trade signals at this moment")
 
-    print(Fore.RESET)
+
+if __name__ == '__main__':
+    print(Fore.YELLOW + 'Starting trade bot...')
+    while True:
+
+        start_trade()
+        time.sleep(60*3600)
