@@ -9,7 +9,7 @@ client = Client(config.API_KEY, config.API_SECRET)
 def trade(symbol, signal, entry_price, position_size):
     current_time = datetime.now()
     start_time = time.time()
-    if signal == 'short':
+    if signal == 'Sell':
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
         tp_sl.current_checkpoint = 0.00
@@ -57,7 +57,7 @@ def trade(symbol, signal, entry_price, position_size):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
 
-    if signal == 'long':
+    if signal == 'Buy':
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
         tp_sl.current_checkpoint = 0.00

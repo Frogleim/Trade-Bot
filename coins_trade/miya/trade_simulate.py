@@ -13,28 +13,41 @@ def trade(symbol, signal, entry_price, start_time=None):
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
         tp_sl.current_checkpoint = 0.00
+        trade_start = time.time()
         print(f'tp_sl.profit_checkpoint_list: {tp_sl.profit_checkpoint_list} --- {tp_sl.current_profit}')
         while True:
+            current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            total_time = time.time() - trade_start
+            if total_time > 60:
+                print('Breaking! Waiting time is expired')
 
-            res = tp_sl.pnl_short(entry_price, current_time)
-            if res == 'Profit' and res is not None:
-                print(f'Closing Position with {res}')
-                logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
+            if float(entry_price) - float(current_price) < - 0.00011:
+                res = tp_sl.pnl_short(entry_price, current_time)
+                if res == 'Profit' and res is not None:
+                    print(f'Closing Position with {res}')
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    break
 
     if signal == 'Buy':
 
         tp_sl.profit_checkpoint_list.clear()
         tp_sl.current_profit = 0.00
         tp_sl.current_checkpoint = 0.00
+        trade_start = time.time()
 
         print(f'tp_sl.profit_checkpoint_list: {tp_sl.profit_checkpoint_list} --- {tp_sl.current_profit}')
         while True:
-            res = tp_sl.pnl_long(entry_price, current_time)
-            print(res)
-            if res == 'Profit' and res is not None:
-                print(f'Closing Position with {res}')
-                logging_settings.finish_trade_log.info(f'{symbol} Finished')
+            current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']
+            total_time = time.time() - trade_start
+            if total_time > 60:
+                print('Breaking! Waiting time is expired')
                 break
+            if float(current_price) - float(entry_price) > 0.00011:
+                res = tp_sl.pnl_long(entry_price, current_time)
+                print(res)
+                if res == 'Profit' and res is not None:
+                    print(f'Closing Position with {res}')
+                    logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    break
 
-# 091
