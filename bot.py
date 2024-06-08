@@ -54,4 +54,4 @@ if __name__ == '__main__':
     while True:
 
         start_trade()
-        time.sleep(60*3600)
+        time.sleep(3600)
