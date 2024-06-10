@@ -14,6 +14,7 @@ def trade(symbol, signal, entry_price, start_time=None):
         tp_sl.current_profit = 0.00
         tp_sl.current_checkpoint = 0.00
         trade_start = time.time()
+        print(f'Trade starting time: {trade_start}')
         print(f'tp_sl.profit_checkpoint_list: {tp_sl.profit_checkpoint_list} --- {tp_sl.current_profit}')
         while True:
             current_price = client.futures_ticker(symbol=config.trading_pair)['lastPrice']

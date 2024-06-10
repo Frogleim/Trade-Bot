@@ -39,6 +39,7 @@ def generate_signals(df):
 
 
 def start_trade():
+    traded = False
     print(Fore.GREEN + f'Starting trade for symbol {symbol}')
     my_db = DataBase()
     signal_data = my_db.get_signal(symbol=symbol)
@@ -46,12 +47,16 @@ def start_trade():
         signal = signal_data[1]
         entry_price = signal_data[2]
         miya_trade.trade(symbol=symbol, signal=signal, entry_price=entry_price, position_size=10)
+        traded = True
+        return traded
     print(Fore.RED + "No trade signals at this moment")
 
 
 if __name__ == '__main__':
     print(Fore.YELLOW + 'Starting trade bot...')
     while True:
-
-        start_trade()
-        time.sleep(3600)
+        is_traded = start_trade()
+        if is_traded:
+            time.sleep(1800)
+        else:
+            time.sleep(5)
