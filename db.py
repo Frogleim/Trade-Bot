@@ -21,6 +21,7 @@ class DataBase:
     def insert_trades(self, symbol, entry_price, signal):
         conn = self.connect()
         cursor = conn.cursor()
+        cursor.execute("DELETE FROM signals")
         cursor.execute("INSERT INTO signals (coin, signal, entry_price) VALUES (%s, %s, %s)",
                        (symbol, signal, entry_price))
         conn.commit()
