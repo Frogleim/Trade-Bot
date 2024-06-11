@@ -2,6 +2,7 @@ import time
 from binance.client import Client
 from . import tp_sl, config, position_handler, logging_settings
 from datetime import datetime
+from binance.exceptions import BinanceAPIException
 
 client = Client(config.API_KEY, config.API_SECRET)
 
@@ -26,7 +27,11 @@ def trade(symbol, signal, entry_price, position_size):
                                                            quantity=position_size,
                                                            symbol=symbol)
         while True:
-            open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
+            try:
+                open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
+            except BinanceAPIException as be:
+                logging_settings.error_logs_logger.error(be)
+                open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
 
             if open_orders['status'] == 'NEW':
                 total_time = time.time() - start_time
@@ -78,7 +83,12 @@ def trade(symbol, signal, entry_price, position_size):
             order_info = position_handler.place_buy_order(price=entry_price, quantity=position_size,
                                                           symbol=symbol)
         while True:
-            open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
+            try:
+                open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
+            except BinanceAPIException as be:
+                logging_settings.error_logs_logger.error(be)
+                open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
+
             if open_orders['status'] == 'NEW':
                 total_time = time.time() - start_time
 

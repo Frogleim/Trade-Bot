@@ -18,10 +18,16 @@ class DataBase:
             database=self.database
         )
 
-    def insert_trades(self, symbol, entry_price, signal):
+    def clean_db(self):
         conn = self.connect()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM signals")
+        conn.commit()
+
+    def insert_trades(self, symbol, entry_price, signal):
+        conn = self.connect()
+        cursor = conn.cursor()
+        self.clean_db()
         cursor.execute("INSERT INTO signals (coin, signal, entry_price) VALUES (%s, %s, %s)",
                        (symbol, signal, entry_price))
         conn.commit()
@@ -36,6 +42,7 @@ class DataBase:
             return rows[-1]
         else:
             return None
+
 
 if __name__ == '__main__':
     symbol = 'MATICUSDT'

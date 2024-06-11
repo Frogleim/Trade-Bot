@@ -96,6 +96,10 @@ def update_chart(n):
             name='Sell'
         ))
 
+    if signal == 0.0:
+        my_db.clean_db()
+        print('Cleaning database')
+
     fig.update_layout(
         title='MATIC/USDT Live Candlestick Chart',
         xaxis_title='Time',
