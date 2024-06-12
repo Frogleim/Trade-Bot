@@ -1,43 +1,31 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string, render_template
 from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
-import ccxt
-import pandas as pd
 import plotly.graph_objs as go
-import numpy as np
-from model_building.strategies import patterns
+from model_building.strategies import patterns, BB, MACD
 from db import DataBase
+from binance.client import Client
 
+api_key = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
+api_secret = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
 my_db = DataBase()
-
-
-# Function to fetch OHLCV data from Binance
-def fetch_ohlcv(symbol='MATIC/USDT', timeframe='15m', limit=100):
-    exchange = ccxt.binance()
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
-    df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
-    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-    return df
-
-
-def generate_signals(df):
-    ma1 = 12
-    ma2 = 26
-    signals = df.copy()
-    signals['ma1'] = signals['close'].rolling(window=ma1, min_periods=1, center=False).mean()
-    signals['ma2'] = signals['close'].rolling(window=ma2, min_periods=1, center=False).mean()
-    signals['positions'] = 0
-    signals['positions'][ma1:] = np.where(signals['ma1'][ma1:] >= signals['ma2'][ma1:], 1, 0)
-    signals['signals'] = signals['positions'].diff()
-    signals['oscillator'] = signals['ma1'] - signals['ma2']
-    return signals
-
-
-# Create Flask server
 server = Flask(__name__)
-
-# Create Dash app
 app = Dash(__name__, server=server, url_base_pathname='/chart/')
+client = Client(api_key, api_secret)
+
+
+def get_account_info():
+    data = client.futures_account()
+    avail_balance = data['availableBalance']
+    trades = client.futures_account_trades()
+    return avail_balance, trades
+
+
+@server.route("/account")
+def account():
+    balance, trades = get_account_info()
+    return render_template("account.html", balance=balance, trades=trades)
+
 
 app.layout = html.Div([
     html.H1("MATIC/USDT Live Candlestick Chart"),
@@ -53,9 +41,10 @@ app.layout = html.Div([
 @app.callback(Output('live-candlestick-chart', 'figure'),
               [Input('interval-component', 'n_intervals')])
 def update_chart(n):
-    df = fetch_ohlcv()
-    signals = generate_signals(df)
+    df = MACD.fetch_ohlcv()
+    signals = MACD.generate_signals(df)
     signal = signals['signals'].iloc[-1]
+    bol_signal, bol_price = BB.check_sma()
     print(f"Signal: {signal}")
     patterns_signal = patterns.detect_head_shoulder(df)
     fig = go.Figure(data=[go.Candlestick(
@@ -74,9 +63,8 @@ def update_chart(n):
     if patterns_signal['head_shoulder_pattern'].iloc[-1] == 'Head and Shoulder':
         pass
 
-    if signal > 0:
-        entry_price = last_candle['close']
-        my_db.insert_trades(symbol='MATICUSDT', signal='Buy', entry_price=entry_price)
+    if signal > 0 or bol_signal == 'Buy':
+        my_db.insert_trades(symbol='MATICUSDT', signal='Buy', entry_price=bol_price)
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],
             y=[last_candle['close']],
@@ -85,9 +73,8 @@ def update_chart(n):
             name='Buy'
         ))
 
-    if signal < 0:
-        entry_price = last_candle['close']
-        my_db.insert_trades(symbol='MATICUSDT', signal='Sell', entry_price=entry_price)
+    if signal < 0 or bol_signal == 'Sell':
+        my_db.insert_trades(symbol='MATICUSDT', signal='Sell', entry_price=bol_price)
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],
             y=[last_candle['close']],
