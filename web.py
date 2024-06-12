@@ -5,6 +5,7 @@ import plotly.graph_objs as go
 from model_building.strategies import patterns, BB, MACD
 from db import DataBase
 from binance.client import Client
+import datetime
 
 api_key = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
 api_secret = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
@@ -12,13 +13,20 @@ my_db = DataBase()
 server = Flask(__name__)
 app = Dash(__name__, server=server, url_base_pathname='/chart/')
 client = Client(api_key, api_secret)
+updated_trades_data = []
 
 
 def get_account_info():
     data = client.futures_account()
     avail_balance = data['availableBalance']
     trades = client.futures_account_trades()
-    return avail_balance, trades
+    for trade in trades:
+        trade_time = trade['time'] / 1000.0
+        trade_datetime = datetime.datetime.fromtimestamp(trade_time)
+        trade['readable_time'] = trade_datetime
+    sorted_trades = sorted(trades, key=lambda x: x['readable_time'], reverse=True)
+
+    return avail_balance, sorted_trades
 
 
 @server.route("/account")
@@ -64,6 +72,8 @@ def update_chart(n):
         pass
 
     if signal > 0 or bol_signal == 'Buy':
+        entry_price = last_candle['close']
+
         my_db.insert_trades(symbol='MATICUSDT', signal='Buy', entry_price=bol_price)
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],
@@ -74,6 +84,8 @@ def update_chart(n):
         ))
 
     if signal < 0 or bol_signal == 'Sell':
+        entry_price = last_candle['close']
+
         my_db.insert_trades(symbol='MATICUSDT', signal='Sell', entry_price=bol_price)
         fig.add_trace(go.Scatter(
             x=[last_candle['timestamp']],

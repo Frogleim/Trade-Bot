@@ -42,4 +42,4 @@ def check_sma():
     elif live_price < lower_band - 0.0015:
         return 'Sell', live_price
     else:
-        return 'Hold', 0.0
+        return 'Hold', live_price

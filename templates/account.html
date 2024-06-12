@@ -47,8 +47,10 @@
         <th scope="col">#</th>
       <th scope="col">Symbol</th>
       <th scope="col">SIDE</th>
-      <th scope="col">PNL</th>
-      <th scope="col">Comission</th>
+      <th scope="col">Price</th>
+      <th scope="col">Profit</th>
+      <th scope="col">Commission</th>
+      <th scope="col">Trade Date</th>
 
     </tr>
     </thead>
@@ -60,8 +62,12 @@
         <th scope="row">{{trade.orderId}}</th>
       <td>{{trade.symbol}}</td>
       <td>{{trade.side}}</td>
+      <td>{{trade.price}}</td>
+
       <td>{{trade.realizedPnl}}</td>
       <td>{{trade.commission}}</td>
+      <td>{{trade.readable_time}}</td>
+
 
     </tr>
 {%endfor%}
