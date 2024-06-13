@@ -53,7 +53,7 @@ def update_chart(n):
     signals = MACD.generate_signals(df)
     signal = signals['signals'].iloc[-1]
     bol_signal, bol_price = BB.check_sma()
-    print(f"Signal: {signal}")
+    print(f"MACD Signal: {signal} --> BB Signal: {bol_signal}")
     patterns_signal = patterns.detect_head_shoulder(df)
     fig = go.Figure(data=[go.Candlestick(
         x=df['timestamp'],

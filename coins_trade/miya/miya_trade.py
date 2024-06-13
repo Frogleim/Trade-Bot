@@ -1,14 +1,16 @@
 import time
 from binance.client import Client
-from . import tp_sl, config, position_handler, logging_settings
+from . import tp_sl, config, position_handler, logging_settings, socket_ticker
 from datetime import datetime
 from binance.exceptions import BinanceAPIException
+import threading
 
 client = Client(config.API_KEY, config.API_SECRET)
 
 
 def trade(symbol, signal, entry_price, position_size):
-    current_time = datetime.now()
+    price_stream = socket_ticker.PriceStreaming('wss://fstream.binance.com/ws/xrpusdt@markPrice')
+    threading.Thread(target=price_stream).start()
     if signal == 'Sell':
         start_time = time.time()
         print(f'Trade starting time: {start_time}')
@@ -27,6 +29,8 @@ def trade(symbol, signal, entry_price, position_size):
                                                            quantity=position_size,
                                                            symbol=symbol)
         while True:
+            latest_price = price_stream.get_latest_price()
+
             try:
                 open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
             except BinanceAPIException as be:
@@ -45,7 +49,7 @@ def trade(symbol, signal, entry_price, position_size):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price, current_time)
+                res = tp_sl.pnl_short(entry_price, float(latest_price))
                 if res == 'Profit':
 
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
@@ -83,6 +87,8 @@ def trade(symbol, signal, entry_price, position_size):
             order_info = position_handler.place_buy_order(price=entry_price, quantity=position_size,
                                                           symbol=symbol)
         while True:
+            latest_price = price_stream.get_latest_price()
+
             try:
                 open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
             except BinanceAPIException as be:
@@ -103,7 +109,7 @@ def trade(symbol, signal, entry_price, position_size):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price, current_time)
+                res = tp_sl.pnl_long(entry_price, float(latest_price))
                 if res == 'Profit':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:

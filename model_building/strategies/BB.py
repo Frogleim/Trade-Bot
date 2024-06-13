@@ -35,6 +35,7 @@ def check_sma():
     upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
     print(upper_band, lower_band)
     live_price = float(client.futures_ticker(symbol="MATICUSDT")['lastPrice'])
+    print(live_price)
     logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
     if live_price > upper_band + 0.0015:
