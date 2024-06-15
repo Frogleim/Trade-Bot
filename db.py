@@ -18,13 +18,13 @@ class DataBase:
             database=self.database
         )
 
-    def clean_db(self):
+    def clean_db(self, table_name):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM signals")
+        cursor.execute(f"DELETE FROM {table_name}")
         conn.commit()
 
-    def insert_trades(self, symbol, entry_price, signal):
+    def insert_signal(self, symbol, entry_price, signal):
         conn = self.connect()
         cursor = conn.cursor()
         self.clean_db()
@@ -49,6 +49,33 @@ class DataBase:
             return rows[-1]
         else:
             return None
+
+    def check_is_finished(self):
+        while True:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT * FROM trades_alert ")
+            rows = cursor.fetchall()
+            print(len(rows))
+
+            if len(rows) > 0:
+                return True
+            else:
+                return None
+
+    def get_binance_keys(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT api_key, api_secret FROM binance_keys")
+        row = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+        if row:
+            api_key = row[0]
+            api_secret = row[1]
+            return api_key, api_secret
+        return None
 
 
 if __name__ == '__main__':

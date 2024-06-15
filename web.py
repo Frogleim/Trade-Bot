@@ -1,125 +1,71 @@
-from flask import Flask, render_template_string, render_template
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output
-import plotly.graph_objs as go
 from model_building.strategies import patterns, BB, MACD
 from db import DataBase
+from coins_trade.miya import logging_settings
 from binance.client import Client
-import datetime
+import asyncio
 
-api_key = 'Gt9HDhbJu5GC5yFkGcL42KAeLx28ISQJ8GxMFU7mG3KwZwCAcXEeiwhOOdOkvDUi'
-api_secret = '6CXlH9wGvvpeyI1h8zWW2nlgAfp0bBRcmkjLxNUtzMBlIOgYBVsv5oNc9SkagpQw'
 my_db = DataBase()
-server = Flask(__name__)
-app = Dash(__name__, server=server, url_base_pathname='/chart/')
-client = Client(api_key, api_secret)
-updated_trades_data = []
+API_KEY, API_SECRET = my_db.get_binance_keys()
+client = Client(API_KEY, API_SECRET)
+technical_tool = ['MACD', 'Bollinger Bands']
 
 
-def get_account_info():
-    data = client.futures_account()
-    avail_balance = data['availableBalance']
-    trades = client.futures_account_trades()
-    for trade in trades:
-        trade_time = trade['time'] / 1000.0
-        trade_datetime = datetime.datetime.fromtimestamp(trade_time)
-        trade['readable_time'] = trade_datetime
-    sorted_trades = sorted(trades, key=lambda x: x['readable_time'], reverse=True)
-
-    return avail_balance, sorted_trades
-
-
-@server.route("/account")
-def account():
-    balance, trades = get_account_info()
-    return render_template("account.html", balance=balance, trades=trades)
-
-
-app.layout = html.Div([
-    html.H1("MATIC/USDT Live Candlestick Chart"),
-    dcc.Graph(id='live-candlestick-chart'),
-    dcc.Interval(
-        id='interval-component',
-        interval=60 * 1000,  # Update every 15 minutes
-        n_intervals=0
-    )
-])
-
-
-@app.callback(Output('live-candlestick-chart', 'figure'),
-              [Input('interval-component', 'n_intervals')])
-def update_chart(n):
-    df = MACD.fetch_ohlcv()
+async def fetch_macd_signal():
+    df = await MACD.fetch_ohlcv()
     signals = MACD.generate_signals(df)
     signal = signals['signals'].iloc[-1]
-    bol_signal, bol_price = BB.check_sma()
-    print(f"MACD Signal: {signal} --> BB Signal: {bol_signal}")
-    patterns_signal = patterns.detect_head_shoulder(df)
-    fig = go.Figure(data=[go.Candlestick(
-        x=df['timestamp'],
-        open=df['open'],
-        high=df['high'],
-        low=df['low'],
-        close=df['close'],
-        name='Candlesticks'
-    )])
+    return 'MACD', signal
 
-    last_candle = df.iloc[-1]
-    print(patterns_signal['head_shoulder_pattern'].iloc[-1])
-    position_closed_text = ""
 
-    if patterns_signal['head_shoulder_pattern'].iloc[-1] == 'Head and Shoulder':
-        pass
+async def fetch_bb_signal():
+    signal, price = await BB.check_sma()
+    return 'Bollinger Bands', signal, price
 
-    if signal > 0 or bol_signal == 'Buy':
-        entry_price = last_candle['close']
 
-        my_db.insert_trades(symbol='MATICUSDT', signal='Buy', entry_price=bol_price)
-        fig.add_trace(go.Scatter(
-            x=[last_candle['timestamp']],
-            y=[last_candle['close']],
-            mode='markers',
-            marker=dict(symbol='triangle-up', color='green', size=15),
-            name='Buy'
-        ))
+async def generate_signal():
+    logging_settings.system_log.info('Starting Miya Beta 0.02')
+    while True:
+        try:
+            my_db.clean_db(table_name='signals')
 
-    if signal < 0 or bol_signal == 'Sell':
-        entry_price = last_candle['close']
+            # Run all indicator functions concurrently
+            results = await asyncio.gather(
+                # fetch_macd_signal(),
+                fetch_bb_signal(),
+            )
 
-        my_db.insert_trades(symbol='MATICUSDT', signal='Sell', entry_price=bol_price)
-        fig.add_trace(go.Scatter(
-            x=[last_candle['timestamp']],
-            y=[last_candle['close']],
-            mode='markers',
-            marker=dict(symbol='triangle-down', color='red', size=15),
-            name='Sell'
-        ))
+            # Process results
+            signals = {name: signal for name, signal, *rest in results}
+            prices = {name: rest[0] for name, signal, *rest in results if rest}
 
-    if signal == 0.0:
-        my_db.clean_db()
-        print('Cleaning database')
+            logging_settings.system_log.info(f'Signals: {signals}')
+            logging_settings.system_log.info(f'Prices: {prices}')
 
-    fig.update_layout(
-        title='MATIC/USDT Live Candlestick Chart',
-        xaxis_title='Time',
-        yaxis_title='Price (USDT)',
-        xaxis_rangeslider_visible=False,
-        annotations=[go.layout.Annotation(
-            xref='paper',
-            yref='paper',
-            x=0.5,
-            y=0,
-            showarrow=False,
-            text=position_closed_text,
-            font=dict(
-                size=12,
-                color="black"
-            ),
-            align="center"
-        )] if position_closed_text else []
-    )
-    return fig
+            # Example logic for combined signals
+            buy_signals = [name for name, signal in signals.items() if signal == 'Buy']
+            sell_signals = [name for name, signal in signals.items() if signal == 'Sell']
+
+            if buy_signals:
+                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                my_db.insert_signal(symbol='MATICUSDT', signal='Buy', entry_price=entry_price)
+                logging_settings.system_log.info(f'Getting Buy signal. Indicators: {buy_signals}')
+                my_db.check_is_finished()
+                my_db.clean_db(table_name='signals')
+                my_db.clean_db(table_name='trades_alert')
+
+            if sell_signals:
+                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                my_db.insert_signal(symbol='MATICUSDT', signal='Sell', entry_price=entry_price)
+                logging_settings.system_log.info(f'Getting Sell signal. Indicators: {sell_signals}')
+                my_db.check_is_finished()
+                my_db.clean_db(table_name='signals')
+                my_db.clean_db(table_name='trades_alert')
+
+        except Exception as e:
+            logging_settings.error_logs_logger.error(f'Error in generate_signal: {e}')
+
+        await asyncio.sleep(60)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050, debug=True)
+    asyncio.run(generate_signal())

@@ -3,7 +3,7 @@ import pandas as pd
 import asyncio
 from binance.client import Client
 import logging
-import price_ticker
+from . import price_ticker
 import threading
 
 client = Client()
@@ -27,7 +27,7 @@ async def calculate_bollinger_bands(interval, length, num_std_dev):
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
 
-    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
+    return df[['sma', 'upper_band', 'lower_band', "close"]].iloc[-1]
 
 
 async def check_sma():
@@ -61,6 +61,3 @@ async def check_sma():
 
 
 
-if __name__ == '__main__':
-    while True:
-        asyncio.run(check_sma())
