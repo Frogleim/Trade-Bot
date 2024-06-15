@@ -3,8 +3,16 @@ from fastapi.responses import FileResponse
 import shutil
 import zipfile
 import os
+from pydantic import BaseModel
+import db
 
 app = FastAPI()
+
+
+class BinanceKeys(BaseModel):
+    api_key: str
+    api_secret: str
+
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -37,6 +45,22 @@ def download_logs():
 
     # Provide the zipped file as a response
     return FileResponse(path=zip_filename, media_type='application/zip', filename='logs.zip')
+
+
+@app.get('/get_trades_history/')
+def get_history():
+    return {"Message": "Success"}
+
+
+@app.post('/set_credentials/')
+def set_credentials(keys: BinanceKeys):
+    if keys.api_key or keys.api_secret is None:
+        raise HTTPException(status_code=500, detail="API Key and API secret is required")
+    api_key = keys.api_key
+    api_secret = keys.api_secret
+    my_db = db.DataBase()
+    my_db.insert_binance_keys(api_key=api_key, api_secret=api_secret)
+    return {"Message": "API keys insert successfully"}
 
 
 if __name__ == "__main__":

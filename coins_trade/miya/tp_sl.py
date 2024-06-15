@@ -10,15 +10,16 @@ import time
 # import logging_settings
 
 my_db = db.DataBase()
+API_KEY, API_SECRET = my_db.get_binance_keys()
 
 current_profit = 0
 profit_checkpoint_list = []
 current_checkpoint = 0.00
 try:
-    client = Client(config.API_KEY, config.API_SECRET)
+    client = Client(API_KEY, API_SECRET)
 except Exception as e:
     print(e)
-    client = Client(config.API_KEY, config.API_SECRET)
+    client = Client(API_KEY, API_SECRET)
 price_history = []
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)

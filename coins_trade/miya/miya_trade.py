@@ -1,11 +1,14 @@
 import time
 from binance.client import Client
-from . import tp_sl, config, position_handler, logging_settings, socket_ticker
+from . import tp_sl, config, position_handler, logging_settings, socket_ticker, db
 from datetime import datetime
 from binance.exceptions import BinanceAPIException
 import threading
 
-client = Client(config.API_KEY, config.API_SECRET)
+
+my_db = db.DataBase()
+API_KEY, API_SECRET = my_db.get_binance_keys()
+client = Client(API_KEY, API_SECRET)
 
 
 def trade(symbol, signal, entry_price, position_size):

@@ -32,6 +32,13 @@ class DataBase:
                        (symbol, signal, entry_price))
         conn.commit()
 
+    def insert_binance_keys(self, api_key, api_secret):
+        conn = self.connect()
+        cursor = conn.cursor()
+        self.clean_db()
+        cursor.execute(f"INSERT INTO binance_keys (api_key, api_secret) VALUES (%s, %s)", (api_key, api_secret))
+        conn.commit()
+
     def get_signal(self, symbol):
         conn = self.connect()
         cursor = conn.cursor()

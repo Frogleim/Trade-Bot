@@ -33,3 +33,24 @@ class DataBase:
                        "VALUES (%s, %s, %s, %s)",
                        (symbol, entry_price, close_price, pnl))
         conn.commit()
+
+    def get_binance_keys(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT api_key, api_secret FROM binance_keys")
+        row = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+        if row:
+            api_key = row[0]
+            api_secret = row[1]
+            return api_key, api_secret
+        return None
+
+
+if __name__ == '__main__':
+    my_db = DataBase()
+    api_key, api_secret = my_db.get_binance_keys()
+    print(api_key)
+    print(api_secret)

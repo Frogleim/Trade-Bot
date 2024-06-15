@@ -1,5 +1,5 @@
 from binance.client import Client
-from . import config
+from . import config, db
 import logging
 import os
 
@@ -11,12 +11,14 @@ price_difference = 0.0
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
+my_db = db.DataBase()
+API_KEY, API_SECRET = my_db.get_binance_keys()
 logging.basicConfig(
     level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def close_position(side, quantity):
-    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
+    client = Client(api_key=API_KEY, api_secret=API_SECRET)
     if side == 'long':
         order = client.futures_create_order(
             symbol=config.trading_pair,
@@ -37,7 +39,7 @@ def close_position(side, quantity):
 
 
 def place_buy_order(price, quantity, symbol):
-    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
+    client = Client(api_key=API_KEY, api_secret=API_SECRET)
     order = client.futures_create_order(
         symbol=symbol,
         side=Client.SIDE_BUY,
@@ -53,7 +55,7 @@ def place_buy_order(price, quantity, symbol):
 
 
 def place_sell_order(price, quantity, symbol):
-    client = Client(api_key=config.API_KEY, api_secret=config.API_SECRET)
+    client = Client(api_key=API_KEY, api_secret=API_SECRET)
 
     order = client.futures_create_order(
         symbol=symbol,

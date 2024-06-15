@@ -1,15 +1,18 @@
 import logging
-from . import config
+from . import config, db
 import os
 import requests
 from binance.client import Client, AsyncClient
 
 import math
 
+my_db = db.DataBase()
+API_KEY, API_SECRET = my_db.get_binance_keys()
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 files_dir = os.path.join(parent_dir, "coins_trade")
-client = Client(config.API_KEY, config.API_SECRET)
+client = Client(API_KEY, API_SECRET)
 percentage_increase = 0.0
 
 
