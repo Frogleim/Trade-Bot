@@ -42,8 +42,8 @@ async def generate_signal():
             logging_settings.system_log.info(f'Prices: {prices}')
 
             # Example logic for combined signals
-            buy_signals = [name for name, signal in signals.items() if signal == 'Buy']
-            sell_signals = [name for name, signal in signals.items() if signal == 'Sell']
+            buy_signals = [name for name, signal in signals.items() if signal == 'Buy' or signal > 0]
+            sell_signals = [name for name, signal in signals.items() if signal == 'Sell' or signal < 0]
 
             if buy_signals:
                 entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
