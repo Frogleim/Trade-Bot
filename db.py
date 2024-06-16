@@ -35,8 +35,13 @@ class DataBase:
     def insert_binance_keys(self, api_key, api_secret):
         conn = self.connect()
         cursor = conn.cursor()
-        self.clean_db()
         cursor.execute(f"INSERT INTO binance_keys (api_key, api_secret) VALUES (%s, %s)", (api_key, api_secret))
+        conn.commit()
+
+    def insert_trades_coins(self, symbol, quantity, checkpoints):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(f"INSERT INTO trade_coins (symbol, quantity, checkpoints) VALUES (%s, %s, %s)", (symbol, quantity, checkpoints))
         conn.commit()
 
     def get_signal(self, symbol):
@@ -76,6 +81,18 @@ class DataBase:
             api_secret = row[1]
             return api_key, api_secret
         return None
+
+    def get_trade_coins(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trade_coins")
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        symbol = row[1]
+        quantity = row[2]
+        checkpoints = row[3]
+        return symbol, quantity, checkpoints
 
 
 if __name__ == '__main__':

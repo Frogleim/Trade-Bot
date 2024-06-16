@@ -48,9 +48,19 @@ class DataBase:
             return api_key, api_secret
         return None
 
+    def get_trade_coins(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trade_coins")
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        symbol = row[1]
+        quantity = row[2]
+        checkpoints = row[3]
+        return symbol, quantity, checkpoints
+
 
 if __name__ == '__main__':
     my_db = DataBase()
-    api_key, api_secret = my_db.get_binance_keys()
-    print(api_key)
-    print(api_secret)
+    my_db.get_trade_coins()

@@ -1,19 +1,52 @@
 import time
 import pandas as pd
-import asyncio
-from binance.client import Client
+import os
 import logging
-from . import price_ticker
-import threading
+import sys
+import asyncio
+import aiohttp
+from binance.client import Client
+from binance.enums import *
 
-client = Client()
+from db import DataBase
+
+# Binance API setup
+my_db = DataBase()
+api_key, api_secret = my_db.get_binance_keys()
+client = Client(api_key, api_secret)
+
 interval = '15m'  # Use '15m' for 15-minute intervals
 length = 20
 num_std_dev = 2
 
 
-async def calculate_bollinger_bands(interval, length, num_std_dev):
-    klines = client.futures_klines(symbol='MATICUSDT', interval=interval)
+async def fetch_klines(session, symbol, interval):
+    url = f'https://fapi.binance.com/fapi/v1/klines?symbol={symbol}&interval={interval}'
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            return await response.json()
+    except aiohttp.ClientError as e:
+        logging.error(f'Error fetching klines: {e}')
+        return []
+
+
+async def fetch_ticker(session, symbol):
+    url = f'https://fapi.binance.com/fapi/v1/ticker/price?symbol={symbol}'
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            return await response.json()
+    except aiohttp.ClientError as e:
+        logging.error(f'Error fetching ticker: {e}')
+        return {}
+
+
+async def calculate_bollinger_bands(session, interval, length, num_std_dev):
+    klines = await fetch_klines(session, 'MATICUSDT', interval)
+    if not klines:
+        return pd.Series([None, None, None], index=['sma', 'upper_band', 'lower_band'])
+
     close_prices = [float(kline[4]) for kline in klines]
     df = pd.DataFrame({'close': close_prices})
 
@@ -27,37 +60,34 @@ async def calculate_bollinger_bands(interval, length, num_std_dev):
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
 
-    return df[['sma', 'upper_band', 'lower_band', "close"]].iloc[-1]
+    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
 
 
 async def check_sma():
-    stop_event = asyncio.Event()
-    price_stream = price_ticker.PriceStreaming('wss://fstream.binance.com/ws/maticusdt@markPrice')
-    price_stream_task = asyncio.create_task(price_stream.connect(stop_event))
-    while not stop_event.is_set():
-        latest_price = await price_stream.get_latest_price()
-
-        bollinger_values = await calculate_bollinger_bands(interval=interval, length=length, num_std_dev=num_std_dev)
-
+    async with aiohttp.ClientSession() as session:
+        bollinger_values = await calculate_bollinger_bands(session, interval=interval, length=length,
+                                                           num_std_dev=num_std_dev)
         upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
+        logging.info(f'Bollinger Bands - Upper: {upper_band}, Lower: {lower_band}')
 
-        logging.info(f'Price: {latest_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
-        print(f'Up Difference {upper_band + 0.001} Price: {float(latest_price)}')
-        print(f'Low Difference {upper_band - 0.001} Price: {float(latest_price)}')
+        ticker = await fetch_ticker(session, "MATICUSDT")
+        live_price = float(ticker.get('price', 0))
+        logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
 
-        if float(latest_price) > upper_band + 0.0008:
-            print('Buy Signal')
-            stop_event.is_set()
-            return 'Buy', latest_price
-        elif float(latest_price) < lower_band - 0.0008:
-            print('Sell Signal')
-
-            stop_event.is_set()
-            return 'Sell', latest_price
+        if live_price > upper_band + 0.0010:
+            return 'Buy', live_price
+        elif live_price < lower_band - 0.0010:
+            return 'Sell', live_price
         else:
-            print('HOld')
-            await asyncio.sleep(1)
-    await price_stream_task
+            return 'Hold', live_price
 
 
+# Running the asynchronous function
+async def main():
+    result = await check_sma()
+    return result
 
+
+if __name__ == '__main__':
+    res = asyncio.run(main())
+    print(res)

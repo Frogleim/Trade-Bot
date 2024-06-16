@@ -5,3 +5,19 @@
 2024-06-13 03:57:16,162 - ERROR - Error while monitoring current position: HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)--- Trying again...
 2024-06-15 20:21:36,743 - ERROR - Error in generate_signal: name 'fetch_rsi_signal' is not defined
 2024-06-15 20:25:47,814 - ERROR - Error in generate_signal: cannot unpack non-iterable NoneType object
+2024-06-16 23:08:22,454 - ERROR - Error in generate_signal: relation "signals" does not exist
+LINE 1: DELETE FROM signals
+                    ^
+
+2024-06-16 23:11:41,412 - ERROR - Error in generate_signal: relation "signals" does not exist
+LINE 1: DELETE FROM signals
+                    ^
+
+2024-06-16 23:12:41,482 - ERROR - Error in generate_signal: relation "signals" does not exist
+LINE 1: DELETE FROM signals
+                    ^
+
+2024-06-16 23:13:23,196 - ERROR - Error in generate_signal: relation "signals" does not exist
+LINE 1: DELETE FROM signals
+                    ^
+

@@ -1,4 +1,4 @@
-from model_building.strategies import patterns, BB, MACD
+from model_building.strategies import MACD, BB as BB, MACD
 from db import DataBase
 from coins_trade.miya import logging_settings
 from binance.client import Client
@@ -18,8 +18,8 @@ async def fetch_macd_signal():
 
 
 async def fetch_bb_signal():
-    signal, price = await BB.check_sma()
-    return 'Bollinger Bands', signal, price
+    result = await BB.main()
+    return 'Bollinger Bands', result[0], result[1]
 
 
 async def generate_signal():
@@ -30,14 +30,14 @@ async def generate_signal():
 
             # Run all indicator functions concurrently
             results = await asyncio.gather(
-                # fetch_macd_signal(),
+                fetch_macd_signal(),
                 fetch_bb_signal(),
             )
 
             # Process results
             signals = {name: signal for name, signal, *rest in results}
             prices = {name: rest[0] for name, signal, *rest in results if rest}
-
+            print(signals)
             logging_settings.system_log.info(f'Signals: {signals}')
             logging_settings.system_log.info(f'Prices: {prices}')
 
@@ -64,7 +64,7 @@ async def generate_signal():
         except Exception as e:
             logging_settings.error_logs_logger.error(f'Error in generate_signal: {e}')
 
-        await asyncio.sleep(60)
+        await asyncio.sleep(5)
 
 
 if __name__ == '__main__':

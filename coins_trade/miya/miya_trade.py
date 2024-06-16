@@ -12,7 +12,7 @@ client = Client(API_KEY, API_SECRET)
 
 
 def trade(symbol, signal, entry_price, position_size):
-    price_stream = socket_ticker.PriceStreaming('wss://fstream.binance.com/ws/xrpusdt@markPrice')
+    price_stream = socket_ticker.PriceStreaming(f'wss://fstream.binance.com/ws/{symbol.lower()}@markPrice')
     threading.Thread(target=price_stream).start()
     if signal == 'Sell':
         start_time = time.time()

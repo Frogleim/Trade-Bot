@@ -14,6 +14,12 @@ class BinanceKeys(BaseModel):
     api_secret: str
 
 
+class TradesCoins(BaseModel):
+    symbol: str
+    quantity: int
+    checkpoints: list
+
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
@@ -54,13 +60,25 @@ def get_history():
 
 @app.post('/set_credentials/')
 def set_credentials(keys: BinanceKeys):
-    if keys.api_key or keys.api_secret is None:
-        raise HTTPException(status_code=500, detail="API Key and API secret is required")
     api_key = keys.api_key
     api_secret = keys.api_secret
     my_db = db.DataBase()
     my_db.insert_binance_keys(api_key=api_key, api_secret=api_secret)
     return {"Message": "API keys insert successfully"}
+
+
+@app.post('/set_trade_coins/')
+def trades_coins(trade_coin: TradesCoins):
+    symbol = trade_coin.symbol
+    quantity = trade_coin.quantity
+    checkpoints = trade_coin.checkpoints
+    my_db = db.DataBase()
+    my_db.insert_trades_coins(
+        symbol=symbol,
+        quantity=quantity,
+        checkpoints=checkpoints
+    )
+    return {"Symbol": symbol, "quantity": quantity, "checkpoints": checkpoints}
 
 
 if __name__ == "__main__":

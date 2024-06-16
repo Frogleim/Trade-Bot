@@ -1,5 +1,3 @@
-from datetime import datetime, timedelta
-import websocket
 import threading
 import json
 import asyncio

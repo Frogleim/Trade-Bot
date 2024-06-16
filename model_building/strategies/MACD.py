@@ -6,10 +6,8 @@ import numpy as np
 async def fetch_ohlcv(symbol='MATIC/USDT', timeframe='15m', limit=100):
     exchange = ccxt.binance()
     ohlcv = await exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=limit)
-    print(f'OHLCV: {ohlcv}')
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-    # await exchange.close()
     return df
 
 
@@ -17,7 +15,6 @@ def generate_signals(df):
     ma1 = 12
     ma2 = 26
     signals = df.copy()
-    print(signals)
     signals['ma1'] = signals['close'].rolling(window=ma1, min_periods=1, center=False).mean()
     signals['ma2'] = signals['close'].rolling(window=ma2, min_periods=1, center=False).mean()
     signals['positions'] = 0
