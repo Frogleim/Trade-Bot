@@ -7,7 +7,7 @@ import asyncio
 import aiohttp
 from binance.client import Client
 from binance.enums import *
-
+from coins_trade.miya import logging_settings
 from db import DataBase
 
 # Binance API setup
@@ -72,12 +72,13 @@ async def check_sma():
 
         ticker = await fetch_ticker(session, "MATICUSDT")
         live_price = float(ticker.get('price', 0))
-        logging.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
-
-        if live_price > upper_band + 0.0010:
-            return 'Buy', live_price
-        elif live_price < lower_band - 0.0010:
+        print(type(live_price))
+        logging_settings.system_log.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
+        print(live_price > upper_band + 0.0008)
+        if live_price > upper_band + 0.0008:
             return 'Sell', live_price
+        elif live_price < lower_band - 0.0008:
+            return 'Buy', live_price
         else:
             return 'Hold', live_price
 

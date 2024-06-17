@@ -14,7 +14,7 @@ class PriceStreaming(websocket.WebSocketApp):
         self.run_forever()
 
     def on_open(self):
-        logging_settings.system_log.info('Price ticker open')
+        logging_settings.system_log.warning('Price ticker open')
 
     def on_message(self, ws, msg):
         data = json.loads(msg)

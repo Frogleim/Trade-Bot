@@ -35,11 +35,17 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def pnl_long(opened_price, price):
+def pnl_long(opened_price, price=None):
     global current_profit, current_checkpoint, profit_checkpoint_list
 
+    try:
+        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+    except Exception as e:
+        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+
+
     print(current_profit, current_checkpoint, profit_checkpoint_list)
-    current_profit = float(price) - float(opened_price)
+    current_profit = float(current_price) - float(opened_price)
     for i in range(len(checkpoints) - 1):
         if checkpoints[i] <= current_profit < checkpoints[i + 1]:
             if current_checkpoint != checkpoints[i]:  # Check if it's a new checkpoint
@@ -51,7 +57,7 @@ def pnl_long(opened_price, price):
     if float(current_profit) <= -0.002:
         return 'Loss'
     logging.warning(
-        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {price}')
+        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
@@ -61,7 +67,7 @@ def pnl_long(opened_price, price):
                 and current_profit > 0):
             body = \
                 f'Position closed!.\nPosition data\nSymbol: {symbol}\nEntry Price: {round(float(opened_price), 1)}\n' \
-                f'Close Price: {round(float(price), 1)}\nProfit: {round(current_profit, 1)}'
+                f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
@@ -70,9 +76,13 @@ def pnl_long(opened_price, price):
             return 'Profit'
 
 
-def pnl_short(opened_price, price):
+def pnl_short(opened_price, price=None):
     global current_profit, current_checkpoint, profit_checkpoint_list
-    current_profit = float(opened_price) - float(price)
+    try:
+        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+    except Exception as e:
+        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+    current_profit = float(opened_price) - float(current_price)
     for i in range(len(checkpoints) - 1):
         if checkpoints[i] <= current_profit < checkpoints[i + 1]:
             if current_checkpoint != checkpoints[i]:
@@ -85,7 +95,7 @@ def pnl_short(opened_price, price):
         return 'Loss'
 
     logging.warning(
-        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {price}')
+        f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
@@ -93,7 +103,7 @@ def pnl_short(opened_price, price):
         if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= checkpoints[-1]
                 and current_profit > 0):
             body = f'Position closed!\nPosition data\nSymbol: {symbol}\nEntry Price: {round(float(opened_price), 1)}\n' \
-                   f'Close Price: {round(float(price), 1)}\nProfit: {round(current_profit, 1)}'
+                   f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')

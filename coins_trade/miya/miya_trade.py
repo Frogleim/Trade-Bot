@@ -12,8 +12,6 @@ client = Client(API_KEY, API_SECRET)
 
 
 def trade(symbol, signal, entry_price, position_size):
-    price_stream = socket_ticker.PriceStreaming(f'wss://fstream.binance.com/ws/{symbol.lower()}@markPrice')
-    threading.Thread(target=price_stream).start()
     if signal == 'Sell':
         start_time = time.time()
         print(f'Trade starting time: {start_time}')
@@ -32,7 +30,6 @@ def trade(symbol, signal, entry_price, position_size):
                                                            quantity=position_size,
                                                            symbol=symbol)
         while True:
-            latest_price = price_stream.get_latest_price()
 
             try:
                 open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
@@ -45,14 +42,14 @@ def trade(symbol, signal, entry_price, position_size):
                 print(f'Total waiting time: {total_time}')
                 if time.time() - start_time > 180:
                     client.cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
-                    logging_settings.system_log.info('Trade wasn\'t finished...too much time passed')
+                    logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price, float(latest_price))
+                res = tp_sl.pnl_short(entry_price)
                 if res == 'Profit':
 
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
@@ -90,7 +87,6 @@ def trade(symbol, signal, entry_price, position_size):
             order_info = position_handler.place_buy_order(price=entry_price, quantity=position_size,
                                                           symbol=symbol)
         while True:
-            latest_price = price_stream.get_latest_price()
 
             try:
                 open_orders = client.futures_get_order(symbol=symbol, orderId=int(order_info['orderId']))
@@ -105,14 +101,14 @@ def trade(symbol, signal, entry_price, position_size):
 
                 if time.time() - start_time > 180:
                     client.cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
-                    logging_settings.system_log.info('Trade wasn\'t finished...too much time passed')
+                    logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price, float(latest_price))
+                res = tp_sl.pnl_long(entry_price)
                 if res == 'Profit':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:

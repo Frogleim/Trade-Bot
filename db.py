@@ -27,7 +27,7 @@ class DataBase:
     def insert_signal(self, symbol, entry_price, signal):
         conn = self.connect()
         cursor = conn.cursor()
-        self.clean_db()
+        self.clean_db(table_name='signals')
         cursor.execute("INSERT INTO signals (coin, signal, entry_price) VALUES (%s, %s, %s)",
                        (symbol, signal, entry_price))
         conn.commit()
@@ -66,7 +66,7 @@ class DataBase:
             if len(rows) > 0:
                 return True
             else:
-                return None
+                return False
 
     def get_binance_keys(self):
         conn = self.connect()

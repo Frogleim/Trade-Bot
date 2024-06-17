@@ -8,12 +8,10 @@ parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(grandparent_dir, r"coins_trade")
 user_count = None
-log_file_path = os.path.join(files_dir, 'logs', 'logs.log')
 actions_log_file_path = os.path.join(files_dir, 'logs', 'actions.log')
 error_logs_log_file_path = os.path.join(files_dir, 'logs', 'error_logs.log')
 finish_trade_log_file_path = os.path.join(files_dir, 'logs', 'finish_trade_log.log')
 system_logs_log_file_path = os.path.join(files_dir, 'logs', 'system_logs.log')
-logging.basicConfig(filename=log_file_path, level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure the 'actions.log' logger
 actions_logger = logging.getLogger('actions_log')
@@ -37,7 +35,7 @@ error_logs_logger.addHandler(error_logs_handler)
 
 
 system_log = logging.getLogger('system_log')
-system_log.setLevel(logging.ERROR)
+system_log.setLevel(logging.WARNING)
 system_log_handler = logging.FileHandler(system_logs_log_file_path)
 system_log_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 system_log.addHandler(system_log_handler)

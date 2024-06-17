@@ -851,3 +851,919 @@ client_session: <aiohttp.client.ClientSession object at 0x704d7af891e0>
 connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x704d7aefc340>, 39749.965100315)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x704d7aefcb80>, 39750.270348497)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x704d7aebfb80>, 39750.947506748)]']
 connector: <aiohttp.connector.TCPConnector object at 0x704d7af88d30>
 2024-06-16 23:44:17,136 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:13,308 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:13,309 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f651390>
+2024-06-17 09:08:13,309 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f5c8b80>, 583361.958645634)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f5c8940>, 583362.078574494)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583362.67807321)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f6512d0>
+2024-06-17 09:08:13,317 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:20,737 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:20,737 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ef20>
+2024-06-17 09:08:20,738 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77db40>, 583369.216158867)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583369.514041414)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583370.11073764)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f4c0>
+2024-06-17 09:08:20,751 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:28,184 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:28,184 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f790>
+2024-06-17 09:08:28,184 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cdc0>, 583376.663395596)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c580>, 583376.95257951)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583377.557619467)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e0e0>
+2024-06-17 09:08:28,192 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:35,654 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:35,655 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f610>
+2024-06-17 09:08:35,656 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cfa0>, 583384.089403408)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cbe0>, 583384.406859098)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7801c0>, 583385.02373022)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f280>
+2024-06-17 09:08:35,670 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:43,125 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:43,126 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ebc0>
+2024-06-17 09:08:43,126 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 583391.578484053)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583391.906433511)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583392.496175136)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d4e0>
+2024-06-17 09:08:43,134 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:50,581 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:50,582 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65edd0>
+2024-06-17 09:08:50,582 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 583399.078610405)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f460>, 583399.36338374)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583399.951736598)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fa30>
+2024-06-17 09:08:50,590 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:08:57,948 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:08:57,950 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ff10>
+2024-06-17 09:08:57,950 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f640>, 583406.557372654)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583406.769305532)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583407.318263939)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fb80>
+2024-06-17 09:08:57,962 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:05,320 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:05,321 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fdc0>
+2024-06-17 09:09:05,321 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cd60>, 583413.892481107)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce80>, 583414.134144964)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583414.6913151)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f400>
+2024-06-17 09:09:05,329 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:12,771 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:12,771 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f4f0>
+2024-06-17 09:09:12,771 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee60>, 583421.247421949)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583421.548381379)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583422.141033582)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f8b0>
+2024-06-17 09:09:12,779 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:20,131 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:20,132 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d3f0>
+2024-06-17 09:09:20,133 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce20>, 583428.641173452)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583428.943623518)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583429.50054574)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f670>
+2024-06-17 09:09:20,145 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:27,538 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:27,538 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d000>
+2024-06-17 09:09:27,539 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cf40>, 583436.103574652)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583436.34503665)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583436.907692905)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f580>
+2024-06-17 09:09:27,547 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:34,927 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:34,928 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fa90>
+2024-06-17 09:09:34,929 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fd00>, 583443.47379086)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 583443.736134239)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583444.298045274)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f190>
+2024-06-17 09:09:34,944 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:42,378 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:42,379 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e320>
+2024-06-17 09:09:42,380 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583451.136380239)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e140>, 583451.189029854)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7802e0>, 583451.747912376)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65eaa0>
+2024-06-17 09:09:42,396 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:49,770 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:49,770 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e920>
+2024-06-17 09:09:49,770 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c520>, 583458.364279544)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dfc0>, 583458.575682132)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583459.140733872)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f520>
+2024-06-17 09:09:49,778 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:09:57,121 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:09:57,122 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ff10>
+2024-06-17 09:09:57,122 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dc00>, 583465.731066348)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fbe0>, 583465.942995478)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780220>, 583466.491510502)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f400>
+2024-06-17 09:09:57,130 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:04,477 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:04,479 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65c730>
+2024-06-17 09:10:04,479 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cfa0>, 583473.065617892)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583473.292552721)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583473.846812277)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e6e0>
+2024-06-17 09:10:04,491 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:11,915 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:11,916 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fdc0>
+2024-06-17 09:10:11,917 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee60>, 583480.415751406)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583480.714586032)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780100>, 583481.284691356)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65cdc0>
+2024-06-17 09:10:11,932 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:19,315 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:19,317 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f370>
+2024-06-17 09:10:19,317 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e020>, 583487.847906694)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7801c0>, 583488.111310057)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583488.685063192)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dd20>
+2024-06-17 09:10:19,333 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:26,727 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:26,728 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dbd0>
+2024-06-17 09:10:26,729 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77da20>, 583495.265779036)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583495.551808873)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583496.096723172)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f070>
+2024-06-17 09:10:26,744 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:34,160 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:34,161 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65db10>
+2024-06-17 09:10:34,161 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee60>, 583502.675349181)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780100>, 583502.96009526)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583503.527399485)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e920>
+2024-06-17 09:10:34,174 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:41,594 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:41,594 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65efe0>
+2024-06-17 09:10:41,594 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f2e0>, 583510.067201683)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583510.408331713)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583510.963714279)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f850>
+2024-06-17 09:10:41,602 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:48,963 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:48,964 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f220>
+2024-06-17 09:10:48,965 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cb80>, 583517.512170406)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f760>, 583517.781871314)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583518.332838588)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e5f0>
+2024-06-17 09:10:48,981 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:10:56,371 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:10:56,372 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e7d0>
+2024-06-17 09:10:56,372 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e0e0>, 583524.898793488)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583525.194291499)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583525.741168616)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e9e0>
+2024-06-17 09:10:56,379 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:03,773 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:03,774 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d270>
+2024-06-17 09:11:03,775 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e6e0>, 583532.329914986)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d540>, 583532.577636413)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583533.142871145)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ecb0>
+2024-06-17 09:11:03,791 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:11,177 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:11,177 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e290>
+2024-06-17 09:11:11,177 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce80>, 583539.725606551)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583539.992566556)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583540.550456919)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fc40>
+2024-06-17 09:11:11,186 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:18,624 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:18,625 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65c4c0>
+2024-06-17 09:11:18,625 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7802e0>, 583547.106986717)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583547.447070158)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780160>, 583547.995243075)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e110>
+2024-06-17 09:11:18,642 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:26,037 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:26,037 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d5d0>
+2024-06-17 09:11:26,037 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c4c0>, 583554.537276782)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c040>, 583554.857710891)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583555.407060848)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e020>
+2024-06-17 09:11:26,045 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:33,444 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:33,445 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fb50>
+2024-06-17 09:11:33,446 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cd60>, 583561.967582017)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583562.263249821)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583562.813172571)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d420>
+2024-06-17 09:11:33,457 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:40,850 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:40,851 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e200>
+2024-06-17 09:11:40,851 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c3a0>, 583569.359246329)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583569.642060085)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583570.221080419)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f0d0>
+2024-06-17 09:11:40,862 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:48,238 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:48,239 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fd90>
+2024-06-17 09:11:48,239 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77df60>, 583576.808405081)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583577.050439524)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583577.608913126)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f280>
+2024-06-17 09:11:48,247 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:11:55,646 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:11:55,648 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ebc0>
+2024-06-17 09:11:55,648 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dfc0>, 583584.150277654)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583584.452312001)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583585.016195538)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ee90>
+2024-06-17 09:11:55,664 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:03,090 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:03,091 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dd50>
+2024-06-17 09:12:03,092 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee60>, 583591.613235019)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583591.902172022)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583592.458514957)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fd30>
+2024-06-17 09:12:03,104 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:11,023 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:11,024 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ece0>
+2024-06-17 09:12:11,024 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fee0>, 583599.028312169)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e4a0>, 583599.317970658)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583600.393826627)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f190>
+2024-06-17 09:12:11,032 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:18,449 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:18,450 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f3d0>
+2024-06-17 09:12:18,450 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c5e0>, 583606.992479259)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583607.246237471)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583607.819403068)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d600>
+2024-06-17 09:12:18,458 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:25,862 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:25,864 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fbe0>
+2024-06-17 09:12:25,864 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e860>, 583614.35941762)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583614.669926329)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583615.232075062)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dfc0>
+2024-06-17 09:12:25,879 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:33,205 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:33,206 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f370>
+2024-06-17 09:12:33,207 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d600>, 583621.728131177)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583622.006317364)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583622.574642706)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d930>
+2024-06-17 09:12:33,222 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:40,598 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:40,599 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e2c0>
+2024-06-17 09:12:40,600 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e260>, 583629.169500772)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583629.402951123)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583629.967993066)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dcf0>
+2024-06-17 09:12:40,616 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:48,016 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:48,017 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f400>
+2024-06-17 09:12:48,018 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dfc0>, 583636.524383153)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583636.826795041)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583637.385727632)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ff10>
+2024-06-17 09:12:48,034 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:12:55,448 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:12:55,449 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e8c0>
+2024-06-17 09:12:55,450 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fb20>, 583643.975061233)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780160>, 583644.256472026)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583644.817838966)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e8f0>
+2024-06-17 09:12:55,463 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:02,805 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:02,806 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d660>
+2024-06-17 09:13:02,806 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e980>, 583651.373118551)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583651.624312633)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583652.175748153)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fb50>
+2024-06-17 09:13:02,814 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:10,249 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:10,250 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65eb60>
+2024-06-17 09:13:10,251 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e260>, 583658.742320274)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583659.05711484)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583659.618883543)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65c040>
+2024-06-17 09:13:10,266 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:17,615 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:17,617 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65feb0>
+2024-06-17 09:13:17,617 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e200>, 583666.161422154)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7802e0>, 583666.42093372)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583666.984861277)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d390>
+2024-06-17 09:13:17,633 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:25,028 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:25,029 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e830>
+2024-06-17 09:13:25,030 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e260>, 583673.562571145)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d060>, 583673.856225592)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583674.397625687)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65efb0>
+2024-06-17 09:13:25,044 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:32,923 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:32,925 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fc10>
+2024-06-17 09:13:32,925 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 583680.981526123)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583681.223647909)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583682.293382873)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f0d0>
+2024-06-17 09:13:32,941 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:40,353 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:40,354 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dcf0>
+2024-06-17 09:13:40,354 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cdc0>, 583688.903662853)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583689.128526578)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583689.723800265)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fee0>
+2024-06-17 09:13:40,362 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:47,743 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:47,744 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65de70>
+2024-06-17 09:13:47,744 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 583696.272174017)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583696.545425748)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583697.113900807)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65cdf0>
+2024-06-17 09:13:47,752 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:13:55,130 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:13:55,130 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d660>
+2024-06-17 09:13:55,130 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c040>, 583703.663443719)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583703.945652411)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583704.500236748)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fdf0>
+2024-06-17 09:13:55,138 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:02,521 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:02,522 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dfc0>
+2024-06-17 09:14:02,523 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cdc0>, 583711.059884701)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583711.342583393)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583711.890487844)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f0d0>
+2024-06-17 09:14:02,538 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:09,909 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:09,911 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65db70>
+2024-06-17 09:14:09,912 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fbe0>, 583718.443161217)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583718.730028116)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583719.279504952)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fc40>
+2024-06-17 09:14:09,926 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:17,354 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:17,354 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f460>
+2024-06-17 09:14:17,355 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 583725.857958774)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780160>, 583726.16290744)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583726.724247989)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65de70>
+2024-06-17 09:14:17,362 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:24,744 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:24,744 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f400>
+2024-06-17 09:14:24,745 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c8e0>, 583733.292875704)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583733.53967058)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583734.114535884)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d420>
+2024-06-17 09:14:24,752 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:32,091 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:32,092 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e290>
+2024-06-17 09:14:32,092 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e920>, 583740.702656463)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583740.918420727)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583741.461493359)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65de40>
+2024-06-17 09:14:32,107 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:39,484 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:39,485 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65efb0>
+2024-06-17 09:14:39,486 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e5c0>, 583748.013043377)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f7801c0>, 583748.298473197)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583748.85343162)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f940>
+2024-06-17 09:14:39,500 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:46,885 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:46,885 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65db40>
+2024-06-17 09:14:46,885 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77eda0>, 583755.388672717)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583755.656676397)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583756.258382589)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f910>
+2024-06-17 09:14:46,893 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:14:54,271 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:14:54,273 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f7c0>
+2024-06-17 09:14:54,273 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c160>, 583762.817355816)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583763.091881419)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583763.641125238)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d270>
+2024-06-17 09:14:54,289 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:01,925 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:01,927 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65c4c0>
+2024-06-17 09:15:01,927 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f640>, 583770.216498911)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583770.503549422)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583771.295317291)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fe20>
+2024-06-17 09:15:01,941 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:09,326 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:09,328 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f0d0>
+2024-06-17 09:15:09,329 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c5e0>, 583777.874156385)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583778.152127809)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583778.696616605)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ed40>
+2024-06-17 09:15:09,344 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:16,722 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:16,722 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e560>
+2024-06-17 09:15:16,723 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cac0>, 583785.218030669)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 583785.546158848)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583786.092819873)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dd80>
+2024-06-17 09:15:16,730 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:24,129 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:24,129 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f5b0>
+2024-06-17 09:15:24,129 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e920>, 583792.662702551)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583792.946871003)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583793.502445938)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f400>
+2024-06-17 09:15:24,137 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:31,547 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:31,548 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f430>
+2024-06-17 09:15:31,549 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c040>, 583800.063832674)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583800.356734717)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583800.91687362)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fd90>
+2024-06-17 09:15:32,154 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:39,546 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:39,546 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d450>
+2024-06-17 09:15:39,546 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d540>, 583808.112320696)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780220>, 583808.359938676)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583808.915797206)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f340>
+2024-06-17 09:15:39,554 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:46,931 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:46,932 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65c070>
+2024-06-17 09:15:46,933 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 583815.485213525)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583815.748282252)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d5a0>, 583816.299745261)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65df60>
+2024-06-17 09:15:46,945 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:15:54,323 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:15:54,325 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f7c0>
+2024-06-17 09:15:54,325 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c400>, 583822.870323629)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583823.143833631)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583823.693363922)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dae0>
+2024-06-17 09:15:54,340 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:01,741 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:01,741 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e1a0>
+2024-06-17 09:16:01,741 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77de40>, 583830.28695294)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583830.529402291)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583831.111780265)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d600>
+2024-06-17 09:16:01,749 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:09,143 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:09,143 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f070>
+2024-06-17 09:16:09,144 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fb20>, 583837.653024072)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780220>, 583837.962466131)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583838.513691345)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d8a0>
+2024-06-17 09:16:09,151 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:16,576 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:16,577 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d5d0>
+2024-06-17 09:16:16,578 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fbe0>, 583845.078754548)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583845.357696167)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583845.946027682)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dde0>
+2024-06-17 09:16:16,592 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:23,988 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:23,989 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fdf0>
+2024-06-17 09:16:23,990 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 583852.533159064)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583852.769775904)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583853.357739498)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fac0>
+2024-06-17 09:16:24,005 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:31,429 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:31,429 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ead0>
+2024-06-17 09:16:31,430 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e560>, 583859.922078864)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583860.201220869)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583860.802339577)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65faf0>
+2024-06-17 09:16:31,447 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:38,852 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:38,854 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e770>
+2024-06-17 09:16:38,854 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d060>, 583867.373199033)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583867.62892191)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583868.222508374)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d2d0>
+2024-06-17 09:16:38,865 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:46,287 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:46,288 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e6b0>
+2024-06-17 09:16:46,288 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77de40>, 583874.818037041)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583875.060995377)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583875.658175872)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e800>
+2024-06-17 09:16:46,296 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:16:53,699 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:16:53,700 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d2d0>
+2024-06-17 09:16:53,701 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c3a0>, 583882.243174089)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583882.473659185)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583883.069085445)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e7a0>
+2024-06-17 09:16:53,716 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:01,137 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:01,138 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fb20>
+2024-06-17 09:17:01,138 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f2e0>, 583889.668607846)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583889.910439505)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583890.507902109)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fe20>
+2024-06-17 09:17:01,146 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:08,562 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:08,563 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f190>
+2024-06-17 09:17:08,564 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dde0>, 583897.069274188)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cbe0>, 583897.366259652)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583897.930796166)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e620>
+2024-06-17 09:17:08,578 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:15,938 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:15,940 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65de70>
+2024-06-17 09:17:15,940 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d000>, 583904.506976351)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f780220>, 583904.760818075)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c040>, 583905.308310522)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ead0>
+2024-06-17 09:17:15,956 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:23,334 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:23,334 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f3d0>
+2024-06-17 09:17:23,334 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cb80>, 583911.888763086)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583912.135511918)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583912.704740791)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d600>
+2024-06-17 09:17:23,342 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:30,695 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:30,696 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dde0>
+2024-06-17 09:17:30,696 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e560>, 583919.259353686)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583919.515386333)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583920.068935571)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d690>
+2024-06-17 09:17:30,704 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:38,079 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:38,079 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d510>
+2024-06-17 09:17:38,079 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 583926.632946752)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583926.893738313)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe80>, 583927.448798039)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dbd0>
+2024-06-17 09:17:38,087 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:45,454 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:45,454 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fa30>
+2024-06-17 09:17:45,454 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f400>, 583934.024638725)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 583934.272388818)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583934.82426852)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65eec0>
+2024-06-17 09:17:45,462 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:17:52,856 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:17:52,858 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65df60>
+2024-06-17 09:17:52,859 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dde0>, 583941.393582158)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583941.656226917)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583942.225495545)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fc40>
+2024-06-17 09:17:52,879 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:00,234 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:00,235 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fc10>
+2024-06-17 09:18:00,235 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77eec0>, 583948.800488254)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583949.054896597)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583949.605415115)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d450>
+2024-06-17 09:18:00,243 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:07,638 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:07,639 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65c700>
+2024-06-17 09:18:07,640 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e6e0>, 583956.196932163)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 583956.462667683)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cd60>, 583957.008145619)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ec50>
+2024-06-17 09:18:07,656 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:15,056 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:15,057 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65eef0>
+2024-06-17 09:18:15,058 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c5e0>, 583963.637261139)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 583963.874636251)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583964.425766662)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f0d0>
+2024-06-17 09:18:15,073 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:22,432 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:22,432 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ed70>
+2024-06-17 09:18:22,433 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e6e0>, 583971.033744545)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 583971.248954689)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583971.802824415)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65cb80>
+2024-06-17 09:18:22,441 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:29,799 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:29,800 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f9a0>
+2024-06-17 09:18:29,800 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 583978.354304747)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 583978.612621755)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583979.169938478)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d930>
+2024-06-17 09:18:29,808 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:37,198 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:37,199 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ee90>
+2024-06-17 09:18:37,199 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e6e0>, 583985.696285488)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 583986.001157388)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 583986.569023198)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e590>
+2024-06-17 09:18:37,207 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:44,594 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:44,595 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f010>
+2024-06-17 09:18:44,596 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 583993.150099742)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 583993.400278665)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 583993.964276347)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e020>
+2024-06-17 09:18:44,611 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:51,979 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:51,980 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65eef0>
+2024-06-17 09:18:51,980 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d600>, 584000.54457202)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 584000.777603693)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 584001.349836157)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f910>
+2024-06-17 09:18:51,988 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:18:59,322 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:18:59,323 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e4a0>
+2024-06-17 09:18:59,324 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 584007.921566117)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 584008.137565933)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 584008.691665195)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f0d0>
+2024-06-17 09:18:59,338 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:06,708 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:06,708 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d6c0>
+2024-06-17 09:19:06,708 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d600>, 584015.237074221)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 584015.529836542)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 584016.078335308)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dae0>
+2024-06-17 09:19:06,716 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:14,101 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:14,102 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e4d0>
+2024-06-17 09:19:14,103 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 584022.662615138)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 584022.927114393)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 584023.470957912)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65c280>
+2024-06-17 09:19:14,119 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:21,468 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:21,468 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65eec0>
+2024-06-17 09:19:21,469 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e200>, 584030.05964935)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f940>, 584030.286561673)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584030.838320807)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e0e0>
+2024-06-17 09:19:21,476 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:28,860 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:28,860 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65efb0>
+2024-06-17 09:19:28,861 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cd60>, 584037.393425154)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 584037.685856045)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 584038.230694658)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65c280>
+2024-06-17 09:19:28,869 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:36,265 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:36,267 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f580>
+2024-06-17 09:19:36,267 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77df60>, 584044.806096056)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 584045.086990767)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77da20>, 584045.635405487)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f130>
+2024-06-17 09:19:36,284 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:43,659 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:43,660 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dab0>
+2024-06-17 09:19:43,660 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cac0>, 584052.220302311)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e6e0>, 584052.481617149)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dde0>, 584053.030461468)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e440>
+2024-06-17 09:19:43,668 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:51,035 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:51,035 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e7a0>
+2024-06-17 09:19:51,036 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 584059.587453529)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 584059.84156305)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e200>, 584060.405576532)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ead0>
+2024-06-17 09:19:51,043 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:19:58,451 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:19:58,452 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ea10>
+2024-06-17 09:19:58,453 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d000>, 584066.983972885)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584067.242959391)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d600>, 584067.820737804)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e140>
+2024-06-17 09:19:58,468 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:05,878 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:05,879 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e200>
+2024-06-17 09:20:05,879 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fb20>, 584074.423839136)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 584074.687919796)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c040>, 584075.249263222)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f520>
+2024-06-17 09:20:05,887 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:13,259 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:13,261 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d810>
+2024-06-17 09:20:13,261 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fac0>, 584081.808066761)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 584082.060555651)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d5a0>, 584082.630992975)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65db40>
+2024-06-17 09:20:13,274 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:20,664 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:20,665 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f400>
+2024-06-17 09:20:20,665 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e560>, 584089.224127631)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58ff40>, 584089.470068597)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77de40>, 584090.033586065)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e830>
+2024-06-17 09:20:20,680 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:28,075 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:28,076 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f700>
+2024-06-17 09:20:28,077 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f760>, 584096.63620501)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 584096.877124843)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77eda0>, 584097.444401065)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f310>
+2024-06-17 09:20:28,093 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:35,463 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:35,464 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65efe0>
+2024-06-17 09:20:35,465 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c8e0>, 584104.020425347)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 584104.258460948)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fbe0>, 584104.83348352)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e800>
+2024-06-17 09:20:35,474 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:42,860 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:42,860 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f310>
+2024-06-17 09:20:42,861 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77dc00>, 584111.415308362)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 584111.669159934)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fb20>, 584112.232341798)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ff10>
+2024-06-17 09:20:42,869 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:50,303 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:50,304 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d810>
+2024-06-17 09:20:50,305 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d8a0>, 584118.808672748)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 584119.10762826)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d120>, 584119.673191638)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ec20>
+2024-06-17 09:20:50,321 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:20:57,792 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:20:57,793 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ead0>
+2024-06-17 09:20:57,793 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ed40>, 584126.239192255)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 584126.53224012)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 584127.162589859)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d900>
+2024-06-17 09:20:57,802 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:05,117 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:05,118 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f670>
+2024-06-17 09:21:05,118 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d000>, 584133.692396576)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584133.920869263)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f2e0>, 584134.487946624)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d630>
+2024-06-17 09:21:05,126 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:12,496 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:12,498 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e200>
+2024-06-17 09:21:12,498 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce80>, 584141.038318819)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f3a0>, 584141.314124604)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d000>, 584141.866203707)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65db70>
+2024-06-17 09:21:12,513 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:19,860 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:19,862 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65dab0>
+2024-06-17 09:21:19,862 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584148.45349219)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 584148.685214121)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce20>, 584149.230250562)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d330>
+2024-06-17 09:21:19,878 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:27,253 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:27,254 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e170>
+2024-06-17 09:21:27,254 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 584155.770584621)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 584156.062427766)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d5a0>, 584156.626525897)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e500>
+2024-06-17 09:21:27,264 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:34,628 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:34,630 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e680>
+2024-06-17 09:21:34,630 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ece0>, 584163.174421437)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 584163.444800484)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e860>, 584163.996918677)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ece0>
+2024-06-17 09:21:34,648 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:42,033 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:42,033 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f3d0>
+2024-06-17 09:21:42,040 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fee0>, 584170.570001245)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 584170.843709253)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e140>, 584171.403245019)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e4a0>
+2024-06-17 09:21:42,058 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:49,371 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:49,372 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d7b0>
+2024-06-17 09:21:49,372 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ce80>, 584177.977529864)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 584178.187533486)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cac0>, 584178.74176112)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dd80>
+2024-06-17 09:21:49,380 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:21:56,746 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:21:56,747 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f220>
+2024-06-17 09:21:56,747 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c160>, 584185.324592556)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 584185.569048906)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d600>, 584186.116702004)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d9c0>
+2024-06-17 09:21:56,755 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:04,129 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:04,130 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e3b0>
+2024-06-17 09:22:04,130 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 584192.670098446)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58c640>, 584192.936706366)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee00>, 584193.502713867)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f070>
+2024-06-17 09:22:04,144 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:11,537 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:11,539 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d390>
+2024-06-17 09:22:11,539 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77cac0>, 584200.079803325)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 584200.341981854)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f3a0>, 584200.907381721)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65e8f0>
+2024-06-17 09:22:11,552 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:18,891 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:18,892 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ea40>
+2024-06-17 09:22:18,892 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e020>, 584207.501534517)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584207.703308602)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ef80>, 584208.261882951)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ec80>
+2024-06-17 09:22:18,907 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:26,250 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:26,250 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65cbb0>
+2024-06-17 09:22:26,250 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d1e0>, 584214.815157354)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 584215.071956461)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77fee0>, 584215.620567823)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d2d0>
+2024-06-17 09:22:26,258 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:33,617 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:33,618 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ee00>
+2024-06-17 09:22:33,619 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d960>, 584222.118282715)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f5e0>, 584222.420514462)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca00>, 584222.987000416)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fca0>
+2024-06-17 09:22:33,636 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:41,546 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:41,546 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65cbb0>
+2024-06-17 09:22:41,546 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ed40>, 584229.573838863)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fee0>, 584229.84118292)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ef80>, 584230.916186785)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65f310>
+2024-06-17 09:22:41,555 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:48,956 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:48,957 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65e3e0>
+2024-06-17 09:22:48,958 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f940>, 584237.493721659)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e140>, 584237.76147745)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d000>, 584238.326037318)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65de70>
+2024-06-17 09:22:48,972 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:22:56,403 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:22:56,403 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65fb50>
+2024-06-17 09:22:56,404 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 584244.910425653)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fe20>, 584245.19837061)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca00>, 584245.774204161)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fdf0>
+2024-06-17 09:22:56,412 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:03,845 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:03,846 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65de40>
+2024-06-17 09:23:03,847 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58fd00>, 584252.603113489)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e4a0>, 584252.644293027)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e260>, 584253.214904517)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65dbd0>
+2024-06-17 09:23:03,863 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:11,214 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:11,214 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65ee90>
+2024-06-17 09:23:11,215 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ee00>, 584259.745550025)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f9a0>, 584260.019787844)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d1e0>, 584260.584513436)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65da80>
+2024-06-17 09:23:11,225 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:18,656 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:18,658 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65d6c0>
+2024-06-17 09:23:18,658 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 584267.163620066)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584267.437387006)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77e440>, 584268.026131887)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65fb50>
+2024-06-17 09:23:18,675 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:26,059 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:26,059 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65f520>
+2024-06-17 09:23:26,059 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77c160>, 584274.627781753)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f820>, 584274.864237189)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77ca60>, 584275.42899011)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65ef20>
+2024-06-17 09:23:26,067 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:33,454 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:33,454 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7d723f65eb00>
+2024-06-17 09:23:33,455 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77d3c0>, 584281.975466538)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f58f8e0>, 584282.256440397)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7d723f77f2e0>, 584282.827634681)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7d723f65d390>
+2024-06-17 09:23:33,463 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:42,261 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:42,263 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7294602580a0>
+2024-06-17 09:23:42,263 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7294601c8ca0>, 584290.72773066)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7294601c8a60>, 584291.033310609)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x729460193a00>, 584291.631014626)]']
+connector: <aiohttp.connector.TCPConnector object at 0x729460258910>
+2024-06-17 09:23:42,278 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:49,660 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:49,661 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x729460258640>
+2024-06-17 09:23:49,662 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x72946037e1a0>, 584298.188185306)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x729460193a00>, 584298.434626729)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x729460190760>, 584299.029691866)]']
+connector: <aiohttp.connector.TCPConnector object at 0x729460258700>
+2024-06-17 09:23:49,677 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:23:57,086 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:23:57,087 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x72946025bf40>
+2024-06-17 09:23:57,087 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x72946037d060>, 584305.584306632)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x729460193e20>, 584305.858808237)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7294601906a0>, 584306.457294464)]']
+connector: <aiohttp.connector.TCPConnector object at 0x72946025a7d0>
+2024-06-17 09:23:57,099 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:24:03,470 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:24:03,471 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x72946025ac20>
+2024-06-17 09:24:03,471 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x729460193a00>, 584311.984508862)]']
+connector: <aiohttp.connector.TCPConnector object at 0x729460259fc0>
+2024-06-17 09:25:24,371 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:25:24,372 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7101d70180a0>
+2024-06-17 09:25:24,373 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7101d6f8cb80>, 584392.898441566)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7101d6f8c940>, 584393.151762946)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x7101d6f58640>, 584393.741141412)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7101d7018910>
+2024-06-17 09:25:24,384 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
+2024-06-17 09:35:21,548 - WARNING - binance requires to release all resources with an explicit call to the .close() coroutine. If you are using the exchange instance with async coroutines, add `await exchange.close()` to your code into a place when you're done with the exchange and don't need the exchange instance anymore (at the end of your async coroutine).
+2024-06-17 09:35:21,549 - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x71932dc940d0>
+2024-06-17 09:35:21,549 - ERROR - Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x71932dc08b80>, 584990.101808254)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x71932dc08940>, 584990.314798495)]', '[(<aiohttp.client_proto.ResponseHandler object at 0x71932dbd4640>, 584990.91859295)]']
+connector: <aiohttp.connector.TCPConnector object at 0x71932dc94bb0>
+2024-06-17 09:35:21,558 - ERROR - Error in generate_signal: '>' not supported between instances of 'str' and 'int'
