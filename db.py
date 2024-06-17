@@ -24,12 +24,13 @@ class DataBase:
         cursor.execute(f"DELETE FROM {table_name}")
         conn.commit()
 
-    def insert_signal(self, symbol, entry_price, signal):
+    def insert_signal(self, symbol, entry_price, signal, indicator):
         conn = self.connect()
         cursor = conn.cursor()
         self.clean_db(table_name='signals')
-        cursor.execute("INSERT INTO signals (coin, signal, entry_price) VALUES (%s, %s, %s)",
-                       (symbol, signal, entry_price))
+        cursor.execute("INSERT INTO signals (coin, signal, entry_price, indicator)"
+                       " VALUES (%s, %s, %s, %s)",
+                       (symbol, signal, entry_price, indicator))
         conn.commit()
 
     def insert_binance_keys(self, api_key, api_secret):
@@ -61,8 +62,6 @@ class DataBase:
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM trades_alert ")
             rows = cursor.fetchall()
-            print(len(rows))
-
             if len(rows) > 0:
                 return True
             else:

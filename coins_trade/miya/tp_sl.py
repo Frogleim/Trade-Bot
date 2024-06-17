@@ -35,7 +35,7 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def pnl_long(opened_price, price=None):
+def pnl_long(opened_price, indicator=None):
     global current_profit, current_checkpoint, profit_checkpoint_list
 
     try:
@@ -71,12 +71,12 @@ def pnl_long(opened_price, price=None):
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                     pnl=current_profit)
+                                     pnl=current_profit, indicator=indicator)
 
             return 'Profit'
 
 
-def pnl_short(opened_price, price=None):
+def pnl_short(opened_price, indicator=None):
     global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
@@ -108,6 +108,6 @@ def pnl_short(opened_price, price=None):
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                     pnl=current_profit)
+                                     pnl=current_profit, indicator=indicator)
 
             return 'Profit'

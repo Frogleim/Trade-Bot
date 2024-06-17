@@ -19,7 +19,14 @@ def start_trade():
     if signal_data is not None:
         signal = signal_data[1]
         entry_price = signal_data[2]
-        miya_trade.trade(symbol=symbol, signal=signal, entry_price=entry_price, position_size=quantity)
+        indicator = signal_data[3]
+        miya_trade.trade(
+            symbol=symbol,
+            signal=signal,
+            entry_price=entry_price,
+            position_size=quantity,
+            indicator=indicator
+        )
         traded = True
         return traded
     print(Fore.RED + "No trade signals at this moment")

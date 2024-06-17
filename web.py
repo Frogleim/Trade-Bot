@@ -62,14 +62,24 @@ async def generate_signal():
 
             if buy_signals:
                 entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
-                my_db.insert_signal(symbol='MATICUSDT', signal='Buy', entry_price=entry_price)
-                logging_settings.system_log.info(f'Getting Buy signal. Indicators: {buy_signals}')
+                my_db.insert_signal(
+                    symbol='MATICUSDT',
+                    signal='Buy',
+                    entry_price=entry_price,
+                    indicator=buy_signals[0]
+                )
+                logging_settings.actions_logger.info(f'Getting Buy signal. Indicators: {buy_signals}')
                 pause_event.clear()  # Pause after detecting a buy signal
 
             if sell_signals:
                 entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
-                my_db.insert_signal(symbol='MATICUSDT', signal='Sell', entry_price=entry_price)
-                logging_settings.system_log.info(f'Getting Sell signal. Indicators: {sell_signals}')
+                my_db.insert_signal(
+                    symbol='MATICUSDT',
+                    signal='Sell',
+                    entry_price=entry_price,
+                    indicator=sell_signals[0]
+                )
+                logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal
 
         except Exception as e:

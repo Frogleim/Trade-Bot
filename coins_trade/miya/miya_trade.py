@@ -11,7 +11,7 @@ API_KEY, API_SECRET = my_db.get_binance_keys()
 client = Client(API_KEY, API_SECRET)
 
 
-def trade(symbol, signal, entry_price, position_size):
+def trade(symbol, signal, entry_price, position_size, indicator):
     if signal == 'Sell':
         start_time = time.time()
         print(f'Trade starting time: {start_time}')
@@ -49,7 +49,7 @@ def trade(symbol, signal, entry_price, position_size):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price)
+                res = tp_sl.pnl_short(entry_price, indicator)
                 if res == 'Profit':
 
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
@@ -108,7 +108,7 @@ def trade(symbol, signal, entry_price, position_size):
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price)
+                res = tp_sl.pnl_long(entry_price, indicator)
                 if res == 'Profit':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:

@@ -26,12 +26,22 @@ class DataBase:
                        (symbol, entry_price, close_price, pnl, side))
         conn.commit()
 
-    def insert_test_trades(self, symbol, entry_price, close_price, pnl):
+    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit)"
-                       "VALUES (%s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl))
+        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit, indicator)"
+                       "VALUES (%s, %s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl, indicator))
+        self.insert_trades_alerts()
+        conn.commit()
+
+    def insert_trades_alerts(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        is_finished = "True"
+        cursor.execute("INSERT INTO trade_alerts (is_finished) VALUES (%s)"
+                       ,
+                       is_finished)
         conn.commit()
 
     def get_binance_keys(self):
