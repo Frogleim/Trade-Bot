@@ -3,8 +3,6 @@ pandas
 ccxt
 fastapi
 uvicorn
-Pillow
-scipy
 matplotlib
 flask
 dash
