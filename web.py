@@ -99,6 +99,7 @@ async def monitor_signals():
 
 
 if __name__ == '__main__':
+    my_db.create_all_tables()
     loop = asyncio.get_event_loop()
     tasks = [
         loop.create_task(generate_signal()),

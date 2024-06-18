@@ -18,6 +18,70 @@ class DataBase:
             database=self.database
         )
 
+    def create_all_tables(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+        CREATE TABLE IF NOT EXISTS signals (
+        id SERIAL PRIMARY KEY,
+        symbol VARCHAR(50) NOT NULL,
+        signal VARCHAR(10) NOT NULL,
+        entry_price NUMERIC(18, 8),
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+            """
+        )
+
+        print('Table signals created successfully')
+        cursor.execute(
+            """
+        CREATE TABLE IF NOT EXISTS binance_keys (
+        id SERIAL PRIMARY KEY,
+        api_key VARCHAR,
+        api_secret VARCHAR
+);
+            """
+        )
+        print('Table binance_keys created successfully')
+        cursor.execute(
+            """
+        CREATE TABLE IF NOT EXISTS trade_coins (
+        id SERIAL PRIMARY KEY,
+        symbol VARCHAR,
+        quantity INT,
+        checkpoints FLOAT8[]
+);
+            """
+        )
+        print('Table trade_coins created successfully')
+        cursor.execute(
+            """
+        CREATE TABLE IF NOT EXISTS trades_alert (
+        id SERIAL PRIMARY KEY,
+        is_finished VARCHAR
+);
+            """
+        )
+        print('Table trades_alert created successfully')
+        cursor.execute(
+            """
+        CREATE TABLE IF NOT EXISTS trades_history (
+        id SERIAL PRIMARY KEY,
+        symbol VARCHAR,
+        entry_price VARCHAR,
+        exit_price VARCHAR,
+        profit VARCHAR
+);
+            """
+        )
+        print('Table trades_alert created successfully')
+        print('All tables created...')
+        conn.commit()
+
+
+
+
     def clean_db(self, table_name):
         conn = self.connect()
         cursor = conn.cursor()
