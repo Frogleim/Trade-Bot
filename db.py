@@ -92,7 +92,7 @@ class DataBase:
         conn = self.connect()
         cursor = conn.cursor()
         self.clean_db(table_name='signals')
-        cursor.execute("INSERT INTO signals (coin, signal, entry_price) VALUES (%s, %s, %s)",
+        cursor.execute("INSERT INTO signals (symbol, signal, entry_price) VALUES (%s, %s, %s)",
                        (symbol, signal, entry_price))
         conn.commit()
 
@@ -111,7 +111,7 @@ class DataBase:
     def get_signal(self, symbol):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM signals WHERE coin='{symbol}'")
+        cursor.execute(f"SELECT * FROM signals WHERE symbol='{symbol}'")
         rows = cursor.fetchall()
         print(len(rows))
         if len(rows) > 0:
@@ -125,7 +125,6 @@ class DataBase:
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM trades_alert ")
             rows = cursor.fetchall()
-            print(len(rows))
 
             if len(rows) > 0:
                 return True

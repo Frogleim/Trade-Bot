@@ -10,6 +10,10 @@ client = Client(API_KEY, API_SECRET)
 technical_tool = ['MACD', 'Bollinger Bands']
 
 pause_event = asyncio.Event()
+in_trade = False
+
+async def close_client():
+    await client.close()
 
 
 async def fetch_macd_signal():
@@ -33,44 +37,63 @@ async def fetch_thrust():
 
 
 async def generate_signal():
+    global in_trade
+
     logging_settings.system_log.warning('Starting Miya Beta 0.07')
     pause_event.set()  # Initially start signal monitoring
-
     while True:
         await pause_event.wait()  # Wait until the event is set (unpaused)
+        signal = my_db.get_signal(symbol='MATICUSDT')
 
         try:
-            my_db.clean_db(table_name='signals')
+            if signal is not None:
+                logging_settings.system_log.warning('There are opened trade. Waiting for finish')
+                print('There are opened trade. Waiting for finish')
+            else:
+                my_db.clean_db(table_name='signals')
 
-            # Run all indicator functions concurrently
-            results = await asyncio.gather(
-                fetch_macd_signal(),
-                fetch_bb_signal(),
-                fetch_thrust()
-            )
+                # Run all indicator functions concurrently
+                results = await asyncio.gather(
+                    fetch_macd_signal(),
+                    fetch_bb_signal(),
+                    fetch_thrust()
+                )
 
-            # Process results
-            signals = {name: signal for name, signal, *rest in results}
-            prices = {name: rest[0] for name, signal, *rest in results if rest}
-            print(signals)
-            logging_settings.system_log.info(f'Signals: {signals}')
-            logging_settings.system_log.info(f'Prices: {prices}')
 
-            # Example logic for combined signals
-            buy_signals = [name for name, signal in signals.items() if signal == 'Buy']
-            sell_signals = [name for name, signal in signals.items() if signal == 'Sell']
+                # Process results
+                signals = {name: signal for name, signal, *rest in results}
+                prices = {name: rest[0] for name, signal, *rest in results if rest}
+                print(signals)
+                logging_settings.system_log.info(f'Signals: {signals}')
+                logging_settings.system_log.info(f'Prices: {prices}')
 
-            if buy_signals:
-                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
-                my_db.insert_signal(symbol='MATICUSDT', signal='Buy', entry_price=entry_price)
-                logging_settings.system_log.info(f'Getting Buy signal. Indicators: {buy_signals}')
-                pause_event.clear()  # Pause after detecting a buy signal
+                # Example logic for combined signals
+                buy_signals = [name for name, signal in signals.items() if signal == 'Buy']
+                sell_signals = [name for name, signal in signals.items() if signal == 'Sell']
 
-            if sell_signals:
-                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
-                my_db.insert_signal(symbol='MATICUSDT', signal='Sell', entry_price=entry_price)
-                logging_settings.system_log.info(f'Getting Sell signal. Indicators: {sell_signals}')
-                pause_event.clear()  # Pause after detecting a sell signal
+                if buy_signals:
+                    entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                    my_db.insert_signal(
+                        symbol='MATICUSDT',
+                        signal='Buy',
+                        entry_price=entry_price,
+                        indicator=buy_signals[0]
+                    )
+                    logging_settings.actions_logger.info(f'Getting Buy signal. Indicators: {buy_signals}')
+                    pause_event.clear()  # Pause after detecting a buy signal
+                    in_trade = True
+
+                if sell_signals:
+                    entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                    my_db.insert_signal(
+                        symbol='MATICUSDT',
+                        signal='Sell',
+                        entry_price=entry_price,
+                        indicator=sell_signals[0]
+                    )
+                    logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
+                    pause_event.clear()  # Pause after detecting a sell signal
+                    in_trade = True
 
         except Exception as e:
             logging_settings.error_logs_logger.error(f'Error in generate_signal: {e}')
@@ -93,6 +116,10 @@ if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     tasks = [
         loop.create_task(generate_signal()),
-        loop.create_task(monitor_signals())
+        # loop.create_task(monitor_signals())
     ]
-    loop.run_until_complete(asyncio.wait(tasks))
+    try:
+        loop.run_until_complete(asyncio.wait(tasks))
+    finally:
+        loop.run_until_complete(close_client())
+        loop.close()

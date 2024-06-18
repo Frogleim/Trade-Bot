@@ -15,10 +15,11 @@ def start_trade():
     symbol, quantity, checkpoints = my_db.get_trade_coins()
     signal_data = my_db.get_signal(symbol=symbol)
     print(Fore.GREEN + f'Starting trade for symbol {symbol}')
-
+    print(signal_data)
     if signal_data is not None:
-        signal = signal_data[1]
-        entry_price = signal_data[2]
+        signal = signal_data[2]
+        entry_price = signal_data[3]
+        print(entry_price)
         miya_trade.trade(symbol=symbol, signal=signal, entry_price=entry_price, position_size=quantity)
         traded = True
         return traded

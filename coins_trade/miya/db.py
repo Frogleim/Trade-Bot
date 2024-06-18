@@ -32,7 +32,18 @@ class DataBase:
         cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit)"
                        "VALUES (%s, %s, %s, %s)",
                        (symbol, entry_price, close_price, pnl))
+        self.insert_is_finished()
         conn.commit()
+
+    def insert_is_finished(self):
+        is_finished = 'yes'
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO trades_alert (is_finished)"
+                       "VALUES (%s)",
+                       (is_finished))
+        conn.commit()
+
 
     def get_binance_keys(self):
         conn = self.connect()
