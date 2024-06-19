@@ -1,3 +1,7 @@
+import warnings
+warnings.simplefilter(action='ignore')
+
+
 import pandas as pd
 import ccxt.async_support as ccxt
 import numpy as np

@@ -3951,3 +3951,65 @@ LINE 1: DELETE FROM MATICUSDT
 2024-06-17 12:23:40,926 - ERROR - Error in generate_signal: binance does not have market symbol MATICUST
 2024-06-17 12:23:48,310 - ERROR - Error in generate_signal: binance does not have market symbol MATICUST
 2024-06-17 13:15:49,846 - ERROR - Error in generate_signal: 'signal'
+2024-06-17 17:21:44,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:23:19,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:26:26,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:27:09,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:27:50,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:28:06,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 17:28:22,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 18:16:42,731 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-17 18:30:14,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:12:19,724 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:31:59,732 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:32:15,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:32:31,735 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:32:58,733 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:33:14,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:33:59,724 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:34:15,732 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:34:31,732 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:35:25,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:35:41,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:35:57,724 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:37:25,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:37:41,743 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:38:05,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:39:07,740 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:39:38,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:39:54,735 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:40:10,732 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:40:37,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:40:53,753 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:41:09,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:41:25,733 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:41:41,993 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:41:57,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:42:13,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:42:29,736 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:46:26,734 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:48:04,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:48:20,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:50:27,744 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:51:21,742 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:52:20,732 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:52:41,734 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 07:53:24,741 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 07:54:13,731 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:03:58,740 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:05:19,732 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:26:51,744 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:28:58,178 - ERROR - Error in generate_signal: 'int' object is not callable
+2024-06-18 08:29:13,731 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:29:20,112 - ERROR - Error in generate_signal: 'int' object is not callable
+2024-06-18 08:33:52,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 08:39:56,743 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:40:33,766 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 08:40:49,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 08:41:05,725 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-18 09:27:13,743 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 09:27:29,724 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-18 09:49:30,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 09:49:46,733 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 09:50:02,745 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-18 09:52:41,733 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
