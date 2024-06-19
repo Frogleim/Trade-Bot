@@ -44,7 +44,7 @@ async def generate_signal():
 
             # Run all indicator functions concurrently
             results = await asyncio.gather(
-                fetch_macd_signal(),
+                # fetch_macd_signal(),
                 fetch_bb_signal(),
                 fetch_thrust()
             )

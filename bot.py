@@ -36,7 +36,4 @@ if __name__ == '__main__':
     print(Fore.YELLOW + 'Starting trade bot...')
     while True:
         is_traded = start_trade()
-        if is_traded:
-            time.sleep(1800)
-        else:
-            time.sleep(5)
+        time.sleep(5)

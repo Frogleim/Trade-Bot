@@ -41,7 +41,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
             if open_orders['status'] == 'NEW':
                 total_time = time.time() - start_time
                 print(f'Total waiting time: {total_time}')
-                if time.time() - start_time > 180:
+                if time.time() - start_time > 60:
                     client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
@@ -107,7 +107,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
 
                 print(f'Total waiting time: {total_time}')
 
-                if time.time() - start_time > 180:
+                if time.time() - start_time > 60:
                     client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')

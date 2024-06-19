@@ -54,7 +54,9 @@ def pnl_long(opened_price, indicator=None):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -0.002:
+    if float(current_profit) <= -0.0016:
+        my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+                                 pnl=current_profit, indicator=indicator)
         return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
@@ -91,7 +93,9 @@ def pnl_short(opened_price, indicator=None):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -0.002:
+    if float(current_profit) <= -0.0016:
+        my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+                                 pnl=current_profit, indicator=indicator)
         return 'Loss'
 
     logging.warning(
