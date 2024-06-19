@@ -1,12 +1,9 @@
-import time
+import warnings
+
+warnings.filterwarnings(action='ignore')
 import pandas as pd
-import os
-import logging
-import sys
-import asyncio
-import aiohttp
+import logging, asyncio, aiohttp
 from binance.client import Client
-from binance.enums import *
 from coins_trade.miya import logging_settings
 from db import DataBase
 

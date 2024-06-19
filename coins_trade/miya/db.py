@@ -39,10 +39,13 @@ class DataBase:
         conn = self.connect()
         cursor = conn.cursor()
         is_finished = "True"
-        cursor.execute("INSERT INTO trade_alerts (is_finished) VALUES (%s)"
-                       ,
-                       is_finished)
+        cursor.execute(
+            "INSERT INTO trades_alert (is_finished) VALUES (%s)",
+            (is_finished,)  # Ensure the argument is passed as a tuple
+        )
         conn.commit()
+        cursor.close()
+        conn.close()
 
     def get_binance_keys(self):
         conn = self.connect()
@@ -70,7 +73,13 @@ class DataBase:
         checkpoints = row[3]
         return symbol, quantity, checkpoints
 
+    def clean_db(self, table_name):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(f"DELETE FROM {table_name}")
+        conn.commit()
+
 
 if __name__ == '__main__':
     my_db = DataBase()
-    my_db.get_trade_coins()
+    my_db.insert_trades_alerts()

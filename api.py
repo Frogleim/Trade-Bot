@@ -73,6 +73,7 @@ def trades_coins(trade_coin: TradesCoins):
     quantity = trade_coin.quantity
     checkpoints = trade_coin.checkpoints
     my_db = db.DataBase()
+    my_db.clean_db(table_name='trade_coins')
     my_db.insert_trades_coins(
         symbol=symbol,
         quantity=quantity,

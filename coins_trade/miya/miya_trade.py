@@ -1,9 +1,7 @@
 import time
 from binance.client import Client
-from . import tp_sl, config, position_handler, logging_settings, socket_ticker, db
-from datetime import datetime
+from . import tp_sl, position_handler, logging_settings, db
 from binance.exceptions import BinanceAPIException
-import threading
 
 
 my_db = db.DataBase()
@@ -12,6 +10,9 @@ client = Client(API_KEY, API_SECRET)
 
 
 def trade(symbol, signal, entry_price, position_size, indicator):
+    my_db.clean_db(table_name='signals')
+    logging_settings.system_log.warning(f'Starting trade. Symbol: {symbol}, '
+                                        f'Entry Price: {entry_price}, Position Size: {position_size}')
     if signal == 'Sell':
         start_time = time.time()
         print(f'Trade starting time: {start_time}')
@@ -41,12 +42,15 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                 total_time = time.time() - start_time
                 print(f'Total waiting time: {total_time}')
                 if time.time() - start_time > 180:
-                    client.cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
+                    client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                my_db.insert_trades_alerts()
                 break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price, indicator)
@@ -59,6 +63,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
 
                 if res == 'Loss':
@@ -69,6 +75,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
 
     if signal == 'Buy':
@@ -100,12 +108,16 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                 print(f'Total waiting time: {total_time}')
 
                 if time.time() - start_time > 180:
-                    client.cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
+                    client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                my_db.insert_trades_alerts()
+
                 break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_long(entry_price, indicator)
@@ -117,6 +129,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
 
                 if res == 'Loss':
@@ -127,6 +141,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    my_db.insert_trades_alerts()
+
                     break
 
 
