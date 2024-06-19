@@ -56,7 +56,7 @@ def pnl_long(opened_price, indicator=None):
 
     if float(current_profit) <= -0.0016:
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                 pnl=current_profit, indicator=indicator)
+                                 pnl=current_profit, indicator=indicator, is_profit=False)
         return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
@@ -73,7 +73,7 @@ def pnl_long(opened_price, indicator=None):
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                     pnl=current_profit, indicator=indicator)
+                                     pnl=current_profit, indicator=indicator, is_profit=True)
 
             return 'Profit'
 
@@ -95,7 +95,7 @@ def pnl_short(opened_price, indicator=None):
 
     if float(current_profit) <= -0.0016:
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                 pnl=current_profit, indicator=indicator)
+                                 pnl=current_profit, indicator=indicator, is_profit=False)
         return 'Loss'
 
     logging.warning(
@@ -112,6 +112,6 @@ def pnl_short(opened_price, indicator=None):
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
             my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
-                                     pnl=current_profit, indicator=indicator)
+                                     pnl=current_profit, indicator=indicator, is_profit=True)
 
             return 'Profit'

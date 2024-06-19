@@ -26,12 +26,12 @@ class DataBase:
                        (symbol, entry_price, close_price, pnl, side))
         conn.commit()
 
-    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator):
+    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator, is_profit):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit, indicator)"
-                       "VALUES (%s, %s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl, indicator))
+        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit, indicator, is_profit)"
+                       "VALUES (%s, %s, %s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl, indicator, is_profit))
         self.insert_trades_alerts()
         conn.commit()
 
