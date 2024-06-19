@@ -39,6 +39,11 @@ uvicorn main:app --reload
 it will run ``FastAPI`` on host ``localhost:8000``. Send your Binance API Key and API Secret with endpoint : `` curl -X 'POST' \
   'http://127.0.0.1:8000/set_credentials/' \
   -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "api_key": "api_key",
+  "api_secret": "api_secret"
+}' ``
 
 ## Runing
 Before running set trade bot configurations with api - ``curl -X 'POST' \
