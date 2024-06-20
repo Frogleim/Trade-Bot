@@ -33,4 +33,4 @@ services:
 
 volumes:
   coins_trade:
-  pgdbdata:
+  db:
