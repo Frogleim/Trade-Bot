@@ -70,6 +70,7 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Buy signal. Indicators: {buy_signals}')
                 pause_event.clear()  # Pause after detecting a buy signal
+                await asyncio.sleep(60)
 
             if sell_signals:
                 entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
@@ -81,6 +82,8 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal
+                await asyncio.sleep(60)
+
 
         except Exception as e:
             logging_settings.error_logs_logger.error(f'Error in generate_signal: {e}')

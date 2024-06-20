@@ -36,3 +36,76 @@
 2024-06-19 15:02:32,994 - INFO - Closing Position with Profit
 2024-06-19 15:11:20,464 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
 2024-06-19 15:21:56,816 - INFO - Closing Position with Profit
+2024-06-19 16:50:01,807 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-19 16:57:01,829 - INFO - Closing Position with Profit
+2024-06-19 16:57:04,727 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-19 16:57:12,279 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-19 17:41:46,008 - INFO - Closing Position with Loss
+2024-06-19 18:07:17,849 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-19 18:16:23,255 - INFO - Closing Position with Profit
+2024-06-19 18:27:52,043 - INFO - Getting Buy signal. Indicators: ['Bollinger Bands']
+2024-06-19 19:14:11,554 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-19 19:22:08,311 - INFO - Closing Position with Loss
+2024-06-19 20:29:19,108 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-19 20:46:20,312 - INFO - Closing Position with Profit
+2024-06-19 21:13:09,449 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-19 21:21:17,596 - INFO - Closing Position with Loss
+2024-06-19 21:21:20,410 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-19 21:36:45,056 - INFO - Closing Position with Profit
+2024-06-20 00:27:16,597 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 00:28:23,117 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 00:36:31,533 - INFO - Closing Position with Loss
+2024-06-20 00:38:14,960 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 00:57:13,165 - INFO - Closing Position with Loss
+2024-06-20 00:57:31,636 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 00:58:39,220 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 01:11:16,777 - INFO - Closing Position with Profit
+2024-06-20 02:17:42,791 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 02:56:37,434 - INFO - Closing Position with Loss
+2024-06-20 02:56:40,374 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 03:00:31,701 - INFO - Closing Position with Profit
+2024-06-20 03:32:40,173 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 03:55:45,559 - INFO - Closing Position with Loss
+2024-06-20 04:02:05,396 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:04:43,974 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:13:10,559 - INFO - Closing Position with Loss
+2024-06-20 04:16:21,195 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:19:29,086 - INFO - Closing Position with Profit
+2024-06-20 04:19:33,088 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:21:35,958 - INFO - Closing Position with Loss
+2024-06-20 04:21:39,438 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:24:18,828 - INFO - Closing Position with Profit
+2024-06-20 04:24:22,356 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:31:17,230 - INFO - Closing Position with Loss
+2024-06-20 04:36:26,690 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 04:39:20,207 - INFO - Closing Position with Profit
+2024-06-20 04:39:23,869 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 04:46:15,863 - INFO - Closing Position with Loss
+2024-06-20 04:46:57,422 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:48:02,167 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:49:17,511 - INFO - Closing Position with Loss
+2024-06-20 04:49:59,001 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 04:54:46,579 - INFO - Closing Position with Loss
+2024-06-20 05:05:52,643 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 05:08:35,888 - INFO - Closing Position with Loss
+2024-06-20 05:33:36,594 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-20 05:53:18,674 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 05:55:42,069 - INFO - Closing Position with Profit
+2024-06-20 05:55:45,246 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 05:58:00,450 - INFO - Closing Position with Loss
+2024-06-20 07:46:27,079 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 07:47:31,217 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 07:52:55,780 - INFO - Closing Position with Loss
+2024-06-20 08:14:28,223 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
+2024-06-20 08:21:47,573 - INFO - Closing Position with Loss
+2024-06-20 08:21:59,072 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 08:23:04,033 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 08:33:52,898 - INFO - Closing Position with Profit
+2024-06-20 08:33:55,943 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 08:44:47,488 - INFO - Closing Position with Loss
+2024-06-20 09:54:23,889 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-20 09:55:31,803 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-20 10:11:22,283 - INFO - Closing Position with Loss
+2024-06-20 10:11:25,298 - INFO - Getting Sell signal. Indicators: ['Bollinger Bands']
+2024-06-20 11:06:08,096 - INFO - Getting Buy signal. Indicators: ['Dual Thrust']
+2024-06-20 11:31:12,818 - INFO - Closing Position with Profit

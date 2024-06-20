@@ -30,3 +30,54 @@
 2024-06-19 14:59:16,880 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5781, Position Size: 33
 2024-06-19 15:04:28,483 - WARNING - Starting Miya Beta 0.07
 2024-06-19 15:11:20,736 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5747, Position Size: 33
+2024-06-19 16:50:03,818 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5737, Position Size: 33
+2024-06-19 16:57:14,495 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5748, Position Size: 33
+2024-06-19 18:07:18,273 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5718, Position Size: 33
+2024-06-19 18:27:52,250 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5674, Position Size: 33
+2024-06-19 18:28:52,644 - WARNING - Trade wasn't finished...too much time passed
+2024-06-19 19:14:14,790 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5737, Position Size: 33
+2024-06-19 20:29:20,711 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5747, Position Size: 33
+2024-06-19 21:13:12,952 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5785, Position Size: 33
+2024-06-19 21:21:24,595 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5799, Position Size: 33
+2024-06-20 00:27:19,917 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5761, Position Size: 33
+2024-06-20 00:28:20,286 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 00:28:25,383 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.577, Position Size: 33
+2024-06-20 00:38:19,621 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5749, Position Size: 33
+2024-06-20 00:57:35,456 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5767, Position Size: 33
+2024-06-20 00:58:35,782 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 00:58:40,887 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5773, Position Size: 33
+2024-06-20 02:17:43,907 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5797, Position Size: 33
+2024-06-20 02:56:44,535 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5781, Position Size: 33
+2024-06-20 03:32:43,537 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5743, Position Size: 33
+2024-06-20 04:02:06,580 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5751, Position Size: 33
+2024-06-20 04:03:07,035 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 04:04:48,179 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5745, Position Size: 33
+2024-06-20 04:16:24,450 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5757, Position Size: 33
+2024-06-20 04:19:36,177 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5741, Position Size: 33
+2024-06-20 04:21:43,059 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5759, Position Size: 33
+2024-06-20 04:24:26,062 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5744, Position Size: 33
+2024-06-20 04:36:27,466 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5767, Position Size: 33
+2024-06-20 04:39:27,322 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5784, Position Size: 33
+2024-06-20 04:46:58,294 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5754, Position Size: 33
+2024-06-20 04:47:58,681 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 04:48:03,801 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5741, Position Size: 33
+2024-06-20 04:49:59,961 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5758, Position Size: 33
+2024-06-20 05:05:55,874 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5752, Position Size: 33
+2024-06-20 05:33:37,871 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5837, Position Size: 33
+2024-06-20 05:34:38,207 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 05:53:19,487 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5768, Position Size: 33
+2024-06-20 05:55:49,313 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5756, Position Size: 33
+2024-06-20 07:46:27,851 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5775, Position Size: 33
+2024-06-20 07:47:28,310 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 07:47:33,406 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5778, Position Size: 33
+2024-06-20 08:14:30,775 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5749, Position Size: 33
+2024-06-20 08:21:59,815 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5766, Position Size: 33
+2024-06-20 08:23:00,447 - WARNING - Trade wasn't finished...too much time passed
+2024-06-20 08:23:05,514 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5778, Position Size: 33
+2024-06-20 08:34:00,087 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5791, Position Size: 33
+2024-06-20 08:45:49,699 - WARNING - Starting Miya Beta 0.07
+2024-06-20 09:54:27,350 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5839, Position Size: 33
+2024-06-20 09:55:33,224 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.584, Position Size: 33
+2024-06-20 10:11:29,354 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5872, Position Size: 33
+2024-06-20 11:03:21,631 - WARNING - Starting Miya Beta 0.07
+2024-06-20 11:06:11,131 - WARNING - Starting trade. Symbol: MATICUSDT, Entry Price: 0.5872, Position Size: 33
