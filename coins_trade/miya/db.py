@@ -71,7 +71,8 @@ class DataBase:
         symbol = row[1]
         quantity = row[2]
         checkpoints = row[3]
-        return symbol, quantity, checkpoints
+        stop_loss = row[4]
+        return symbol, quantity, checkpoints, stop_loss
 
     def clean_db(self, table_name):
         conn = self.connect()
@@ -82,4 +83,5 @@ class DataBase:
 
 if __name__ == '__main__':
     my_db = DataBase()
-    my_db.insert_trades_alerts()
+    symbol, quantity, checkpoints, stop_loss = my_db.get_trade_coins()
+    print(stop_loss)

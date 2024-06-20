@@ -103,10 +103,10 @@ class DataBase:
         cursor.execute(f"INSERT INTO binance_keys (api_key, api_secret) VALUES (%s, %s)", (api_key, api_secret))
         conn.commit()
 
-    def insert_trades_coins(self, symbol, quantity, checkpoints):
+    def insert_trades_coins(self, symbol, quantity, checkpoints, stop_loss):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO trade_coins (symbol, quantity, checkpoints) VALUES (%s, %s, %s)", (symbol, quantity, checkpoints))
+        cursor.execute(f"INSERT INTO trade_coins (symbol, quantity, checkpoints, stop_loss) VALUES (%s, %s, %s, %s)", (symbol, quantity, checkpoints, stop_loss))
         conn.commit()
 
     def get_signal(self, symbol):

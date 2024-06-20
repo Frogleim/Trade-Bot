@@ -11,7 +11,7 @@ import time
 
 my_db = db.DataBase()
 API_KEY, API_SECRET = my_db.get_binance_keys()
-symbol, quantity, checkpoints = my_db.get_trade_coins()
+symbol, quantity, checkpoints, stop_loss = my_db.get_trade_coins()
 current_profit = 0
 profit_checkpoint_list = []
 current_checkpoint = 0.00
@@ -43,7 +43,6 @@ def pnl_long(opened_price, indicator=None):
     except Exception as e:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
 
-
     print(current_profit, current_checkpoint, profit_checkpoint_list)
     current_profit = float(current_price) - float(opened_price)
     for i in range(len(checkpoints) - 1):
@@ -54,7 +53,7 @@ def pnl_long(opened_price, indicator=None):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -0.0033:
+    if float(current_profit) <= -float(stop_loss):
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         return 'Loss'
@@ -93,11 +92,10 @@ def pnl_short(opened_price, indicator=None):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -0.0033:
+    if float(current_profit) <= -float(stop_loss):
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         return 'Loss'
-
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:

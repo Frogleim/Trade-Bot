@@ -18,6 +18,7 @@ class TradesCoins(BaseModel):
     symbol: str
     quantity: int
     checkpoints: list
+    stop_loss: float
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -72,14 +73,16 @@ def trades_coins(trade_coin: TradesCoins):
     symbol = trade_coin.symbol
     quantity = trade_coin.quantity
     checkpoints = trade_coin.checkpoints
+    stop_loss = trade_coin.stop_loss
     my_db = db.DataBase()
     my_db.clean_db(table_name='trade_coins')
     my_db.insert_trades_coins(
         symbol=symbol,
         quantity=quantity,
-        checkpoints=checkpoints
+        checkpoints=checkpoints,
+        stop_loss=stop_loss
     )
-    return {"Symbol": symbol, "quantity": quantity, "checkpoints": checkpoints}
+    return {"Symbol": symbol, "quantity": quantity, "checkpoints": checkpoints, "stop_loss": stop_loss}
 
 
 if __name__ == "__main__":

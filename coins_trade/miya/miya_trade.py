@@ -45,12 +45,16 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                     client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    time.sleep(60)
+
                     my_db.insert_trades_alerts()
 
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                time.sleep(60)
                 my_db.insert_trades_alerts()
+
                 break
             if open_orders['status'] == 'FILLED':
                 res = tp_sl.pnl_short(entry_price, indicator)
@@ -63,6 +67,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    time.sleep(60)
+
                     my_db.insert_trades_alerts()
 
                     break
@@ -75,6 +81,8 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='long', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
+                    time.sleep(60)
+
                     my_db.insert_trades_alerts()
 
                     break
