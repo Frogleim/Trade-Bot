@@ -69,7 +69,8 @@ class DataBase:
         symbol = row[1]
         quantity = row[2]
         checkpoints = row[3]
-        return symbol, quantity, checkpoints
+        stop_loss = row[4]
+        return symbol, quantity, checkpoints, stop_loss
 
 
 if __name__ == '__main__':

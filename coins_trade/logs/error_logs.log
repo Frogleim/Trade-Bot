@@ -4016,3 +4016,15 @@ LINE 1: DELETE FROM MATICUSDT
 2024-06-19 19:41:16,034 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
 2024-06-19 19:41:32,035 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
 2024-06-19 19:44:15,034 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/klines?interval=15m&limit=1000&symbol=MATICUSDT
+2024-06-20 20:08:57,677 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 20:09:05,496 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 20:09:22,280 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+

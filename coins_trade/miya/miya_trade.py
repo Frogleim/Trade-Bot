@@ -47,13 +47,13 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     time.sleep(60)
 
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
                 time.sleep(60)
-                my_db.insert_trades_alerts()
+                my_db.insert_is_finished()
 
                 break
             if open_orders['status'] == 'FILLED':
@@ -69,7 +69,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     time.sleep(60)
 
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
 
@@ -83,7 +83,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
                     time.sleep(60)
 
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
 
