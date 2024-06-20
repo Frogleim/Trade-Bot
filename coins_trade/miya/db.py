@@ -26,26 +26,24 @@ class DataBase:
                        (symbol, entry_price, close_price, pnl, side))
         conn.commit()
 
-    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator, is_profit):
+    def insert_test_trades(self, symbol, entry_price, close_price, pnl):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit, indicator, is_profit)"
-                       "VALUES (%s, %s, %s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl, indicator, is_profit))
-        self.insert_trades_alerts()
+        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit)"
+                       "VALUES (%s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl))
+        self.insert_is_finished()
         conn.commit()
 
-    def insert_trades_alerts(self):
+    def insert_is_finished(self):
+        is_finished = 'yes'
         conn = self.connect()
         cursor = conn.cursor()
-        is_finished = "True"
-        cursor.execute(
-            "INSERT INTO trades_alert (is_finished) VALUES (%s)",
-            (is_finished,)  # Ensure the argument is passed as a tuple
-        )
+        cursor.execute("INSERT INTO trades_alert (is_finished)"
+                       "VALUES (%s)",
+                       (is_finished))
         conn.commit()
-        cursor.close()
-        conn.close()
+
 
     def get_binance_keys(self):
         conn = self.connect()
@@ -71,17 +69,9 @@ class DataBase:
         symbol = row[1]
         quantity = row[2]
         checkpoints = row[3]
-        stop_loss = row[4]
-        return symbol, quantity, checkpoints, stop_loss
-
-    def clean_db(self, table_name):
-        conn = self.connect()
-        cursor = conn.cursor()
-        cursor.execute(f"DELETE FROM {table_name}")
-        conn.commit()
+        return symbol, quantity, checkpoints
 
 
 if __name__ == '__main__':
     my_db = DataBase()
-    symbol, quantity, checkpoints, stop_loss = my_db.get_trade_coins()
-    print(stop_loss)
+    my_db.get_trade_coins()

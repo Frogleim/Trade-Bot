@@ -85,6 +85,8 @@ def trades_coins(trade_coin: TradesCoins):
     return {"Symbol": symbol, "quantity": quantity, "checkpoints": checkpoints, "stop_loss": stop_loss}
 
 
+
+
 if __name__ == "__main__":
     import uvicorn
 
