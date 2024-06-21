@@ -119,12 +119,12 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                     client.futures_cancel_order(symbol=symbol, orderId=int(order_info['orderId']))
                     logging_settings.system_log.warning('Trade wasn\'t finished...too much time passed')
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
             if open_orders['status'] == 'CANCELED':
                 logging_settings.finish_trade_log.info(f'{symbol} Finished')
-                my_db.insert_trades_alerts()
+                my_db.insert_is_finished()
 
                 break
             if open_orders['status'] == 'FILLED':
@@ -137,7 +137,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
 
@@ -149,7 +149,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
                         logging_settings.error_logs_logger.error(e)
                         position_handler.close_position(side='short', quantity=position_size)
                     logging_settings.finish_trade_log.info(f'{symbol} Finished')
-                    my_db.insert_trades_alerts()
+                    my_db.insert_is_finished()
 
                     break
 

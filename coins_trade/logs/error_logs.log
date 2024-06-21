@@ -4028,3 +4028,523 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
 LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
                                                         ^
 
+2024-06-20 21:27:29,824 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-20 21:27:58,510 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-20 23:02:59,168 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-06-20 23:17:56,060 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:04,023 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:12,031 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:24,196 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:32,681 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:41,695 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:49,939 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:18:57,693 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:05,559 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:13,370 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:21,196 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:33,776 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:43,822 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:51,682 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:19:59,440 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:08,073 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:16,004 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:23,784 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:31,733 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:45,408 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:20:53,394 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:21:01,238 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:21:17,177 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-20 23:21:25,086 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:21:33,259 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:21:41,153 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:21:50,276 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:01,378 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:09,731 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:17,466 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:25,402 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:33,600 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:41,691 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:22:51,773 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:01,265 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:10,546 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:18,239 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:26,023 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:33,969 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:41,871 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:49,665 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:23:57,877 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:05,556 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:14,561 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:22,768 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:31,779 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:39,793 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:47,801 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:24:56,323 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:04,567 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:12,613 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:20,540 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:28,578 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:36,347 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:44,237 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:25:53,014 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:02,035 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:09,727 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:23,481 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:31,232 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:39,134 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:46,992 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:26:56,929 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:27:04,859 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:27:12,620 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:27:20,462 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:27:28,485 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-20 23:27:37,565 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 00:31:17,410 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-21 00:31:33,168 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-06-21 00:31:48,225 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-21 00:32:04,168 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-06-21 00:32:27,168 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/klines?interval=15m&limit=1000&symbol=MATICUSDT
+2024-06-21 00:32:43,168 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-06-21 00:32:59,179 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     2024-06-21 07:32:22,003 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:32:29,926 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:32:37,897 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:32:45,875 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:32:53,819 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:33:01,749 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:33:09,956 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:33:19,057 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 07:33:26,938 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:07:13,681 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:07:21,548 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:07:29,486 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:07:37,649 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:07:45,339 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:10:58,414 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:11:06,199 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:11:14,076 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:11:22,064 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:11:31,007 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:02,616 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:10,761 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:18,754 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:26,780 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:34,777 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:42,883 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:51,044 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:13:59,077 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:07,470 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:15,470 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:23,550 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:31,619 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:39,485 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:48,249 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:14:56,137 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:52:21,279 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:52:28,911 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:52:36,603 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:52:44,455 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:52:53,366 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:01,243 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:08,906 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:16,867 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:24,555 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:32,556 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:41,371 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:49,037 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:53:56,615 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:04,570 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:12,399 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:21,340 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:29,374 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:36,964 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:44,790 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:54:53,548 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:01,239 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:09,192 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:17,178 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:24,905 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:32,646 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 09:55:40,573 - ERROR - Error in generate_signal: column "indicator" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                                                        ^
+
+2024-06-21 10:36:17,223 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.71.82.237

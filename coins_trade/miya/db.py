@@ -18,6 +18,12 @@ class DataBase:
             database=self.database
         )
 
+
+    def clean_db(self, table_name):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute(f"DELETE FROM {table_name}")
+        conn.commit()
     def insert_trades(self, symbol, entry_price, close_price, pnl, side, time_in_trade):
         conn = self.connect()
         cursor = conn.cursor()
