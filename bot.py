@@ -4,32 +4,27 @@ from binance.client import Client
 from db import DataBase
 import time
 
-init()
-
 client = Client()
 
 
 def start_trade():
-    traded = False
     my_db = DataBase()
-    symbol, quantity, checkpoints = my_db.get_trade_coins()
-    signal_data = my_db.get_signal(symbol=symbol)
-    print(Fore.GREEN + f'Starting trade for symbol {symbol}')
-    print(signal_data)
+    signal_data = my_db.get_signal()
     if signal_data is not None:
+        row = my_db.get_trade_coins(signal_data[-1])
         signal = signal_data[2]
         entry_price = signal_data[3]
-        indicator = signal_data[5]
         miya_trade.trade(
-            symbol=symbol,
+            symbol=row[1],
             signal=signal,
             entry_price=entry_price,
-            position_size=quantity,
-            indicator=indicator
+            position_size=row[2],
+            indicator=row[-1]
         )
         traded = True
         return traded
-    print(Fore.RED + "No trade signals at this moment")
+    else:
+        print('No trading signal')
 
 
 if __name__ == '__main__':

@@ -103,16 +103,16 @@ class DataBase:
         cursor.execute(f"INSERT INTO binance_keys (api_key, api_secret) VALUES (%s, %s)", (api_key, api_secret))
         conn.commit()
 
-    def insert_trades_coins(self, symbol, quantity, checkpoints, stop_loss):
+    def insert_trades_coins(self, symbol, quantity, checkpoints, stop_loss, indicator):
         conn = self.connect()
         cursor = conn.cursor()
         cursor.execute(f"INSERT INTO trade_coins (symbol, quantity, checkpoints, stop_loss) VALUES (%s, %s, %s, %s)", (symbol, quantity, checkpoints, stop_loss))
         conn.commit()
 
-    def get_signal(self, symbol):
+    def get_signal(self):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM signals WHERE coin='{symbol}'")
+        cursor.execute(f"SELECT * FROM signals")
         rows = cursor.fetchall()
         print(len(rows))
         if len(rows) > 0:
@@ -145,21 +145,20 @@ class DataBase:
             return api_key, api_secret
         return None
 
-    def get_trade_coins(self):
+    def get_trade_coins(self, indicator):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM trade_coins")
-        row = cursor.fetchone()
+        cursor.execute("SELECT * FROM trade_coins WHERE indicator=%s", (indicator,))
+        row = cursor.fetchall()
+        print(row)
         cursor.close()
         conn.close()
-        symbol = row[1]
-        quantity = row[2]
-        checkpoints = row[3]
-        return symbol, quantity, checkpoints
+
+        return row[0]
 
 
 if __name__ == '__main__':
     symbol = 'MATICUSDT'
     db = DataBase()
-    rows = db.get_signal(symbol=symbol)
+    rows = db.get_trade_coins()
     print(rows)
