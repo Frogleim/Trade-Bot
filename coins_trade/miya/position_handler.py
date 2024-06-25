@@ -38,6 +38,39 @@ def close_position(side, quantity):
     print("Position closed successfully")
 
 
+def place_buy_order_with_stop_loss_take_profit(price, quantity, symbol, stop_loss_price, take_profit_price):
+    client = Client(api_key=API_KEY, api_secret=API_SECRET)
+
+    # Place the buy order
+    buy_order = client.futures_create_order(
+        symbol=symbol,
+        side=Client.SIDE_BUY,
+        type='LIMIT',
+        timeInForce='GTC',  # Good 'til canceled
+        quantity=quantity,
+        price=price
+    )
+
+    print("Buy order placed successfully:")
+    print(buy_order)
+
+    # Place OCO (One Cancels the Other) order for stop loss and take profit
+    take_profit_limit = client.futures_create_order(
+        symbol=symbol,
+        side='SELL',
+        positionSide='LONG',
+        type='TAKE_PROFIT_LIMIT',
+        timeInForce='GTC',  # GTC (Good 'Til Canceled)
+        quantity=0.001,
+        price=take_profit_price,  # Specify the take profit price
+        stopPrice=take_profit_price,  # Specify the trigger price
+        closePosition=True
+    )
+
+    print("OCO order for stop loss and take profit placed successfully:")
+
+
+
 def place_buy_order(price, quantity, symbol):
     client = Client(api_key=API_KEY, api_secret=API_SECRET)
     order = client.futures_create_order(
@@ -71,4 +104,10 @@ def place_sell_order(price, quantity, symbol):
 
 
 if __name__ == "__main__":
-    place_buy_order(price=40000, quantity=0.003, symbol='BTCUSDT')
+    price = 0.553  # Example price for buying
+    quantity = 10  # Example quantity
+    symbol = 'MATICUSDT'
+    stop_loss_price = 1.20  # Example stop loss price
+    take_profit_price = 1.30  # Example take profit price
+
+    place_buy_order_with_stop_loss_take_profit(price, quantity, symbol, stop_loss_price, take_profit_price)

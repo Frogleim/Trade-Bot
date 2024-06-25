@@ -22,6 +22,12 @@ class TradesCoins(BaseModel):
     indicator: str
 
 
+class UpdateTradeCoins(BaseModel):
+    column: str
+    value: str
+    indicator: str
+
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
@@ -76,27 +82,46 @@ def trades_coins(trade_coin: TradesCoins):
     checkpoints = trade_coin.checkpoints
     stop_loss = trade_coin.stop_loss
     indicator = trade_coin.indicator
-    my_db = db.DataBase()
-    my_db.insert_trades_coins(
-        symbol=symbol,
-        quantity=quantity,
-        checkpoints=checkpoints,
-        stop_loss=stop_loss,
-        indicator=indicator
-    )
-    return {
-        "Message": "Success",
-        "Data": {
-            "Symbol": symbol,
-            "quantity": quantity,
-            "checkpoints": checkpoints,
-            "stop_loss": stop_loss,
-            "indicator": indicator
+    try:
+        my_db = db.DataBase()
+        my_db.insert_trades_coins(
+            symbol=symbol,
+            quantity=quantity,
+            checkpoints=checkpoints,
+            stop_loss=stop_loss,
+            indicator=indicator
+        )
+        return {
+            "Message": "Success",
+            "Data": {
+                "Symbol": symbol,
+                "quantity": quantity,
+                "checkpoints": checkpoints,
+                "stop_loss": stop_loss,
+                "indicator": indicator
+            }
+
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error while inserting settings for indicator {indicator}")
 
-    }
 
-
+@app.post("/update_settings/")
+def update_settings(updated: UpdateTradeCoins):
+    column = updated.column
+    value = updated.value
+    indicator = updated.indicator
+    try:
+        my_db = db.DataBase()
+        my_db.update_trade_coins(
+            column=column,
+            update_value=value,
+            indicator=indicator
+        )
+        return {'Message': "Success"}
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=500, detail=f'Error while updating column: {column}')
 
 
 if __name__ == "__main__":

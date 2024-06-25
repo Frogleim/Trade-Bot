@@ -5,9 +5,13 @@ from binance.client import Client
 import asyncio
 
 my_db = DataBase()
-API_KEY, API_SECRET = my_db.get_binance_keys()
-client = Client(API_KEY, API_SECRET)
-technical_tool = ['MACD', 'Bollinger Bands']
+try:
+    API_KEY, API_SECRET = my_db.get_binance_keys()
+    client = Client(API_KEY, API_SECRET)
+except Exception as e:
+    custom_message = "Error occurred while fetching Binance keys and initializing the client."
+    logging_settings.error_logs_logger.error(f"{custom_message}: {e}")
+    raise Exception(custom_message)
 
 pause_event = asyncio.Event()
 
@@ -33,20 +37,21 @@ async def fetch_thrust():
 
 
 async def generate_signal():
-    logging_settings.system_log.warning('Starting Miya Beta 0.07')
-    pause_event.set()  # Initially start signal monitoring
+    logging_settings.system_log.warning('Starting Miya Beta 0.1')
+    pause_event.set()
 
     while True:
-        await pause_event.wait()  # Wait until the event is set (unpaused)
+        await pause_event.wait()
 
         try:
             my_db.clean_db(table_name='signals')
+            my_db.clean_db(table_name='trades_alert')
 
             # Run all indicator functions concurrently
             results = await asyncio.gather(
                 # fetch_macd_signal(),
                 fetch_bb_signal(),
-                fetch_thrust()
+                # fetch_thrust()
             )
 
             # Process results
@@ -102,10 +107,11 @@ async def monitor_signals():
 
 
 if __name__ == '__main__':
+
     my_db.create_all_tables()
     loop = asyncio.get_event_loop()
     tasks = [
         loop.create_task(generate_signal()),
-        loop.create_task(monitor_signals())
+        loop.create_task(monitor_signals()),
     ]
     loop.run_until_complete(asyncio.wait(tasks))

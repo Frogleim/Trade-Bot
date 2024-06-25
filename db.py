@@ -28,6 +28,7 @@ class DataBase:
         symbol VARCHAR(50) NOT NULL,
         signal VARCHAR(10) NOT NULL,
         entry_price NUMERIC(18, 8),
+        indicator VARCHAR,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
             """
@@ -50,7 +51,9 @@ class DataBase:
         id SERIAL PRIMARY KEY,
         symbol VARCHAR,
         quantity INT,
-        checkpoints FLOAT8[]
+        checkpoints FLOAT8[],
+        stop_loss numeric,
+        indicator VARCHAR
 );
             """
         )
@@ -71,7 +74,8 @@ class DataBase:
         symbol VARCHAR,
         entry_price VARCHAR,
         exit_price VARCHAR,
-        profit VARCHAR
+        profit VARCHAR,
+        indicator VARCHAR
 );
             """
         )
@@ -92,7 +96,7 @@ class DataBase:
         conn = self.connect()
         cursor = conn.cursor()
         self.clean_db(table_name='signals')
-        cursor.execute("INSERT INTO signals (coin, signal, entry_price, indicator)"
+        cursor.execute("INSERT INTO signals (symbol, signal, entry_price, indicator)"
                        " VALUES (%s, %s, %s, %s)",
                        (symbol, signal, entry_price, indicator))
         conn.commit()

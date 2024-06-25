@@ -28,36 +28,23 @@ async def fetch_klines(session, symbol, interval):
         return []
 
 
-async def fetch_ticker(session, symbol):
-    url = f'https://fapi.binance.com/fapi/v1/ticker/price?symbol={symbol}'
-    try:
-        async with session.get(url) as response:
-            response.raise_for_status()
-            return await response.json()
-    except aiohttp.ClientError as e:
-        logging.error(f'Error fetching ticker: {e}')
-        return {}
-
-
 async def calculate_bollinger_bands(session, interval, length, num_std_dev):
     klines = await fetch_klines(session, 'MATICUSDT', interval)
-    if not klines:
-        return pd.Series([None, None, None], index=['sma', 'upper_band', 'lower_band'])
+    if not klines or len(klines) < length:
+        return pd.Series([None, None, None, None], index=['sma', 'upper_band', 'lower_band', 'previous_close'])
 
     close_prices = [float(kline[4]) for kline in klines]
+    previous_close = close_prices[-2] if len(close_prices) >= 2 else None
+
     df = pd.DataFrame({'close': close_prices})
-
-    # Calculate SMA using pandas
     df['sma'] = df['close'].rolling(window=length).mean()
-
-    # Calculate standard deviation
     df['std_dev'] = df['close'].rolling(window=length).std()
-
-    # Calculate upper and lower Bollinger Bands
     df['upper_band'] = df['sma'] + (num_std_dev * df['std_dev'])
     df['lower_band'] = df['sma'] - (num_std_dev * df['std_dev'])
 
-    return df[['sma', 'upper_band', 'lower_band']].iloc[-1]
+    result = df[['sma', 'upper_band', 'lower_band']].iloc[-1]
+    result['previous_close'] = previous_close
+    return result
 
 
 async def check_sma():
@@ -65,19 +52,22 @@ async def check_sma():
         bollinger_values = await calculate_bollinger_bands(session, interval=interval, length=length,
                                                            num_std_dev=num_std_dev)
         upper_band, lower_band = float(bollinger_values['upper_band']), float(bollinger_values['lower_band'])
+        previous_close = bollinger_values['previous_close']
+
         logging.info(f'Bollinger Bands - Upper: {upper_band}, Lower: {lower_band}')
 
-        ticker = await fetch_ticker(session, "MATICUSDT")
-        live_price = float(ticker.get('price', 0))
-        print(type(live_price))
-        logging_settings.system_log.info(f'Price: {live_price} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
-        print(live_price > upper_band + 0.0008)
-        if live_price > upper_band + 0.0008:
-            return 'Sell', live_price
-        elif live_price < lower_band - 0.0008:
-            return 'Buy', live_price
+        logging_settings.system_log.info(
+            f'Price: {previous_close} --- Upper Band: {upper_band}, Lower Band: {lower_band}')
+
+        if previous_close is None:
+            return 'Hold', previous_close
+
+        if previous_close > upper_band + 0.0008:
+            return 'Sell', previous_close
+        elif previous_close < lower_band - 0.0008:
+            return 'Buy', previous_close
         else:
-            return 'Hold', live_price
+            return 'Hold', previous_close
 
 
 # Running the asynchronous function

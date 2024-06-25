@@ -18,18 +18,10 @@ class DataBase:
             database=self.database
         )
 
-
     def clean_db(self, table_name):
         conn = self.connect()
         cursor = conn.cursor()
         cursor.execute(f"DELETE FROM {table_name}")
-        conn.commit()
-    def insert_trades(self, symbol, entry_price, close_price, pnl, side, time_in_trade):
-        conn = self.connect()
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades (symbol, entry_price, close_price, pnl, side) "
-                       "VALUES (%s, %s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl, side))
         conn.commit()
 
     def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator=None, is_profit=None):
@@ -45,11 +37,15 @@ class DataBase:
         is_finished = 'yes'
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades_alert (is_finished)"
-                       "VALUES (%s)",
-                       (is_finished))
-        conn.commit()
-
+        try:
+            cursor.execute("INSERT INTO trades_alert (is_finished) VALUES (%s)", (is_finished,))
+            conn.commit()
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            conn.rollback()  # Rollback in case of error
+        finally:
+            cursor.close()  # Close the cursor
+            conn.close()  # Close the connection
 
     def get_binance_keys(self):
         conn = self.connect()
@@ -81,4 +77,4 @@ class DataBase:
 
 if __name__ == '__main__':
     my_db = DataBase()
-    my_db.get_trade_coins()
+    my_db.insert_is_finished()

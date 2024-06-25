@@ -10,8 +10,9 @@ client = Client()
 def start_trade():
     my_db = DataBase()
     signal_data = my_db.get_signal()
+    print(signal_data)
     if signal_data is not None:
-        row = my_db.get_trade_coins(signal_data[-1])
+        row = my_db.get_trade_coins(signal_data[4])
         signal = signal_data[2]
         entry_price = signal_data[3]
         miya_trade.trade(

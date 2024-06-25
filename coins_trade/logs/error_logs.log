@@ -4548,3 +4548,8 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
                                                         ^
 
 2024-06-21 10:36:17,223 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.71.82.237
+2024-06-24 14:20:23,876 - ERROR - Error in generate_signal: 'signal'
+2024-06-24 14:20:31,987 - ERROR - Error in generate_signal: 'signal'
+2024-06-24 14:20:39,721 - ERROR - Error in generate_signal: 'signal'
+2024-06-24 14:21:13,603 - ERROR - Error in generate_signal: 'signal'
+2024-06-24 14:21:28,306 - ERROR - Error in generate_signal: 'signal'

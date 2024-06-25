@@ -16,6 +16,7 @@ services:
       - signal_checker
       - db
 
+
   db:
     image: "postgres:16"
     hostname: 'db'
@@ -32,5 +33,5 @@ services:
 
 
 volumes:
-  signal_checker:
-  db:
+  coins_trade:
+  pgdbdata:

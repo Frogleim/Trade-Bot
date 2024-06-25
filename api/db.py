@@ -158,6 +158,16 @@ class DataBase:
         checkpoints = row[3]
         return symbol, quantity, checkpoints
 
+    def update_trade_coins(self, column, update_value, indicator):
+        conn = self.connect()
+        cursor = conn.cursor()
+        query = f"UPDATE trade_coins SET {column} = {update_value} WHERE indicator=%s;"
+        cursor.execute(query, (indicator,))
+        conn.commit()
+
+
+
+
 
 if __name__ == '__main__':
     symbol = 'MATICUSDT'

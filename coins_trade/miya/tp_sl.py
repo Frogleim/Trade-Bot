@@ -4,10 +4,6 @@ import sys
 from collections import Counter
 from binance.client import Client
 from . import db
-import threading
-import time
-
-# import logging_settings
 
 my_db = db.DataBase()
 API_KEY, API_SECRET = my_db.get_binance_keys()
@@ -36,14 +32,12 @@ root_logger.addHandler(console_handler)
 
 
 def pnl_long(opened_price, indicator=None):
-    global current_profit, current_checkpoint, profit_checkpoint_list
-
+    global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
     try:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
     except Exception as e:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
 
-    print(current_profit, current_checkpoint, profit_checkpoint_list)
     current_profit = float(current_price) - float(opened_price)
     for i in range(len(checkpoints) - 1):
         if checkpoints[i] <= current_profit < checkpoints[i + 1]:
@@ -56,6 +50,7 @@ def pnl_long(opened_price, indicator=None):
     if float(current_profit) <= -float(stop_loss):
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
+        print('CLosing with lose')
         return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
@@ -95,6 +90,7 @@ def pnl_short(opened_price, indicator=None):
     if float(current_profit) <= -float(stop_loss):
         my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
+        print('CLosing with lose')
         return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
@@ -113,3 +109,8 @@ def pnl_short(opened_price, indicator=None):
                                      pnl=current_profit, indicator=indicator, is_profit=True)
 
             return 'Profit'
+
+
+
+if __name__ == '__main__':
+    pnl_long(opened_price=0.554)
