@@ -161,8 +161,8 @@ class DataBase:
     def update_trade_coins(self, column, update_value, indicator):
         conn = self.connect()
         cursor = conn.cursor()
-        query = f"UPDATE trade_coins SET {column} = {update_value} WHERE indicator=%s;"
-        cursor.execute(query, (indicator,))
+        query = f"UPDATE trade_coins SET {column} =%s WHERE indicator=%s;"
+        cursor.execute(query, (update_value, indicator))
         conn.commit()
 
 
