@@ -1,9 +1,12 @@
 import warnings
 
 warnings.filterwarnings(action='ignore')
+
 import pandas as pd
 import numpy as np
 from binance.client import Client
+import aiohttp
+import logging
 
 # Initialize the Binance client
 api_key = 'YOUR_API_KEY'
@@ -12,8 +15,8 @@ client = Client(api_key, api_secret)
 
 
 # Function to fetch historical futures data
-def fetch_futures_klines(symbol, interval, limit=500):
-    klines = client.futures_klines(symbol=symbol, interval=interval, limit=limit)
+async def fetch_futures_klines(symbol, interval, limit=500):
+    klines = await client.futures_klines(symbol=symbol, interval=interval, limit=limit)
     df = pd.DataFrame(klines, columns=[
         'timestamp', 'open', 'high', 'low', 'close', 'volume',
         'close_time', 'quote_asset_volume', 'number_of_trades',
@@ -25,41 +28,67 @@ def fetch_futures_klines(symbol, interval, limit=500):
     return df
 
 
-# Define the symbol
-symbol = 'MATICUSDT'
+class SMA21:
+    def __init__(self, symbol):
+        self.symbol = symbol
 
-# Fetch historical data for different time frames
-df_15m = fetch_futures_klines(symbol, Client.KLINE_INTERVAL_15MINUTE)
-df_1h = fetch_futures_klines(symbol, Client.KLINE_INTERVAL_1HOUR)
-df_4h = fetch_futures_klines(symbol, Client.KLINE_INTERVAL_4HOUR)
+    async def get_df_15m(self):
+        df_15m = await fetch_futures_klines(self.symbol, Client.KLINE_INTERVAL_15MINUTE)
 
-# Calculate SMA 21
-df_15m['SMA21'] = df_15m['close'].rolling(window=21).mean()
-df_1h['SMA21'] = df_1h['close'].rolling(window=21).mean()
-df_4h['SMA21'] = df_4h['close'].rolling(window=21).mean()
+        df_15m['SMA21'] = df_15m['close'].rolling(window=21).mean()
 
-# Generate signals on 15-minute chart
-df_15m['Signal'] = 0
-df_15m['Signal'][21:] = np.where(df_15m['close'][21:] > df_15m['SMA21'][21:], 1, 0)
-df_15m['Position'] = df_15m['Signal'].diff()
+        # Define trigger zones
+        trigger_offset = 0.0005  # Adjust this based on your needs
+        df_15m['up_trigger_zone'] = df_15m['SMA21'] + trigger_offset
+        df_15m['down_trigger_zone'] = df_15m['SMA21'] - trigger_offset
 
-# Confirmation from 1-hour chart
-df_1h['Above_SMA21'] = df_1h['close'] > df_1h['SMA21']
+        # Initialize columns for signals and states
+        df_15m['Buy_Signal'] = 0
+        df_15m['Sell_Signal'] = 0
+        df_15m['State'] = 'neutral'
 
-# Context from 4-hour chart
-df_4h['Above_SMA21'] = df_4h['close'] > df_4h['SMA21']
+        # Logic to generate signals
+        for i in range(21, len(df_15m)):
+            if df_15m['State'].iloc[i - 1] == 'neutral':
+                if df_15m['close'].iloc[i] < df_15m['down_trigger_zone'].iloc[i]:
+                    df_15m['State'].iloc[i] = 'waiting_for_up'
+                elif df_15m['close'].iloc[i] > df_15m['up_trigger_zone'].iloc[i]:
+                    df_15m['State'].iloc[i] = 'waiting_for_down'
+                else:
+                    df_15m['State'].iloc[i] = 'neutral'
+            elif df_15m['State'].iloc[i - 1] == 'waiting_for_up':
+                if df_15m['close'].iloc[i] > df_15m['up_trigger_zone'].iloc[i]:  # RSI confirmation
+                    df_15m['Buy_Signal'].iloc[i] = 1
+                    df_15m['State'].iloc[i] = 'neutral'
+                elif df_15m['close'].iloc[i] < df_15m['down_trigger_zone'].iloc[i]:
+                    df_15m['Sell_Signal'].iloc[i] = 1
+                    df_15m['State'].iloc[i] = 'neutral'
+                else:
+                    df_15m['State'].iloc[i] = 'waiting_for_up'
+            elif df_15m['State'].iloc[i - 1] == 'waiting_for_down':
+                if df_15m['close'].iloc[i] < df_15m['down_trigger_zone'].iloc[i]:  # RSI confirmation
+                    df_15m['Sell_Signal'].iloc[i] = 1
+                    df_15m['State'].iloc[i] = 'neutral'
+                elif df_15m['close'].iloc[i] > df_15m['up_trigger_zone'].iloc[i]:
+                    df_15m['Buy_Signal'].iloc[i] = 1
+                    df_15m['State'].iloc[i] = 'neutral'
+                else:
+                    df_15m['State'].iloc[i] = 'waiting_for_down'
+        latest_row = \
+            df_15m[
+                ['close', 'SMA21', 'up_trigger_zone', 'down_trigger_zone', 'Buy_Signal', 'Sell_Signal', 'State']].iloc[
+                -1]
+        latest_row = latest_row.astype(object)
 
 
-# Function to check confirmation and context
-def confirm_and_context(timestamp):
-    hour = timestamp.floor('H')
-    four_hour = timestamp.floor('4H')
-    if hour in df_1h.index and four_hour in df_4h.index:
-        return df_1h.loc[hour, 'Above_SMA21'] and df_4h.loc[four_hour, 'Above_SMA21']
-    return False
+        return latest_row
 
 
-df_15m['Confirmed_Signal'] = df_15m.apply(lambda row: row['Signal'] if confirm_and_context(row.name) else 0, axis=1)
+    async def check_signal(self):
+        df = await self.get_df_15m()
 
-# Display the signals
-print(df_15m.tail())
+if __name__ == '__main__':
+    symbol = 'MATICUSDT'
+    sma = SMA21(symbol)
+    latest = sma.get_df_15m()
+    print(type(float(latest['close'])))

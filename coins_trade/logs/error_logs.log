@@ -4560,3 +4560,23 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
 2024-06-25 13:41:06,008 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
 2024-06-25 13:41:31,067 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
 2024-06-25 13:41:57,798 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:27:51,038 - ERROR - Error in generate_signal: 
+2024-06-25 23:28:48,892 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:43:16,028 - ERROR - Error in generate_signal: 
+2024-06-25 23:43:41,097 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:44:06,160 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:44:31,209 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:44:56,276 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:45:21,344 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:45:46,419 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:46:11,484 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:46:36,559 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:47:01,627 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:47:26,700 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-25 23:47:51,768 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+2024-06-26 14:33:12,732 - ERROR - Error in generate_signal: __aenter__
+2024-06-26 14:33:17,781 - ERROR - Error in generate_signal: __aenter__
+2024-06-26 14:33:22,835 - ERROR - Error in generate_signal: __aenter__
+2024-06-26 14:47:47,935 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
+2024-06-26 14:47:53,321 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
+2024-06-26 14:47:58,659 - ERROR - Error in generate_signal: object list can't be used in 'await' expression

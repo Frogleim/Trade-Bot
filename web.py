@@ -1,4 +1,4 @@
-from model_building.strategies import MACD, BB, Dual_Thrust
+from model_building.strategies import MACD, BB, Dual_Thrust, SMA21
 from db import DataBase
 from coins_trade.miya import logging_settings
 from binance.client import Client
@@ -36,6 +36,15 @@ async def fetch_thrust():
     return 'Dual Thrust', last_signal
 
 
+async def fetch_sam21():
+    sma21 = SMA21.SMA21(symbol='MATICUSDT')
+    df = await sma21.check_signal()
+    if float(df['Buy_Signal']) > 0:
+        return 'SMA21', 'Buy'
+    elif float(df['Sell_Signal']) > 0:
+        return 'SMA21', 'Sell'
+
+
 async def generate_signal():
     logging_settings.system_log.warning('Starting Miya Beta 0.1')
     pause_event.set()
@@ -51,6 +60,7 @@ async def generate_signal():
             results = await asyncio.gather(
                 # fetch_macd_signal(),
                 fetch_bb_signal(),
+                fetch_sam21()
                 # fetch_thrust()
             )
 
