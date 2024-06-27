@@ -257,3 +257,6 @@
 2024-06-26 14:30:17,215 - INFO - SMA21 signal testing inserted successfully
 2024-06-26 14:31:19,086 - INFO - SMA21 signal testing inserted successfully
 2024-06-26 14:32:21,078 - INFO - SMA21 signal testing inserted successfully
+2024-06-27 12:00:09,360 - INFO - Getting Sell signal. Indicators: ['SMA21']
+2024-06-27 12:05:10,232 - INFO - Getting Sell signal. Indicators: ['SMA21']
+2024-06-27 12:08:05,676 - INFO - Getting Sell signal. Indicators: ['SMA21']

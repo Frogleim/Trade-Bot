@@ -4580,3 +4580,10 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
 2024-06-26 14:47:47,935 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
 2024-06-26 14:47:53,321 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
 2024-06-26 14:47:58,659 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
+2024-06-27 11:44:30,849 - ERROR - Error in generate_signal: column "symbol" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
+                             ^
+
+2024-06-27 12:05:13,931 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.71.183.135
+2024-06-27 12:12:36,610 - ERROR - APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
+2024-06-27 22:37:01,001 - ERROR - Error in generate_signal: 

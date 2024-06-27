@@ -38,11 +38,8 @@ async def fetch_thrust():
 
 async def fetch_sam21():
     sma21 = SMA21.SMA21(symbol='MATICUSDT')
-    df = await sma21.check_signal()
-    if float(df['Buy_Signal']) > 0:
-        return 'SMA21', 'Buy'
-    elif float(df['Sell_Signal']) > 0:
-        return 'SMA21', 'Sell'
+    df = await sma21.get_df_15m()
+    return 'SMA21', df
 
 
 async def generate_signal():

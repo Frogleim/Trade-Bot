@@ -93,7 +93,7 @@ class DataBase:
         conn = self.connect()
         cursor = conn.cursor()
         self.clean_db(table_name='signals')
-        cursor.execute("INSERT INTO signals (symbol, signal, entry_price, indicator)"
+        cursor.execute("INSERT INTO signals (coin, signal, entry_price, indicator)"
                        " VALUES (%s, %s, %s, %s)",
                        (symbol, signal, entry_price, indicator))
         conn.commit()
@@ -187,5 +187,5 @@ class DataBase:
 if __name__ == '__main__':
     symbol = 'MATICUSDT'
     db = DataBase()
-    rows = db.get_trade_coins()
+    rows = db.get_trade_coins('SMA21')
     print(rows)
