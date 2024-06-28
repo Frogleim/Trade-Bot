@@ -39,6 +39,7 @@ async def fetch_thrust():
 async def fetch_sam21():
     sma21 = SMA21.SMA21(symbol='MATICUSDT')
     df = await sma21.get_df_15m()
+
     return 'SMA21', df
 
 
@@ -73,7 +74,8 @@ async def generate_signal():
             sell_signals = [name for name, signal in signals.items() if signal == 'Sell']
 
             if buy_signals:
-                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                entry_price = client.futures_ticker(symbol='MATICUSDT')['lastPrice']
+
                 my_db.insert_signal(
                     symbol='MATICUSDT',
                     signal='Buy',
@@ -85,7 +87,8 @@ async def generate_signal():
                 await asyncio.sleep(60)
 
             if sell_signals:
-                entry_price = prices.get('Bollinger Bands', None)  # Use BB price if available
+                entry_price = client.futures_ticker(symbol='MATICUSDT')['lastPrice']
+
                 my_db.insert_signal(
                     symbol='MATICUSDT',
                     signal='Sell',

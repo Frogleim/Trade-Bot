@@ -4587,3 +4587,6 @@ LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
 2024-06-27 12:05:13,931 - ERROR - APIError(code=-2015): Invalid API-key, IP, or permissions for action, request ip: 46.71.183.135
 2024-06-27 12:12:36,610 - ERROR - APIError(code=-1021): Timestamp for this request is outside of the recvWindow.
 2024-06-27 22:37:01,001 - ERROR - Error in generate_signal: 
+2024-06-28 01:25:23,600 - ERROR - Error in generate_signal: single positional indexer is out-of-bounds
+2024-06-28 01:25:38,653 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
+                                                                                                                               
