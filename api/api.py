@@ -1,12 +1,26 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 import shutil
 import zipfile
 import os
 from pydantic import BaseModel
 import db
+import json
 
 app = FastAPI()
+origins = [
+    "http://127.0.0.1:8000",  # Your frontend server origin
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class BinanceKeys(BaseModel):
@@ -59,11 +73,6 @@ def download_logs():
 
     # Provide the zipped file as a response
     return FileResponse(path=zip_filename, media_type='application/zip', filename='logs.zip')
-
-
-@app.get('/get_trades_history/')
-def get_history():
-    return {"Message": "Success"}
 
 
 @app.post('/set_credentials/')
@@ -122,6 +131,48 @@ def update_settings(updated: UpdateTradeCoins):
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=f'Error while updating column: {column}')
+
+
+@app.get('/get_trade_setting/')
+def get_trade_coins():
+    my_db = db.DataBase()
+    data = my_db.get_trade_settings()
+    transformed_data = [
+        {
+            "id": item[0],
+            "symbol": item[1],
+            "value": item[2],
+            "ratios": item[3],
+            "decimal_value": float(item[4]),
+            "indicator": item[5]
+        }
+        for item in data
+    ]
+    json_data = json.dumps(transformed_data, indent=4)
+    return json.loads(json_data)
+
+
+@app.get('/get_trades_history/')
+def get_trade_coins():
+    my_db = db.DataBase()
+    data = my_db.get_trade_history()
+    try:
+        transformed_data = [
+            {
+                "id": item[0],
+                "symbol": item[1],
+                "entry_price": item[2],
+                "exit_price": item[3],
+                "profit": float(item[4]),
+                "is_profit": item[5],
+                "indicator": item[-1]
+            }
+            for item in data
+        ]
+        json_data = json.dumps(transformed_data, indent=4)
+        return json.loads(json_data)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail='Something wrong!')
 
 
 if __name__ == "__main__":

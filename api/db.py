@@ -79,9 +79,6 @@ class DataBase:
         print('All tables created...')
         conn.commit()
 
-
-
-
     def clean_db(self, table_name):
         conn = self.connect()
         cursor = conn.cursor()
@@ -158,6 +155,20 @@ class DataBase:
         checkpoints = row[3]
         return symbol, quantity, checkpoints
 
+    def get_trade_settings(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trade_coins")
+        rows = cursor.fetchall()
+        return rows
+
+    def get_trade_history(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trades_history")
+        rows = cursor.fetchall()
+        return rows
+
     def update_trade_coins(self, column, update_value, indicator):
         conn = self.connect()
         cursor = conn.cursor()
@@ -166,11 +177,8 @@ class DataBase:
         conn.commit()
 
 
-
-
-
 if __name__ == '__main__':
     symbol = 'MATICUSDT'
     db = DataBase()
-    rows = db.get_signal(symbol=symbol)
+    rows = db.get_trade_history()
     print(rows)

@@ -31,7 +31,7 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def pnl_long(opened_price, indicator=None):
+def pnl_long(opened_price, indicator):
     global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
     try:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
@@ -72,7 +72,7 @@ def pnl_long(opened_price, indicator=None):
             return 'Profit'
 
 
-def pnl_short(opened_price, indicator=None):
+def pnl_short(opened_price, indicator):
     global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=symbol)['lastPrice']
