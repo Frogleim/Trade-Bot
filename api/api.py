@@ -175,6 +175,16 @@ def get_trade_coins():
         raise HTTPException(status_code=500, detail='Something wrong!')
 
 
+@app.get("/clean_trades_history/")
+def clean_history():
+    try:
+        my_db = db.DataBase()
+        my_db.clean_db('trades_history')
+        return {"Message Success"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail='Failed to clean trades history')
+
+
 if __name__ == "__main__":
     import uvicorn
 
