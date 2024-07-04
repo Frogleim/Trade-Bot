@@ -84,7 +84,7 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Buy signal. Indicators: {buy_signals}')
                 pause_event.clear()  # Pause after detecting a buy signal
-                await asyncio.sleep(60)
+                await asyncio.sleep(1800)
 
             if sell_signals:
                 entry_price = client.futures_ticker(symbol='MATICUSDT')['lastPrice']
@@ -93,7 +93,7 @@ async def generate_signal():
                     symbol='MATICUSDT',
                     signal='Sell',
                     entry_price=entry_price,
-                    indicator=sell_signals[0]
+                    indicator=sell_signals[1800]
                 )
                 logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal

@@ -24,12 +24,12 @@ class DataBase:
         cursor.execute(f"DELETE FROM {table_name}")
         conn.commit()
 
-    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator=None, is_profit=None):
+    def insert_test_trades(self, symbol, entry_price, close_price, pnl, indicator, is_profit=None):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit)"
-                       "VALUES (%s, %s, %s, %s)",
-                       (symbol, entry_price, close_price, pnl))
+        cursor.execute("INSERT INTO trades_history (symbol, entry_price, exit_price, profit, indicator)"
+                       "VALUES (%s, %s, %s, %s, %s)",
+                       (symbol, entry_price, close_price, pnl, indicator))
         self.insert_is_finished()
         conn.commit()
 

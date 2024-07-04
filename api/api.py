@@ -11,7 +11,7 @@ import json
 
 app = FastAPI()
 origins = [
-    "http://127.0.0.1:8000",  # Your frontend server origin
+    "http://77.37.51.134:8000",  # Your frontend server origin
 ]
 
 app.add_middleware(
@@ -52,7 +52,7 @@ files_dir = os.path.join(grandparent_dir, r"Trade-Bot/coins_trade/logs")
 def download_logs():
     # Define the path to the logs directory and the output zip file
     logs_directory = '/coins_trade/logs'
-    zip_filename = '/coins_trade/logs.zip'
+    zip_filename = '/logs.zip'
 
     # Ensure the directory exists
     if not os.path.exists(files_dir):
@@ -60,12 +60,12 @@ def download_logs():
 
     # Create a zip file containing all files from the logs directory
     with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk(logs_directory):
+        for root, dirs, files in os.walk(files_dir):
             for file in files:
                 # Create a complete filepath of file in directory
                 file_path = os.path.join(root, file)
                 # Add file to zip
-                zipf.write(file_path, arcname=os.path.relpath(file_path, logs_directory))
+                zipf.write(file_path, arcname=os.path.relpath(file_path, files_dir))
 
     # Check if zip file has been created successfully
     if not os.path.exists(zip_filename):
@@ -173,6 +173,16 @@ def get_trade_coins():
         return json.loads(json_data)
     except Exception as e:
         raise HTTPException(status_code=500, detail='Something wrong!')
+
+
+@app.get("/clean_history/")
+def app_clean_history():
+    try:
+        my_db = db.DataBase()
+        my_db.clean_db(table_name='trades_history')
+        return {"Message": "Trades history cleaned successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to clean trades history")
 
 
 if __name__ == "__main__":
