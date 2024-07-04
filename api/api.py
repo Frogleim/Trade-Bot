@@ -23,6 +23,10 @@ app.add_middleware(
 )
 
 
+class Database(BaseModel):
+    table_name: str
+
+
 class BinanceKeys(BaseModel):
     api_key: str
     api_secret: str
@@ -184,6 +188,15 @@ def app_clean_history():
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to clean trades history")
 
+
+@app.post('/clean_db/')
+def clean_table(table: Database):
+    try:
+        my_db = db.DataBase()
+        my_db.clean_db(table_name=table.table_name)
+        return {'Message': f'Successfully cleaned {table.table_name}'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f'Failed to clean {table.table_name}')
 
 if __name__ == "__main__":
     import uvicorn
