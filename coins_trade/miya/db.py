@@ -61,20 +61,18 @@ class DataBase:
             return api_key, api_secret
         return None
 
-    def get_trade_coins(self):
+    def get_trade_coins(self, indicator):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM trade_coins")
-        row = cursor.fetchone()
+        cursor.execute("SELECT * FROM trade_coins WHERE indicator=%s", (indicator,))
+        row = cursor.fetchall()
         cursor.close()
         conn.close()
-        symbol = row[1]
-        quantity = row[2]
-        checkpoints = row[3]
-        stop_loss = row[4]
-        return symbol, quantity, checkpoints, stop_loss
+
+        return row[0]
 
 
 if __name__ == '__main__':
     my_db = DataBase()
-    my_db.insert_is_finished()
+    data = my_db.get_trade_coins(indicator='SMA21')
+    print(data)

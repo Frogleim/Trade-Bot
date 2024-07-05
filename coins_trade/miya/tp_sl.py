@@ -7,7 +7,6 @@ from . import db
 
 my_db = db.DataBase()
 API_KEY, API_SECRET = my_db.get_binance_keys()
-symbol, quantity, checkpoints, stop_loss = my_db.get_trade_coins()
 current_profit = 0
 profit_checkpoint_list = []
 current_checkpoint = 0.00
@@ -32,23 +31,25 @@ root_logger.addHandler(console_handler)
 
 
 def pnl_long(opened_price, indicator):
+    indicator_settings = my_db.get_trade_coins(indicator=indicator)
+
     global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
     try:
-        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+        current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     except Exception as e:
-        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+        current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
 
     current_profit = float(current_price) - float(opened_price)
-    for i in range(len(checkpoints) - 1):
-        if checkpoints[i] <= current_profit < checkpoints[i + 1]:
-            if current_checkpoint != checkpoints[i]:  # Check if it's a new checkpoint
-                current_checkpoint = checkpoints[i]
+    for i in range(len(indicator_settings[3]) - 1):
+        if indicator_settings[3][i] <= current_profit < indicator_settings[3][i + 1]:
+            if current_checkpoint != indicator_settings[3][i]:  # Check if it's a new checkpoint
+                current_checkpoint = indicator_settings[3][i]
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
     if float(current_profit) <= -float(stop_loss):
-        my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+        my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         print('CLosing with lose')
         return 'Loss'
@@ -59,36 +60,38 @@ def pnl_long(opened_price, indicator):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= checkpoints[-1]
+        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= indicator_settings[3][-1]
                 and current_profit > 0):
             body = \
-                f'Position closed!.\nPosition data\nSymbol: {symbol}\nEntry Price: {round(float(opened_price), 1)}\n' \
+                f'Position closed!.\nPosition data\nSymbol: {indicator_settings[1]}\nEntry Price: {round(float(opened_price), 1)}\n' \
                 f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-            my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+            my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
                                      pnl=current_profit, indicator=indicator, is_profit=True)
 
             return 'Profit'
 
 
 def pnl_short(opened_price, indicator):
+    indicator_settings = my_db.get_trade_coins(indicator=indicator)
+
     global current_profit, current_checkpoint, profit_checkpoint_list
     try:
-        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+        current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     except Exception as e:
-        current_price = client.futures_ticker(symbol=symbol)['lastPrice']
+        current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     current_profit = float(opened_price) - float(current_price)
-    for i in range(len(checkpoints) - 1):
-        if checkpoints[i] <= current_profit < checkpoints[i + 1]:
-            if current_checkpoint != checkpoints[i]:
-                current_checkpoint = checkpoints[i]
+    for i in range(len(indicator_settings[3]) - 1):
+        if indicator_settings[3][i] <= current_profit < indicator_settings[3][i + 1]:
+            if current_checkpoint != indicator_settings[3][i]:
+                current_checkpoint = indicator_settings[3][i]
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
     if float(current_profit) <= -float(stop_loss):
-        my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+        my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         print('CLosing with lose')
         return 'Loss'
@@ -98,14 +101,14 @@ def pnl_short(opened_price, indicator):
         logging.info('Checking for duplicates...')
         profit_checkpoint_list = list(Counter(profit_checkpoint_list).keys())
         logging.info(f'Checkpoint List is: {profit_checkpoint_list}')
-        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= checkpoints[-1]
+        if (current_profit < profit_checkpoint_list[-1] or current_checkpoint >= indicator_settings[3][-1]
                 and current_profit > 0):
-            body = f'Position closed!\nPosition data\nSymbol: {symbol}\nEntry Price: {round(float(opened_price), 1)}\n' \
+            body = f'Position closed!\nPosition data\nSymbol: {indicator_settings[1]}\nEntry Price: {round(float(opened_price), 1)}\n' \
                    f'Close Price: {round(float(current_price), 1)}\nProfit: {round(current_profit, 1)}'
             logging.info(body)
             logging.info('Saving data')
             logging.info(f'Profit checkpoint list: {profit_checkpoint_list}')
-            my_db.insert_test_trades(symbol=symbol, entry_price=opened_price, close_price='0.0',
+            my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
                                      pnl=current_profit, indicator=indicator, is_profit=True)
 
             return 'Profit'
