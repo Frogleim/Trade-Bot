@@ -3,7 +3,7 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import db
+from . import db, fetch_sma
 
 my_db = db.DataBase()
 API_KEY, API_SECRET = my_db.get_binance_keys()
@@ -33,7 +33,7 @@ root_logger.addHandler(console_handler)
 def pnl_long(opened_price, indicator):
     indicator_settings = my_db.get_trade_coins(indicator=indicator)
 
-    global current_profit, current_checkpoint, profit_checkpoint_list
+    global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
     try:
         current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     except Exception as e:
@@ -47,12 +47,19 @@ def pnl_long(opened_price, indicator):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-
-    if float(current_profit) <= -float(indicator_settings[4]):
-        my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
-                                 pnl=current_profit, indicator=indicator, is_profit=False)
-        print('CLosing with lose')
-        return 'Loss'
+    if indicator == 'SMA21':
+        sma = fetch_sma.get_df_15m()
+        if float(current_profit) <= float(sma):
+            my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
+                                     pnl=current_profit, indicator=indicator, is_profit=False)
+            print('CLosing with lose')
+            return 'Loss'
+    else:
+        if float(current_profit) <= -float(indicator_settings[4]):
+            my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
+                                     pnl=current_profit, indicator=indicator, is_profit=False)
+            print('CLosing with lose')
+            return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
 
@@ -89,12 +96,19 @@ def pnl_short(opened_price, indicator):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-
-    if float(current_profit) <= -float(indicator_settings[4]):
-        my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
-                                 pnl=current_profit, indicator=indicator, is_profit=False)
-        print('CLosing with lose')
-        return 'Loss'
+    if indicator == 'SMA21':
+        sma = fetch_sma.get_df_15m()
+        if float(current_price) >= float(sma):
+            my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
+                                     pnl=current_profit, indicator=indicator, is_profit=False)
+            print('CLosing with lose')
+            return 'Loss'
+    else:
+        if float(current_profit) <= -float(indicator_settings[4]):
+            my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
+                                     pnl=current_profit, indicator=indicator, is_profit=False)
+            print('CLosing with lose')
+            return 'Loss'
     logging.warning(
         f'Current checkpoint: --> {current_checkpoint} --> {current_profit} --> Current Price {current_price}')
     if len(profit_checkpoint_list) >= 1 and current_checkpoint is not None:

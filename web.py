@@ -44,7 +44,7 @@ async def fetch_sam21():
 
 
 async def generate_signal():
-    logging_settings.system_log.warning('Starting Miya Beta 0.1')
+    logging_settings.system_log.warning('Starting Miya Beta 0.1.4')
     pause_event.set()
 
     while True:
@@ -59,7 +59,7 @@ async def generate_signal():
                 #fetch_macd_signal(),
                 fetch_bb_signal(),
                 fetch_sam21(),
-                fetch_thrust()
+                # fetch_thrust()
             )
 
             # Process results
@@ -93,7 +93,7 @@ async def generate_signal():
                     symbol='MATICUSDT',
                     signal='Sell',
                     entry_price=entry_price,
-                    indicator=sell_signals[1800]
+                    indicator=sell_signals[0]
                 )
                 logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal

@@ -1,8 +1,5 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware
-
-import shutil
 import zipfile
 import os
 from pydantic import BaseModel
@@ -23,10 +20,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class Database(BaseModel):
     table_name: str
-
-
 
 
 class BinanceKeys(BaseModel):
@@ -52,33 +48,36 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
 grandparent_dir = os.path.dirname(parent_dir)
 files_dir = os.path.join(grandparent_dir, r"Trade-Bot/coins_trade/logs")
+sys_log_file_path = os.path.join(files_dir, "system_logs.log")
+error_log_file_path = os.path.join(files_dir, "error_logs.log")
+action_log_file_path = os.path.join(files_dir, "actions.log")
 
 
-@app.get("/download-logs/")
-def download_logs():
-    # Define the path to the logs directory and the output zip file
-    logs_directory = '/coins_trade/logs'
-    zip_filename = '/logs.zip'
+@app.get("/get-sys-log")
+async def get_log():
+    # Check if the log file exists
+    if os.path.exists(sys_log_file_path):
+        return FileResponse(sys_log_file_path, media_type='application/octet-stream', filename='system_log.logs')
+    else:
+        raise HTTPException(status_code=404, detail="Log file not found")
 
-    # Ensure the directory exists
-    if not os.path.exists(files_dir):
-        raise HTTPException(status_code=404, detail="Logs directory not found")
 
-    # Create a zip file containing all files from the logs directory
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk(files_dir):
-            for file in files:
-                # Create a complete filepath of file in directory
-                file_path = os.path.join(root, file)
-                # Add file to zip
-                zipf.write(file_path, arcname=os.path.relpath(file_path, files_dir))
+@app.get("/get-error-log")
+async def get_error_log():
+    # Check if the log file exists
+    if os.path.exists(error_log_file_path):
+        return FileResponse(error_log_file_path, media_type='application/octet-stream', filename='error_log.logs')
+    else:
+        raise HTTPException(status_code=404, detail="Log file not found")
 
-    # Check if zip file has been created successfully
-    if not os.path.exists(zip_filename):
-        raise HTTPException(status_code=500, detail="Failed to create zip file")
 
-    # Provide the zipped file as a response
-    return FileResponse(path=zip_filename, media_type='application/zip', filename='logs.zip')
+@app.get("/get-action-log")
+async def get_action_log():
+    # Check if the log file exists
+    if os.path.exists(action_log_file_path):
+        return FileResponse(action_log_file_path, media_type='application/octet-stream', filename='actions_log.logs')
+    else:
+        raise HTTPException(status_code=404, detail="Log file not found")
 
 
 @app.post('/set_credentials/')
@@ -190,6 +189,7 @@ def app_clean_history():
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to clean trades history")
 
+
 @app.post('/clean_db/')
 def clean_table(table: Database):
     try:
@@ -198,8 +198,9 @@ def clean_table(table: Database):
         return {'Message': f'Successfully cleaned {table.table_name}'}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f'Failed to clean {table.table_name}')
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+#
+#
+# if __name__ == "__main__":
+#     import uvicorn
+#
+#     uvicorn.run(app, host="0.0.0.0", port=8000)

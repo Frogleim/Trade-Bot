@@ -38,5 +38,39 @@ def dual_thrust_strategy(df, k1=0.5, k2=0.5, lookback=5):
     return df
 
 
+# Function to backtest the strategy
+def backtest_strategy(df, lookback, k1=0.5, k2=0.5):
+    df = dual_thrust_strategy(df, k1, k2, lookback)
+    df['returns'] = df['close'].pct_change()
+    df['strategy_returns'] = df['returns'] * df['signal'].shift(1).map({'Buy': 1, 'Sell': -1, 'Hold': 0})
+    return df['strategy_returns'].cumsum()
+
+
+# Fetch data and backtest for different lookback periods
+async def main():
+    df = await fetch_ohlcv()
+
+    lookback_periods = [5, 10, 20, 50]
+    results = {}
+
+    for lookback in lookback_periods:
+        results[lookback] = backtest_strategy(df, lookback)
+
+    # Plotting results
+    plt.figure(figsize=(14, 7))
+    for lookback, result in results.items():
+        plt.plot(result, label=f'Lookback {lookback}')
+
+    plt.legend()
+    plt.title('Dual Thrust Strategy Backtest')
+    plt.xlabel('Time')
+    plt.ylabel('Cumulative Returns')
+    plt.show()
+
+
+if __name__ == '__main__':
+    import asyncio
+    asyncio.run(main())
+
 
 

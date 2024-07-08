@@ -4649,3 +4649,9 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
 2024-07-05 18:50:10,726 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
 2024-07-05 18:50:26,725 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
 2024-07-07 06:19:47,590 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-08 21:48:40,009 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
+2024-07-08 21:48:45,496 - ERROR - Error in generate_signal: object list can't be used in 'await' expression
+2024-07-08 22:49:15,961 - ERROR - Error in generate_signal: column "symbol" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
+                             ^
+

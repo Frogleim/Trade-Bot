@@ -579,3 +579,4 @@
 2024-07-08 14:38:19,187 - INFO - Closing Position with Profit
 2024-07-08 16:29:27,137 - INFO - Getting Sell signal. Indicators: ['Dual Thrust']
 2024-07-08 16:32:29,276 - INFO - Closing Position with Loss
+2024-07-08 22:52:10,261 - INFO - Getting Buy signal. Indicators: ['SMA21']
