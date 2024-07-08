@@ -62,9 +62,9 @@ async def check_sma():
         if previous_close is None:
             return 'Hold', previous_close
 
-        if previous_close > upper_band + 0.0008:
+        if previous_close > upper_band + 0.0003:
             return 'Sell', previous_close
-        elif previous_close < lower_band - 0.0008:
+        elif previous_close < lower_band - 0.0003:
             return 'Buy', previous_close
         else:
             return 'Hold', previous_close

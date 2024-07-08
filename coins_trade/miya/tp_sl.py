@@ -33,7 +33,7 @@ root_logger.addHandler(console_handler)
 def pnl_long(opened_price, indicator):
     indicator_settings = my_db.get_trade_coins(indicator=indicator)
 
-    global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
+    global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     except Exception as e:
@@ -48,7 +48,7 @@ def pnl_long(opened_price, indicator):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -float(stop_loss):
+    if float(current_profit) <= -float(indicator_settings[4]):
         my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         print('CLosing with lose')
@@ -90,7 +90,7 @@ def pnl_short(opened_price, indicator):
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
 
-    if float(current_profit) <= -float(stop_loss):
+    if float(current_profit) <= -float(indicator_settings[4]):
         my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
                                  pnl=current_profit, indicator=indicator, is_profit=False)
         print('CLosing with lose')

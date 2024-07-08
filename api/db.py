@@ -85,6 +85,13 @@ class DataBase:
         cursor.execute(f"DELETE FROM {table_name}")
         conn.commit()
 
+    def get_trade_settings(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trade_coins")
+        rows = cursor.fetchall()
+        return rows
+
     def insert_signal(self, symbol, entry_price, signal, indicator):
         conn = self.connect()
         cursor = conn.cursor()
@@ -175,6 +182,14 @@ class DataBase:
         query = f"UPDATE trade_coins SET {column} =%s WHERE indicator=%s;"
         cursor.execute(query, (update_value, indicator))
         conn.commit()
+
+
+    def get_trade_history(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM trades_history")
+        rows = cursor.fetchall()
+        return rows
 
 
 if __name__ == '__main__':

@@ -38,7 +38,7 @@ class SMA21:
         df_15m['SMA21'] = df_15m['close'].rolling(window=21).mean()
 
         # Define trigger zones
-        trigger_offset = 0.0005  # Adjust this based on your needs
+        trigger_offset = 0.0001  # Adjust this based on your needs
         df_15m['up_trigger_zone'] = df_15m['SMA21'] + trigger_offset
         df_15m['down_trigger_zone'] = df_15m['SMA21'] - trigger_offset
 

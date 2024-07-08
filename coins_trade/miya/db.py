@@ -33,6 +33,8 @@ class DataBase:
         self.insert_is_finished()
         conn.commit()
 
+
+
     def insert_is_finished(self):
         is_finished = 'yes'
         conn = self.connect()
@@ -70,7 +72,6 @@ class DataBase:
         conn.close()
 
         return row[0]
-
 
 if __name__ == '__main__':
     my_db = DataBase()

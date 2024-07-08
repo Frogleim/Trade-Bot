@@ -8,6 +8,7 @@ import os
 from pydantic import BaseModel
 import db
 import json
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 origins = [
@@ -22,9 +23,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class Database(BaseModel):
     table_name: str
+
+
 
 
 class BinanceKeys(BaseModel):
@@ -187,7 +189,6 @@ def app_clean_history():
         return {"Message": "Trades history cleaned successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to clean trades history")
-
 
 @app.post('/clean_db/')
 def clean_table(table: Database):

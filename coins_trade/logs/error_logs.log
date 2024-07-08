@@ -4589,4 +4589,63 @@ LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
 2024-06-27 22:37:01,001 - ERROR - Error in generate_signal: 
 2024-06-28 01:25:23,600 - ERROR - Error in generate_signal: single positional indexer is out-of-bounds
 2024-06-28 01:25:38,653 - ERROR - Error in generate_signal: float() argument must be a string or a real number, not 'NoneType'
-                                                                                                                               
+                                                                                                                               2024-06-28 08:01:56,598 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:03,528 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:10,104 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:36,508 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:43,385 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:50,439 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:02:57,219 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:03:04,254 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-06-28 08:03:11,296 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-07-02 12:48:04,734 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-02 13:36:15,733 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-03 14:42:20,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 14:42:43,734 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-03 14:44:51,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-03 14:45:29,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 14:55:51,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 14:58:46,737 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 14:59:02,734 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 14:59:25,746 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 15:02:58,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-03 15:03:44,736 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 15:04:24,735 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-03 15:10:13,736 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-03 16:32:17,737 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-04 10:02:18,724 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-04 10:02:34,724 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-04 10:02:50,723 - ERROR - Error in generate_signal: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-07-05 04:19:42,821 - ERROR - APIError(code=-4164): Order's notional must be no smaller than 5 (unless you choose reduce only).
+2024-07-05 18:49:38,724 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-05 18:49:54,723 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-07-05 18:50:10,726 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-07-05 18:50:26,725 - ERROR - Error in generate_signal: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-07-07 06:19:47,590 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo

@@ -56,10 +56,10 @@ async def generate_signal():
 
             # Run all indicator functions concurrently
             results = await asyncio.gather(
-                # fetch_macd_signal(),
+                #fetch_macd_signal(),
                 fetch_bb_signal(),
-                fetch_sam21()
-                # fetch_thrust()
+                fetch_sam21(),
+                fetch_thrust()
             )
 
             # Process results
@@ -97,7 +97,7 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal
-                await asyncio.sleep(60)
+                await asyncio.sleep(1800)
 
 
         except Exception as e:
