@@ -43,6 +43,8 @@ class SMA21:
             df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
             df.set_index('timestamp', inplace=True)
             df['close'] = df['close'].astype(float)
+            df['high'] = df['high'].astype(float)
+            df['low'] = df['low'].astype(float)
             return df
 
     async def get_df_15m(self):
@@ -67,14 +69,14 @@ class SMA21:
                     df_15m['State'].iloc[i] = 'waiting_for_down'
 
             elif df_15m['State'].iloc[i - 1] == 'waiting_for_up':
-                if df_15m['close'].iloc[i] > df_15m['up_trigger_zone'].iloc[i]:
+                if df_15m['close'].iloc[i] > df_15m['up_trigger_zone'].iloc[i] and df_15m['low'].iloc[i] > df_15m['SMA21'].iloc[i]:
                     df_15m['Signal'].iloc[i] = 1  # Buy
                     df_15m['State'].iloc[i] = 'neutral'
                 else:
                     df_15m['State'].iloc[i] = 'waiting_for_up'
 
             elif df_15m['State'].iloc[i - 1] == 'waiting_for_down':
-                if df_15m['close'].iloc[i] < df_15m['down_trigger_zone'].iloc[i]:
+                if df_15m['close'].iloc[i] < df_15m['down_trigger_zone'].iloc[i] and df_15m['high'].iloc[i] < df_15m['SMA21'].iloc[i]:
                     df_15m['Signal'].iloc[i] = -1  # Sell
                     df_15m['State'].iloc[i] = 'neutral'
                 else:
