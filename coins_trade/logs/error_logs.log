@@ -4655,3 +4655,7 @@ LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
 LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
                              ^
 
+2024-07-13 21:56:41,504 - ERROR - Error in generate_signal: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-07-13 21:56:48,286 - ERROR - Error in generate_signal: cannot unpack non-iterable NoneType object
+2024-07-13 21:56:55,122 - ERROR - Error in generate_signal: cannot unpack non-iterable NoneType object
+2024-07-13 22:02:28,453 - ERROR - Error occurred while fetching Binance keys and initializing the client.: HTTPSConnectionPool(host='api.binance.com', port=443): Read timed out. (read timeout=10)

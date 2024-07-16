@@ -13,7 +13,7 @@ api_key, api_secret = my_db.get_binance_keys()
 client = Client(api_key, api_secret)
 
 interval = '15m'  # Use '15m' for 15-minute intervals
-length = 20
+length = 21
 num_std_dev = 2
 
 
