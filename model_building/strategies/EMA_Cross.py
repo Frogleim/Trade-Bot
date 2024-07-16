@@ -13,9 +13,9 @@ client = Client(api_key, api_secret)
 
 # Parameters
 short_period = 7
-long_period = 25
+long_period = 21
 adx_period = 14
-symbol = 'MATICUSDT'
+symbol = 'TRXUSDT'
 interval = Client.KLINE_INTERVAL_15MINUTE
 start_str = '1 month ago UTC'
 
@@ -49,8 +49,8 @@ async def calculate_indicators():
         df['ADX'] = ta.trend.adx(df['high'], df['low'], df['close'], window=adx_period)
 
         # Calculate EMAs
-        df['EMA_short'] = ta.trend.ema_indicator(df['close'], window=short_period)
-        df['EMA_long'] = ta.trend.ema_indicator(df['close'], window=long_period)
+        df['EMA_Short'] = df['close'].ewm(span=short_period, adjust=False).mean()
+        df['EMA_Long'] = df['close'].ewm(span=long_period, adjust=False).mean()
 
         df.dropna(inplace=True)
         return df
@@ -60,8 +60,8 @@ async def check_signal():
     data = await calculate_indicators()
 
     data['Signal'] = 0
-    data['Signal'] = np.where((data['EMA_short'] > data['EMA_long']) & (data['ADX'] > 25), 1,
-                              np.where((data['EMA_short'] < data['EMA_long']) & (data['ADX'] > 25), -1, 0))
+    data['Signal'] = np.where((data['EMA_Short'] > data['EMA_Long']) & (data['ADX'] > 25), 1,
+                              np.where((data['EMA_Short'] < data['EMA_Long']) & (data['ADX'] > 25), -1, 0))
 
     data['Crossover'] = data['Signal'].diff()
 
@@ -75,3 +75,10 @@ async def check_signal():
         return 'Hold', 0.0
 
 
+async def main():
+    result = await check_signal()
+    print(result)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
