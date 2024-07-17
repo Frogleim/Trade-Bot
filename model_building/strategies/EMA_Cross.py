@@ -66,13 +66,20 @@ async def check_signal():
     data['Crossover'] = data['Signal'].diff()
 
     last_close_price = data['close'].iloc[-1]
-
-    if data['Crossover'].iloc[-1] == 1:
-        return 'Buy', last_close_price
-    elif data['Crossover'].iloc[-1] == -1:
-        return 'Sell', last_close_price
+    short_ema = data["EMA_Short"].iloc[-1]
+    long_ema = data["EMA_Long"].iloc[-1]
+    
+    if short_ema > long_ema:
+        print("Waiting for down trend!")
+        if short_ema <= long_ema and last_close_proce < short_ema:
+            return 'Sell', last_close_price
+    elif short_ema < long_ema:
+        print("Waiting for uptrend!")
+        if short_ema >= long_ema and last_close_proce > short_ema:
+            return "Buy", last_close_price
     else:
-        return 'Hold', 0.0
+        return 'Hold', last_close_price
+        
 
 
 async def main():
