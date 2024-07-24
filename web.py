@@ -2,6 +2,7 @@ from model_building.strategies import MACD, BB, Dual_Thrust, SMA21, EMA_Cross
 from db import DataBase
 from coins_trade.miya import logging_settings
 from binance.client import Client
+import bot
 import asyncio
 
 my_db = DataBase()
@@ -62,8 +63,8 @@ async def generate_signal():
             # Run all indicator functions concurrently
             results = await asyncio.gather(
                 #fetch_macd_signal(),
-                fetch_bb_signal(),
-                fetch_sam21(),
+                # fetch_bb_signal(),
+                # fetch_sam21(),
                 fetch_ema_cross()
                 # fetch_thrust()
             )
@@ -90,7 +91,8 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Buy signal. Indicators: {buy_signals}')
                 pause_event.clear()  # Pause after detecting a buy signal
-                await asyncio.sleep(60)
+                await bot.start_trade()
+                # await asyncio.sleep(60)
 
             if sell_signals:
                 entry_price = client.futures_ticker(symbol='MATICUSDT')['lastPrice']
@@ -103,7 +105,9 @@ async def generate_signal():
                 )
                 logging_settings.actions_logger.info(f'Getting Sell signal. Indicators: {sell_signals}')
                 pause_event.clear()  # Pause after detecting a sell signal
-                await asyncio.sleep(60)
+                # await asyncio.sleep(60)
+                await bot.start_trade()
+
 
 
         except Exception as e:

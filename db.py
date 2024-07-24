@@ -128,7 +128,6 @@ class DataBase:
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM trades_alert ")
             rows = cursor.fetchall()
-            print(len(rows))
             if len(rows) > 0:
                 return True
             else:

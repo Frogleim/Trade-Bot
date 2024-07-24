@@ -4659,3 +4659,13 @@ LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
 2024-07-13 21:56:48,286 - ERROR - Error in generate_signal: cannot unpack non-iterable NoneType object
 2024-07-13 21:56:55,122 - ERROR - Error in generate_signal: cannot unpack non-iterable NoneType object
 2024-07-13 22:02:28,453 - ERROR - Error occurred while fetching Binance keys and initializing the client.: HTTPSConnectionPool(host='api.binance.com', port=443): Read timed out. (read timeout=10)
+2024-07-19 23:07:36,157 - ERROR - Error in generate_signal: 
+2024-07-19 23:07:36,157 - ERROR - Error in generate_signal: 
+2024-07-19 23:20:31,156 - ERROR - Error in generate_signal: 
+2024-07-19 23:20:31,156 - ERROR - Error in generate_signal: 
+2024-07-19 23:28:58,156 - ERROR - Error in generate_signal: 
+2024-07-19 23:28:58,156 - ERROR - Error in generate_signal: 
+2024-07-19 23:42:59,842 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:default [None]
+2024-07-19 23:42:59,842 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:default [None]
+2024-07-19 23:42:59,845 - ERROR - Error in generate_signal: negative dimensions are not allowed
+2024-07-19 23:42:59,845 - ERROR - Error in generate_signal: negative dimensions are not allowed

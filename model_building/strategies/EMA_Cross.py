@@ -6,16 +6,17 @@ import aiohttp
 import asyncio
 import logging
 import ta
+from . import logging_settings
 
 api_key = 'your_api_key'
 api_secret = 'your_api_secret'
 client = Client(api_key, api_secret)
 
 # Parameters
-short_period = 7
-long_period = 21
+short_period = 5
+long_period = 8
 adx_period = 14
-symbol = 'TRXUSDT'
+symbol = 'MATICUSDT'
 interval = Client.KLINE_INTERVAL_15MINUTE
 start_str = '1 month ago UTC'
 
@@ -27,12 +28,13 @@ async def fetch_klines(session, symbol, interval):
             response.raise_for_status()
             return await response.json()
     except aiohttp.ClientError as e:
-        logging.error(f'Error fetching klines: {e}')
+        logging_settings.error_logs_logger.error(f'Error fetching klines: {e}')
         return []
 
 
 async def calculate_indicators():
     async with aiohttp.ClientSession() as session:
+
         klines = await fetch_klines(session, symbol=symbol, interval=interval)
         df = pd.DataFrame(klines, columns=[
             'timestamp', 'open', 'high', 'low', 'close', 'volume',
@@ -68,23 +70,45 @@ async def check_signal():
     last_close_price = data['close'].iloc[-1]
     short_ema = data["EMA_Short"].iloc[-1]
     long_ema = data["EMA_Long"].iloc[-1]
-    
+
     if short_ema > long_ema:
-        print("Waiting for down trend!")
-        if short_ema <= long_ema and last_close_proce < short_ema:
-            return 'Sell', last_close_price
+        logging_settings.system_log.warning("Waiting for downtrend!")
+        while True:
+            data = await calculate_indicators()
+            short_ema = data["EMA_Short"].iloc[-1]
+            long_ema = data["EMA_Long"].iloc[-1]
+            last_close_price = data['close'].iloc[-1]
+
+            logging_settings.system_log.warning('EMA has not crossed yet')
+            if short_ema < long_ema:
+                logging_settings.system_log.warning('EMA crosses')
+                if last_close_price < long_ema:
+                    return 'Sell', last_close_price
+            await asyncio.sleep(20)  # Adjust the sleep time as needed
+
     elif short_ema < long_ema:
-        print("Waiting for uptrend!")
-        if short_ema >= long_ema and last_close_proce > short_ema:
-            return "Buy", last_close_price
+        logging_settings.system_log.warning("Waiting for uptrend!")
+        while True:
+            data = await calculate_indicators()
+            short_ema = data["EMA_Short"].iloc[-1]
+            long_ema = data["EMA_Long"].iloc[-1]
+            last_close_price = data['close'].iloc[-1]
+
+            logging_settings.system_log.warning('EMA has not crossed yet')
+            if short_ema > long_ema:
+                logging_settings.system_log.warning('EMA crosses')
+                if last_close_price > long_ema:
+                    return "Buy", last_close_price
+            await asyncio.sleep(20)  # Adjust the sleep time as needed
+
     else:
         return 'Hold', last_close_price
-        
 
 
 async def main():
-    result = await check_signal()
-    print(result)
+    while True:
+        result = await check_signal()
+        print(result)
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ import time
 client = Client()
 
 
-def start_trade():
+async def start_trade():
     my_db = DataBase()
     signal_data = my_db.get_signal()
     print(signal_data)
