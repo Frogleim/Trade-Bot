@@ -16,10 +16,10 @@ client = Client(api_key, api_secret)
 short_period = 5
 long_period = 8
 adx_period = 14
+atr_period = 14  # ATR period
 symbol = 'MATICUSDT'
 interval = Client.KLINE_INTERVAL_15MINUTE
 start_str = '1 month ago UTC'
-
 
 async def fetch_klines(session, symbol, interval):
     url = f'https://fapi.binance.com/fapi/v1/klines?symbol={symbol}&interval={interval}'
@@ -31,10 +31,8 @@ async def fetch_klines(session, symbol, interval):
         logging_settings.error_logs_logger.error(f'Error fetching klines: {e}')
         return []
 
-
 async def calculate_indicators():
     async with aiohttp.ClientSession() as session:
-
         klines = await fetch_klines(session, symbol=symbol, interval=interval)
         df = pd.DataFrame(klines, columns=[
             'timestamp', 'open', 'high', 'low', 'close', 'volume',
@@ -54,9 +52,11 @@ async def calculate_indicators():
         df['EMA_Short'] = df['close'].ewm(span=short_period, adjust=False).mean()
         df['EMA_Long'] = df['close'].ewm(span=long_period, adjust=False).mean()
 
+        # Calculate ATR
+        df['ATR'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=atr_period)
+
         df.dropna(inplace=True)
         return df
-
 
 async def check_signal():
     data = await calculate_indicators()
@@ -70,6 +70,7 @@ async def check_signal():
     last_close_price = data['close'].iloc[-1]
     short_ema = data["EMA_Short"].iloc[-1]
     long_ema = data["EMA_Long"].iloc[-1]
+    latest_atr = data['ATR'].iloc[-1]  # Get the latest ATR value
 
     if short_ema > long_ema:
         logging_settings.system_log.warning("Waiting for downtrend!")
@@ -78,12 +79,13 @@ async def check_signal():
             short_ema = data["EMA_Short"].iloc[-1]
             long_ema = data["EMA_Long"].iloc[-1]
             last_close_price = data['close'].iloc[-1]
+            latest_atr = data['ATR'].iloc[-1]
 
             logging_settings.system_log.warning('EMA has not crossed yet')
-            if short_ema < long_ema:
+            if short_ema < long_ema and float(atr_period) >0.0022:
                 logging_settings.system_log.warning('EMA crosses')
                 if last_close_price < long_ema:
-                    return 'Sell', last_close_price
+                    return 'Sell', last_close_price, latest_atr
             await asyncio.sleep(20)  # Adjust the sleep time as needed
 
     elif short_ema < long_ema:
@@ -93,23 +95,22 @@ async def check_signal():
             short_ema = data["EMA_Short"].iloc[-1]
             long_ema = data["EMA_Long"].iloc[-1]
             last_close_price = data['close'].iloc[-1]
+            latest_atr = data['ATR'].iloc[-1]
 
             logging_settings.system_log.warning('EMA has not crossed yet')
-            if short_ema > long_ema:
+            if short_ema > long_ema and float(atr_period) > 0.0022:
                 logging_settings.system_log.warning('EMA crosses')
                 if last_close_price > long_ema:
-                    return "Buy", last_close_price
+                    return "Buy", last_close_price, latest_atr
             await asyncio.sleep(20)  # Adjust the sleep time as needed
 
     else:
-        return 'Hold', last_close_price
-
+        return 'Hold', last_close_price, latest_atr
 
 async def main():
     while True:
         result = await check_signal()
         print(result)
-
 
 if __name__ == '__main__':
     asyncio.run(main())
