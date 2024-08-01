@@ -15,6 +15,7 @@ async def fetch_ohlcv(symbol='MATIC/USDT', timeframe="15m", limit=1000):
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
     df.set_index('timestamp', inplace=True)
     df = df[['open', 'high', 'low', 'close', 'volume']].astype(float)
+    print(df)
     await exchange.close()
     return df
 
@@ -70,7 +71,7 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio
-    asyncio.run(main())
+    asyncio.run(fetch_ohlcv())
 
 
 

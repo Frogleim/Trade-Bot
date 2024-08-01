@@ -50,7 +50,7 @@ async def fetch_sam21():
 
 
 async def generate_signal():
-    logging_settings.system_log.warning('Starting Miya Beta 0.1.4')
+    logging_settings.system_log.warning('Starting Miya Beta 0.1.9')
     pause_event.set()
 
     while True:

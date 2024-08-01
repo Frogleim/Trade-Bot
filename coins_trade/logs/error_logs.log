@@ -4669,3 +4669,249 @@ LINE 1: INSERT INTO signals (symbol, signal, entry_price, indicator)...
 2024-07-19 23:42:59,842 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:default [None]
 2024-07-19 23:42:59,845 - ERROR - Error in generate_signal: negative dimensions are not allowed
 2024-07-19 23:42:59,845 - ERROR - Error in generate_signal: negative dimensions are not allowed
+2024-07-31 18:19:52,104 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 18:20:37,890 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 19:57:46,542 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:05:31,499 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:05:56,608 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:07:27,078 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:07:32,405 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:07:37,708 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:07:43,107 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:15:56,679 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:16:34,444 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,529 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,529 - ERROR - No klines data returned
+2024-07-31 20:28:09,531 - ERROR - No data available for signal check
+2024-07-31 20:28:09,627 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,627 - ERROR - No klines data returned
+2024-07-31 20:28:09,628 - ERROR - No data available for signal check
+2024-07-31 20:28:09,760 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,760 - ERROR - No klines data returned
+2024-07-31 20:28:09,762 - ERROR - No data available for signal check
+2024-07-31 20:28:09,862 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,863 - ERROR - No klines data returned
+2024-07-31 20:28:09,863 - ERROR - No data available for signal check
+2024-07-31 20:28:09,965 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:09,966 - ERROR - No klines data returned
+2024-07-31 20:28:09,967 - ERROR - No data available for signal check
+2024-07-31 20:28:10,072 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,072 - ERROR - No klines data returned
+2024-07-31 20:28:10,073 - ERROR - No data available for signal check
+2024-07-31 20:28:10,270 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,270 - ERROR - No klines data returned
+2024-07-31 20:28:10,271 - ERROR - No data available for signal check
+2024-07-31 20:28:10,374 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,374 - ERROR - No klines data returned
+2024-07-31 20:28:10,375 - ERROR - No data available for signal check
+2024-07-31 20:28:10,476 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,476 - ERROR - No klines data returned
+2024-07-31 20:28:10,477 - ERROR - No data available for signal check
+2024-07-31 20:28:10,609 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,610 - ERROR - No klines data returned
+2024-07-31 20:28:10,611 - ERROR - No data available for signal check
+2024-07-31 20:28:10,711 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,712 - ERROR - No klines data returned
+2024-07-31 20:28:10,713 - ERROR - No data available for signal check
+2024-07-31 20:28:10,814 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,814 - ERROR - No klines data returned
+2024-07-31 20:28:10,815 - ERROR - No data available for signal check
+2024-07-31 20:28:10,915 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:10,915 - ERROR - No klines data returned
+2024-07-31 20:28:10,916 - ERROR - No data available for signal check
+2024-07-31 20:28:11,016 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,016 - ERROR - No klines data returned
+2024-07-31 20:28:11,017 - ERROR - No data available for signal check
+2024-07-31 20:28:11,116 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,116 - ERROR - No klines data returned
+2024-07-31 20:28:11,117 - ERROR - No data available for signal check
+2024-07-31 20:28:11,218 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,218 - ERROR - No klines data returned
+2024-07-31 20:28:11,219 - ERROR - No data available for signal check
+2024-07-31 20:28:11,320 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,320 - ERROR - No klines data returned
+2024-07-31 20:28:11,322 - ERROR - No data available for signal check
+2024-07-31 20:28:11,452 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,452 - ERROR - No klines data returned
+2024-07-31 20:28:11,453 - ERROR - No data available for signal check
+2024-07-31 20:28:11,586 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,587 - ERROR - No klines data returned
+2024-07-31 20:28:11,588 - ERROR - No data available for signal check
+2024-07-31 20:28:11,687 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,688 - ERROR - No klines data returned
+2024-07-31 20:28:11,689 - ERROR - No data available for signal check
+2024-07-31 20:28:11,790 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,790 - ERROR - No klines data returned
+2024-07-31 20:28:11,791 - ERROR - No data available for signal check
+2024-07-31 20:28:11,891 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:11,892 - ERROR - No klines data returned
+2024-07-31 20:28:11,893 - ERROR - No data available for signal check
+2024-07-31 20:28:12,050 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,050 - ERROR - No klines data returned
+2024-07-31 20:28:12,051 - ERROR - No data available for signal check
+2024-07-31 20:28:12,164 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,165 - ERROR - No klines data returned
+2024-07-31 20:28:12,165 - ERROR - No data available for signal check
+2024-07-31 20:28:12,265 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,266 - ERROR - No klines data returned
+2024-07-31 20:28:12,267 - ERROR - No data available for signal check
+2024-07-31 20:28:12,366 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,366 - ERROR - No klines data returned
+2024-07-31 20:28:12,367 - ERROR - No data available for signal check
+2024-07-31 20:28:12,464 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,465 - ERROR - No klines data returned
+2024-07-31 20:28:12,465 - ERROR - No data available for signal check
+2024-07-31 20:28:12,566 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,566 - ERROR - No klines data returned
+2024-07-31 20:28:12,567 - ERROR - No data available for signal check
+2024-07-31 20:28:12,663 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,664 - ERROR - No klines data returned
+2024-07-31 20:28:12,664 - ERROR - No data available for signal check
+2024-07-31 20:28:12,764 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,765 - ERROR - No klines data returned
+2024-07-31 20:28:12,766 - ERROR - No data available for signal check
+2024-07-31 20:28:12,865 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,866 - ERROR - No klines data returned
+2024-07-31 20:28:12,868 - ERROR - No data available for signal check
+2024-07-31 20:28:12,969 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:12,969 - ERROR - No klines data returned
+2024-07-31 20:28:12,970 - ERROR - No data available for signal check
+2024-07-31 20:28:13,102 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,102 - ERROR - No klines data returned
+2024-07-31 20:28:13,103 - ERROR - No data available for signal check
+2024-07-31 20:28:13,201 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,201 - ERROR - No klines data returned
+2024-07-31 20:28:13,202 - ERROR - No data available for signal check
+2024-07-31 20:28:13,334 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,334 - ERROR - No klines data returned
+2024-07-31 20:28:13,335 - ERROR - No data available for signal check
+2024-07-31 20:28:13,434 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,434 - ERROR - No klines data returned
+2024-07-31 20:28:13,435 - ERROR - No data available for signal check
+2024-07-31 20:28:13,534 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,534 - ERROR - No klines data returned
+2024-07-31 20:28:13,535 - ERROR - No data available for signal check
+2024-07-31 20:28:13,635 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,635 - ERROR - No klines data returned
+2024-07-31 20:28:13,637 - ERROR - No data available for signal check
+2024-07-31 20:28:13,769 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,769 - ERROR - No klines data returned
+2024-07-31 20:28:13,770 - ERROR - No data available for signal check
+2024-07-31 20:28:13,871 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,871 - ERROR - No klines data returned
+2024-07-31 20:28:13,873 - ERROR - No data available for signal check
+2024-07-31 20:28:13,973 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:13,973 - ERROR - No klines data returned
+2024-07-31 20:28:13,974 - ERROR - No data available for signal check
+2024-07-31 20:28:14,073 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,073 - ERROR - No klines data returned
+2024-07-31 20:28:14,074 - ERROR - No data available for signal check
+2024-07-31 20:28:14,174 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,175 - ERROR - No klines data returned
+2024-07-31 20:28:14,176 - ERROR - No data available for signal check
+2024-07-31 20:28:14,307 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,307 - ERROR - No klines data returned
+2024-07-31 20:28:14,308 - ERROR - No data available for signal check
+2024-07-31 20:28:14,409 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,409 - ERROR - No klines data returned
+2024-07-31 20:28:14,411 - ERROR - No data available for signal check
+2024-07-31 20:28:14,509 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,509 - ERROR - No klines data returned
+2024-07-31 20:28:14,510 - ERROR - No data available for signal check
+2024-07-31 20:28:14,608 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,609 - ERROR - No klines data returned
+2024-07-31 20:28:14,609 - ERROR - No data available for signal check
+2024-07-31 20:28:14,710 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,710 - ERROR - No klines data returned
+2024-07-31 20:28:14,711 - ERROR - No data available for signal check
+2024-07-31 20:28:14,808 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,809 - ERROR - No klines data returned
+2024-07-31 20:28:14,809 - ERROR - No data available for signal check
+2024-07-31 20:28:14,907 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:14,907 - ERROR - No klines data returned
+2024-07-31 20:28:14,908 - ERROR - No data available for signal check
+2024-07-31 20:28:15,008 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,008 - ERROR - No klines data returned
+2024-07-31 20:28:15,009 - ERROR - No data available for signal check
+2024-07-31 20:28:15,108 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,109 - ERROR - No klines data returned
+2024-07-31 20:28:15,111 - ERROR - No data available for signal check
+2024-07-31 20:28:15,211 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,211 - ERROR - No klines data returned
+2024-07-31 20:28:15,212 - ERROR - No data available for signal check
+2024-07-31 20:28:15,311 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,311 - ERROR - No klines data returned
+2024-07-31 20:28:15,312 - ERROR - No data available for signal check
+2024-07-31 20:28:15,412 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,412 - ERROR - No klines data returned
+2024-07-31 20:28:15,413 - ERROR - No data available for signal check
+2024-07-31 20:28:15,512 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,512 - ERROR - No klines data returned
+2024-07-31 20:28:15,513 - ERROR - No data available for signal check
+2024-07-31 20:28:15,614 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,614 - ERROR - No klines data returned
+2024-07-31 20:28:15,615 - ERROR - No data available for signal check
+2024-07-31 20:28:15,715 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,715 - ERROR - No klines data returned
+2024-07-31 20:28:15,716 - ERROR - No data available for signal check
+2024-07-31 20:28:15,816 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,816 - ERROR - No klines data returned
+2024-07-31 20:28:15,818 - ERROR - No data available for signal check
+2024-07-31 20:28:15,917 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:15,918 - ERROR - No klines data returned
+2024-07-31 20:28:15,919 - ERROR - No data available for signal check
+2024-07-31 20:28:16,019 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:16,019 - ERROR - No klines data returned
+2024-07-31 20:28:16,020 - ERROR - No data available for signal check
+2024-07-31 20:28:16,122 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:28:16,122 - ERROR - No klines data returned
+2024-07-31 20:28:16,123 - ERROR - No data available for signal check
+2024-07-31 20:29:30,468 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:29:30,469 - ERROR - No klines data returned
+2024-07-31 20:29:30,472 - ERROR - No data available for signal check
+2024-07-31 20:29:35,922 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-07-31 20:29:35,922 - ERROR - No klines data returned
+2024-07-31 20:29:35,923 - ERROR - No data available for signal check
+2024-08-01 11:38:04,780 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 11:38:04,780 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 11:38:04,783 - ERROR - No data available during uptrend wait
+2024-08-01 11:38:04,783 - ERROR - No data available during uptrend wait
+2024-08-01 12:36:59,242 - ERROR - Error in calculate_indicators: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-08-01 12:36:59,242 - ERROR - Error in calculate_indicators: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-08-01 12:36:59,244 - ERROR - No data available during uptrend wait
+2024-08-01 12:36:59,244 - ERROR - No data available during uptrend wait
+2024-08-01 12:43:55,834 - ERROR - Error in calculate_indicators: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-08-01 12:43:55,834 - ERROR - Error in calculate_indicators: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-08-01 12:43:55,836 - ERROR - No data available during uptrend wait
+2024-08-01 12:43:55,836 - ERROR - No data available during uptrend wait
+2024-08-01 12:59:56,892 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 12:59:56,892 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 12:59:56,894 - ERROR - No data available during uptrend wait
+2024-08-01 12:59:56,894 - ERROR - No data available during uptrend wait
+2024-08-01 12:59:59,659 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-08-01 12:59:59,659 - ERROR - Error in generate_signal: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-08-01 13:15:48,844 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 13:15:48,844 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/exchangeInfo
+2024-08-01 13:15:48,845 - ERROR - No data available during downtrend wait
+2024-08-01 13:15:48,845 - ERROR - No data available during downtrend wait
+2024-08-01 13:21:02,422 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/klines?interval=15m&limit=1000&symbol=MATICUSDT
+2024-08-01 13:21:02,422 - ERROR - Error in calculate_indicators: binance GET https://api.binance.com/api/v3/klines?interval=15m&limit=1000&symbol=MATICUSDT
+2024-08-01 13:21:02,423 - ERROR - No data available during downtrend wait
+2024-08-01 13:21:02,423 - ERROR - No data available during downtrend wait
+2024-08-01 13:22:29,362 - ERROR - Error in calculate_indicators: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-08-01 13:22:29,362 - ERROR - Error in calculate_indicators: binance GET https://dapi.binance.com/dapi/v1/exchangeInfo
+2024-08-01 13:22:29,364 - ERROR - No data available during downtrend wait
+2024-08-01 13:22:29,364 - ERROR - No data available during downtrend wait
+2024-08-01 13:29:33,393 - ERROR - Error in calculate_indicators: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-08-01 13:29:33,393 - ERROR - Error in calculate_indicators: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
+2024-08-01 13:29:33,396 - ERROR - No data available during downtrend wait
+2024-08-01 13:29:33,396 - ERROR - No data available during downtrend wait
+2024-08-01 16:01:02,495 - ERROR - Error fetching klines: Cannot connect to host fapi.binance.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1006)')]
+2024-08-01 16:01:02,505 - ERROR - EMA Crossover script down!
+Error message: negative dimensions are not allowed
