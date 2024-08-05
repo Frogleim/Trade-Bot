@@ -1,5 +1,5 @@
 import db
-from model_building.strategies import SMA21
+from core.strategies import SMA21
 from coins_trade.miya import logging_settings
 import time
 

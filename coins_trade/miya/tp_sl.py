@@ -43,12 +43,12 @@ def pnl_long(opened_price, indicator):
     for i in range(len(indicator_settings[3]) - 1):
         if indicator_settings[3][i] <= current_profit < indicator_settings[3][i + 1]:
             if current_checkpoint != indicator_settings[3][i]:  # Check if it's a new checkpoint
-                current_checkpoint = indicator_settings[3][i]
+                current_checkpoint = indicator_settings[3][i] * 1.15
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if indicator == 'SMA21':
-        sma = fetch_sma.get_df_15m()
+    if indicator == 'EMA':
+        sma = fetch_sma.get_ema()
         if float(current_profit) <= float(sma):
             my_db.insert_test_trades(symbol=indicator_settings[3], entry_price=opened_price, close_price='0.0',
                                      pnl=current_profit, indicator=indicator, is_profit=False)
@@ -96,8 +96,8 @@ def pnl_short(opened_price, indicator):
                 profit_checkpoint_list.append(current_checkpoint)
                 message = f'Current profit is: {current_profit}\nCurrent checkpoint is: {current_checkpoint}'
                 logging.info(message)
-    if indicator == 'SMA21':
-        sma = fetch_sma.get_df_15m()
+    if indicator == 'EMA':
+        sma = fetch_sma.get_ema()
         if float(current_price) >= float(sma):
             my_db.insert_test_trades(symbol=indicator_settings[1], entry_price=opened_price, close_price='0.0',
                                      pnl=current_profit, indicator=indicator, is_profit=False)

@@ -1,4 +1,4 @@
-from model_building.strategies import MACD, BB, Dual_Thrust, SMA21, EMA_Cross
+from core.strategies import MACD, BB, Dual_Thrust, SMA21, EMA_Cross
 from db import DataBase
 from coins_trade.miya import logging_settings
 from binance.client import Client

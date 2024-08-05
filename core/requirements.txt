@@ -1,0 +1,14 @@
+python-binance
+pandas
+ccxt
+fastapi
+uvicorn
+Pillow
+scipy
+matplotlib
+flask
+dash
+plotly
+scikit-learn
+tradingpattern
+colorama
