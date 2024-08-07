@@ -55,7 +55,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
 
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_short(entry_price, indicator)
+                res = tp_sl.pnl_short(entry_price, indicator, symbol)
                 if res == 'Profit':
 
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
@@ -124,7 +124,7 @@ def trade(symbol, signal, entry_price, position_size, indicator):
 
                 break
             if open_orders['status'] == 'FILLED':
-                res = tp_sl.pnl_long(entry_price, indicator)
+                res = tp_sl.pnl_long(entry_price, indicator, symbol)
                 if res == 'Profit':
                     logging_settings.actions_logger.info(f'Closing Position with {res}')
                     try:

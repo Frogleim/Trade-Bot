@@ -63,10 +63,10 @@ class DataBase:
             return api_key, api_secret
         return None
 
-    def get_trade_coins(self, indicator):
+    def get_trade_coins(self, indicator, symbol):
         conn = self.connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM trade_coins WHERE indicator=%s", (indicator,))
+        cursor.execute("SELECT * FROM trade_coins WHERE indicator=%s AND symbol=%s", (indicator, symbol))
         row = cursor.fetchall()
         cursor.close()
         conn.close()

@@ -3,7 +3,7 @@ import os
 import sys
 from collections import Counter
 from binance.client import Client
-from . import db, fetch_sma
+from . import db, fetch_sma, api_connect
 
 my_db = db.DataBase()
 API_KEY, API_SECRET = my_db.get_binance_keys()
@@ -30,10 +30,11 @@ root_logger = logging.getLogger()
 root_logger.addHandler(console_handler)
 
 
-def pnl_long(opened_price, indicator):
-    indicator_settings = my_db.get_trade_coins(indicator=indicator)
+def pnl_long(opened_price, indicator, symbol):
+    indicator_settings = my_db.get_trade_coins(indicator=indicator, symbol=symbol)
 
-    global current_profit, current_checkpoint, profit_checkpoint_list, stop_loss
+
+    global current_profit, current_checkpoint, profit_checkpoint_list
     try:
         current_price = client.futures_ticker(symbol=indicator_settings[1])['lastPrice']
     except Exception as e:
