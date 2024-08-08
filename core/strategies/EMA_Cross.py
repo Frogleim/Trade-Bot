@@ -7,7 +7,7 @@ import aiohttp
 import asyncio
 import logging
 import ta
-import logging_settings
+from . import logging_settings
 import ccxt.async_support as ccxt_async
 
 warnings.filterwarnings(action='ignore')
@@ -104,8 +104,6 @@ async def check_signal(symbol):
             is_adx = True if adx > 22 else False
             is_sar = True if sar > short_ema else False 
 
-            support = data['Support'].iloc[-1]
-            resistance = data['Resistance'].iloc[-1]
             print(f'{symbol} Long ema: {long_ema} Short ema: {short_ema} ADX: {is_adx} SAR: {sar} is SAR: {is_sar}')
 
             logging_settings.system_log.warning(f'EMA has not crossed yet for {symbol}')
@@ -114,6 +112,8 @@ async def check_signal(symbol):
                 if last_close_price < long_ema and is_adx and is_sar:
                     logging_settings.system_log.warning(f'{symbol} EMA crosses!\nShort EMA: {short_ema}, Long EMA: {long_ema} ADX: {data["ADX"].iloc[-1]} ATR: {atr} Signal: Buy')
                     return symbol, 'Sell', last_close_price
+            return symbol, 'Hold', last_close_price
+
 
     elif short_ema < long_ema:
         logging_settings.system_log.warning(f"Waiting for uptrend for {symbol}!")
@@ -134,6 +134,9 @@ async def check_signal(symbol):
                 if last_close_price > long_ema and is_adx and is_sar:
                     logging_settings.system_log.warning(f'{symbol} EMA crosses!\nShort EMA: {short_ema}, Long EMA: {long_ema} ADX: {data["ADX"].iloc[-1]} ATR: {atr} Signal: Buy')
                     return symbol, "Buy", last_close_price
+            print('No signal ')
+            return symbol, 'Hold', last_close_price
+
 
     else:
         return symbol, 'Hold', last_close_price

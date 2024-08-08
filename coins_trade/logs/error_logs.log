@@ -740,3 +740,13 @@
 2024-08-07 09:16:44,634 - ERROR - No data available during downtrend wait for BTC/USDT
 2024-08-07 09:49:37,215 - ERROR - Error in calculate_indicators for BTC/USDT: binance GET https://fapi.binance.com/fapi/v1/exchangeInfo
 2024-08-07 09:49:37,216 - ERROR - No data available during downtrend wait for BTC/USDT
+2024-08-08 17:56:12,793 - ERROR - EMA Crossover script down!
+Error message: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+
+2024-08-08 17:56:12,793 - ERROR - EMA Crossover script down!
+Error message: column "coin" of relation "signals" does not exist
+LINE 1: INSERT INTO signals (coin, signal, entry_price, indicator) V...
+                             ^
+

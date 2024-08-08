@@ -9,6 +9,5 @@ dash
 plotly
 tradingpattern
 colorama
-psycopg2
 websocket-client
 ta
